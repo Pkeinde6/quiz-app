@@ -1,0 +1,58 @@
+{
+  "title": "Questionnaire Fairy Tail – Niveau Avancé",
+  "minimum_score": 4,
+  "success_message": "Impressionnant. Tu maîtrises Fairy Tail comme un mage de rang S.",
+  "failure_message": "Tu connais la guilde, mais tu dois encore progresser pour atteindre le niveau S.",
+  "questions": [
+    {
+      "question": "Quel est le véritable nom de Zeref avant de devenir l’immortel que l’on connaît?",
+      "choices": [
+        "Zeref Dragneel",
+        "Zeref Etherius",
+        "Zeref Oracion",
+        "Zeref Milkovich"
+      ],
+      "correct_answer": "Zeref Dragneel"
+    },
+    {
+      "question": "Quel est le vrai rôle de Mavis Vermillion dans la création de Fairy Tail?",
+      "choices": [
+        "Fondatrice et stratège militaire",
+        "Première maîtresse et créatrice de la magie Fairy Heart",
+        "Auteure des premiers sorts sacrés",
+        "Gardienne de l'île Tenrô"
+      ],
+      "correct_answer": "Première maîtresse et créatrice de la magie Fairy Heart"
+    },
+    {
+      "question": "Quel mage de Fairy Tail a été élu officiellement mage de rang S avant l’ellipse de 7 ans?",
+      "choices": [
+        "Laxus Dreyar",
+        "Mirajane Strauss",
+        "Gildarts Clive",
+        "Erza Scarlet"
+      ],
+      "correct_answer": "Gildarts Clive"
+    },
+    {
+      "question": "Quel est le nom du démon d’Etherious créé par Zeref qui est lié directement à Natsu?",
+      "choices": [
+        "E.N.D",
+        "Mard Geer",
+        "Kyôka",
+        "Jackal"
+      ],
+      "correct_answer": "E.N.D"
+    },
+    {
+      "question": "Dans l’arc Tartaros, quel personnage active le sort de Face, désactivant la magie sur tout le continent?",
+      "choices": [
+        "Kyouka",
+        "Jackal",
+        "Sayla",
+        "Seilah et Mirajane"
+      ],
+      "correct_answer": "Kyouka"
+    }
+  ]
+}
