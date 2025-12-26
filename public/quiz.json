@@ -1,48 +1,58 @@
 {
-  "title": "Questionnaire sur les Films et Séries",
+  "title": "Questionnaire Fairy Tail – Niveau Avancé",
   "minimum_score": 4,
-  "success_message": "Félicitations! Vous êtes un véritable cinéphile!",
-  "failure_message": "Dommage! Vous devriez regarder plus de films et séries.",
+  "success_message": "Impressionnant. Tu maîtrises Fairy Tail comme un mage de rang S.",
+  "failure_message": "Tu connais la guilde, mais tu dois encore progresser pour atteindre le niveau S.",
   "questions": [
     {
-      "question": "Dans quel film trouve-t-on le personnage de Jack Dawson?",
-      "choices": ["Titanic", "Le Seigneur des Anneaux", "Inception", "Avatar"],
-      "correct_answer": "Titanic"
-    },
-    {
-      "question": "Quelle série met en scène le personnage de Walter White?",
+      "question": "Quel est le véritable nom de Zeref avant de devenir l’immortel que l’on connaît?",
       "choices": [
-        "Breaking Bad",
-        "Stranger Things",
-        "Game of Thrones",
-        "The Walking Dead"
+        "Zeref Dragneel",
+        "Zeref Etherius",
+        "Zeref Oracion",
+        "Zeref Milkovich"
       ],
-      "correct_answer": "Breaking Bad"
+      "correct_answer": "Zeref Dragneel"
     },
     {
-      "question": "Dans quel film Harry Potter rencontre-t-il pour la première fois Lord Voldemort?",
+      "question": "Quel est le vrai rôle de Mavis Vermillion dans la création de Fairy Tail?",
       "choices": [
-        "Harry Potter à l'école des sorciers",
-        "Harry Potter et la Chambre des secrets",
-        "Harry Potter et le Prisonnier d'Azkaban",
-        "Harry Potter et la Coupe de feu"
+        "Fondatrice et stratège militaire",
+        "Première maîtresse et créatrice de la magie Fairy Heart",
+        "Auteure des premiers sorts sacrés",
+        "Gardienne de l'île Tenrô"
       ],
-      "correct_answer": "Harry Potter à l'école des sorciers"
+      "correct_answer": "Première maîtresse et créatrice de la magie Fairy Heart"
     },
     {
-      "question": "Quel est le nom de l'intelligence artificielle dans '2001: L'Odyssée de l'espace'?",
-      "choices": ["HAL 9000", "Siri", "Cortana", "Jarvis"],
-      "correct_answer": "HAL 9000"
-    },
-    {
-      "question": "Qui joue le rôle principal dans la série 'Sherlock' de la BBC?",
+      "question": "Quel mage de Fairy Tail a été élu officiellement mage de rang S avant l’ellipse de 7 ans?",
       "choices": [
-        "Benedict Cumberbatch",
-        "David Tennant",
-        "Matt Smith",
-        "Tom Hiddleston"
+        "Laxus Dreyar",
+        "Mirajane Strauss",
+        "Gildarts Clive",
+        "Erza Scarlet"
       ],
-      "correct_answer": "Benedict Cumberbatch"
+      "correct_answer": "Gildarts Clive"
+    },
+    {
+      "question": "Quel est le nom du démon d’Etherious créé par Zeref qui est lié directement à Natsu?",
+      "choices": [
+        "E.N.D",
+        "Mard Geer",
+        "Kyôka",
+        "Jackal"
+      ],
+      "correct_answer": "E.N.D"
+    },
+    {
+      "question": "Dans l’arc Tartaros, quel personnage active le sort de Face, désactivant la magie sur tout le continent?",
+      "choices": [
+        "Kyouka",
+        "Jackal",
+        "Sayla",
+        "Seilah et Mirajane"
+      ],
+      "correct_answer": "Kyouka"
     }
   ]
 }
