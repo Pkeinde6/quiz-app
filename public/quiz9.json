@@ -1,0 +1,18 @@
+﻿{
+  "title": "Oracle #3 - Utilisateurs & Profils",
+  "minimum_score": 5,
+  "success_message": "Parfait ! La gestion des utilisateurs Oracle n'a plus de secret !",
+  "failure_message": "Revois la creation d'utilisateurs et les profils.",
+  "questions": [
+    {"question":"Quelle commande cree un utilisateur Oracle ?","choices":["CREATE USER","ADD USER","INSERT USER","NEW USER"],"correct_answer":"CREATE USER","hint":"CREATE USER nom IDENTIFIED BY ...","accept":["CREATE USER"]},
+    {"question":"Quelle clause definit le mot de passe ?","choices":["IDENTIFIED BY","PASSWORD","AUTH BY","SECRET"],"correct_answer":"IDENTIFIED BY","hint":"CREATE USER x IDENTIFIED BY motdepasse","accept":["IDENTIFIED BY"]},
+    {"question":"Quel privilege permet a un utilisateur de se connecter ?","choices":["CREATE SESSION","CONNECT","LOGIN","ACCESS"],"correct_answer":"CREATE SESSION","hint":"GRANT CREATE SESSION TO ...","accept":["CREATE SESSION"]},
+    {"question":"Quelle commande cree un profil ?","choices":["CREATE PROFILE","ADD PROFILE","SET PROFILE","NEW PROFILE"],"correct_answer":"CREATE PROFILE","hint":"CREATE PROFILE nom LIMIT ...","accept":["CREATE PROFILE"]},
+    {"question":"Quel parametre de profil limite le nombre de sessions par utilisateur ?","choices":["SESSIONS_PER_USER","MAX_SESSIONS","USER_SESSIONS","SESSION_LIMIT"],"correct_answer":"SESSIONS_PER_USER","hint":"SESSIONS_PER_USER 2","accept":["SESSIONS_PER_USER"]},
+    {"question":"Quel parametre de profil definit le temps d'inactivite max ?","choices":["IDLE_TIME","INACTIVE_TIME","TIMEOUT","MAX_IDLE"],"correct_answer":"IDLE_TIME","hint":"IDLE_TIME en minutes","accept":["IDLE_TIME"]},
+    {"question":"Quelle clause assigne un profil a un utilisateur ?","choices":["PROFILE","ASSIGN PROFILE","SET PROFILE","USE PROFILE"],"correct_answer":"PROFILE","hint":"CREATE USER ... PROFILE nom_profil","accept":["PROFILE"]},
+    {"question":"Quelle clause definit le tablespace par defaut d'un utilisateur ?","choices":["DEFAULT TABLESPACE","TABLESPACE","DATA_TABLESPACE","STORAGE"],"correct_answer":"DEFAULT TABLESPACE","hint":"DEFAULT TABLESPACE nom_ts","accept":["DEFAULT TABLESPACE"]},
+    {"question":"Quel parametre de profil limite les tentatives de connexion echouees ?","choices":["FAILED_LOGIN_ATTEMPTS","LOGIN_ATTEMPTS","MAX_FAILURES","AUTH_FAILURES"],"correct_answer":"FAILED_LOGIN_ATTEMPTS","hint":"FAILED_LOGIN_ATTEMPTS 3","accept":["FAILED_LOGIN_ATTEMPTS"]},
+    {"question":"Quelle commande modifie le quota d'un utilisateur ?","choices":["ALTER USER","MODIFY USER","UPDATE USER","SET QUOTA"],"correct_answer":"ALTER USER","hint":"ALTER USER nom QUOTA ... ON tablespace","accept":["ALTER USER"]}
+  ]
+}

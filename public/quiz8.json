@@ -1,0 +1,18 @@
+﻿{
+  "title": "Oracle #2 - Tablespaces & Datafiles",
+  "minimum_score": 5,
+  "success_message": "Bravo ! Tu geres les tablespaces comme un pro !",
+  "failure_message": "Revois la gestion des tablespaces et datafiles.",
+  "questions": [
+    {"question":"Quelle commande cree un tablespace permanent ?","choices":["CREATE TABLESPACE","CREATE DATAFILE","ALTER TABLESPACE","CREATE STORAGE"],"correct_answer":"CREATE TABLESPACE","hint":"CREATE TABLESPACE nom DATAFILE ...","accept":["CREATE TABLESPACE"]},
+    {"question":"Quelle clause definit la taille d'un datafile ?","choices":["SIZE","CAPACITY","LENGTH","SPACE"],"correct_answer":"SIZE","hint":"DATAFILE '...' SIZE 100M","accept":["SIZE"]},
+    {"question":"Quelle option permet a un datafile de grandir automatiquement ?","choices":["AUTOEXTEND ON","AUTO_GROW","EXTEND_AUTO","DYNAMIC_SIZE"],"correct_answer":"AUTOEXTEND ON","hint":"AUTOEXTEND ON NEXT ... MAXSIZE ...","accept":["AUTOEXTEND ON","AUTOEXTEND"]},
+    {"question":"Quel tablespace stocke les segments temporaires (tri, etc.) ?","choices":["TEMP","TEMPORARY","SORT_SPACE","TMP"],"correct_answer":"TEMP","hint":"Tablespace TEMP par defaut","accept":["TEMP"]},
+    {"question":"Quelle vue affiche les tablespaces existants ?","choices":["DBA_TABLESPACES","V$TABLESPACE","ALL_TABLESPACES","USER_TABLESPACE"],"correct_answer":"DBA_TABLESPACES","hint":"DBA_...","accept":["DBA_TABLESPACES","dba_tablespaces"]},
+    {"question":"Quelle commande ajoute un datafile a un tablespace ?","choices":["ALTER TABLESPACE ADD DATAFILE","ADD DATAFILE TO","CREATE DATAFILE","INSERT DATAFILE"],"correct_answer":"ALTER TABLESPACE ADD DATAFILE","hint":"ALTER TABLESPACE ... ADD DATAFILE","accept":["ALTER TABLESPACE ADD DATAFILE"]},
+    {"question":"Quelle clause limite la taille maximale d'un datafile ?","choices":["MAXSIZE","MAX_CAPACITY","LIMIT","SIZE_MAX"],"correct_answer":"MAXSIZE","hint":"AUTOEXTEND ON NEXT 5M MAXSIZE 500M","accept":["MAXSIZE"]},
+    {"question":"Quel type de tablespace utilise-t-on pour les donnees UNDO ?","choices":["UNDO TABLESPACE","ROLLBACK TABLESPACE","TEMP TABLESPACE","LOG TABLESPACE"],"correct_answer":"UNDO TABLESPACE","hint":"Tablespace pour annuler les transactions","accept":["UNDO TABLESPACE","UNDO"]},
+    {"question":"Quelle commande supprime un tablespace et ses fichiers ?","choices":["DROP TABLESPACE ... INCLUDING CONTENTS AND DATAFILES","DELETE TABLESPACE","REMOVE TABLESPACE","DROP DATAFILE"],"correct_answer":"DROP TABLESPACE ... INCLUDING CONTENTS AND DATAFILES","hint":"DROP TABLESPACE ... INCLUDING CONTENTS","accept":["DROP TABLESPACE INCLUDING CONTENTS AND DATAFILES","DROP TABLESPACE"]},
+    {"question":"Quel est le tablespace par defaut pour les utilisateurs ?","choices":["USERS","DEFAULT","USER_DATA","MAIN"],"correct_answer":"USERS","hint":"Tablespace USERS","accept":["USERS"]}
+  ]
+}

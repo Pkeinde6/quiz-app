@@ -89,6 +89,8 @@ const props = defineProps({
   quiz: Object
 });
 
+const emit = defineEmits(['finished']);
+
 const etape = ref('choose');
 const mode = ref('qcm');
 const answers = ref([]);
@@ -163,10 +165,16 @@ const wrongAnswers = computed(() => {
   return wrongs;
 });
 
+const finishQuiz = () => {
+  etape.value = 'result';
+  // Emettre le score vers le parent pour sauvegarder la progression
+  emit('finished', note.value);
+};
+
 const addAnswer = (answer) => {
   answers.value[current.value] = answer;
   if (current.value === props.quiz.questions.length - 1) {
-    etape.value = 'result';
+    finishQuiz();
   } else {
     current.value++;
   }
@@ -175,7 +183,7 @@ const addAnswer = (answer) => {
 const addWrittenAnswer = (answer) => {
   answers.value[current.value] = answer;
   if (current.value === props.quiz.questions.length - 1) {
-    etape.value = 'result';
+    finishQuiz();
   } else {
     current.value++;
   }

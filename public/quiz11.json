@@ -1,0 +1,18 @@
+﻿{
+  "title": "Oracle #5 - Tables & SQL",
+  "minimum_score": 5,
+  "success_message": "Genial ! Tu maitrises les tables et le SQL Oracle !",
+  "failure_message": "Revois CREATE TABLE, INSERT, SELECT et les contraintes.",
+  "questions": [
+    {"question":"Quelle contrainte garantit l'unicite d'une colonne ?","choices":["UNIQUE","DISTINCT","SINGLE","NO_DUPLICATE"],"correct_answer":"UNIQUE","hint":"Contrainte UNIQUE","accept":["UNIQUE"]},
+    {"question":"Quelle contrainte empeche les valeurs NULL ?","choices":["NOT NULL","REQUIRED","MANDATORY","NO_NULL"],"correct_answer":"NOT NULL","hint":"Contrainte NOT NULL","accept":["NOT NULL"]},
+    {"question":"Quelle contrainte definit la cle primaire ?","choices":["PRIMARY KEY","MAIN KEY","FIRST KEY","UNIQUE KEY"],"correct_answer":"PRIMARY KEY","hint":"Cle primaire = PRIMARY KEY","accept":["PRIMARY KEY"]},
+    {"question":"Quelle contrainte cree une reference vers une autre table ?","choices":["FOREIGN KEY ... REFERENCES","LINK TO","CONNECT TO","REF KEY"],"correct_answer":"FOREIGN KEY ... REFERENCES","hint":"FOREIGN KEY (col) REFERENCES table(col)","accept":["FOREIGN KEY","FOREIGN KEY REFERENCES","REFERENCES"]},
+    {"question":"Quelle commande insere une ligne dans une table ?","choices":["INSERT INTO","ADD INTO","PUT INTO","WRITE INTO"],"correct_answer":"INSERT INTO","hint":"INSERT INTO table VALUES (...)","accept":["INSERT INTO"]},
+    {"question":"Quelle clause filtre les lignes dans un SELECT ?","choices":["WHERE","FILTER","HAVING","WHEN"],"correct_answer":"WHERE","hint":"SELECT ... WHERE condition","accept":["WHERE"]},
+    {"question":"Quelle fonction compte le nombre de lignes ?","choices":["COUNT(*)","SUM(*)","TOTAL(*)","NB(*)"],"correct_answer":"COUNT(*)","hint":"SELECT COUNT(*) FROM ...","accept":["COUNT(*)","COUNT"]},
+    {"question":"Quelle clause regroupe les resultats ?","choices":["GROUP BY","CLUSTER BY","SORT BY","COLLECT BY"],"correct_answer":"GROUP BY","hint":"SELECT col, COUNT(*) ... GROUP BY col","accept":["GROUP BY"]},
+    {"question":"Quel type de donnee stocke une chaine de taille variable ?","choices":["VARCHAR2","STRING","TEXT","CHAR_VAR"],"correct_answer":"VARCHAR2","hint":"VARCHAR2(50)","accept":["VARCHAR2"]},
+    {"question":"Quel mot-cle trie les resultats par ordre decroissant ?","choices":["DESC","DESCENDING","REVERSE","DOWN"],"correct_answer":"DESC","hint":"ORDER BY col DESC","accept":["DESC"]}
+  ]
+}

@@ -1,0 +1,30 @@
+﻿{
+  "title": "Mini-Cours Oracle",
+  "icon": "🗄️",
+  "sections": [
+    {
+      "title": "Architecture CDB / PDB",
+      "content": "CDB (Container Database) : base conteneur principale\nPDB (Pluggable Database) : base branchable dans un CDB\nSHOW CON_NAME : affiche le conteneur courant\nSELECT NAME, OPEN_MODE FROM V$PDBS : liste les PDB\nALTER SESSION SET CONTAINER = mypdb : se connecter a une PDB\nALTER PLUGGABLE DATABASE ALL OPEN : ouvrir toutes les PDB"
+    },
+    {
+      "title": "Tablespaces & Datafiles",
+      "content": "CREATE TABLESPACE nom DATAFILE '/chemin/fichier.dbf' SIZE 100M;\nAUTOEXTEND ON NEXT 5M MAXSIZE 500M : extension automatique\nALTER TABLESPACE nom ADD DATAFILE : ajouter un fichier\nDROP TABLESPACE nom INCLUDING CONTENTS AND DATAFILES : suppression\nTablespaces speciaux : SYSTEM, SYSAUX, TEMP, UNDO, USERS"
+    },
+    {
+      "title": "Profils utilisateur",
+      "content": "CREATE PROFILE nom LIMIT\n  SESSIONS_PER_USER 2\n  IDLE_TIME 30\n  FAILED_LOGIN_ATTEMPTS 3\n  PASSWORD_LIFE_TIME 90;\nLe profil limite les ressources et la politique de mot de passe.\nALTER USER nom PROFILE nom_profil : assigner un profil."
+    },
+    {
+      "title": "Gestion des utilisateurs",
+      "content": "CREATE USER nom IDENTIFIED BY mdp\n  DEFAULT TABLESPACE users\n  TEMPORARY TABLESPACE temp\n  QUOTA 50M ON users\n  PROFILE nom_profil;\nALTER USER nom QUOTA UNLIMITED ON ts;\nDROP USER nom CASCADE : supprime utilisateur et ses objets."
+    },
+    {
+      "title": "Roles & Privileges",
+      "content": "Privileges systeme : CREATE SESSION, CREATE TABLE, CREATE VIEW...\nGRANT privilege TO utilisateur;\nREVOKE privilege FROM utilisateur;\nRoles predifinis : CONNECT, RESOURCE, DBA\nCREATE ROLE nom; GRANT privileges TO nom_role;\nGRANT nom_role TO utilisateur;\nWITH GRANT OPTION : permet de transmettre le privilege."
+    },
+    {
+      "title": "Tables et SQL de base",
+      "content": "CREATE TABLE nom (col1 TYPE CONSTRAINT, col2 TYPE...);\nTypes : NUMBER, VARCHAR2(n), DATE, CHAR(n)\nContraintes : PRIMARY KEY, FOREIGN KEY REFERENCES, NOT NULL, UNIQUE, CHECK\nINSERT INTO table VALUES (...);\nSELECT col FROM table WHERE condition;\nGROUP BY, ORDER BY, HAVING, COUNT(*), SUM(), AVG()\nCOMMIT : valide / ROLLBACK : annule\nON DELETE CASCADE : suppression en cascade."
+    }
+  ]
+}

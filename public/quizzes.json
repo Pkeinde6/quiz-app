@@ -1,8 +1,36 @@
-﻿[
-  {"id":"quiz1","file":"quiz1.json","title":"Linux #1 - Navigation","icon":"🧭","questions":10},
-  {"id":"quiz2","file":"quiz2.json","title":"Linux #2 - Fichiers & Dossiers","icon":"📁","questions":10},
-  {"id":"quiz3","file":"quiz3.json","title":"Linux #3 - Lecture de Fichiers","icon":"📖","questions":10},
-  {"id":"quiz4","file":"quiz4.json","title":"Linux #4 - Permissions","icon":"🔒","questions":10},
-  {"id":"quiz5","file":"quiz5.json","title":"Linux #5 - Utilisateurs & Groupes","icon":"👥","questions":10},
-  {"id":"quiz6","file":"quiz6.json","title":"Linux #6 - Revision Generale","icon":"🎯","questions":10}
-]
+﻿{
+  "categories": [
+    {
+      "id": "linux",
+      "name": "Linux",
+      "icon": "🐧",
+      "color": "#e8f5e9",
+      "borderColor": "#4caf50",
+      "courseFile": "cours_linux.json",
+      "quizzes": [
+        {"id":"quiz1","file":"quiz1.json","title":"Navigation","icon":"🧭","questions":10},
+        {"id":"quiz2","file":"quiz2.json","title":"Fichiers & Dossiers","icon":"📁","questions":10},
+        {"id":"quiz3","file":"quiz3.json","title":"Lecture de Fichiers","icon":"📖","questions":10},
+        {"id":"quiz4","file":"quiz4.json","title":"Permissions","icon":"🔒","questions":10},
+        {"id":"quiz5","file":"quiz5.json","title":"Utilisateurs & Groupes","icon":"👥","questions":10},
+        {"id":"quiz6","file":"quiz6.json","title":"Revision Generale","icon":"🎯","questions":10}
+      ]
+    },
+    {
+      "id": "oracle",
+      "name": "Oracle",
+      "icon": "🗄️",
+      "color": "#fff3e0",
+      "borderColor": "#ff9800",
+      "courseFile": "cours_oracle.json",
+      "quizzes": [
+        {"id":"quiz7","file":"quiz7.json","title":"Architecture & PDB","icon":"🏗️","questions":10},
+        {"id":"quiz8","file":"quiz8.json","title":"Tablespaces & Datafiles","icon":"💾","questions":10},
+        {"id":"quiz9","file":"quiz9.json","title":"Utilisateurs & Profils","icon":"👤","questions":10},
+        {"id":"quiz10","file":"quiz10.json","title":"Roles & Privileges","icon":"🔑","questions":10},
+        {"id":"quiz11","file":"quiz11.json","title":"Tables & SQL","icon":"📊","questions":10},
+        {"id":"quiz12","file":"quiz12.json","title":"Revision Generale","icon":"🏆","questions":10}
+      ]
+    }
+  ]
+}

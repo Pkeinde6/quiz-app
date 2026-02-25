@@ -1,0 +1,18 @@
+﻿{
+  "title": "Oracle #4 - Roles & Privileges",
+  "minimum_score": 5,
+  "success_message": "Top ! Tu maitrises les roles et privileges Oracle !",
+  "failure_message": "Revois GRANT, REVOKE, et la gestion des roles.",
+  "questions": [
+    {"question":"Quelle commande cree un role ?","choices":["CREATE ROLE","ADD ROLE","NEW ROLE","DEFINE ROLE"],"correct_answer":"CREATE ROLE","hint":"CREATE ROLE nom_role","accept":["CREATE ROLE"]},
+    {"question":"Quelle commande accorde un privilege a un utilisateur ?","choices":["GRANT","ALLOW","PERMIT","ASSIGN"],"correct_answer":"GRANT","hint":"GRANT privilege TO utilisateur","accept":["GRANT"]},
+    {"question":"Quelle commande retire un privilege ?","choices":["REVOKE","REMOVE","DELETE","DENY"],"correct_answer":"REVOKE","hint":"REVOKE privilege FROM utilisateur","accept":["REVOKE"]},
+    {"question":"Quel privilege permet de creer des tables ?","choices":["CREATE TABLE","TABLE_CREATE","MAKE TABLE","BUILD TABLE"],"correct_answer":"CREATE TABLE","hint":"GRANT CREATE TABLE TO ...","accept":["CREATE TABLE"]},
+    {"question":"Quel privilege systeme permet de creer des vues ?","choices":["CREATE VIEW","MAKE VIEW","VIEW_CREATE","BUILD VIEW"],"correct_answer":"CREATE VIEW","hint":"GRANT CREATE VIEW TO ...","accept":["CREATE VIEW"]},
+    {"question":"Quelle clause permet de transmettre un privilege a d'autres ?","choices":["WITH GRANT OPTION","CASCADE","TRANSFERABLE","SHAREABLE"],"correct_answer":"WITH GRANT OPTION","hint":"GRANT ... WITH GRANT OPTION","accept":["WITH GRANT OPTION"]},
+    {"question":"Quel role predifini donne les droits de connexion ?","choices":["CONNECT","SESSION","LOGIN","ACCESS"],"correct_answer":"CONNECT","hint":"Role CONNECT standard","accept":["CONNECT"]},
+    {"question":"Quel role predifini donne les droits de creation d'objets ?","choices":["RESOURCE","DEVELOPER","BUILDER","CREATOR"],"correct_answer":"RESOURCE","hint":"Role RESOURCE standard","accept":["RESOURCE"]},
+    {"question":"Quel role donne tous les privileges systeme ?","choices":["DBA","ADMIN","SUPERUSER","ROOT"],"correct_answer":"DBA","hint":"Role DBA = administrateur","accept":["DBA"]},
+    {"question":"Quelle commande assigne un role a un utilisateur ?","choices":["GRANT role TO user","ASSIGN role TO user","SET ROLE FOR user","ADD ROLE TO user"],"correct_answer":"GRANT role TO user","hint":"GRANT nom_role TO nom_user","accept":["GRANT role TO user","GRANT"]}
+  ]
+}
