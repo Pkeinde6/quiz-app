@@ -102,6 +102,7 @@ const quizData = ref(null);
 const quizKey = ref(0);
 const courseData = ref(null);
 const currentQuizMeta = ref(null);
+const progressVersion = ref(0);   // compteur reactif pour forcer le recalcul
 
 const STORAGE_KEY = 'quiz-app-progress';
 
@@ -118,18 +119,24 @@ const saveScore = (quizId, score) => {
     progress[quizId] = score;
   }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  progressVersion.value++;   // declenche le recalcul des computed
 };
 
 const getScore = (quizId) => {
+  progressVersion.value;     // abonnement reactif
   const progress = loadProgress();
   return progress[quizId] !== undefined ? progress[quizId] : null;
 };
 
 const catProgress = computed(() => {
+  progressVersion.value;     // abonnement reactif
   if (!selectedCat.value) return { done: 0, total: 0, pct: 0 };
   const quizzes = selectedCat.value.quizzes;
   const total = quizzes.length;
-  const done = quizzes.filter(q => getScore(q.id) !== null).length;
+  const done = quizzes.filter(q => {
+    const p = loadProgress();
+    return p[q.id] !== undefined;
+  }).length;
   return { done, total, pct: total ? Math.round((done / total) * 100) : 0 };
 });
 
