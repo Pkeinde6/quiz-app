@@ -1,21 +1,21 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 py-8 font-[Inter]">
+  <div class="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8 font-[Inter]">
 
     <!-- ============ ECRAN 1 : Choix de la categorie ============ -->
     <div v-if="screen === 'home'" class="mt-4">
-      <h1 class="text-center text-4xl font-extrabold text-gray-900 mb-1">Quiz App</h1>
-      <p class="text-center text-gray-500 mb-8">Choisis ta matiere</p>
+      <h1 class="text-center text-2xl sm:text-4xl font-extrabold text-gray-900 mb-1">Quiz App</h1>
+      <p class="text-center text-gray-500 text-sm sm:text-base mb-6 sm:mb-8">Choisis ta matiere</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <button
           v-for="cat in categories"
           :key="cat.id"
-          class="group flex flex-col items-center justify-center py-10 px-6 rounded-2xl border-3 cursor-pointer transition-all duration-300 shadow-md hover:-translate-y-1.5 hover:shadow-xl"
+          class="group flex flex-col items-center justify-center py-6 sm:py-10 px-4 sm:px-6 rounded-2xl border-3 cursor-pointer transition-all duration-300 shadow-md hover:-translate-y-1.5 hover:shadow-xl"
           :style="{ background: cat.color, borderColor: cat.borderColor }"
           @click="selectCategory(cat)"
         >
-          <span class="text-5xl mb-2">{{ cat.icon }}</span>
-          <span class="text-xl font-extrabold text-gray-800">{{ cat.name }}</span>
+          <span class="text-3xl sm:text-5xl mb-2">{{ cat.icon }}</span>
+          <span class="text-lg sm:text-xl font-extrabold text-gray-800">{{ cat.name }}</span>
           <span class="text-sm text-gray-600 mt-1">{{ cat.quizzes.length }} quiz</span>
         </button>
       </div>
@@ -29,11 +29,11 @@
         Retour
       </button>
 
-      <h1 class="text-center text-3xl font-extrabold text-gray-900 mb-2">{{ selectedCat.icon }} {{ selectedCat.name }}</h1>
+      <h1 class="text-center text-xl sm:text-3xl font-extrabold text-gray-900 mb-2">{{ selectedCat.icon }} {{ selectedCat.name }}</h1>
 
       <!-- Bouton mini-cours -->
       <div class="text-center my-5">
-        <button @click="loadCourse" class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer">
+        <button @click="loadCourse" class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer text-sm sm:text-base">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
           Mini-cours {{ selectedCat.name }}
         </button>
@@ -47,16 +47,16 @@
         <span class="text-sm text-gray-500 font-semibold">{{ catProgress.done }} / {{ catProgress.total }} quiz termines</span>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
+      <div class="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mt-4">
         <button
           v-for="q in selectedCat.quizzes"
           :key="q.id"
-          class="flex flex-col items-center justify-center py-5 px-3 rounded-xl border-2 bg-white cursor-pointer transition-all duration-200 shadow-sm hover:-translate-y-1 hover:border-indigo-400 hover:shadow-lg"
+          class="flex flex-col items-center justify-center py-4 sm:py-5 px-2 sm:px-3 rounded-xl border-2 bg-white cursor-pointer transition-all duration-200 shadow-sm hover:-translate-y-1 hover:border-indigo-400 hover:shadow-lg"
           :class="getScore(q.id) !== null ? 'border-green-400 bg-green-50' : 'border-gray-200'"
           @click="loadQuiz(q)"
         >
-          <span class="text-3xl mb-1.5">{{ q.icon }}</span>
-          <span class="text-sm font-bold text-gray-800 text-center mb-0.5">{{ q.title }}</span>
+          <span class="text-2xl sm:text-3xl mb-1.5">{{ q.icon }}</span>
+          <span class="text-xs sm:text-sm font-bold text-gray-800 text-center mb-0.5">{{ q.title }}</span>
           <span class="text-xs text-gray-400">{{ q.questions }} questions</span>
           <span v-if="getScore(q.id) !== null" class="flex items-center gap-1 text-xs font-bold text-green-600 mt-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>

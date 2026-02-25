@@ -1,17 +1,17 @@
 <template>
-  <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg ring-1 ring-gray-900/5 p-6 sm:p-8 transition-all">
+  <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg ring-1 ring-gray-900/5 p-4 sm:p-6 md:p-8 transition-all">
 
     <!-- Ecran de choix de mode -->
     <div v-if="etape === 'choose'" class="text-center">
-      <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ quiz.title }}</h1>
-      <p class="text-gray-500 mb-8">Choisis ton mode d'examen :</p>
-      <div class="flex gap-5 justify-center flex-wrap">
-        <button @click="startQuiz('qcm')" class="group flex flex-col items-center justify-center w-48 h-44 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer transition-all duration-300 shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-indigo-400 hover:bg-indigo-50">
+      <h1 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{{ quiz.title }}</h1>
+      <p class="text-gray-500 text-sm sm:text-base mb-6 sm:mb-8">Choisis ton mode d'examen :</p>
+      <div class="flex gap-4 sm:gap-5 justify-center flex-col sm:flex-row">
+        <button @click="startQuiz('qcm')" class="group flex flex-col items-center justify-center sm:w-48 sm:h-44 py-5 sm:py-0 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer transition-all duration-300 shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-indigo-400 hover:bg-indigo-50">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-indigo-500 mb-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>
           <span class="text-lg font-bold text-gray-800">QCM</span>
           <span class="text-xs text-gray-400 mt-1">Choix multiples</span>
         </button>
-        <button @click="startQuiz('written')" class="group flex flex-col items-center justify-center w-48 h-44 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer transition-all duration-300 shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-slate-600 hover:bg-slate-50">
+        <button @click="startQuiz('written')" class="group flex flex-col items-center justify-center sm:w-48 sm:h-44 py-5 sm:py-0 rounded-2xl border-2 border-gray-200 bg-white cursor-pointer transition-all duration-300 shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-slate-600 hover:bg-slate-50">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-slate-600 mb-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
           <span class="text-lg font-bold text-gray-800">Ecrit</span>
           <span class="text-xs text-gray-400 mt-1">Tape tes commandes</span>
@@ -21,7 +21,7 @@
 
     <!-- Quiz en cours -->
     <div v-if="etape === 'question' && quiz">
-      <h1 class="text-2xl font-bold text-center text-gray-900 mb-2">{{ quiz.title }}</h1>
+      <h1 class="text-xl sm:text-2xl font-bold text-center text-gray-900 mb-2">{{ quiz.title }}</h1>
       <div class="flex justify-center mb-4">
         <span class="inline-block bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full tracking-wide">
           {{ mode === 'qcm' ? 'Mode QCM' : 'Mode Ecrit' }}
@@ -48,7 +48,7 @@
         <span class="inline-block bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full mt-2">
           {{ mode === 'qcm' ? 'Mode QCM' : 'Mode Ecrit' }}
         </span>
-        <p class="text-2xl font-bold mt-3">{{ note }} <span class="text-gray-400 font-normal">/ {{ quiz.questions.length }}</span></p>
+        <p class="text-xl sm:text-2xl font-bold mt-3">{{ note }} <span class="text-gray-400 font-normal">/ {{ quiz.questions.length }}</span></p>
       </div>
 
       <div v-if="note >= quiz.minimum_score" class="bg-green-50 text-green-700 border border-green-200 rounded-xl p-4 text-center mb-4">
@@ -64,11 +64,11 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg>
           Questions fausses ({{ wrongAnswers.length }})
         </h3>
-        <div v-for="(item, idx) in wrongAnswers" :key="idx" class="bg-white border border-gray-200 border-l-4 border-l-red-400 rounded-xl p-4 mb-3">
+        <div v-for="(item, idx) in wrongAnswers" :key="idx" class="bg-white border border-gray-200 border-l-4 border-l-red-400 rounded-xl p-3 sm:p-4 mb-3">
           <div class="text-xs font-bold text-gray-400 mb-1">Question {{ item.index + 1 }}</div>
-          <div class="font-semibold text-gray-800 mb-2">{{ item.question }}</div>
-          <div class="text-sm text-red-500 py-0.5"><span class="font-semibold">Ta reponse :</span> {{ item.yourAnswer || '(aucune)' }}</div>
-          <div class="text-sm text-green-600 py-0.5"><span class="font-semibold">Bonne reponse :</span> {{ item.correctAnswer }}</div>
+          <div class="font-semibold text-gray-800 mb-2 text-sm sm:text-base">{{ item.question }}</div>
+          <div class="text-xs sm:text-sm text-red-500 py-0.5 break-all"><span class="font-semibold">Ta reponse :</span> {{ item.yourAnswer || '(aucune)' }}</div>
+          <div class="text-xs sm:text-sm text-green-600 py-0.5 break-all"><span class="font-semibold">Bonne reponse :</span> {{ item.correctAnswer }}</div>
         </div>
       </div>
 

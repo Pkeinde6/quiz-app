@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-slate-50 border border-gray-200 rounded-xl p-6 max-w-xl mx-auto">
-    <div class="text-lg font-bold text-gray-800 mb-4">
+  <div class="bg-slate-50 border border-gray-200 rounded-xl p-4 sm:p-6 max-w-xl mx-auto">
+    <div class="text-base sm:text-lg font-bold text-gray-800 mb-3 sm:mb-4">
       {{ task.question }}
     </div>
 

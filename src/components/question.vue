@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 max-w-xl mx-auto">
-    <div class="text-lg font-bold text-gray-800 mb-5">
+  <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 sm:p-6 max-w-xl mx-auto">
+    <div class="text-base sm:text-lg font-bold text-gray-800 mb-4 sm:mb-5">
       {{ task.question }}
     </div>
 
-    <ul class="flex flex-col gap-2.5 mb-6 list-none p-0">
+    <ul class="flex flex-col gap-2 sm:gap-2.5 mb-5 sm:mb-6 list-none p-0">
       <li v-for="choice in task.choices" :key="choice">
-        <label class="flex items-center gap-3 text-sm cursor-pointer px-4 py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition">
+        <label class="flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm cursor-pointer px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition">
           <input
             type="radio"
             name="answer"

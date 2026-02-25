@@ -5,12 +5,12 @@
       Retour
     </button>
 
-    <h1 class="text-center text-2xl font-extrabold text-gray-900 mb-8">{{ course.icon }} {{ course.title }}</h1>
+    <h1 class="text-center text-xl sm:text-2xl font-extrabold text-gray-900 mb-6 sm:mb-8">{{ course.icon }} {{ course.title }}</h1>
 
-    <div class="flex flex-col gap-4">
-      <div v-for="(section, idx) in course.sections" :key="idx" class="bg-gray-50 border border-gray-200 rounded-xl p-5 transition hover:border-indigo-400 hover:shadow-md">
-        <h3 class="text-base font-bold text-gray-700 mb-3 pb-2 border-b-2 border-indigo-400">{{ idx + 1 }}. {{ section.title }}</h3>
-        <pre class="font-mono text-sm leading-7 text-gray-700 bg-white p-4 rounded-lg border border-gray-100 whitespace-pre-wrap break-words m-0">{{ section.content }}</pre>
+    <div class="flex flex-col gap-3 sm:gap-4">
+      <div v-for="(section, idx) in course.sections" :key="idx" class="bg-gray-50 border border-gray-200 rounded-xl p-3 sm:p-5 transition hover:border-indigo-400 hover:shadow-md">
+        <h3 class="text-sm sm:text-base font-bold text-gray-700 mb-2 sm:mb-3 pb-2 border-b-2 border-indigo-400">{{ idx + 1 }}. {{ section.title }}</h3>
+        <pre class="font-mono text-xs sm:text-sm leading-6 sm:leading-7 text-gray-700 bg-white p-3 sm:p-4 rounded-lg border border-gray-100 whitespace-pre-wrap break-words m-0 overflow-x-auto">{{ section.content }}</pre>
       </div>
     </div>
   </div>
