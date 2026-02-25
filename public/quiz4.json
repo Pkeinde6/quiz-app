@@ -1,0 +1,18 @@
+﻿{
+  "title": "Linux #4 - Permissions (chmod, chown, chgrp)",
+  "minimum_score": 7,
+  "success_message": "Les permissions Linux n'ont plus de secret pour toi !",
+  "failure_message": "Revise chmod, chown, chgrp et la notation numerique !",
+  "questions": [
+    {"question":"Quelle commande modifie les permissions d'un fichier ?","choices":["chmod","chown","chgrp","perm"],"correct_answer":"chmod","hint":"ch...mod","accept":["chmod"]},
+    {"question":"Que signifie le chiffre 7 dans chmod 750 ?","choices":["rwx (lecture + ecriture + execution)","rw (lecture + ecriture)","rx (lecture + execution)","r (lecture seule)"],"correct_answer":"rwx (lecture + ecriture + execution)","hint":"7 = 4+2+1","accept":["rwx (lecture + ecriture + execution)","rwx","7"]},
+    {"question":"Que signifie le chiffre 5 dans chmod 750 ?","choices":["rx (lecture + execution)","rw (lecture + ecriture)","rwx (tous)","x (execution seule)"],"correct_answer":"rx (lecture + execution)","hint":"5 = 4+1","accept":["rx (lecture + execution)","rx","r-x","5"]},
+    {"question":"Que signifie le chiffre 0 dans chmod 750 ?","choices":["Aucun droit","Lecture seule","Execution seule","Tous les droits"],"correct_answer":"Aucun droit","hint":"0 = rien du tout","accept":["Aucun droit","aucun","rien","0","---"]},
+    {"question":"Dans chmod 750, a qui s'appliquent les 3 chiffres (7, 5, 0) ?","choices":["Proprietaire, Groupe, Autres","Proprietaire, Autres, Groupe","Groupe, Proprietaire, Autres","Admin, User, Guest"],"correct_answer":"Proprietaire, Groupe, Autres","hint":"User, Group, Others","accept":["Proprietaire, Groupe, Autres","user group others","proprietaire groupe autres"]},
+    {"question":"En mode symbolique, comment donner rwx au proprietaire ?","choices":["chmod u+rwx fichier","chmod g+rwx fichier","chmod o+rwx fichier","chmod a+rwx fichier"],"correct_answer":"chmod u+rwx fichier","hint":"u = user (proprietaire)","accept":["chmod u+rwx fichier","chmod u+rwx"]},
+    {"question":"Quelle commande change le proprietaire d'un fichier ?","choices":["chown","chmod","chgrp","owner"],"correct_answer":"chown","hint":"ch...own (owner)","accept":["chown"]},
+    {"question":"Comment changer le proprietaire de data.txt vers alice ?","choices":["sudo chown alice data.txt","sudo chmod alice data.txt","sudo chgrp alice data.txt","sudo setowner alice data.txt"],"correct_answer":"sudo chown alice data.txt","hint":"sudo chown user fichier","accept":["sudo chown alice data.txt","chown alice data.txt"]},
+    {"question":"Quelle commande change le groupe d'un fichier ?","choices":["chgrp","chown","chmod","setgroup"],"correct_answer":"chgrp","hint":"ch...grp (group)","accept":["chgrp"]},
+    {"question":"Comment mettre le groupe 'dev' sur fichier.txt ?","choices":["sudo chgrp dev fichier.txt","sudo chown dev fichier.txt","sudo chmod dev fichier.txt","sudo group dev fichier.txt"],"correct_answer":"sudo chgrp dev fichier.txt","hint":"sudo chgrp groupe fichier","accept":["sudo chgrp dev fichier.txt","chgrp dev fichier.txt"]}
+  ]
+}

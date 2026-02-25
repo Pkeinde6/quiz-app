@@ -1,0 +1,18 @@
+﻿{
+  "title": "Linux #3 - Lecture de Fichiers",
+  "minimum_score": 7,
+  "success_message": "Tu sais lire les fichiers comme un expert terminal !",
+  "failure_message": "Revise cat, less, head et tail !",
+  "questions": [
+    {"question":"Quelle commande affiche tout le contenu d'un fichier ?","choices":["cat","less","head","read"],"correct_answer":"cat","hint":"c...a...t","accept":["cat"]},
+    {"question":"Comment afficher le contenu de notes.txt ?","choices":["cat notes.txt","read notes.txt","open notes.txt","show notes.txt"],"correct_answer":"cat notes.txt","hint":"cat ...","accept":["cat notes.txt"]},
+    {"question":"Quelle commande lit un fichier page par page ?","choices":["less","cat","more","view"],"correct_answer":"less","hint":"l...e...s...s","accept":["less"]},
+    {"question":"Comment lire notes.txt page par page ?","choices":["less notes.txt","cat notes.txt","page notes.txt","read notes.txt"],"correct_answer":"less notes.txt","hint":"less ...","accept":["less notes.txt"]},
+    {"question":"Quelle commande affiche le debut d'un fichier ?","choices":["head","tail","cat","top"],"correct_answer":"head","hint":"Debut = tete","accept":["head"]},
+    {"question":"Comment afficher les 5 premieres lignes de notes.txt ?","choices":["head -n 5 notes.txt","tail -n 5 notes.txt","cat -5 notes.txt","top 5 notes.txt"],"correct_answer":"head -n 5 notes.txt","hint":"head -n ...","accept":["head -n 5 notes.txt","head -5 notes.txt"]},
+    {"question":"Quelle commande affiche la fin d'un fichier ?","choices":["tail","head","end","bottom"],"correct_answer":"tail","hint":"Fin = queue","accept":["tail"]},
+    {"question":"Comment afficher les 10 dernieres lignes de log.txt ?","choices":["tail -n 10 log.txt","head -n 10 log.txt","cat -10 log.txt","end 10 log.txt"],"correct_answer":"tail -n 10 log.txt","hint":"tail -n ...","accept":["tail -n 10 log.txt","tail -10 log.txt"]},
+    {"question":"Quelle est la difference entre cat et less ?","choices":["cat affiche tout d'un coup, less page par page","cat est plus lent que less","less affiche tout, cat page par page","Aucune difference"],"correct_answer":"cat affiche tout d'un coup, less page par page","hint":"cat = tout, less = page","accept":["cat affiche tout d'un coup, less page par page","cat tout less page"]},
+    {"question":"Comment suivre en temps reel les nouvelles lignes ajoutees a un fichier log ?","choices":["tail -f log.txt","cat -f log.txt","watch log.txt","follow log.txt"],"correct_answer":"tail -f log.txt","hint":"tail -f (follow)","accept":["tail -f log.txt","tail -f"]}
+  ]
+}

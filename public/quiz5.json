@@ -1,0 +1,18 @@
+﻿{
+  "title": "Linux #5 - Utilisateurs & Groupes",
+  "minimum_score": 7,
+  "success_message": "Tu geres les utilisateurs et groupes comme un admin sys !",
+  "failure_message": "Revise useradd, passwd, userdel, usermod, groupadd, groupdel !",
+  "questions": [
+    {"question":"Quelle commande cree un nouvel utilisateur ?","choices":["sudo useradd","sudo adduser","sudo newuser","sudo createuser"],"correct_answer":"sudo useradd","hint":"sudo user...add","accept":["sudo useradd","useradd"]},
+    {"question":"Comment creer l'utilisateur bob ?","choices":["sudo useradd bob","sudo adduser bob","sudo newuser bob","sudo create bob"],"correct_answer":"sudo useradd bob","hint":"sudo useradd ...","accept":["sudo useradd bob","useradd bob"]},
+    {"question":"Quelle commande definit le mot de passe d'un utilisateur ?","choices":["sudo passwd bob","sudo password bob","sudo setpw bob","sudo pass bob"],"correct_answer":"sudo passwd bob","hint":"sudo passwd ...","accept":["sudo passwd bob","passwd bob"]},
+    {"question":"Comment supprimer un utilisateur ET son dossier personnel ?","choices":["sudo userdel -r bob","sudo userdel bob","sudo deluser bob","sudo removeuser bob"],"correct_answer":"sudo userdel -r bob","hint":"userdel -r (recursif)","accept":["sudo userdel -r bob","userdel -r bob"]},
+    {"question":"Comment ajouter bob au groupe dev ?","choices":["sudo usermod -aG dev bob","sudo addgroup dev bob","sudo groupadd dev bob","sudo useradd -g dev bob"],"correct_answer":"sudo usermod -aG dev bob","hint":"usermod -aG groupe utilisateur","accept":["sudo usermod -aG dev bob","usermod -aG dev bob"]},
+    {"question":"Que signifient les options -aG dans usermod -aG ?","choices":["append + Group (ajouter au groupe)","admin + Global","all + Group","add + Grant"],"correct_answer":"append + Group (ajouter au groupe)","hint":"a = append, G = Group","accept":["append + Group (ajouter au groupe)","append group","a append G group"]},
+    {"question":"Quelle commande cree un nouveau groupe ?","choices":["sudo groupadd dev","sudo addgroup dev","sudo newgroup dev","sudo mkgroup dev"],"correct_answer":"sudo groupadd dev","hint":"sudo groupadd ...","accept":["sudo groupadd dev","groupadd dev"]},
+    {"question":"Quelle commande supprime un groupe ?","choices":["sudo groupdel dev","sudo delgroup dev","sudo rmgroup dev","sudo removegroup dev"],"correct_answer":"sudo groupdel dev","hint":"sudo groupdel ...","accept":["sudo groupdel dev","groupdel dev"]},
+    {"question":"Quelle commande affiche le UID et GID d'un utilisateur ?","choices":["id bob","info bob","who bob","uid bob"],"correct_answer":"id bob","hint":"Deux lettres","accept":["id bob","id"]},
+    {"question":"Quelle commande affiche tous les groupes d'un utilisateur ?","choices":["groups bob","grp bob","id -G bob","showgroups bob"],"correct_answer":"groups bob","hint":"groups ...","accept":["groups bob","groups"]}
+  ]
+}

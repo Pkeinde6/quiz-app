@@ -1,0 +1,18 @@
+﻿{
+  "title": "Linux #1 - Navigation",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu navigues dans le terminal comme un pro !",
+  "failure_message": "Revise les commandes pwd, ls et cd et reessaye !",
+  "questions": [
+    {"question":"Quelle commande affiche le chemin du dossier courant ?","choices":["pwd","cd","ls","whoami"],"correct_answer":"pwd","hint":"p...w...d","accept":["pwd"]},
+    {"question":"Quelle commande liste les fichiers et dossiers ?","choices":["ls","dir","list","show"],"correct_answer":"ls","hint":"Deux lettres","accept":["ls"]},
+    {"question":"Quelle option de ls affiche les fichiers caches (commencant par un point) ?","choices":["ls -a","ls -l","ls -h","ls -R"],"correct_answer":"ls -a","hint":"a comme all","accept":["ls -a","-a"]},
+    {"question":"Quelle option de ls affiche les details (droits, taille, date) ?","choices":["ls -l","ls -a","ls -s","ls -d"],"correct_answer":"ls -l","hint":"l comme long","accept":["ls -l","-l"]},
+    {"question":"Comment entrer dans un dossier nomme 'projet' ?","choices":["cd projet","ls projet","open projet","go projet"],"correct_answer":"cd projet","hint":"cd ...","accept":["cd projet"]},
+    {"question":"Comment revenir au dossier parent ?","choices":["cd ..","cd ~","cd /","cd -"],"correct_answer":"cd ..","hint":"cd et deux points","accept":["cd ..","cd.."]},
+    {"question":"Comment aller au dossier personnel (home) ?","choices":["cd ~","cd ..","cd /","cd home"],"correct_answer":"cd ~","hint":"cd et le symbole tilde","accept":["cd ~","cd~","cd"]},
+    {"question":"Que retourne pwd si tu es dans /home/bob/projet ?","choices":["/home/bob/projet","projet","bob","~/projet"],"correct_answer":"/home/bob/projet","hint":"Le chemin absolu complet","accept":["/home/bob/projet"]},
+    {"question":"Quelle commande combine ls -l et ls -a ?","choices":["ls -la","ls -al","ls -l -a","Toutes ces reponses"],"correct_answer":"Toutes ces reponses","hint":"Plusieurs formes possibles","accept":["Toutes ces reponses","ls -la","ls -al","ls -l -a"]},
+    {"question":"Avec cd, comment revenir au dossier precedent (dernier visite) ?","choices":["cd -","cd ..","cd ~","cd /"],"correct_answer":"cd -","hint":"cd et un tiret","accept":["cd -","cd-"]}
+  ]
+}

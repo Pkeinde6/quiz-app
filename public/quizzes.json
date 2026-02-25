@@ -1,0 +1,8 @@
+﻿[
+  {"id":"quiz1","file":"quiz1.json","title":"Linux #1 - Navigation","icon":"🧭","questions":10},
+  {"id":"quiz2","file":"quiz2.json","title":"Linux #2 - Fichiers & Dossiers","icon":"📁","questions":10},
+  {"id":"quiz3","file":"quiz3.json","title":"Linux #3 - Lecture de Fichiers","icon":"📖","questions":10},
+  {"id":"quiz4","file":"quiz4.json","title":"Linux #4 - Permissions","icon":"🔒","questions":10},
+  {"id":"quiz5","file":"quiz5.json","title":"Linux #5 - Utilisateurs & Groupes","icon":"👥","questions":10},
+  {"id":"quiz6","file":"quiz6.json","title":"Linux #6 - Revision Generale","icon":"🎯","questions":10}
+]
