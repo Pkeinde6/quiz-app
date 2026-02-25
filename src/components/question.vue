@@ -5,7 +5,7 @@
     </div>
 
     <ul class="flex flex-col gap-2 sm:gap-2.5 mb-5 sm:mb-6 list-none p-0">
-      <li v-for="choice in task.choices" :key="choice">
+      <li v-for="choice in shuffledChoices" :key="choice">
         <label class="flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm cursor-pointer px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition">
           <input
             type="radio"
@@ -31,11 +31,21 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const props = defineProps({ task: Object });
 const emit = defineEmits(['answer']);
 const selected = ref('');
+
+// Melange Fisher-Yates (une seule fois par question grace au computed)
+const shuffledChoices = computed(() => {
+  const arr = [...props.task.choices];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+});
 
 const validate = () => {
   emit('answer', selected.value);
