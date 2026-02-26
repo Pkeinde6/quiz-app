@@ -1,0 +1,78 @@
+{
+  "title": "Python - Types de données & Opérateurs",
+  "minimum_score": 6,
+  "success_message": "Tu maîtrises les types de données Python !",
+  "failure_message": "Revois les types int, float, str, bool et les opérateurs.",
+  "questions": [
+    {
+      "question": "Quel type Python représente un nombre entier ?",
+      "choices": ["int", "float", "str", "bool"],
+      "correct_answer": "int",
+      "hint": "Integer en anglais",
+      "accept": ["int", "Int", "integer"]
+    },
+    {
+      "question": "Quel type Python représente un nombre à virgule ?",
+      "choices": ["float", "int", "decimal", "double"],
+      "correct_answer": "float",
+      "hint": "Nombre flottant",
+      "accept": ["float", "Float"]
+    },
+    {
+      "question": "Les deux valeurs possibles du type bool sont :",
+      "choices": ["True et False", "0 et 1", "Oui et Non", "Vrai et Faux"],
+      "correct_answer": "True et False",
+      "hint": "En anglais",
+      "accept": ["True et False", "true et false", "True, False"]
+    },
+    {
+      "question": "Comment écrire 52 sous forme de float ?",
+      "choices": ["52.0", "52,0", "float52", "(float)52"],
+      "correct_answer": "52.0",
+      "hint": "Rajouter une partie flottante",
+      "accept": ["52.0"]
+    },
+    {
+      "question": "Comment échapper une apostrophe dans une chaîne Python ?",
+      "choices": ["Avec un antislash \\", "Avec un slash /", "Avec un dièse #", "Avec un dollar $"],
+      "correct_answer": "Avec un antislash \\",
+      "hint": "Caractère d'échappement",
+      "accept": ["Avec un antislash \\", "antislash", "\\"]
+    },
+    {
+      "question": "Que vaut l'expression : 10 // 3 ?",
+      "choices": ["3", "3.33", "1", "10"],
+      "correct_answer": "3",
+      "hint": "Division entière",
+      "accept": ["3"]
+    },
+    {
+      "question": "Que vaut l'expression : 10 % 3 ?",
+      "choices": ["1", "3", "0", "3.33"],
+      "correct_answer": "1",
+      "hint": "Reste de la division (modulo)",
+      "accept": ["1"]
+    },
+    {
+      "question": "Quel raccourci Python est équivalent à : variable = variable + 1 ?",
+      "choices": ["variable += 1", "variable++", "variable =+ 1", "variable.add(1)"],
+      "correct_answer": "variable += 1",
+      "hint": "Incrémentation avec opérateur d'affectation",
+      "accept": ["variable += 1", "variable+=1"]
+    },
+    {
+      "question": "Comment affecter la même valeur 3 à trois variables a, b, c en une ligne ?",
+      "choices": ["a = b = c = 3", "a, b, c = 3", "a = 3, b = 3, c = 3", "set(a,b,c,3)"],
+      "correct_answer": "a = b = c = 3",
+      "hint": "Affectation multiple d'une même valeur",
+      "accept": ["a = b = c = 3", "a=b=c=3"]
+    },
+    {
+      "question": "En Python, les triples guillemets permettent de :",
+      "choices": ["Écrire sur plusieurs lignes", "Faire un commentaire inline", "Déclarer un entier", "Créer une liste"],
+      "correct_answer": "Écrire sur plusieurs lignes",
+      "hint": "\"\"\"texte multiligne\"\"\"",
+      "accept": ["Écrire sur plusieurs lignes", "ecrire sur plusieurs lignes", "multiligne"]
+    }
+  ]
+}

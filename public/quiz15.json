@@ -1,0 +1,78 @@
+{
+  "title": "Python - Print, Input & Casting",
+  "minimum_score": 6,
+  "success_message": "Bravo, tu gères print(), input() et le casting !",
+  "failure_message": "Revois les fonctions print(), input() et les conversions de type.",
+  "questions": [
+    {
+      "question": "Quelle fonction permet d'afficher du texte à l'écran en Python ?",
+      "choices": ["print()", "echo()", "display()", "write()"],
+      "correct_answer": "print()",
+      "hint": "Fonction d'affichage standard",
+      "accept": ["print()", "print", "Print()"]
+    },
+    {
+      "question": "Quelle fonction permet de demander une saisie à l'utilisateur ?",
+      "choices": ["input()", "read()", "scan()", "get()"],
+      "correct_answer": "input()",
+      "hint": "Fonction de lecture/saisie",
+      "accept": ["input()", "input", "Input()"]
+    },
+    {
+      "question": "La fonction input() retourne toujours une valeur de type :",
+      "choices": ["str (string)", "int", "float", "bool"],
+      "correct_answer": "str (string)",
+      "hint": "Toujours considérée comme chaîne de caractères",
+      "accept": ["str (string)", "str", "string", "chaine"]
+    },
+    {
+      "question": "Comment convertir la saisie de l'utilisateur en entier ?",
+      "choices": ["int(input())", "input(int())", "integer(input())", "toInt(input())"],
+      "correct_answer": "int(input())",
+      "hint": "Casting avec int()",
+      "accept": ["int(input())", "int(input(\"...\"))", "int(input())"]
+    },
+    {
+      "question": "Comment convertir une saisie en nombre à virgule ?",
+      "choices": ["float(input())", "decimal(input())", "input(float())", "toFloat(input())"],
+      "correct_answer": "float(input())",
+      "hint": "Casting avec float()",
+      "accept": ["float(input())", "float(input(\"...\"))"]
+    },
+    {
+      "question": "Le principe de conversion de type forcée s'appelle :",
+      "choices": ["Casting", "Parsing", "Mapping", "Binding"],
+      "correct_answer": "Casting",
+      "hint": "Conversion forcée",
+      "accept": ["Casting", "casting", "le casting"]
+    },
+    {
+      "question": "Que fait print(\"A=\", A) si A vaut 5 ?",
+      "choices": ["Affiche : A= 5", "Affiche : A=A", "Erreur", "Affiche : 5"],
+      "correct_answer": "Affiche : A= 5",
+      "hint": "Affiche le texte puis le contenu de la variable",
+      "accept": ["Affiche : A= 5", "A= 5", "A = 5"]
+    },
+    {
+      "question": "Quelle est la syntaxe correcte pour saisir le programme ?",
+      "choices": ["programme = input(\"Votre programme : \")", "programme = read(\"Votre programme : \")", "programme = scan(\"Votre programme : \")", "programme = get(\"Votre programme : \")"],
+      "correct_answer": "programme = input(\"Votre programme : \")",
+      "hint": "Fonction input() avec un message",
+      "accept": ["programme = input(\"Votre programme : \")", "input()"]
+    },
+    {
+      "question": "L'aire d'un cercle se calcule avec la formule :",
+      "choices": ["π * r * r", "2 * π * r", "π * r", "r * r"],
+      "correct_answer": "π * r * r",
+      "hint": "Pi fois le rayon au carré",
+      "accept": ["π * r * r", "pi * r * r", "pi*r*r", "pi * rayon * rayon"]
+    },
+    {
+      "question": "Que se passe-t-il si A = input() et qu'on fait B = A * 2, avec A='5' ?",
+      "choices": ["B vaut '55'", "B vaut 10", "Erreur", "B vaut '52'"],
+      "correct_answer": "B vaut '55'",
+      "hint": "input() retourne un string, * 2 répète la chaîne",
+      "accept": ["B vaut '55'", "55", "'55'"]
+    }
+  ]
+}

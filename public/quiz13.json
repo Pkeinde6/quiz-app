@@ -1,0 +1,78 @@
+{
+  "title": "Python - Introduction & Variables",
+  "minimum_score": 6,
+  "success_message": "Excellente maîtrise des bases Python !",
+  "failure_message": "Revois les fondamentaux de Python et les variables.",
+  "questions": [
+    {
+      "question": "En quelle année la première version de Python a-t-elle été créée ?",
+      "choices": ["1989", "1991", "1995", "2000"],
+      "correct_answer": "1991",
+      "hint": "Guido van Rossum",
+      "accept": ["1991"]
+    },
+    {
+      "question": "Python est un langage de programmation :",
+      "choices": ["Compilé", "Interprété", "Assembleur", "Machine"],
+      "correct_answer": "Interprété",
+      "hint": "Les instructions sont traduites au fur et à mesure",
+      "accept": ["Interprété", "interprete", "interpreté"]
+    },
+    {
+      "question": "Quel symbole représente le prompt de l'interpréteur Python ?",
+      "choices": [">>>", "###", "$$$", "---"],
+      "correct_answer": ">>>",
+      "hint": "Trois chevrons",
+      "accept": [">>>"]
+    },
+    {
+      "question": "En Python, un nombre décimal s'écrit avec :",
+      "choices": ["Une virgule", "Un point", "Un tiret", "Un slash"],
+      "correct_answer": "Un point",
+      "hint": "Notation anglo-saxonne",
+      "accept": ["Un point", "point", "un point", "."]
+    },
+    {
+      "question": "Quel opérateur donne la partie entière d'une division en Python ?",
+      "choices": ["//", "%", "/", "**"],
+      "correct_answer": "//",
+      "hint": "Double slash",
+      "accept": ["//"]
+    },
+    {
+      "question": "Quel opérateur donne le reste d'une division (modulo) ?",
+      "choices": ["%", "//", "**", "&&"],
+      "correct_answer": "%",
+      "hint": "Symbole pourcentage",
+      "accept": ["%"]
+    },
+    {
+      "question": "Un nom de variable en Python peut-il commencer par un chiffre ?",
+      "choices": ["Oui", "Non", "Seulement en Python 3", "Seulement avec un underscore devant"],
+      "correct_answer": "Non",
+      "hint": "Règle syntaxique des variables",
+      "accept": ["Non", "non"]
+    },
+    {
+      "question": "Python est sensible à la casse (majuscule/minuscule) ?",
+      "choices": ["Oui", "Non", "Seulement pour les fonctions", "Seulement pour les classes"],
+      "correct_answer": "Oui",
+      "hint": "AGE et age sont différents",
+      "accept": ["Oui", "oui"]
+    },
+    {
+      "question": "Comment permuter deux variables a et b en Python ?",
+      "choices": ["a,b = b,a", "swap(a,b)", "a = b; b = a", "permute(a,b)"],
+      "correct_answer": "a,b = b,a",
+      "hint": "Affectation multiple",
+      "accept": ["a,b = b,a", "a, b = b, a"]
+    },
+    {
+      "question": "Combien de mots réservés Python ne peut-on pas utiliser comme nom de variable ?",
+      "choices": ["25", "28", "33", "40"],
+      "correct_answer": "33",
+      "hint": "and, del, from, none, true...",
+      "accept": ["33"]
+    }
+  ]
+}

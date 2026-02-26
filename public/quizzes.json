@@ -31,6 +31,22 @@
         {"id":"quiz11","file":"quiz11.json","title":"Tables & SQL","icon":"📊","questions":10},
         {"id":"quiz12","file":"quiz12.json","title":"Revision Generale","icon":"🏆","questions":10}
       ]
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "icon": "🐍",
+      "color": "#e3f2fd",
+      "borderColor": "#2196f3",
+      "courseFile": "cours_python.json",
+      "quizzes": [
+        {"id":"quiz13","file":"quiz13.json","title":"Introduction & Variables","icon":"📝","questions":10},
+        {"id":"quiz14","file":"quiz14.json","title":"Types & Opérateurs","icon":"🔢","questions":10},
+        {"id":"quiz15","file":"quiz15.json","title":"Print, Input & Casting","icon":"⌨️","questions":10},
+        {"id":"quiz16","file":"quiz16.json","title":"Conditions if/elif/else","icon":"🔀","questions":10},
+        {"id":"quiz17","file":"quiz17.json","title":"Boucles for & while","icon":"🔁","questions":10},
+        {"id":"quiz18","file":"quiz18.json","title":"Fonctions & Modules","icon":"⚙️","questions":10}
+      ]
     }
   ]
 }
