@@ -19,6 +19,14 @@
           <span class="text-sm text-gray-600 mt-1">{{ cat.quizzes.length }} quiz</span>
         </button>
       </div>
+
+      <!-- Compteur d'appareils -->
+      <div v-if="deviceCount > 0" class="mt-8 text-center">
+        <button @click="showAdmin" class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-indigo-500 transition cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
+          {{ deviceCount }} appareil{{ deviceCount > 1 ? 's' : '' }} connecte{{ deviceCount > 1 ? 's' : '' }}
+        </button>
+      </div>
     </div>
 
     <!-- ============ ECRAN 2 : Liste des quiz d'une categorie ============ -->
@@ -86,6 +94,38 @@
       <p class="text-gray-600 mb-4">Impossible de charger les donnees.</p>
       <button @click="screen = 'home'" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-5 py-2 rounded-lg text-sm text-gray-600 transition cursor-pointer">Retour au menu</button>
     </div>
+
+    <!-- ============ ECRAN 6 : Admin - Liste des appareils ============ -->
+    <div v-if="screen === 'admin'" class="mt-4">
+      <button @click="screen = 'home'" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-4 py-2 rounded-lg transition mb-6 cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
+        Retour
+      </button>
+
+      <h1 class="text-center text-xl sm:text-2xl font-extrabold text-gray-900 mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
+        Appareils connectes
+      </h1>
+      <p class="text-center text-indigo-500 font-bold text-lg mb-6">{{ devices.length }} appareil{{ devices.length > 1 ? 's' : '' }} au total</p>
+
+      <div v-if="devicesLoading" class="text-center text-gray-400 py-8">Chargement...</div>
+
+      <div v-else class="flex flex-col gap-3">
+        <div v-for="(d, idx) in devices" :key="idx" class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 shadow-sm flex items-center gap-3">
+          <!-- Icone type -->
+          <div class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-lg" :class="d.device_type === 'Mobile' ? 'bg-blue-100 text-blue-600' : d.device_type === 'Tablette' ? 'bg-purple-100 text-purple-600' : 'bg-gray-100 text-gray-600'">
+            {{ d.device_type === 'Mobile' ? '📱' : d.device_type === 'Tablette' ? '📲' : '💻' }}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-bold text-gray-800">{{ d.device_type }} — {{ d.os }}</div>
+            <div class="text-xs text-gray-400 truncate">{{ d.browser }} · {{ d.screen_size }} · {{ d.language }}</div>
+            <div class="text-xs text-gray-300 mt-0.5">Derniere visite : {{ formatDate(d.last_seen) }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="!devicesLoading && devices.length === 0" class="text-center text-gray-400 py-8">Aucun appareil enregistre.</div>
+    </div>
   </div>
 </template>
 
@@ -94,6 +134,7 @@
 import { onMounted, ref, computed } from 'vue';
 import Quiz from './components/quiz.vue';
 import CoursePage from './components/CoursePage.vue';
+import { registerDevice, getDeviceCount, getDevices } from './tracker.js';
 
 const screen = ref('home');
 const categories = ref([]);
@@ -103,6 +144,11 @@ const quizKey = ref(0);
 const courseData = ref(null);
 const currentQuizMeta = ref(null);
 const progressVersion = ref(0);   // compteur reactif pour forcer le recalcul
+
+// Tracking
+const deviceCount = ref(0);
+const devices = ref([]);
+const devicesLoading = ref(false);
 
 const STORAGE_KEY = 'quiz-app-progress';
 
@@ -145,7 +191,25 @@ onMounted(() => {
     .then(r => r.json())
     .then(data => { categories.value = data.categories; })
     .catch(() => { screen.value = 'error'; });
+
+  // Enregistrer cet appareil et charger le compteur
+  registerDevice().then(() => {
+    getDeviceCount().then(c => { deviceCount.value = c; });
+  });
 });
+
+const showAdmin = async () => {
+  devicesLoading.value = true;
+  screen.value = 'admin';
+  devices.value = await getDevices();
+  devicesLoading.value = false;
+};
+
+const formatDate = (iso) => {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+};
 
 const selectCategory = (cat) => {
   selectedCat.value = cat;
