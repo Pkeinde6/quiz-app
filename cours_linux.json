@@ -1,0 +1,30 @@
+﻿{
+  "title": "Mini-Cours Linux",
+  "icon": "🐧",
+  "sections": [
+    {
+      "title": "Navigation dans le systeme",
+      "content": "pwd : affiche le repertoire courant\nls : liste le contenu (options : -l details, -a fichiers caches, -la les deux)\ncd : change de repertoire (cd .. = parent, cd ~ = home, cd / = racine)"
+    },
+    {
+      "title": "Gestion des fichiers et dossiers",
+      "content": "mkdir nom : cree un dossier (-p pour creer les parents)\ntouch nom : cree un fichier vide\ncp source dest : copie (-r pour dossiers)\nmv source dest : deplace ou renomme\nrm nom : supprime (-r pour dossiers, -f pour forcer)"
+    },
+    {
+      "title": "Lecture de fichiers",
+      "content": "cat fichier : affiche tout le contenu\nless fichier : affiche page par page (q pour quitter)\nhead -n N fichier : affiche les N premieres lignes\ntail -n N fichier : affiche les N dernieres lignes"
+    },
+    {
+      "title": "Permissions (rwx)",
+      "content": "Trois groupes : proprietaire (u), groupe (g), autres (o)\nr=4 (lecture), w=2 (ecriture), x=1 (execution)\nchmod 755 fichier : rwxr-xr-x\nchmod u+x fichier : ajoute execution au proprietaire\nchown user:group fichier : change le proprietaire\nchgrp group fichier : change le groupe"
+    },
+    {
+      "title": "Gestion des utilisateurs",
+      "content": "useradd nom : cree un utilisateur (-m = cree le home, -s = shell)\npasswd nom : definit le mot de passe\nusermod -aG groupe nom : ajoute a un groupe\nuserdel -r nom : supprime utilisateur et son home\ngroupadd nom : cree un groupe\ngroupdel nom : supprime un groupe\nid nom : affiche UID, GID et groupes\ngroups nom : liste les groupes d'un utilisateur"
+    },
+    {
+      "title": "Recherche et filtres",
+      "content": "find /chemin -name '*.txt' : cherche des fichiers\ngrep 'motif' fichier : cherche du texte dans un fichier\ngrep -r 'motif' dossier/ : recherche recursive\nwc -l fichier : compte les lignes"
+    }
+  ]
+}

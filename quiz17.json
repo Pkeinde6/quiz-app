@@ -1,0 +1,78 @@
+{
+  "title": "Python - Boucles for & while",
+  "minimum_score": 6,
+  "success_message": "Tu maîtrises les boucles Python !",
+  "failure_message": "Revois les boucles for, while, range(), break et continue.",
+  "questions": [
+    {
+      "question": "Quelle boucle utilise-t-on quand le nombre de répétitions est connu ?",
+      "choices": ["for", "while", "do-while", "repeat"],
+      "correct_answer": "for",
+      "hint": "Nombre de répétitions fixé à l'avance",
+      "accept": ["for", "For", "la boucle for"]
+    },
+    {
+      "question": "Quelle boucle s'exécute tant qu'une condition est vraie ?",
+      "choices": ["while", "for", "loop", "until"],
+      "correct_answer": "while",
+      "hint": "'Tant que' en anglais",
+      "accept": ["while", "While", "la boucle while"]
+    },
+    {
+      "question": "Que retourne range(5) ?",
+      "choices": ["0, 1, 2, 3, 4", "1, 2, 3, 4, 5", "0, 1, 2, 3, 4, 5", "5"],
+      "correct_answer": "0, 1, 2, 3, 4",
+      "hint": "Commence à 0 et va jusqu'à n-1",
+      "accept": ["0, 1, 2, 3, 4", "0 1 2 3 4"]
+    },
+    {
+      "question": "Que retourne range(2, 6) ?",
+      "choices": ["2, 3, 4, 5", "2, 3, 4, 5, 6", "0, 1, 2, 3, 4, 5", "6"],
+      "correct_answer": "2, 3, 4, 5",
+      "hint": "Commence à n, s'arrête à m-1",
+      "accept": ["2, 3, 4, 5", "2 3 4 5"]
+    },
+    {
+      "question": "Quel est le 3ème paramètre de range(n, m, p) ?",
+      "choices": ["Le pas (incrément)", "La valeur finale", "La valeur initiale", "Le nombre de répétitions"],
+      "correct_answer": "Le pas (incrément)",
+      "hint": "Exemple : range(0, 22, 3) → saute de 3 en 3",
+      "accept": ["Le pas (incrément)", "le pas", "pas", "increment", "incrément", "step"]
+    },
+    {
+      "question": "L'instruction break dans une boucle permet de :",
+      "choices": ["Arrêter la boucle immédiatement", "Passer à l'itération suivante", "Redémarrer la boucle", "Rien"],
+      "correct_answer": "Arrêter la boucle immédiatement",
+      "hint": "Casse la boucle",
+      "accept": ["Arrêter la boucle immédiatement", "arreter la boucle", "sortir de la boucle"]
+    },
+    {
+      "question": "L'instruction continue dans une boucle permet de :",
+      "choices": ["Passer à l'itération suivante", "Arrêter la boucle", "Relancer le programme", "Imprimer un résultat"],
+      "correct_answer": "Passer à l'itération suivante",
+      "hint": "Saute le reste du bloc et passe au tour suivant",
+      "accept": ["Passer à l'itération suivante", "passer a l'iteration suivante", "sauter une iteration"]
+    },
+    {
+      "question": "Que fait la boucle : for i in 'HELLO' ?",
+      "choices": ["Parcourt chaque lettre de HELLO", "Affiche HELLO 5 fois", "Crée une variable HELLO", "Erreur"],
+      "correct_answer": "Parcourt chaque lettre de HELLO",
+      "hint": "for parcourt une séquence (chaîne = séquence de caractères)",
+      "accept": ["Parcourt chaque lettre de HELLO", "parcourt chaque lettre", "parcourt les caracteres"]
+    },
+    {
+      "question": "Combien de fois s'exécute : for i in range(0, 10, 2) ?",
+      "choices": ["5 fois", "10 fois", "6 fois", "4 fois"],
+      "correct_answer": "5 fois",
+      "hint": "0, 2, 4, 6, 8 → 5 valeurs",
+      "accept": ["5 fois", "5"]
+    },
+    {
+      "question": "Qu'est-ce qu'une boucle imbriquée ?",
+      "choices": ["Une boucle à l'intérieur d'une autre boucle", "Deux boucles côte à côte", "Une boucle infinie", "Une boucle avec break"],
+      "correct_answer": "Une boucle à l'intérieur d'une autre boucle",
+      "hint": "for dans un for par exemple",
+      "accept": ["Une boucle à l'intérieur d'une autre boucle", "boucle dans une boucle", "boucle dans boucle"]
+    }
+  ]
+}

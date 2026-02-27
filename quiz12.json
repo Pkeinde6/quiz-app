@@ -1,0 +1,18 @@
+﻿{
+  "title": "Oracle #6 - Revision Generale",
+  "minimum_score": 5,
+  "success_message": "Felicitations ! Tu es pret pour l'examen Oracle !",
+  "failure_message": "Continue a reviser, tu y es presque !",
+  "questions": [
+    {"question":"Quelle commande affiche les datafiles d'un tablespace ?","choices":["SELECT FILE_NAME FROM DBA_DATA_FILES","SHOW DATAFILES","LIST FILES","SELECT DATAFILE FROM V$FILES"],"correct_answer":"SELECT FILE_NAME FROM DBA_DATA_FILES","hint":"Vue DBA_DATA_FILES","accept":["SELECT FILE_NAME FROM DBA_DATA_FILES"]},
+    {"question":"Quel privilege permet de creer des sequences ?","choices":["CREATE SEQUENCE","MAKE SEQUENCE","SEQUENCE_CREATE","BUILD SEQUENCE"],"correct_answer":"CREATE SEQUENCE","hint":"GRANT CREATE SEQUENCE TO ...","accept":["CREATE SEQUENCE"]},
+    {"question":"Quelle commande verifie si un utilisateur existe ?","choices":["SELECT * FROM DBA_USERS","SHOW USERS","LIST USERS","SELECT * FROM ALL_USERS"],"correct_answer":"SELECT * FROM DBA_USERS","hint":"Vue DBA_USERS","accept":["SELECT * FROM DBA_USERS","SELECT USERNAME FROM DBA_USERS"]},
+    {"question":"Quelle commande accorde SELECT sur une table a un utilisateur ?","choices":["GRANT SELECT ON table TO user","ALLOW SELECT ON table TO user","PERMIT READ ON table","GRANT READ ON table TO user"],"correct_answer":"GRANT SELECT ON table TO user","hint":"GRANT SELECT ON ...","accept":["GRANT SELECT ON table TO user","GRANT SELECT"]},
+    {"question":"Quelle commande definit le quota illimite sur un tablespace ?","choices":["ALTER USER x QUOTA UNLIMITED ON ts","SET QUOTA UNLIMITED","GRANT UNLIMITED ON ts","ALTER TABLESPACE UNLIMITED"],"correct_answer":"ALTER USER x QUOTA UNLIMITED ON ts","hint":"QUOTA UNLIMITED ON ...","accept":["ALTER USER x QUOTA UNLIMITED ON ts","QUOTA UNLIMITED"]},
+    {"question":"Quelle clause cree un tablespace temporaire ?","choices":["TEMPORARY TABLESPACE","TEMP TABLESPACE","CREATE TEMP","TEMPFILE"],"correct_answer":"TEMPORARY TABLESPACE","hint":"CREATE TEMPORARY TABLESPACE ...","accept":["TEMPORARY TABLESPACE","TEMPORARY"]},
+    {"question":"Quelle commande sauvegarde les modifications ?","choices":["COMMIT","SAVE","APPLY","CONFIRM"],"correct_answer":"COMMIT","hint":"COMMIT pour valider la transaction","accept":["COMMIT","COMMIT;"]},
+    {"question":"Quelle commande annule les modifications non validees ?","choices":["ROLLBACK","UNDO","CANCEL","REVERT"],"correct_answer":"ROLLBACK","hint":"ROLLBACK pour annuler","accept":["ROLLBACK","ROLLBACK;"]},
+    {"question":"Quelle option ON DELETE supprime les lignes enfants automatiquement ?","choices":["ON DELETE CASCADE","ON DELETE REMOVE","CASCADE DELETE","AUTO DELETE"],"correct_answer":"ON DELETE CASCADE","hint":"FOREIGN KEY ... ON DELETE CASCADE","accept":["ON DELETE CASCADE","CASCADE"]},
+    {"question":"Quelle vue montre les privileges systeme accordes a un utilisateur ?","choices":["DBA_SYS_PRIVS","USER_PRIVILEGES","V$PRIVILEGES","ALL_GRANTS"],"correct_answer":"DBA_SYS_PRIVS","hint":"DBA_SYS_PRIVS","accept":["DBA_SYS_PRIVS","dba_sys_privs"]}
+  ]
+}

@@ -1,0 +1,18 @@
+﻿{
+  "title": "Oracle #1 - Architecture & PDB",
+  "minimum_score": 5,
+  "success_message": "Excellent ! Tu maitrises l'architecture Oracle !",
+  "failure_message": "Revois les bases : CDB, PDB, tablespaces...",
+  "questions": [
+    {"question":"Quelle commande affiche le nom du conteneur courant ?","choices":["SHOW CON_NAME","SHOW CONTAINER","SELECT DB_NAME","SHOW PDB"],"correct_answer":"SHOW CON_NAME","hint":"CON = conteneur","accept":["SHOW CON_NAME","SHOW CON_NAME;"]},
+    {"question":"Quelle vue liste toutes les PDB ?","choices":["V$PDBS","DBA_PDBS","V$CONTAINERS","ALL_PDBS"],"correct_answer":"V$PDBS","hint":"Vue dynamique V$...","accept":["V$PDBS","v$pdbs"]},
+    {"question":"Quelle commande ouvre toutes les PDB ?","choices":["ALTER PLUGGABLE DATABASE ALL OPEN","OPEN ALL PDB","START ALL PDB","ALTER DATABASE OPEN ALL"],"correct_answer":"ALTER PLUGGABLE DATABASE ALL OPEN","hint":"ALTER PLUGGABLE DATABASE...","accept":["ALTER PLUGGABLE DATABASE ALL OPEN","ALTER PLUGGABLE DATABASE ALL OPEN;"]},
+    {"question":"Quel fichier specifie l'emplacement du fichier de donnees d'une PDB ?","choices":["FILE_NAME_CONVERT","DATAFILE_PATH","PDB_FILE_DIR","CREATE_FILE_DEST"],"correct_answer":"FILE_NAME_CONVERT","hint":"Lors du CREATE PLUGGABLE DATABASE","accept":["FILE_NAME_CONVERT"]},
+    {"question":"Quelle commande se connecte a une PDB nommee 'mypdb' ?","choices":["ALTER SESSION SET CONTAINER = mypdb","CONNECT mypdb","USE mypdb","SWITCH TO mypdb"],"correct_answer":"ALTER SESSION SET CONTAINER = mypdb","hint":"ALTER SESSION SET CONTAINER","accept":["ALTER SESSION SET CONTAINER = mypdb","ALTER SESSION SET CONTAINER=mypdb","ALTER SESSION SET CONTAINER = mypdb;"]},
+    {"question":"Que signifie CDB ?","choices":["Container DataBase","Central DataBase","Common DataBase","Cloud DataBase"],"correct_answer":"Container DataBase","hint":"C = Container","accept":["Container DataBase","Container Database"]},
+    {"question":"Que signifie PDB ?","choices":["Pluggable DataBase","Private DataBase","Primary DataBase","Portable DataBase"],"correct_answer":"Pluggable DataBase","hint":"P = Pluggable","accept":["Pluggable DataBase","Pluggable Database"]},
+    {"question":"Quelle clause sauvegarde l'etat ouvert d'une PDB au redemarrage ?","choices":["SAVE STATE","PERSIST OPEN","KEEP OPEN","AUTO OPEN"],"correct_answer":"SAVE STATE","hint":"ALTER PLUGGABLE DATABASE ... SAVE STATE","accept":["SAVE STATE"]},
+    {"question":"Dans quel tablespace sont stockes les objets systeme d'Oracle ?","choices":["SYSTEM","SYSAUX","USERS","TEMP"],"correct_answer":"SYSTEM","hint":"Tablespace principal du dictionnaire","accept":["SYSTEM"]},
+    {"question":"Quelle commande cree une PDB nommee 'pfe' a partir du seed ?","choices":["CREATE PLUGGABLE DATABASE pfe ADMIN USER ...","CREATE PDB pfe","ALTER DATABASE CREATE PDB pfe","INSERT PDB pfe"],"correct_answer":"CREATE PLUGGABLE DATABASE pfe ADMIN USER ...","hint":"CREATE PLUGGABLE DATABASE","accept":["CREATE PLUGGABLE DATABASE pfe ADMIN USER","CREATE PLUGGABLE DATABASE pfe"]}
+  ]
+}

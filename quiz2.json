@@ -1,0 +1,18 @@
+﻿{
+  "title": "Linux #2 - Gestion Fichiers & Dossiers",
+  "minimum_score": 7,
+  "success_message": "Tu geres les fichiers et dossiers Linux parfaitement !",
+  "failure_message": "Revise mkdir, touch, cp, mv, rm et reessaye !",
+  "questions": [
+    {"question":"Quelle commande cree un nouveau dossier ?","choices":["mkdir","touch","newdir","create"],"correct_answer":"mkdir","hint":"m...k...dir","accept":["mkdir"]},
+    {"question":"Comment creer un dossier nomme 'site' ?","choices":["mkdir site","touch site","newdir site","md site"],"correct_answer":"mkdir site","hint":"mkdir ...","accept":["mkdir site"]},
+    {"question":"Quelle commande supprime un dossier VIDE ?","choices":["rmdir","rm","del","remove"],"correct_answer":"rmdir","hint":"rm...dir","accept":["rmdir"]},
+    {"question":"Quelle commande cree un fichier vide ?","choices":["touch","mkdir","create","new"],"correct_answer":"touch","hint":"t...","accept":["touch"]},
+    {"question":"Comment creer un fichier index.html vide ?","choices":["touch index.html","mkdir index.html","create index.html","echo index.html"],"correct_answer":"touch index.html","hint":"touch ...","accept":["touch index.html"]},
+    {"question":"Comment copier index.html vers backup.html ?","choices":["cp index.html backup.html","mv index.html backup.html","copy index.html backup.html","clone index.html backup.html"],"correct_answer":"cp index.html backup.html","hint":"cp source destination","accept":["cp index.html backup.html"]},
+    {"question":"Quelle option pour copier un dossier entier avec cp ?","choices":["cp -r","cp -a","cp -d","cp -f"],"correct_answer":"cp -r","hint":"r comme recursif","accept":["cp -r","-r"]},
+    {"question":"Comment renommer fichier.txt en notes.txt ?","choices":["mv fichier.txt notes.txt","cp fichier.txt notes.txt","rn fichier.txt notes.txt","rename fichier.txt notes.txt"],"correct_answer":"mv fichier.txt notes.txt","hint":"mv ancien nouveau","accept":["mv fichier.txt notes.txt"]},
+    {"question":"Comment supprimer le fichier test.txt ?","choices":["rm test.txt","del test.txt","remove test.txt","erase test.txt"],"correct_answer":"rm test.txt","hint":"rm ...","accept":["rm test.txt"]},
+    {"question":"Comment supprimer le dossier 'site' et tout son contenu ?","choices":["rm -r site","rmdir site","del site","rm site"],"correct_answer":"rm -r site","hint":"rm -r ...","accept":["rm -r site","rm -r site/","rm -rf site"]}
+  ]
+}

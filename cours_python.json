@@ -1,0 +1,30 @@
+{
+  "icon": "🐍",
+  "title": "Cours Python",
+  "sections": [
+    {
+      "title": "Introduction à Python",
+      "content": "Python : langage interprété créé en 1991 par Guido van Rossum.\n\nAvantages :\n  - Syntaxe simple et lisible\n  - Modulaire et orienté objet\n  - Multiplateforme (Windows, Mac, Linux)\n  - Open source\n  - Riche en bibliothèques\n\nInconvénients :\n  - Plus lent qu'un langage compilé (C/C++)\n  - Nécessite d'installer Python sur le système\n\nL'interpréteur Python :\n  >>> signifie que Python est prêt à recevoir des commandes\n  Les nombres décimaux utilisent le point (3.5 et non 3,5)\n\nOpérateurs de base :\n  +   addition\n  -   soustraction\n  *   multiplication\n  /   division\n  //  division entière    → 10 // 3 = 3\n  %   modulo (reste)      → 10 % 3  = 1\n  **  puissance            → 2 ** 3  = 8"
+    },
+    {
+      "title": "Variables & Types de données",
+      "content": "Variable = donnée stockée en mémoire, associée à un nom.\n\nRègles de nommage :\n  - Lettres (maj/min), chiffres, underscore _\n  - Ne peut PAS commencer par un chiffre\n  - Sensible à la casse : AGE ≠ age\n\nConventions :\n  mon_age     → snake_case (recommandé)\n  monAge      → camelCase\n\nTypes principaux :\n  int     → entier        ex: 42\n  float   → flottant       ex: 3.14\n  str     → chaîne         ex: \"hello\"\n  bool    → booléen        ex: True, False\n\nAffectation :\n  mon_age = 21\n  mon_age_x2 = mon_age * 2\n\nAstuces :\n  a, b = b, a          → permutation\n  a = b = c = 3        → même valeur\n  variable += 1        → incrémentation\n  -=  *=  /=           → raccourcis\n\nMots réservés (33) : and, as, assert, break, class,\n  continue, def, del, elif, else, except, False,\n  finally, for, from, global, if, import, in, is,\n  lambda, None, nonlocal, not, or, pass, raise,\n  return, True, try, while, with, yield"
+    },
+    {
+      "title": "Print(), Input() & Casting",
+      "content": "AFFICHAGE : print()\n  print(\"Bonjour\")            → affiche Bonjour\n  print(\"A =\", A)             → affiche A = valeur_de_A\n  print(X, \"et\", Y)           → plusieurs valeurs\n\nSAISIE : input()\n  nom = input(\"Votre nom : \")\n  → attend une saisie utilisateur\n  → retourne TOUJOURS un string (str)\n\nCASTING (conversion de type) :\n  Problème : A = input()  →  A est un str\n             B = A * 2   →  '55' pas 10 !\n\n  Solution : convertir le type\n    age = int(input(\"Age : \"))       → entier\n    prix = float(input(\"Prix : \"))   → flottant\n    texte = str(42)                   → chaîne\n\nExemple complet :\n  rayon = float(input(\"Rayon : \"))\n  pi = 3.14159\n  aire = pi * rayon * rayon\n  print(\"Aire du cercle :\", aire)"
+    },
+    {
+      "title": "Structures conditionnelles",
+      "content": "IF simple :\n  if condition:\n      instruction\n\nIF / ELSE :\n  if condition:\n      instruction_si_vrai\n  else:\n      instruction_si_faux\n\nIF / ELIF / ELSE :\n  if condition1:\n      instruction1\n  elif condition2:\n      instruction2\n  else:\n      instruction3\n\nRègles importantes :\n  - Toujours mettre : après la condition\n  - Indenter le bloc de code (4 espaces)\n  - L'indentation délimite le bloc\n\nOpérateurs de comparaison :\n  ==   égal à\n  !=   différent de\n  >    supérieur\n  <    inférieur\n  >=   supérieur ou égal\n  <=   inférieur ou égal\n\nOpérateur ternaire :\n  max = A if A > B else B\n  → syntaxe : valeur_si_vrai if condition else valeur_si_faux\n\nIF imbriqué :\n  if condition1:\n      if condition2:\n          instruction\n      else:\n          instruction\n  else:\n      instruction"
+    },
+    {
+      "title": "Boucles for & while",
+      "content": "BOUCLE FOR (nombre de répétitions connu) :\n  for i in range(5):\n      print(i)           → 0, 1, 2, 3, 4\n\nFonction range() :\n  range(n)         → 0 à n-1\n  range(n, m)      → n à m-1\n  range(n, m, p)   → n à m-1 avec pas p\n\n  Exemples :\n    range(5)        → 0, 1, 2, 3, 4\n    range(2, 6)     → 2, 3, 4, 5\n    range(0, 10, 2) → 0, 2, 4, 6, 8\n\nParcourir une chaîne :\n  for lettre in \"HELLO\":\n      print(lettre)    → H, E, L, L, O\n\nBoucles imbriquées :\n  for i in range(3):\n      for j in range(4):\n          print(i, j)\n\nBOUCLE WHILE (dépend d'une condition) :\n  compteur = 0\n  while compteur < 5:\n      print(compteur)\n      compteur += 1\n\nBREAK : arrête la boucle immédiatement\n  for i in range(10):\n      if i == 5:\n          break\n      print(i)          → 0, 1, 2, 3, 4\n\nCONTINUE : saute à l'itération suivante\n  for i in range(5):\n      if i == 2:\n          continue\n      print(i)          → 0, 1, 3, 4"
+    },
+    {
+      "title": "Fonctions & Modules",
+      "content": "DÉFINIR UNE FONCTION :\n  def nom_fonction(arg1, arg2):\n      instructions\n      return resultat\n\n  → def : mot-clé de définition\n  → arguments : données en entrée\n  → return : résultat renvoyé\n  → ne pas oublier : et l'indentation\n\nAPPELER UNE FONCTION :\n  resultat = nom_fonction(val1, val2)\n\nVARIABLES LOCALES vs GLOBALES :\n  → Locale : définie dans la fonction, inaccessible dehors\n  → Globale : définie hors fonction, lisible partout\n  → Pour MODIFIER une globale dans une fonction :\n      global ma_variable\n\nMODULES :\n  Un module = un fichier .py avec des fonctions/classes\n\n  Méthodes d'import :\n    import module                      → module.fonction()\n    from module import fonction        → fonction()\n    from module import *               → tout importer\n    import module as alias             → alias.fonction()\n    from module import fonction as f   → f()\n\nPACKAGES :\n  → Dossier contenant plusieurs modules\n  → Identifié par un fichier __init__.py\n\nPIP : gestionnaire de packages\n  pip install nom_package\n  pip list\n  pip uninstall nom_package"
+    }
+  ]
+}

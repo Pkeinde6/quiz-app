@@ -1,0 +1,288 @@
+﻿{
+  "title": "Linux - Commandes Essentielles",
+  "minimum_score": 20,
+  "success_message": "Bravo ! Tu maitrises les commandes Linux comme un pro du terminal !",
+  "failure_message": "Revise encore un peu tes commandes Linux et reessaye !",
+  "questions": [
+    {
+      "question": "Quelle commande affiche le chemin du dossier courant ?",
+      "choices": ["pwd", "cd", "ls", "dir"],
+      "correct_answer": "pwd",
+      "hint": "p... w... d...",
+      "accept": ["pwd"]
+    },
+    {
+      "question": "Quelle commande liste les fichiers et dossiers ?",
+      "choices": ["ls", "dir", "list", "show"],
+      "correct_answer": "ls",
+      "hint": "Deux lettres...",
+      "accept": ["ls"]
+    },
+    {
+      "question": "Quelle option de ls affiche les fichiers caches ?",
+      "choices": ["ls -a", "ls -h", "ls -l", "ls -all"],
+      "correct_answer": "ls -a",
+      "hint": "ls -...",
+      "accept": ["ls -a", "-a"]
+    },
+    {
+      "question": "Quelle option de ls affiche les details (droits, taille...) ?",
+      "choices": ["ls -l", "ls -a", "ls -d", "ls -v"],
+      "correct_answer": "ls -l",
+      "hint": "ls -... (long format)",
+      "accept": ["ls -l", "-l"]
+    },
+    {
+      "question": "Quelle commande permet de changer de dossier ?",
+      "choices": ["cd", "mv", "go", "chdir"],
+      "correct_answer": "cd",
+      "hint": "c... d...",
+      "accept": ["cd"]
+    },
+    {
+      "question": "Comment revenir au dossier parent (un niveau en arriere) ?",
+      "choices": ["cd ..", "cd ~", "cd /", "cd -"],
+      "correct_answer": "cd ..",
+      "hint": "cd et deux points",
+      "accept": ["cd ..", "cd.."]
+    },
+    {
+      "question": "Comment aller directement au dossier personnel (home) ?",
+      "choices": ["cd ~", "cd ..", "cd /home", "cd home"],
+      "correct_answer": "cd ~",
+      "hint": "cd et un symbole special ~",
+      "accept": ["cd ~", "cd~"]
+    },
+    {
+      "question": "Quelle commande cree un nouveau dossier ?",
+      "choices": ["mkdir", "touch", "newdir", "create"],
+      "correct_answer": "mkdir",
+      "hint": "m... k... dir",
+      "accept": ["mkdir"]
+    },
+    {
+      "question": "Comment creer un dossier nomme 'site' ?",
+      "choices": ["mkdir site", "touch site", "newdir site", "create site"],
+      "correct_answer": "mkdir site",
+      "hint": "mkdir ...",
+      "accept": ["mkdir site"]
+    },
+    {
+      "question": "Quelle commande supprime un dossier VIDE ?",
+      "choices": ["rmdir", "rm", "del", "remove"],
+      "correct_answer": "rmdir",
+      "hint": "rm... dir",
+      "accept": ["rmdir"]
+    },
+    {
+      "question": "Quelle commande cree un fichier vide ?",
+      "choices": ["touch", "mkdir", "create", "new"],
+      "correct_answer": "touch",
+      "hint": "t...",
+      "accept": ["touch"]
+    },
+    {
+      "question": "Comment creer un fichier index.html vide ?",
+      "choices": ["touch index.html", "mkdir index.html", "create index.html", "new index.html"],
+      "correct_answer": "touch index.html",
+      "hint": "touch ...",
+      "accept": ["touch index.html"]
+    },
+    {
+      "question": "Quelle commande copie un fichier ?",
+      "choices": ["cp", "mv", "copy", "duplicate"],
+      "correct_answer": "cp",
+      "hint": "Deux lettres : c...",
+      "accept": ["cp"]
+    },
+    {
+      "question": "Comment copier index.html vers sauvegarde.html ?",
+      "choices": ["cp index.html sauvegarde.html", "mv index.html sauvegarde.html", "copy index.html sauvegarde.html", "clone index.html sauvegarde.html"],
+      "correct_answer": "cp index.html sauvegarde.html",
+      "hint": "cp source destination",
+      "accept": ["cp index.html sauvegarde.html"]
+    },
+    {
+      "question": "Quelle option faut-il ajouter a cp pour copier un dossier entier ?",
+      "choices": ["cp -r", "cp -a", "cp -d", "cp -f"],
+      "correct_answer": "cp -r",
+      "hint": "-r comme recursif",
+      "accept": ["cp -r", "-r"]
+    },
+    {
+      "question": "Quelle commande deplace ou renomme un fichier ?",
+      "choices": ["mv", "cp", "rn", "move"],
+      "correct_answer": "mv",
+      "hint": "m... v...",
+      "accept": ["mv"]
+    },
+    {
+      "question": "Comment renommer index.html en accueil.html ?",
+      "choices": ["mv index.html accueil.html", "cp index.html accueil.html", "rn index.html accueil.html", "rename index.html accueil.html"],
+      "correct_answer": "mv index.html accueil.html",
+      "hint": "mv ancien nouveau",
+      "accept": ["mv index.html accueil.html"]
+    },
+    {
+      "question": "Quelle commande supprime un fichier ?",
+      "choices": ["rm", "del", "remove", "erase"],
+      "correct_answer": "rm",
+      "hint": "r... m...",
+      "accept": ["rm"]
+    },
+    {
+      "question": "Comment supprimer un dossier et tout son contenu ?",
+      "choices": ["rm -r site", "rmdir site", "del -r site", "remove site"],
+      "correct_answer": "rm -r site",
+      "hint": "rm -r ...",
+      "accept": ["rm -r site", "rm -r site/"]
+    },
+    {
+      "question": "Quelle commande affiche le contenu complet d'un fichier ?",
+      "choices": ["cat", "less", "head", "read"],
+      "correct_answer": "cat",
+      "hint": "c... a... t...",
+      "accept": ["cat"]
+    },
+    {
+      "question": "Quelle commande lit un fichier page par page ?",
+      "choices": ["less", "cat", "more", "read"],
+      "correct_answer": "less",
+      "hint": "l... e... s... s...",
+      "accept": ["less"]
+    },
+    {
+      "question": "Comment afficher les 5 premieres lignes d'un fichier notes.txt ?",
+      "choices": ["head -n 5 notes.txt", "tail -n 5 notes.txt", "cat -5 notes.txt", "top 5 notes.txt"],
+      "correct_answer": "head -n 5 notes.txt",
+      "hint": "head -n ...",
+      "accept": ["head -n 5 notes.txt", "head -5 notes.txt"]
+    },
+    {
+      "question": "Comment afficher les 5 dernieres lignes d'un fichier notes.txt ?",
+      "choices": ["tail -n 5 notes.txt", "head -n 5 notes.txt", "cat -5 notes.txt", "end 5 notes.txt"],
+      "correct_answer": "tail -n 5 notes.txt",
+      "hint": "tail -n ...",
+      "accept": ["tail -n 5 notes.txt", "tail -5 notes.txt"]
+    },
+    {
+      "question": "Quelle commande permet de modifier les permissions d'un fichier ?",
+      "choices": ["chmod", "chown", "chgrp", "perm"],
+      "correct_answer": "chmod",
+      "hint": "ch... mod",
+      "accept": ["chmod"]
+    },
+    {
+      "question": "Que signifie chmod 750 script.sh ? Quels droits pour le proprietaire ?",
+      "choices": ["rwx (lecture, ecriture, execution)", "rw (lecture, ecriture)", "rx (lecture, execution)", "r (lecture seule)"],
+      "correct_answer": "rwx (lecture, ecriture, execution)",
+      "hint": "7 = 4+2+1 = r+w+x",
+      "accept": ["rwx (lecture, ecriture, execution)", "rwx", "lecture ecriture execution", "7"]
+    },
+    {
+      "question": "Dans chmod 750, que signifie le 5 pour le groupe ?",
+      "choices": ["rx (lecture + execution)", "rw (lecture + ecriture)", "rwx (tous les droits)", "r (lecture seule)"],
+      "correct_answer": "rx (lecture + execution)",
+      "hint": "5 = 4+1 = r+x",
+      "accept": ["rx (lecture + execution)", "rx", "lecture execution", "5", "r-x"]
+    },
+    {
+      "question": "Dans chmod 750, que signifie le 0 pour les autres ?",
+      "choices": ["Aucun droit", "Lecture seule", "Execution seule", "Tous les droits"],
+      "correct_answer": "Aucun droit",
+      "hint": "0 = rien",
+      "accept": ["Aucun droit", "aucun", "rien", "0", "---"]
+    },
+    {
+      "question": "Quelle commande change le proprietaire d'un fichier ?",
+      "choices": ["chown", "chmod", "chgrp", "owner"],
+      "correct_answer": "chown",
+      "hint": "ch... own (owner = proprietaire)",
+      "accept": ["chown"]
+    },
+    {
+      "question": "Comment changer le proprietaire de fichier.txt vers bob ?",
+      "choices": ["sudo chown bob fichier.txt", "sudo chmod bob fichier.txt", "sudo chgrp bob fichier.txt", "sudo owner bob fichier.txt"],
+      "correct_answer": "sudo chown bob fichier.txt",
+      "hint": "sudo chown ... ...",
+      "accept": ["sudo chown bob fichier.txt", "chown bob fichier.txt"]
+    },
+    {
+      "question": "Quelle commande change le groupe d'un fichier ?",
+      "choices": ["chgrp", "chown", "chmod", "group"],
+      "correct_answer": "chgrp",
+      "hint": "ch... grp (group)",
+      "accept": ["chgrp"]
+    },
+    {
+      "question": "Quelle commande cree un nouvel utilisateur ?",
+      "choices": ["sudo useradd bob", "sudo adduser bob", "sudo newuser bob", "sudo createuser bob"],
+      "correct_answer": "sudo useradd bob",
+      "hint": "sudo useradd ...",
+      "accept": ["sudo useradd bob", "useradd bob"]
+    },
+    {
+      "question": "Quelle commande definit le mot de passe d'un utilisateur ?",
+      "choices": ["sudo passwd bob", "sudo password bob", "sudo setpw bob", "sudo pass bob"],
+      "correct_answer": "sudo passwd bob",
+      "hint": "sudo passwd ...",
+      "accept": ["sudo passwd bob", "passwd bob"]
+    },
+    {
+      "question": "Comment supprimer un utilisateur ET son dossier personnel ?",
+      "choices": ["sudo userdel -r bob", "sudo userdel bob", "sudo deluser bob", "sudo removeuser -r bob"],
+      "correct_answer": "sudo userdel -r bob",
+      "hint": "sudo userdel -r ...",
+      "accept": ["sudo userdel -r bob", "userdel -r bob"]
+    },
+    {
+      "question": "Comment ajouter l'utilisateur bob au groupe dev ?",
+      "choices": ["sudo usermod -aG dev bob", "sudo addgroup dev bob", "sudo groupadd dev bob", "sudo useradd -g dev bob"],
+      "correct_answer": "sudo usermod -aG dev bob",
+      "hint": "sudo usermod -aG groupe utilisateur",
+      "accept": ["sudo usermod -aG dev bob", "usermod -aG dev bob"]
+    },
+    {
+      "question": "Quelle commande cree un nouveau groupe ?",
+      "choices": ["sudo groupadd dev", "sudo addgroup dev", "sudo newgroup dev", "sudo creategroup dev"],
+      "correct_answer": "sudo groupadd dev",
+      "hint": "sudo groupadd ...",
+      "accept": ["sudo groupadd dev", "groupadd dev"]
+    },
+    {
+      "question": "Quelle commande supprime un groupe ?",
+      "choices": ["sudo groupdel dev", "sudo delgroup dev", "sudo rmgroup dev", "sudo removegroup dev"],
+      "correct_answer": "sudo groupdel dev",
+      "hint": "sudo groupdel ...",
+      "accept": ["sudo groupdel dev", "groupdel dev"]
+    },
+    {
+      "question": "Quelle commande affiche le UID et GID d'un utilisateur ?",
+      "choices": ["id bob", "info bob", "who bob", "uid bob"],
+      "correct_answer": "id bob",
+      "hint": "Deux lettres...",
+      "accept": ["id bob", "id"]
+    },
+    {
+      "question": "Quelle commande affiche les groupes d'un utilisateur ?",
+      "choices": ["groups bob", "grp bob", "id -G bob", "showgroups bob"],
+      "correct_answer": "groups bob",
+      "hint": "groups ...",
+      "accept": ["groups bob", "groups"]
+    },
+    {
+      "question": "Quel prefixe utilise-t-on pour executer une commande en mode administrateur ?",
+      "choices": ["sudo", "admin", "root", "su"],
+      "correct_answer": "sudo",
+      "hint": "s... u... d... o...",
+      "accept": ["sudo"]
+    },
+    {
+      "question": "Que signifie l'option -r dans cp -r et rm -r ?",
+      "choices": ["Recursif (agit sur les dossiers et leur contenu)", "Rapide", "Read-only", "Reverse"],
+      "correct_answer": "Recursif (agit sur les dossiers et leur contenu)",
+      "hint": "r comme r...",
+      "accept": ["Recursif (agit sur les dossiers et leur contenu)", "recursif", "recursive", "recursif"]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "title": "Python - Fonctions & Modules",
+  "minimum_score": 6,
+  "success_message": "Bravo, tu maîtrises les fonctions et modules Python !",
+  "failure_message": "Revois la définition de fonctions, return, variables locales/globales et les modules.",
+  "questions": [
+    {
+      "question": "Quel mot-clé permet de définir une fonction en Python ?",
+      "choices": ["def", "function", "func", "define"],
+      "correct_answer": "def",
+      "hint": "Abréviation de 'define'",
+      "accept": ["def"]
+    },
+    {
+      "question": "Quel mot-clé permet de retourner un résultat depuis une fonction ?",
+      "choices": ["return", "result", "print", "yield"],
+      "correct_answer": "return",
+      "hint": "Renvoie une valeur à l'appelant",
+      "accept": ["return"]
+    },
+    {
+      "question": "Une variable définie à l'intérieur d'une fonction est appelée :",
+      "choices": ["Variable locale", "Variable globale", "Variable statique", "Variable dynamique"],
+      "correct_answer": "Variable locale",
+      "hint": "Accessible uniquement dans la fonction",
+      "accept": ["Variable locale", "variable locale", "locale"]
+    },
+    {
+      "question": "Quel mot-clé permet de modifier une variable globale depuis une fonction ?",
+      "choices": ["global", "public", "extern", "static"],
+      "correct_answer": "global",
+      "hint": "Indique à Python qu'on veut modifier la variable globale",
+      "accept": ["global"]
+    },
+    {
+      "question": "Une variable globale est accessible en lecture à l'intérieur d'une fonction ?",
+      "choices": ["Oui", "Non", "Seulement avec import", "Seulement avec global"],
+      "correct_answer": "Oui",
+      "hint": "En lecture oui, en modification il faut 'global'",
+      "accept": ["Oui", "oui"]
+    },
+    {
+      "question": "Qu'est-ce qu'un module en Python ?",
+      "choices": ["Un fichier .py contenant des fonctions/classes", "Un type de variable", "Un opérateur", "Une boucle spéciale"],
+      "correct_answer": "Un fichier .py contenant des fonctions/classes",
+      "hint": "Décomposer les grands programmes en petits fichiers",
+      "accept": ["Un fichier .py contenant des fonctions/classes", "un fichier python", "fichier .py"]
+    },
+    {
+      "question": "Quelle commande importe toutes les fonctions d'un module ?",
+      "choices": ["from module import *", "import module.*", "include module", "require module"],
+      "correct_answer": "from module import *",
+      "hint": "from ... import étoile",
+      "accept": ["from module import *"]
+    },
+    {
+      "question": "Comment donner un alias à un module importé ?",
+      "choices": ["import module as alias", "import module = alias", "alias = import module", "import module alias"],
+      "correct_answer": "import module as alias",
+      "hint": "Mot-clé 'as'",
+      "accept": ["import module as alias", "as"]
+    },
+    {
+      "question": "Qu'est-ce qu'un package en Python ?",
+      "choices": ["Un ensemble de modules regroupés dans un dossier", "Un seul fichier .py", "Un type de variable", "Un IDE Python"],
+      "correct_answer": "Un ensemble de modules regroupés dans un dossier",
+      "hint": "Dossier contenant plusieurs modules",
+      "accept": ["Un ensemble de modules regroupés dans un dossier", "ensemble de modules", "dossier de modules"]
+    },
+    {
+      "question": "Quel outil permet de gérer les packages depuis le dépôt officiel Python ?",
+      "choices": ["pip", "npm", "apt", "brew"],
+      "correct_answer": "pip",
+      "hint": "Installé avec Python",
+      "accept": ["pip", "Pip", "PIP"]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "title": "Python - Structures conditionnelles",
+  "minimum_score": 6,
+  "success_message": "Tu maîtrises les conditions if/elif/else !",
+  "failure_message": "Revois les structures conditionnelles en Python.",
+  "questions": [
+    {
+      "question": "Quel mot-clé commence une structure conditionnelle en Python ?",
+      "choices": ["if", "when", "case", "switch"],
+      "correct_answer": "if",
+      "hint": "Mot anglais pour 'si'",
+      "accept": ["if", "If"]
+    },
+    {
+      "question": "Que ne faut-il JAMAIS oublier après la condition dans un if ?",
+      "choices": ["Les deux points :", "Le point-virgule ;", "Les parenthèses ()", "Les accolades {}"],
+      "correct_answer": "Les deux points :",
+      "hint": "Syntaxe obligatoire après la condition",
+      "accept": ["Les deux points :", ":", "deux points", "les deux points"]
+    },
+    {
+      "question": "Comment Python délimite-t-il les blocs de code (au lieu des accolades) ?",
+      "choices": ["Par l'indentation", "Par des accolades", "Par des parenthèses", "Par des crochets"],
+      "correct_answer": "Par l'indentation",
+      "hint": "Espaces ou tabulations en début de ligne",
+      "accept": ["Par l'indentation", "indentation", "l'indentation"]
+    },
+    {
+      "question": "Quel mot-clé permet d'ajouter une condition alternative en Python ?",
+      "choices": ["elif", "elseif", "else if", "elsif"],
+      "correct_answer": "elif",
+      "hint": "Contraction de else if en Python",
+      "accept": ["elif"]
+    },
+    {
+      "question": "Que fait le bloc else dans une structure conditionnelle ?",
+      "choices": ["S'exécute si aucune condition n'est vraie", "S'exécute toujours", "Arrête le programme", "Répète la condition"],
+      "correct_answer": "S'exécute si aucune condition n'est vraie",
+      "hint": "Cas par défaut quand tout est faux",
+      "accept": ["S'exécute si aucune condition n'est vraie", "si aucune condition n'est vraie", "sinon"]
+    },
+    {
+      "question": "Quelle est la syntaxe de l'opérateur ternaire en Python ?",
+      "choices": ["valeur_si_vrai if condition else valeur_si_faux", "condition ? vrai : faux", "if condition then vrai else faux", "select(condition, vrai, faux)"],
+      "correct_answer": "valeur_si_vrai if condition else valeur_si_faux",
+      "hint": "Trois opérandes : valeur, condition, valeur",
+      "accept": ["valeur_si_vrai if condition else valeur_si_faux"]
+    },
+    {
+      "question": "Dans une division A/B, que se passe-t-il si B vaut 0 ?",
+      "choices": ["Python retourne une erreur", "Le résultat est 0", "Le résultat est infini", "Python ignore l'instruction"],
+      "correct_answer": "Python retourne une erreur",
+      "hint": "Division par zéro impossible",
+      "accept": ["Python retourne une erreur", "erreur", "une erreur", "ZeroDivisionError"]
+    },
+    {
+      "question": "Quel opérateur vérifie l'égalité en Python ?",
+      "choices": ["==", "=", "===", "eq"],
+      "correct_answer": "==",
+      "hint": "Double signe égal",
+      "accept": ["=="]
+    },
+    {
+      "question": "Quel opérateur signifie 'différent de' en Python ?",
+      "choices": ["!=", "<>", "=/=", "not="],
+      "correct_answer": "!=",
+      "hint": "Point d'exclamation + égal",
+      "accept": ["!="]
+    },
+    {
+      "question": "Qu'est-ce qu'une structure conditionnelle imbriquée ?",
+      "choices": ["Un if à l'intérieur d'un autre if/else", "Deux if côte à côte", "Un if avec elif", "Un if sans else"],
+      "correct_answer": "Un if à l'intérieur d'un autre if/else",
+      "hint": "Imbrication = une structure dans une autre",
+      "accept": ["Un if à l'intérieur d'un autre if/else", "un if dans un if", "if dans if"]
+    }
+  ]
+}
