@@ -1,5 +1,5 @@
 <template>
-  <div :class="screen === 'tutorial' ? 'font-[Inter]' : 'max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8 font-[Inter]'">
+  <div :class="(screen === 'tutorial' || screen === 'tutoAnimation') ? 'font-[Inter]' : 'max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8 font-[Inter]'">
 
     <!-- ============ ECRAN 1 : Choix de la categorie ============ -->
     <div v-if="screen === 'home'" class="mt-4">

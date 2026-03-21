@@ -22,7 +22,7 @@
       <div v-if="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
 
       <!-- Sidebar — GSAP dark style with green line -->
-      <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed lg:sticky top-[53px] left-0 z-50 lg:z-10 lg:translate-x-0 w-64 h-[calc(100vh-53px)] bg-[#131613] border-r border-[#1e211e] overflow-y-auto transition-transform duration-300 lg:block">
+      <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed lg:sticky top-[53px] left-0 z-50 lg:z-10 lg:translate-x-0 w-[280px] sm:w-64 lg:w-60 xl:w-64 h-[calc(100vh-53px)] bg-[#131613] border-r border-[#1e211e] overflow-y-auto transition-transform duration-300 lg:block shrink-0">
         <nav class="py-4 pl-4 pr-3">
           <p class="px-3 pb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#0ae448]/60">Documentation</p>
           <!-- Vertical line -->
@@ -50,7 +50,7 @@
       </aside>
 
       <!-- Contenu principal -->
-      <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-8 py-8 pb-24">
+      <main class="flex-1 min-w-0 px-4 sm:px-6 lg:px-10 xl:px-16 py-8 pb-24">
         <!-- Intro — GSAP Hero style -->
         <div class="mb-12 relative">
           <div class="flex items-center gap-3 mb-4">
@@ -60,7 +60,7 @@
               <p class="text-sm text-gray-500 font-medium">Documentation Portfolio</p>
             </div>
           </div>
-          <p class="text-gray-400 leading-relaxed max-w-2xl">
+          <p class="text-gray-400 leading-relaxed max-w-3xl">
             Toutes les animations GSAP utilisees dans mon <span class="text-[#0ae448] font-semibold">portfolio</span> (foliolara).
             Chaque section contient une <span class="text-white font-medium">explication</span>, le <span class="text-white font-medium">code source</span>, puis une
             <span class="text-white font-medium">analyse detaillee</span> du fonctionnement.
