@@ -1,107 +1,132 @@
 <template>
-  <div class="font-[Inter] min-h-screen bg-gray-50">
-    <!-- Header sticky -->
-    <div class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-gray-200 px-4 py-3 flex items-center gap-3">
-      <button @click="$emit('back')" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-lg transition cursor-pointer shrink-0">
+  <div class="font-[Inter] min-h-screen bg-[#0e100f] text-gray-200">
+    <!-- Header sticky — GSAP dark style -->
+    <div class="sticky top-0 z-30 bg-[#0e100f]/95 backdrop-blur-md border-b border-[#1a1d1b] px-4 py-3 flex items-center gap-3">
+      <button @click="$emit('back')" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-[#0ae448] bg-[#1a1d1b] hover:bg-[#222522] border border-[#2a2d2b] px-3 py-1.5 rounded-lg transition cursor-pointer shrink-0">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
         Retour
       </button>
-      <div class="flex-1 min-w-0">
-        <h1 class="text-sm sm:text-base font-bold text-gray-900 truncate">🎬 GSAP — Animations Portfolio</h1>
+      <div class="flex-1 min-w-0 flex items-center gap-2">
+        <!-- GSAP logo green -->
+        <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0ae448"/><path d="M7 12h4l2-5 2 8 2-3h2" stroke="#0e100f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h1 class="text-sm sm:text-base font-bold text-white truncate">GSAP — Animations Portfolio</h1>
       </div>
       <!-- Burger mobile -->
-      <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+      <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden p-2 rounded-lg hover:bg-[#1a1d1b] transition cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
       </button>
     </div>
 
     <div class="flex">
       <!-- Sidebar overlay mobile -->
-      <div v-if="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black/30 z-40 lg:hidden"></div>
+      <div v-if="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
 
-      <!-- Sidebar -->
-      <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed lg:sticky top-[53px] left-0 z-50 lg:z-10 lg:translate-x-0 w-72 h-[calc(100vh-53px)] bg-gradient-to-b from-slate-50 to-white border-r border-gray-200/80 overflow-y-auto transition-transform duration-300 lg:block scrollbar-thin">
-        <nav class="p-3 space-y-0.5">
-          <p class="px-3 pt-2 pb-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">Sommaire</p>
-          <button
-            v-for="(section, i) in sections"
-            :key="i"
-            @click="scrollToSection(i)"
-            class="group w-full text-left px-3 py-2.5 rounded-xl text-[13px] leading-snug transition-all duration-200 cursor-pointer flex items-start gap-2.5 relative"
-            :class="activeSection === i
-              ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-200'
-              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-800'"
-          >
-            <span class="text-base shrink-0 mt-px" :class="activeSection === i ? 'grayscale-0 brightness-125' : 'grayscale group-hover:grayscale-0 transition-all'">{{ section.icon }}</span>
-            <span class="truncate">{{ section.title.split(' — ')[0] }}</span>
-            <span v-if="activeSection === i" class="absolute right-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white/80"></span>
-          </button>
+      <!-- Sidebar — GSAP dark style with green line -->
+      <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed lg:sticky top-[53px] left-0 z-50 lg:z-10 lg:translate-x-0 w-64 h-[calc(100vh-53px)] bg-[#131613] border-r border-[#1e211e] overflow-y-auto transition-transform duration-300 lg:block">
+        <nav class="py-4 pl-4 pr-3">
+          <p class="px-3 pb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#0ae448]/60">Documentation</p>
+          <!-- Vertical line -->
+          <div class="relative">
+            <div class="absolute left-[11px] top-0 bottom-0 w-px bg-[#1e211e]"></div>
+            <div class="space-y-0.5">
+              <button
+                v-for="(section, i) in sections"
+                :key="i"
+                @click="scrollToSection(i)"
+                class="group w-full text-left pl-7 pr-2 py-2 rounded-r-lg text-[13px] leading-snug transition-all duration-200 cursor-pointer relative"
+                :class="activeSection === i
+                  ? 'text-[#0ae448] font-semibold bg-[#0ae448]/8'
+                  : 'text-gray-500 hover:text-gray-300 hover:bg-white/3'"
+              >
+                <!-- Dot on the line -->
+                <span class="absolute left-[7px] top-1/2 -translate-y-1/2 w-[9px] h-[9px] rounded-full border-2 transition-all duration-200"
+                  :class="activeSection === i ? 'border-[#0ae448] bg-[#0ae448] shadow-[0_0_8px_rgba(10,228,72,0.5)]' : 'border-[#2a2d2b] bg-[#131613] group-hover:border-gray-500'"></span>
+                <span class="block truncate">{{ section.title.split(' — ')[0] }}</span>
+                <span v-if="section.title.includes(' — ')" class="block text-[11px] truncate mt-0.5" :class="activeSection === i ? 'text-[#0ae448]/60' : 'text-gray-600'">{{ section.title.split(' — ')[1] }}</span>
+              </button>
+            </div>
+          </div>
         </nav>
       </aside>
 
       <!-- Contenu principal -->
       <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-8 py-8 pb-24">
-        <!-- Intro -->
-        <div class="mb-10">
-          <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-3">🎬 Animations GSAP — Documentation</h1>
-          <p class="text-gray-600 leading-relaxed">
-            Toutes les animations GSAP utilisees dans mon <strong>portfolio</strong> (foliolara).
-            Chaque section contient une <strong>explication</strong>, le <strong>code source</strong>, puis une
-            <strong>analyse detaillee</strong> du fonctionnement.
+        <!-- Intro — GSAP Hero style -->
+        <div class="mb-12 relative">
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-10 h-10" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#0ae448"/><path d="M11 20h7l3-8 4 14 3-6h4" stroke="#0e100f" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-white">Animations GSAP</h1>
+              <p class="text-sm text-gray-500 font-medium">Documentation Portfolio</p>
+            </div>
+          </div>
+          <p class="text-gray-400 leading-relaxed max-w-2xl">
+            Toutes les animations GSAP utilisees dans mon <span class="text-[#0ae448] font-semibold">portfolio</span> (foliolara).
+            Chaque section contient une <span class="text-white font-medium">explication</span>, le <span class="text-white font-medium">code source</span>, puis une
+            <span class="text-white font-medium">analyse detaillee</span> du fonctionnement.
           </p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">GSAP 3.12+</span>
-            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">ScrollTrigger</span>
-            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">Timeline</span>
-            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-bold">Ticker</span>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-[#0ae448]/10 text-[#0ae448] border border-[#0ae448]/20 rounded-full text-xs font-bold">GSAP 3.12+</span>
+            <span class="px-3 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-full text-xs font-bold">ScrollTrigger</span>
+            <span class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold">Timeline</span>
+            <span class="px-3 py-1 bg-orange-500/10 text-orange-400 border border-orange-500/20 rounded-full text-xs font-bold">Ticker</span>
           </div>
         </div>
 
         <!-- Sections -->
-        <div v-for="(section, i) in sections" :key="i" :ref="el => sectionRefs[i] = el" class="mb-14">
-          <!-- Titre section -->
-          <div class="flex items-center gap-3 mb-4 pb-2 border-b-2 border-indigo-200">
-            <span class="text-2xl">{{ section.icon }}</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-gray-900">{{ section.title }}</h2>
+        <div v-for="(section, i) in sections" :key="i" :ref="el => sectionRefs[i] = el" class="mb-16">
+          <!-- Titre section — green accent -->
+          <div class="flex items-center gap-3 mb-5 pb-3 border-b border-[#1e211e]">
+            <span class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#0ae448]/10 text-lg">{{ section.icon }}</span>
+            <div>
+              <h2 class="text-lg sm:text-xl font-extrabold text-white">{{ section.title.split(' — ')[0] }}</h2>
+              <p v-if="section.title.includes(' — ')" class="text-sm text-gray-500 mt-0.5">{{ section.title.split(' — ')[1] }}</p>
+            </div>
+            <span class="ml-auto text-[11px] font-mono text-gray-600 bg-[#1a1d1b] px-2 py-0.5 rounded">{{ String(i + 1).padStart(2, '0') }}/{{ String(sections.length).padStart(2, '0') }}</span>
           </div>
 
-          <!-- Explication -->
-          <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 sm:p-5 mb-5">
-            <h3 class="font-bold text-indigo-800 mb-2 flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
+          <!-- Explication — dark card -->
+          <div class="bg-[#131613] border border-[#1e211e] rounded-xl p-4 sm:p-5 mb-5">
+            <h3 class="font-bold text-[#0ae448] mb-3 flex items-center gap-2 text-sm uppercase tracking-wide">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
               Explication
             </h3>
-            <p class="text-sm text-indigo-900 leading-relaxed whitespace-pre-line">{{ section.explanation }}</p>
+            <p class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">{{ section.explanation }}</p>
           </div>
 
           <!-- Demo interactive -->
-          <div v-if="section.demoId" class="mb-5 bg-white border-2 border-dashed border-gray-300 rounded-xl p-5 overflow-hidden" :ref="el => demoRefs[section.demoId] = el">
-            <p class="text-xs text-gray-400 font-bold uppercase mb-3">⚡ Demo interactive</p>
+          <div v-if="section.demoId" class="mb-5 bg-[#131613] border border-dashed border-[#2a2d2b] rounded-xl p-5 overflow-hidden" :ref="el => demoRefs[section.demoId] = el">
+            <p class="text-[10px] text-[#0ae448] font-bold uppercase tracking-widest mb-3">⚡ Demo interactive</p>
             <component :is="section.demoComponent" v-if="section.demoComponent" />
             <div v-else :id="section.demoId"></div>
           </div>
 
-          <!-- Code -->
-          <div class="mb-5">
-            <div class="flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-xl">
-              <span class="text-xs font-mono font-bold">{{ section.codeLabel || 'javascript' }}</span>
-              <button @click="copyCode(section.code)" class="text-xs hover:text-white transition cursor-pointer flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" /></svg>
-                {{ copied === section.code ? 'Copie !' : 'Copier' }}
+          <!-- Code — GSAP dark code style -->
+          <div class="mb-5 rounded-xl overflow-hidden border border-[#1e211e]">
+            <div class="flex items-center justify-between bg-[#1a1d1b] px-4 py-2.5">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+                <span class="text-xs font-mono text-gray-500 ml-2">{{ section.codeLabel || 'javascript' }}</span>
+              </div>
+              <button @click="copyCode(section.code)" class="text-xs text-gray-500 hover:text-[#0ae448] transition cursor-pointer flex items-center gap-1.5 font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" /></svg>
+                <span :class="copied === section.code ? 'text-[#0ae448]' : ''">{{ copied === section.code ? '✓ Copie !' : 'Copier' }}</span>
               </button>
             </div>
-            <pre class="bg-gray-900 text-gray-100 p-4 rounded-b-xl overflow-x-auto text-xs sm:text-sm leading-relaxed"><code>{{ section.code }}</code></pre>
+            <pre class="bg-[#0e100f] text-gray-300 p-4 sm:p-5 overflow-x-auto text-xs sm:text-sm leading-relaxed"><code>{{ section.code }}</code></pre>
           </div>
 
-          <!-- Analyse du code -->
-          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-5">
-            <h3 class="font-bold text-amber-800 mb-2 flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
+          <!-- Analyse du code — dark card with green bullets -->
+          <div class="bg-[#131613] border border-[#1e211e] rounded-xl p-4 sm:p-5">
+            <h3 class="font-bold text-[#0ae448] mb-3 flex items-center gap-2 text-sm uppercase tracking-wide">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
               Analyse du code
             </h3>
-            <ul class="space-y-2 text-sm text-amber-900">
-              <li v-for="(point, j) in section.analysis" :key="j" class="flex gap-2">
-                <span class="text-amber-500 font-bold shrink-0">▸</span>
+            <ul class="space-y-2.5 text-sm text-gray-300">
+              <li v-for="(point, j) in section.analysis" :key="j" class="flex gap-2.5 items-start">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#0ae448] shrink-0 mt-1.5"></span>
                 <span v-html="point"></span>
               </li>
             </ul>
