@@ -20,16 +20,21 @@
       <div v-if="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black/30 z-40 lg:hidden"></div>
 
       <!-- Sidebar -->
-      <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed lg:sticky top-[53px] left-0 z-50 lg:z-10 lg:translate-x-0 w-72 h-[calc(100vh-53px)] bg-white border-r border-gray-200 overflow-y-auto transition-transform duration-300 lg:block">
-        <nav class="p-4 space-y-1">
+      <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed lg:sticky top-[53px] left-0 z-50 lg:z-10 lg:translate-x-0 w-72 h-[calc(100vh-53px)] bg-gradient-to-b from-slate-50 to-white border-r border-gray-200/80 overflow-y-auto transition-transform duration-300 lg:block scrollbar-thin">
+        <nav class="p-3 space-y-0.5">
+          <p class="px-3 pt-2 pb-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">Sommaire</p>
           <button
             v-for="(section, i) in sections"
             :key="i"
             @click="scrollToSection(i)"
-            class="w-full text-left px-3 py-2 rounded-lg text-sm transition cursor-pointer"
-            :class="activeSection === i ? 'bg-indigo-50 text-indigo-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
+            class="group w-full text-left px-3 py-2.5 rounded-xl text-[13px] leading-snug transition-all duration-200 cursor-pointer flex items-start gap-2.5 relative"
+            :class="activeSection === i
+              ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-200'
+              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-800'"
           >
-            <span class="mr-2">{{ section.icon }}</span>{{ section.title }}
+            <span class="text-base shrink-0 mt-px" :class="activeSection === i ? 'grayscale-0 brightness-125' : 'grayscale group-hover:grayscale-0 transition-all'">{{ section.icon }}</span>
+            <span class="truncate">{{ section.title.split(' — ')[0] }}</span>
+            <span v-if="activeSection === i" class="absolute right-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white/80"></span>
           </button>
         </nav>
       </aside>
