@@ -47,6 +47,26 @@
         {"id":"quiz17","file":"quiz17.json","title":"Boucles for & while","icon":"🔁","questions":10},
         {"id":"quiz18","file":"quiz18.json","title":"Fonctions & Modules","icon":"⚙️","questions":10}
       ]
+    },
+    {
+      "id": "windows",
+      "name": "Windows Server",
+      "icon": "🖥️",
+      "color": "#e8eaf6",
+      "borderColor": "#3f51b5",
+      "type": "tutorial",
+      "tutorialFile": "tutoriel_windows.json",
+      "quizzes": []
+    },
+    {
+      "id": "admission",
+      "name": "Admission Sherbrooke",
+      "icon": "🎓",
+      "color": "#fce4ec",
+      "borderColor": "#e91e63",
+      "type": "tutorial",
+      "tutorialFile": "admission_sherbrooke.json",
+      "quizzes": []
     }
   ]
 }

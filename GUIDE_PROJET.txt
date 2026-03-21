@@ -1,0 +1,14 @@
+Salut a tous,
+
+J'ai cree un site avec un tutoriel complet pour le projet Windows Server.
+Tout est dedans : les 26 etapes, mode GUI ou PowerShell, les commandes a copier-coller.
+
+Lien : https://pkeinde6.github.io/quiz-app/
+
+Comment faire :
+1. Ouvrir le lien
+2. Cliquer sur "Windows Server"
+3. Suivre les phases dans l'ordre (menu a gauche)
+4. Copier les commandes directement dans PowerShell
+
+Bon courage !

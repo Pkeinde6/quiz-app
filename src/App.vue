@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8 font-[Inter]">
+  <div :class="screen === 'tutorial' ? 'font-[Inter]' : 'max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8 font-[Inter]'">
 
     <!-- ============ ECRAN 1 : Choix de la categorie ============ -->
     <div v-if="screen === 'home'" class="mt-4">
@@ -16,15 +16,31 @@
         >
           <span class="text-3xl sm:text-5xl mb-2">{{ cat.icon }}</span>
           <span class="text-lg sm:text-xl font-extrabold text-gray-800">{{ cat.name }}</span>
-          <span class="text-sm text-gray-600 mt-1">{{ cat.quizzes.length }} quiz</span>
+          <span class="text-sm text-gray-600 mt-1">{{ cat.type === 'tutorial' ? '📖 Tutoriel' : cat.quizzes.length + ' quiz' }}</span>
         </button>
       </div>
 
-      <!-- Compteur d'appareils -->
-      <div v-if="deviceCount > 0" class="mt-8 text-center">
-        <button @click="showAdmin" class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-indigo-500 transition cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
-          {{ deviceCount }} appareil{{ deviceCount > 1 ? 's' : '' }} connecte{{ deviceCount > 1 ? 's' : '' }}
+      <!-- Bouton Tuto Animations GSAP -->
+      <div class="mt-8">
+        <button
+          @click="screen = 'tutoAnimation'"
+          class="w-full flex flex-col items-center justify-center py-6 sm:py-10 px-4 sm:px-6 rounded-2xl border-3 cursor-pointer transition-all duration-300 shadow-md hover:-translate-y-1.5 hover:shadow-xl"
+          style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-color: #5a67d8;"
+        >
+          <span class="text-3xl sm:text-5xl mb-2">🎬</span>
+          <span class="text-lg sm:text-xl font-extrabold text-white">Animations GSAP</span>
+          <span class="text-sm text-white/70 mt-1">📖 Documentation Portfolio</span>
+        </button>
+      </div>
+
+      <!-- Compteur en ligne temps reel -->
+      <div class="mt-8 text-center">
+        <button @click="showAdmin" class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-green-600 transition cursor-pointer">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+          {{ deviceCount }} en ligne
         </button>
       </div>
     </div>
@@ -79,6 +95,16 @@
       <CoursePage :course="courseData" @back="screen = 'category'" />
     </div>
 
+    <!-- ============ ECRAN 3b : Tutoriel (type tutorial) ============ -->
+    <div v-if="screen === 'tutorial'">
+      <TutorialPage :course="courseData" @back="screen = 'home'" />
+    </div>
+
+    <!-- ============ ECRAN : Tuto Animations GSAP ============ -->
+    <div v-if="screen === 'tutoAnimation'">
+      <TutoAnimation @back="screen = 'home'" />
+    </div>
+
     <!-- ============ ECRAN 4 : Quiz en cours ============ -->
     <div v-if="screen === 'quiz' && quizData">
       <button @click="screen = 'category'" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-4 py-2 rounded-lg transition mb-4 cursor-pointer">
@@ -95,46 +121,67 @@
       <button @click="screen = 'home'" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-5 py-2 rounded-lg text-sm text-gray-600 transition cursor-pointer">Retour au menu</button>
     </div>
 
-    <!-- ============ ECRAN 6 : Admin - Liste des appareils ============ -->
+    <!-- ============ ECRAN 6 : Admin - Appareils en ligne (temps reel) ============ -->
     <div v-if="screen === 'admin'" class="mt-4">
       <button @click="screen = 'home'" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-4 py-2 rounded-lg transition mb-6 cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
         Retour
       </button>
 
-      <h1 class="text-center text-xl sm:text-2xl font-extrabold text-gray-900 mb-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
-        Appareils connectes
-      </h1>
-      <p class="text-center text-indigo-500 font-bold text-lg mb-6">{{ devices.length }} appareil{{ devices.length > 1 ? 's' : '' }} au total</p>
+      <div class="text-center mb-6">
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+          </span>
+          <h1 class="text-xl sm:text-2xl font-extrabold text-gray-900">Appareils en ligne</h1>
+        </div>
+        <p class="text-green-600 font-bold text-lg">{{ onlineDevices.length }} appareil{{ onlineDevices.length > 1 ? 's' : '' }} en temps reel</p>
+        <p class="text-xs text-gray-400 mt-1">Mise a jour automatique</p>
+      </div>
 
-      <div v-if="devicesLoading" class="text-center text-gray-400 py-8">Chargement...</div>
-
-      <div v-else class="flex flex-col gap-3">
-        <div v-for="(d, idx) in devices" :key="idx" class="bg-white border border-gray-200 rounded-xl p-3 sm:p-4 shadow-sm flex items-center gap-3">
-          <!-- Icone type -->
+      <div class="flex flex-col gap-3">
+        <div v-for="d in onlineDevices" :key="d.device_id" class="bg-white border border-green-200 rounded-xl p-3 sm:p-4 shadow-sm flex items-center gap-3 transition-all duration-300">
+          <!-- Pulsing green dot -->
+          <span class="relative flex h-2.5 w-2.5 shrink-0">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+          </span>
+          <!-- Device icon -->
           <div class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-lg" :class="d.device_type === 'Mobile' ? 'bg-blue-100 text-blue-600' : d.device_type === 'Tablette' ? 'bg-purple-100 text-purple-600' : 'bg-gray-100 text-gray-600'">
             {{ d.device_type === 'Mobile' ? '📱' : d.device_type === 'Tablette' ? '📲' : '💻' }}
           </div>
+          <!-- Info -->
           <div class="flex-1 min-w-0">
             <div class="text-sm font-bold text-gray-800">{{ d.device_type }} — {{ d.os }}</div>
             <div class="text-xs text-gray-400 truncate">{{ d.browser }} · {{ d.screen_size }} · {{ d.language }}</div>
-            <div class="text-xs text-gray-300 mt-0.5">Derniere visite : {{ formatDate(d.last_seen) }}</div>
+            <div class="text-xs text-green-500 mt-0.5 font-medium">En ligne depuis {{ timeSince(d.online_since) }}</div>
+          </div>
+          <!-- Current page badge -->
+          <div class="shrink-0 hidden sm:block">
+            <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full font-medium">
+              {{ pageLabel(d.current_page) }}
+            </span>
           </div>
         </div>
       </div>
 
-      <div v-if="!devicesLoading && devices.length === 0" class="text-center text-gray-400 py-8">Aucun appareil enregistre.</div>
+      <div v-if="onlineDevices.length === 0" class="text-center py-12">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
+        <p class="text-gray-400">Aucun appareil en ligne</p>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script setup>
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
 import Quiz from './components/quiz.vue';
 import CoursePage from './components/CoursePage.vue';
-import { registerDevice, getDeviceCount, getDevices } from './tracker.js';
+import TutorialPage from './components/TutorialPage.vue';
+import TutoAnimation from './components/TutoAnimation.vue';
+import { registerDevice, startPresence, updatePresencePage, stopPresence } from './tracker.js';
 
 const screen = ref('home');
 const categories = ref([]);
@@ -145,10 +192,11 @@ const courseData = ref(null);
 const currentQuizMeta = ref(null);
 const progressVersion = ref(0);   // compteur reactif pour forcer le recalcul
 
-// Tracking
-const deviceCount = ref(0);
-const devices = ref([]);
-const devicesLoading = ref(false);
+// Tracking temps reel
+const onlineDevices = ref([]);
+const deviceCount = computed(() => onlineDevices.value.length);
+const tick = ref(0);
+let tickInterval = null;
 
 const STORAGE_KEY = 'quiz-app-progress';
 
@@ -192,17 +240,23 @@ onMounted(() => {
     .then(data => { categories.value = data.categories; })
     .catch(() => { screen.value = 'error'; });
 
-  // Enregistrer cet appareil et charger le compteur
-  registerDevice().then(() => {
-    getDeviceCount().then(c => { deviceCount.value = c; });
-  });
+  // Enregistrer + Presence temps reel
+  registerDevice();
+  startPresence(devices => { onlineDevices.value = devices; });
+  tickInterval = setInterval(() => tick.value++, 30000);
 });
 
-const showAdmin = async () => {
-  devicesLoading.value = true;
+watch(screen, (val) => {
+  updatePresencePage(val);
+});
+
+onUnmounted(() => {
+  clearInterval(tickInterval);
+  stopPresence();
+});
+
+const showAdmin = () => {
   screen.value = 'admin';
-  devices.value = await getDevices();
-  devicesLoading.value = false;
 };
 
 const formatDate = (iso) => {
@@ -211,7 +265,29 @@ const formatDate = (iso) => {
   return d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
 };
 
+const timeSince = (isoStr) => {
+  tick.value;
+  if (!isoStr) return '';
+  const diff = Math.floor((Date.now() - new Date(isoStr).getTime()) / 1000);
+  if (diff < 60) return "moins d'1 min";
+  if (diff < 3600) return Math.floor(diff / 60) + ' min';
+  return Math.floor(diff / 3600) + 'h ' + Math.floor((diff % 3600) / 60) + 'min';
+};
+
+const pageLabel = (page) => {
+  const labels = { home: 'Accueil', category: 'Categories', tutorial: 'Tutoriel', quiz: 'Quiz', course: 'Mini-cours', admin: 'Admin' };
+  return labels[page] || page || 'Accueil';
+};
+
 const selectCategory = (cat) => {
+  if (cat.type === 'tutorial') {
+    // Ouvrir directement le tutoriel
+    fetch(cat.tutorialFile)
+      .then(r => { if (r.ok) return r.json(); throw new Error(); })
+      .then(data => { courseData.value = data; screen.value = 'tutorial'; })
+      .catch(() => { screen.value = 'error'; });
+    return;
+  }
   selectedCat.value = cat;
   screen.value = 'category';
 };

@@ -1,14 +1,19 @@
 // ============================================
-// Tracker d'appareils - Supabase REST API
+// Tracker d'appareils - Supabase Realtime
 // ============================================
 
-// ⚠️ Configuration Supabase
+import { createClient } from '@supabase/supabase-js';
+
 const SUPABASE_URL = 'https://kgkenqocfulbftfjvazt.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtna2VucW9jZnVsYmZ0Zmp2YXp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNjE3NjMsImV4cCI6MjA4NzYzNzc2M30.RcwQ4cyO1-wOUIizwMktdDYhekwyUqSsFBctlzffOCE';
 
-function isConfigured() {
-  return SUPABASE_URL.startsWith('https://');
-}
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ── State ──
+let channel = null;
+const onlineSince = new Date().toISOString();
+
+// ── Helpers ──
 
 function getDeviceId() {
   let id = localStorage.getItem('quiz-device-id');
@@ -48,104 +53,96 @@ function detectBrowser() {
   return 'Autre';
 }
 
-function headers(extra = {}) {
+function getDeviceInfo() {
   return {
-    apikey: SUPABASE_ANON_KEY,
-    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-    'Content-Type': 'application/json',
-    ...extra,
-  };
-}
-
-/**
- * Enregistre l'appareil dans Supabase (ou met à jour last_seen)
- */
-export async function registerDevice() {
-  if (!isConfigured()) return;
-
-  const deviceId = getDeviceId();
-  const info = {
-    device_id: deviceId,
+    device_id: getDeviceId(),
     device_type: detectDeviceType(),
     os: detectOS(),
     browser: detectBrowser(),
     screen_size: `${screen.width}x${screen.height}`,
     language: navigator.language,
-    last_seen: new Date().toISOString(),
   };
+}
+
+// ── Database registration (historical) ──
+
+export async function registerDevice() {
+  const info = getDeviceInfo();
+  const now = new Date().toISOString();
 
   try {
-    // Vérifie si l'appareil existe déjà
-    const checkRes = await fetch(
-      `${SUPABASE_URL}/rest/v1/devices?device_id=eq.${deviceId}&select=id`,
-      { headers: headers() }
-    );
-    const existing = await checkRes.json();
+    const { data } = await supabase
+      .from('devices')
+      .select('id')
+      .eq('device_id', info.device_id);
 
-    if (existing.length === 0) {
-      // Nouvel appareil → INSERT
-      await fetch(`${SUPABASE_URL}/rest/v1/devices`, {
-        method: 'POST',
-        headers: headers({ Prefer: 'return=minimal' }),
-        body: JSON.stringify({ ...info, first_seen: info.last_seen }),
+    if (data && data.length === 0) {
+      await supabase.from('devices').insert({
+        ...info,
+        first_seen: now,
+        last_seen: now,
       });
     } else {
-      // Appareil existant → UPDATE last_seen
-      await fetch(
-        `${SUPABASE_URL}/rest/v1/devices?device_id=eq.${deviceId}`,
-        {
-          method: 'PATCH',
-          headers: headers({ Prefer: 'return=minimal' }),
-          body: JSON.stringify({
-            last_seen: info.last_seen,
-            device_type: info.device_type,
-            os: info.os,
-            browser: info.browser,
-          }),
-        }
-      );
+      await supabase
+        .from('devices')
+        .update({ last_seen: now, device_type: info.device_type, os: info.os, browser: info.browser })
+        .eq('device_id', info.device_id);
     }
   } catch (e) {
     console.warn('Tracker:', e.message);
   }
 }
 
-/**
- * Retourne le nombre total d'appareils différents
- */
-export async function getDeviceCount() {
-  if (!isConfigured()) return 0;
+// ── Realtime Presence ──
 
-  try {
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/devices?select=id`,
-      { headers: headers({ Prefer: 'count=exact' }) }
-    );
-    const range = res.headers.get('content-range');
-    if (range) {
-      const total = range.split('/')[1];
-      return parseInt(total) || 0;
-    }
-    const data = await res.json();
-    return data.length;
-  } catch {
-    return 0;
-  }
+/**
+ * Rejoint le canal Presence. Appelle onSync(devices[]) a chaque changement.
+ */
+export function startPresence(onSync) {
+  const info = getDeviceInfo();
+
+  channel = supabase.channel('online-users', {
+    config: { presence: { key: info.device_id } },
+  });
+
+  channel
+    .on('presence', { event: 'sync' }, () => {
+      const state = channel.presenceState();
+      const devices = [];
+      for (const presences of Object.values(state)) {
+        if (presences.length > 0) devices.push(presences[0]);
+      }
+      onSync(devices);
+    })
+    .subscribe(async (status) => {
+      if (status === 'SUBSCRIBED') {
+        await channel.track({
+          ...info,
+          online_since: onlineSince,
+          current_page: 'home',
+        });
+      }
+    });
 }
 
 /**
- * Retourne la liste complète des appareils
+ * Met a jour la page courante dans la Presence.
  */
-export async function getDevices() {
-  if (!isConfigured()) return [];
+export function updatePresencePage(page) {
+  if (!channel) return;
+  channel.track({
+    ...getDeviceInfo(),
+    online_since: onlineSince,
+    current_page: page,
+  });
+}
 
-  try {
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/devices?select=*&order=last_seen.desc`,
-      { headers: headers() }
-    );
-    return await res.json();
-  } catch {
-    return [];
+/**
+ * Se deconnecte du canal Presence.
+ */
+export function stopPresence() {
+  if (channel) {
+    channel.unsubscribe();
+    channel = null;
   }
 }
