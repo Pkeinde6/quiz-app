@@ -45,7 +45,8 @@
         {"id":"quiz15","file":"quiz15.json","title":"Print, Input & Casting","icon":"⌨️","questions":10},
         {"id":"quiz16","file":"quiz16.json","title":"Conditions if/elif/else","icon":"🔀","questions":10},
         {"id":"quiz17","file":"quiz17.json","title":"Boucles for & while","icon":"🔁","questions":10},
-        {"id":"quiz18","file":"quiz18.json","title":"Fonctions & Modules","icon":"⚙️","questions":10}
+        {"id":"quiz18","file":"quiz18.json","title":"Fonctions & Modules","icon":"⚙️","questions":10},
+        {"id":"quiz19","file":"quiz19.json","title":"Entretien Dev Full Stack Junior","icon":"💼","questions":20}
       ]
     },
     {
