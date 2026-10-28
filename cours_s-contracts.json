@@ -1,0 +1,18 @@
+{
+  "icon": "📄",
+  "title": "Sophia : Contrats",
+  "sections": [
+    {
+      "title": "Contrat et articles",
+      "content": "Un CONTRAT est signé entre :\n  organizationId  la société qui possède le contrat (toi)\n  clientId        le client\nIl contient des ARTICLES (les lignes : produits / services vendus).\n\nStatuts du contrat : CREATED, PENDING, INVOICED, CLOSED\nStatuts d'article  : INPROGRESS, ACTIVATED, CANCELLED, CLOSED, NOTINVOICED\n\nFacturation : MONTHLY, QUARTERLY, ANNUALLY\nTerme       : FALLDUE (à échoir) ou INARREARS (échu)\nPaiement    : DAYS20, DAYS30, DAYS45, DAYS60"
+    },
+    {
+      "title": "Les opérations",
+      "content": "CONTRAT\n  get(id)        un contrat (creator, client, organization, articles chargés à la demande)\n  list(organizationId, pagination, filtres status / period / ...)\n                 pagination offset ; status = OU logique ; period = date de signature\n  add            créer (id UUID fourni PAR TOI, pas généré)\n  update(id, ...) modifier (n'envoie que les champs à changer)\n\nARTICLES\n  listArticles(contractId)  getArticle(id)\n  addArticles(contractId, articles)  → en masse ; serviceId OBLIGATOIRE\n     article catalogue (catalogRef, categoryId…) ou hors catalogue\n  updateArticle(id, ...)   → renvoie un Boolean\n  deleteArticles(ids)      → en masse uniquement (liste non vide)\n\nAUTRES\n  getSites(contractId)          sites concernés par les articles\n  getOrganizations(parentId)    enfants directs (tri +name par défaut)\n  addExternalContact"
+    },
+    {
+      "title": "Pièces jointes (S3)",
+      "content": "Envoyer un fichier (ex : le PDF signé) :\n  1) attachmentPresignedUpload(contractId, filename, mimetype)\n       → uploadUrl (valable expiresIn secondes) + key\n  2) PUT du fichier sur uploadUrl (même mimetype / nom !)\n  3) associer la key au contrat (update, attachmentLinks)\n\nTélécharger :\n  attachmentPresignedDownload(id de la pièce jointe) → downloadUrl temporaire\n\nSupprimer :\n  deleteAttachments(urls)  → identifiées par URL, pas par UUID ; en masse"
+    }
+  ]
+}

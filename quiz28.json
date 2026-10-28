@@ -1,0 +1,176 @@
+{
+  "title": "Sophia : Téléphonie hébergée",
+  "minimum_score": 9,
+  "success_message": "Bravo ! Tu maîtrises le module Téléphonie hébergée.",
+  "failure_message": "Relis le cours Téléphonie hébergée et réessaie.",
+  "questions": [
+    {
+      "question": "Type de compte voix pour une ligne fixe hébergée ?",
+      "choices": [
+        "CENTREX",
+        "AML",
+        "TRUNK",
+        "SIP"
+      ],
+      "correct_answer": "CENTREX",
+      "hint": "AML = mobile.",
+      "accept": [
+        "CENTREX"
+      ]
+    },
+    {
+      "question": "createVoiceAccounts renvoie…",
+      "choices": [
+        "Les comptes créés et ceux en échec",
+        "Un booléen",
+        "Un seul ID",
+        "Rien"
+      ],
+      "correct_answer": "Les comptes créés et ceux en échec",
+      "hint": "Création en masse.",
+      "accept": [
+        "Les comptes créés et ceux en échec"
+      ]
+    },
+    {
+      "question": "Activer un forfait au prochain cycle de facturation :",
+      "choices": [
+        "NEXT_BILLING_PERIOD",
+        "NOW",
+        "LATER",
+        "MONTHLY"
+      ],
+      "correct_answer": "NEXT_BILLING_PERIOD",
+      "hint": "VoiceAccountPlanActivationType.",
+      "accept": [
+        "NEXT_BILLING_PERIOD"
+      ]
+    },
+    {
+      "question": "Touche de fonction pour voir si un collègue est en ligne ?",
+      "choices": [
+        "SUPERVISION",
+        "SHORTCUT",
+        "SPACE",
+        "PRESENCE"
+      ],
+      "correct_answer": "SUPERVISION",
+      "hint": "Supervision.",
+      "accept": [
+        "SUPERVISION"
+      ]
+    },
+    {
+      "question": "Où voir si le téléphone est bien enregistré ?",
+      "choices": [
+        "getVoipStatus",
+        "getSummary",
+        "getPinCode",
+        "getCallSettings"
+      ],
+      "correct_answer": "getVoipStatus",
+      "hint": "Diagnostic.",
+      "accept": [
+        "getVoipStatus"
+      ]
+    },
+    {
+      "question": "Renvoi vers la messagerie : target vaut…",
+      "choices": [
+        "null",
+        "\"voicemail\"",
+        "0",
+        "le numéro du compte"
+      ],
+      "correct_answer": "null",
+      "hint": "null = messagerie.",
+      "accept": [
+        "null"
+      ]
+    },
+    {
+      "question": "Que fait updateSipPassword ?",
+      "choices": [
+        "Régénère le mot de passe SIP",
+        "Change le PIN",
+        "Change le mot de passe SSO",
+        "Supprime le compte"
+      ],
+      "correct_answer": "Régénère le mot de passe SIP",
+      "hint": "Sécurité.",
+      "accept": [
+        "Régénère le mot de passe SIP"
+      ]
+    },
+    {
+      "question": "L'option nomade permet…",
+      "choices": [
+        "D'utiliser sa ligne depuis n'importe où",
+        "De changer de forfait",
+        "D'enregistrer",
+        "De bloquer l'international"
+      ],
+      "correct_answer": "D'utiliser sa ligne depuis n'importe où",
+      "hint": "updateNomadOption.",
+      "accept": [
+        "D'utiliser sa ligne depuis n'importe où"
+      ]
+    },
+    {
+      "question": "Un groupe d'interception sert à…",
+      "choices": [
+        "Décrocher le téléphone d'un collègue qui sonne",
+        "Enregistrer",
+        "Facturer",
+        "Créer des comptes"
+      ],
+      "correct_answer": "Décrocher le téléphone d'un collègue qui sonne",
+      "hint": "Call pickup.",
+      "accept": [
+        "Décrocher le téléphone d'un collègue qui sonne"
+      ]
+    },
+    {
+      "question": "Que renvoie getDokoConfig ?",
+      "choices": [
+        "Les identifiants et le QR code de l'appli Doko",
+        "La facture",
+        "Les renvois",
+        "Le statut VoIP"
+      ],
+      "correct_answer": "Les identifiants et le QR code de l'appli Doko",
+      "hint": "Appli mobile Sewan.",
+      "accept": [
+        "Les identifiants et le QR code de l'appli Doko"
+      ]
+    },
+    {
+      "question": "getSummary renvoie…",
+      "choices": [
+        "Total comptes, softphones et téléphones",
+        "Les appels",
+        "Les factures",
+        "Les forfaits"
+      ],
+      "correct_answer": "Total comptes, softphones et téléphones",
+      "hint": "Lookups.",
+      "accept": [
+        "Total comptes, softphones et téléphones"
+      ]
+    },
+    {
+      "question": "Renvoi quand le poste est déconnecté ?",
+      "choices": [
+        "updateNoConnectionCallForwarding",
+        "updateLineBusyCallForwarding",
+        "updateDirectCallForwarding",
+        "updateSimultaneousRing"
+      ],
+      "correct_answer": "updateNoConnectionCallForwarding",
+      "hint": "No connection.",
+      "accept": [
+        "updateNoConnectionCallForwarding"
+      ]
+    }
+  ]
+}

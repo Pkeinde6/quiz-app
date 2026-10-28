@@ -1,0 +1,26 @@
+{
+  "icon": "🏢",
+  "title": "Sophia : Clients & identités",
+  "sections": [
+    {
+      "title": "Le module en bref",
+      "content": "Le point de départ de TOUT : sans client, site et identité, rien ne peut être vendu.\n\nDomaines GraphQL :\n  organization { ... }     organisations et sites\n  identity { ... }         utilisateurs\n  billing (facturation)    infos de facturation, SEPA, personnalisation des factures\n\nOrdre de création :\n  createOrganization → (activer les services) → createSite → createIdentity"
+    },
+    {
+      "title": "Organisations et sites",
+      "content": "LECTURE\n  getOrganization(id)                  getSite(id)\n  getOrganizations(parentOrganizationId, pagination)\n  getSites(organizationId)\n  getOrganizationFromLive(perId)       getSiteFromLive(perId)   ← ID de l'ancienne API LIVE\n  getStats(parentOrganizationId)       compteurs customer / internal / reseller\n  getHierarchy(entityId)               fil d'Ariane\n  getOrganizationRoles(organizationId) rôles disponibles\n\nÉCRITURE\n  createOrganization(organization)     createSite(organizationId, site)\n  updateOrganization(id, organization) updateSite(siteId, site)\n  deleteOrganization(id)               deleteSite(id)\n\nTypes d'organisation : RESELLER PROVIDER CUSTOMER MULTISITE LOGISTICIAN\nPays toujours sur 2 lettres (FR, SN…) sinon erreur 613-121 / 613-122."
+    },
+    {
+      "title": "Identités (utilisateurs)",
+      "content": "getIdentity          → moi (sans argument) ou une identité\ngetIdentityFromLive  → depuis un ID LIVE\ncreateIdentity       → toujours SOUS UN SITE\nupdateIdentity\ndeleteIdentity       → possible seulement si :\n                         plus aucune ressource liée (ligne mobile, licence Microsoft…)\n                         plus aucun profil de droits lié\nresetPassword        → réinitialiser le mot de passe SSO\n\nTypes : USER (humain), RESOURCE (salle de réunion…), SSO\n\nRôles (droits) :\n  getIdentityRoles\n  assignIdentityRoleToIdentity / unassignIdentityRoleToIdentity\n  getMobileLinesByIdentityId → les lignes mobiles d'un utilisateur"
+    },
+    {
+      "title": "Facturation",
+      "content": "Deux objets :\n  Personnalisation de facture (InvoiceCustomization)\n    → valeurs PAR DÉFAUT qu'un parent donne à ses enfants\n  Infos de facturation (BillingInfo)\n    → liées à une entité ; certains champs HÉRITENT du parent\n\nLECTURE\n  getBillingInfoByOrganization(organizationId, getImage)\n  getBillingInfoBySite(siteId, getImage)\n  getInvoiceCustomizations(organizationId)\n  getAvailableRefCustomer(parentEntityId)   ← générer une référence client\n\nÉCRITURE\n  updateOrganizationBillingInfo / updateSiteBillingInfo\n  updateInvoiceCustomizations\n  updateAdvertisementImage / updateBackgroundImage   ← images sur la facture\n\nSEPA (prélèvement)\n  generateSEPAMandateInfoOrganization / ...Site  (deprecatePrevious: true = remplace l'ancien)\n  generateAndDownloadSepaMandateTemplateFile\n  uploadSEPAMandateFile"
+    },
+    {
+      "title": "Services Sophia",
+      "content": "Un « service » = un catalogue de produits autorisé pour un client.\nSans le service, le client ne peut pas acheter les produits correspondants.\n\n⚠ Créé via l'API, un client n'a AUCUN service actif.\n   Il faut les activer dans une 2e opération.\n   (L'assistant web, lui, propose de tout activer.)\n\nExemples : pour gérer des subnets → service AccessLink\n           pour Microsoft 365     → service Microsoft\n           pour commander des SIM → service téléphonie mobile"
+    }
+  ]
+}

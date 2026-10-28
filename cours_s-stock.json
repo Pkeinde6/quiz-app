@@ -1,0 +1,18 @@
+{
+  "icon": "📦",
+  "title": "Sophia : Stock & commandes",
+  "sections": [
+    {
+      "title": "Commandes de matériel (Resource Order)",
+      "content": "Qui ?\n  commanditaire (commissioner) : passe la commande — reseller ou plus\n  destinataire (recipient)     : reçoit le matériel\n  logisticien (LOGISTICIAN)    : prépare, configure, expédie\n\nRègles :\n  seuls les rôles reseller et au-dessus peuvent commander\n  le SERVICE lié au matériel doit être actif chez le destinataire\n     (ex : commander des SIM → service téléphonie mobile)\n  le logisticien peut REFUSER avec un commentaire\n  le matériel apparaît dans le stock du destinataire au statut READY_TO_SHIP\n\ncreateOrder / createMultiLogisticianOrder (plusieurs logisticiens)\ngetOrder  getOrders  listOrders  getOrderGroup(s)"
+    },
+    {
+      "title": "Le stock",
+      "content": "listStockResources / listResources\n  → SIM, téléphones, routeurs, numéros, passerelles… d'une organisation\n  filtres par type (did = numéro, sipGateway…) et statut (inactive = disponible)\n\nmoveResources\n  → DÉPLACER des ressources dans la hiérarchie\n     ex : du stock du reseller vers le site du client\n\ncheckResourcePurgeRequirement\n  → faut-il PURGER (réinitialiser) les ressources avant de les déplacer ?"
+    },
+    {
+      "title": "Configuration des équipements",
+      "content": "Téléphones, DECT et passerelles SIP lisent leur config AU REDÉMARRAGE.\nRouteurs : pilotés par l'ACS en CWMP, config SANS redémarrage.\n\nInventaire : createDevices  removeDevicesFromInventory  getAvailableDeviceModels\nFormulaire : (lire) → submitForm / submitDeviceForm → publishDeviceConfig\nModèle     : changeModel / changeDeviceModel\nActions    : rebootDevice, rebootDevices (masse), setPublishInhibited (suspendre la publication)\nMasse      : getAffectedDevices (aperçu) → exposeConfigs → jobId → job (pending/running/completed/failed)\n\nDECT : addHandset / removeHandset, addSatellite / removeSatellite,\n       assignHandsetToSlot, assignSatelliteToSlot\n\nRouteur : updateOptions, schedulePush / cancelCwmpScheduledPush, refreshCwmp\n  cwmpStatus : online (contact < 1 h), offline, unknown\n  provCode ≠ informProvCode → config pas encore prise\n\nAttribution : phone/softphone/DECT → compte voix ; sipGateway → trunk"
+    }
+  ]
+}

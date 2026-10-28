@@ -1,0 +1,22 @@
+{
+  "icon": "🛡️",
+  "title": "Sophia : Sécurité voix",
+  "sections": [
+    {
+      "title": "Pourquoi ?",
+      "content": "La fraude téléphonique : un pirate prend le contrôle d'un standard la nuit\net appelle en boucle des numéros surtaxés à l'étranger.\nRésultat : des milliers d'euros de facture le lundi.\n\n3 protections :\n  Profil de restriction       QUELLES destinations sont autorisées\n  Limiteur d'appels sortants  COMBIEN d'appels / quelle quantité\n  Filtrage des appels entrants QUI peut appeler (trunk)\n\nLes profils s'appliquent sur un trunk (updateTrunkSecuritySettings)\nou sur un compte voix (updateSecuritySettings)."
+    },
+    {
+      "title": "Profil de restriction",
+      "content": "listRestrictionProfiles   profils assignables\ngetRestrictionProfile(restrictionProfileId)\n\nType :\n  WHITELIST → seules les destinations listées sont autorisées\n  BLACKLIST → les destinations listées sont interdites\n\ncountryCodes : codes pays ISO 3166-1 alpha-2 (FR, SN, ES…)\nCas spécial : destination VOIP → \"UIFN\" = numéros verts internationaux\nPropriétaire (OwnerType) : ORGANIZATION ou SITE"
+    },
+    {
+      "title": "Limiteur d'appels sortants (OCL)",
+      "content": "listOutgoingCallLimiterProfiles\n→ profils qui limitent le nombre d'appels sortants\n   sur des périodes (par jour, etc.)\n\nÀ assigner via outgoingCallLimiterProfileId\nsur le trunk ou le compte voix.\nPropriétaire : ORGANIZATION ou SITE"
+    },
+    {
+      "title": "Filtrage des appels entrants",
+      "content": "Listes de filtrage (réutilisables) :\n  getFilteringLists  createFilteringList  updateFilteringList  deleteFilteringList\n  = collections nommées de numéros et de préfixes\n\nRègles de filtrage (InboundFiltering) :\n  getInboundFiltering  getInboundFilteringByAccount\n  createInboundFiltering  updateInboundFiltering  deleteInboundFiltering\n  une même règle peut servir à plusieurs ressources\n\nÉvaluation à CHAQUE appel entrant :\n  1) specificRules : nommées, limitées dans le temps, évaluées EN PREMIER, dans l'ordre\n  2) defaultRule   : si aucune règle spécifique ne correspond (peut être null = rien filtré)\n  Action : ALLOW ou BLOCK\n\nMise à jour :\n  champ omis → inchangé ; defaultRule: null → efface ; specificRules: [] → tout supprimer\n  dans une règle, renvoyer les tableaux numbers / numbersPrefixes / filteringLists COMPLETS"
+    }
+  ]
+}

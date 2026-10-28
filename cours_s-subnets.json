@@ -1,0 +1,22 @@
+{
+  "icon": "🌐",
+  "title": "Sophia : Accès Internet & subnets",
+  "sections": [
+    {
+      "title": "C'est quoi ?",
+      "content": "Un subnet = un bloc d'adresses IP attribué à un client.\nExemple : une clinique veut 8 IP publiques fixes pour son VPN et ses caméras\n  → on commande un subnet /29.\n\nPrérequis : le service AccessLink doit être activé sur l'organisation.\n\nTaille (SubnetPrefix) : plus le nombre est GRAND, plus le bloc est PETIT\n  /29 = 8 adresses   /28 = 16   /27 = 32   /32 = 1 seule\n  IPv6 : /48, /64"
+    },
+    {
+      "title": "Les opérations",
+      "content": "orderSubnet               commander un subnet\nterminateSubnet           résilier\nupdateSubnetDescription   modifier la description\ngetSingleSubnet           infos d'un subnet\ngetHistory / getEventsLog historique des événements\nassignService             lier le subnet à un service\nunassignService           le délier"
+    },
+    {
+      "title": "Types et statuts",
+      "content": "IpVersion   : IP_V4, IP_V6\nPays        : FR, ES, BE, DE\nSubnetType  : PUBLIC (internet), CGN (IP partagée opérateur), MPLS (réseau privé), SINGLE_USE\n\nStatuts :\n  AVAILABLE   disponible\n  IN_USE      utilisé\n  QUARANTINE  mis de côté après résiliation (pas réattribué tout de suite)\n  TERMINATED  résilié\n\nServices liables (LinkedServiceType) : FIREWALL, ACCESS_LINK, SDWAN\nContexte : HOSTED (hébergé) ou ROUTED (routé)"
+    },
+    {
+      "title": "Historique (événements)",
+      "content": "Chaque action est tracée (IpAddressEventType) :\n  SUBNET_ORDERED, STATUS_CHANGED, DESCRIPTION_UPDATED,\n  SERVICE_ASSIGNED / SERVICE_UNASSIGNED,\n  TERMINATION_REQUESTED, QUARANTINE_STARTED, QUARANTINE_EXPIRED,\n  SUBNET_RECOVERED, SUBNET_MOVED, MIGRATION\n\nPourquoi la quarantaine ? Pour qu'une IP résiliée ne soit pas\nredonnée immédiatement à un autre client (anciens DNS, listes noires…)."
+    }
+  ]
+}

@@ -1,11 +1,220 @@
 {
   "categories": [
     {
+      "id": "sophia",
+      "name": "Les bases de l'API",
+      "icon": "📡",
+      "courseFile": "cours_sophia.json",
+      "quizzes": [
+        {
+          "id": "quiz20",
+          "file": "quiz20.json",
+          "title": "Concepts & Auth",
+          "icon": "🔐",
+          "questions": 20
+        },
+        {
+          "id": "quiz21",
+          "file": "quiz21.json",
+          "title": "Logique des requêtes",
+          "icon": "🧩",
+          "questions": 20
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/sophia.svg"
+    },
+    {
+      "id": "s-clients",
+      "name": "Clients & identités",
+      "icon": "🏢",
+      "courseFile": "cours_s-clients.json",
+      "quizzes": [
+        {
+          "id": "quiz23",
+          "file": "quiz23.json",
+          "title": "Clients & identités",
+          "icon": "🏢",
+          "questions": 12
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/clients.svg"
+    },
+    {
+      "id": "s-hosted",
+      "name": "Téléphonie hébergée",
+      "icon": "📞",
+      "courseFile": "cours_s-hosted.json",
+      "quizzes": [
+        {
+          "id": "quiz28",
+          "file": "quiz28.json",
+          "title": "Téléphonie hébergée",
+          "icon": "📞",
+          "questions": 12
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/hosted.svg"
+    },
+    {
+      "id": "s-mobile",
+      "name": "Lignes mobiles",
+      "icon": "📱",
+      "courseFile": "cours_s-mobile.json",
+      "quizzes": [
+        {
+          "id": "quiz27",
+          "file": "quiz27.json",
+          "title": "Lignes mobiles",
+          "icon": "📱",
+          "questions": 14
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/mobile.svg"
+    },
+    {
+      "id": "trunks",
+      "name": "Trunks SIP",
+      "icon": "☎️",
+      "courseFile": "cours_trunks.json",
+      "quizzes": [
+        {
+          "id": "quiz22",
+          "file": "quiz22.json",
+          "title": "createTrunk & gestion",
+          "icon": "☎️",
+          "questions": 20
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/trunks.svg"
+    },
+    {
+      "id": "s-voicesec",
+      "name": "Sécurité voix",
+      "icon": "🛡️",
+      "courseFile": "cours_s-voicesec.json",
+      "quizzes": [
+        {
+          "id": "quiz29",
+          "file": "quiz29.json",
+          "title": "Sécurité voix",
+          "icon": "🛡️",
+          "questions": 10
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/voicesec.svg"
+    },
+    {
+      "id": "s-subnets",
+      "name": "Accès Internet & subnets",
+      "icon": "🌐",
+      "courseFile": "cours_s-subnets.json",
+      "quizzes": [
+        {
+          "id": "quiz24",
+          "file": "quiz24.json",
+          "title": "Accès Internet & subnets",
+          "icon": "🌐",
+          "questions": 10
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/subnets.svg"
+    },
+    {
+      "id": "s-cloud",
+      "name": "Cloud",
+      "icon": "☁️",
+      "courseFile": "cours_s-cloud.json",
+      "quizzes": [
+        {
+          "id": "quiz25",
+          "file": "quiz25.json",
+          "title": "Cloud",
+          "icon": "☁️",
+          "questions": 12
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/cloud.svg"
+    },
+    {
+      "id": "s-microsoft",
+      "name": "Microsoft 365",
+      "icon": "🪟",
+      "courseFile": "cours_s-microsoft.json",
+      "quizzes": [
+        {
+          "id": "quiz26",
+          "file": "quiz26.json",
+          "title": "Microsoft 365",
+          "icon": "🪟",
+          "questions": 10
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/microsoft.svg"
+    },
+    {
+      "id": "s-stock",
+      "name": "Stock & commandes",
+      "icon": "📦",
+      "courseFile": "cours_s-stock.json",
+      "quizzes": [
+        {
+          "id": "quiz30",
+          "file": "quiz30.json",
+          "title": "Stock & commandes",
+          "icon": "📦",
+          "questions": 10
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/stock.svg"
+    },
+    {
+      "id": "s-contracts",
+      "name": "Contrats",
+      "icon": "📄",
+      "courseFile": "cours_s-contracts.json",
+      "quizzes": [
+        {
+          "id": "quiz31",
+          "file": "quiz31.json",
+          "title": "Contrats",
+          "icon": "📄",
+          "questions": 10
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/contracts.svg"
+    },
+    {
+      "id": "s-transverse",
+      "name": "Numéros, journaux & outils",
+      "icon": "🧰",
+      "courseFile": "cours_s-transverse.json",
+      "quizzes": [
+        {
+          "id": "quiz32",
+          "file": "quiz32.json",
+          "title": "Numéros, journaux & outils",
+          "icon": "🧰",
+          "questions": 10
+        }
+      ],
+      "group": "API Sophia GO",
+      "iconUrl": "icons/tools.svg"
+    },
+    {
       "id": "linux",
       "name": "Linux",
       "icon": "🐧",
-      "color": "#e8f5e9",
-      "borderColor": "#4caf50",
       "courseFile": "cours_linux.json",
       "quizzes": [
         {
@@ -50,14 +259,14 @@
           "icon": "🎯",
           "questions": 10
         }
-      ]
+      ],
+      "group": "Informatique",
+      "iconUrl": "icons/linux.svg"
     },
     {
       "id": "oracle",
       "name": "Oracle",
       "icon": "🗄️",
-      "color": "#fff3e0",
-      "borderColor": "#ff9800",
       "courseFile": "cours_oracle.json",
       "quizzes": [
         {
@@ -102,14 +311,14 @@
           "icon": "🏆",
           "questions": 10
         }
-      ]
+      ],
+      "group": "Informatique",
+      "iconUrl": "icons/oracle.svg"
     },
     {
       "id": "python",
       "name": "Python",
       "icon": "🐍",
-      "color": "#e3f2fd",
-      "borderColor": "#2196f3",
       "courseFile": "cours_python.json",
       "quizzes": [
         {
@@ -161,58 +370,19 @@
           "icon": "💼",
           "questions": 20
         }
-      ]
-    },
-    {
-      "id": "sophia",
-      "name": "API Sophia",
-      "icon": "📡",
-      "color": "#f3e5f5",
-      "borderColor": "#9c27b0",
-      "courseFile": "cours_sophia.json",
-      "quizzes": [
-        {
-          "id": "quiz20",
-          "file": "quiz20.json",
-          "title": "Concepts & Auth",
-          "icon": "🔐",
-          "questions": 20
-        },
-        {
-          "id": "quiz21",
-          "file": "quiz21.json",
-          "title": "Logique des requêtes",
-          "icon": "🧩",
-          "questions": 20
-        }
-      ]
-    },
-    {
-      "id": "trunks",
-      "name": "Sophia : Trunks SIP",
-      "icon": "☎️",
-      "color": "#e8f5e9",
-      "borderColor": "#00853F",
-      "courseFile": "cours_trunks.json",
-      "quizzes": [
-        {
-          "id": "quiz22",
-          "file": "quiz22.json",
-          "title": "createTrunk & gestion",
-          "icon": "☎️",
-          "questions": 20
-        }
-      ]
+      ],
+      "group": "Informatique",
+      "iconUrl": "icons/python.svg"
     },
     {
       "id": "windows",
       "name": "Windows Server",
       "icon": "🖥️",
-      "color": "#e8eaf6",
-      "borderColor": "#3f51b5",
       "type": "tutorial",
       "tutorialFile": "tutoriel_windows.json",
-      "quizzes": []
+      "quizzes": [],
+      "group": "Informatique",
+      "iconUrl": "icons/windows.svg"
     }
   ]
 }

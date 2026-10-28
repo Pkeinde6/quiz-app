@@ -1,0 +1,30 @@
+{
+  "icon": "📞",
+  "title": "Sophia : Téléphonie hébergée",
+  "sections": [
+    {
+      "title": "Le principe",
+      "content": "Le standard de l'entreprise est dans le cloud Sewan.\nChaque employé a un COMPTE VOIX (voice account) :\n  type CENTREX = ligne fixe hébergée\n  type AML     = ligne mobile reliée au standard\n\nAutour du compte voix :\n  postes (téléphone, softphone, combiné DECT)\n  forfait, renvois, messagerie, enregistrement, touches de fonction,\n  intégrations (Webex, Mondago, Doko), groupes d'interception"
+    },
+    {
+      "title": "Cycle de vie et lookups",
+      "content": "createVoiceAccounts   en MASSE : renvoie les créés ET les échecs\ngetVoiceAccount / getVoiceAccounts (paginé, filtres)\nupdateVoiceAccount\ndeleteVoiceAccounts   en masse : réussites + échecs\n\nLookups (avant de créer) :\n  getAvailablePhonePlans(owner)    forfaits possibles\n  getAvailableSpeedDials(site)     numéros abrégés libres\n  getSummary(owner)                total comptes, softphones, téléphones\n\nForfaits :\n  assignPhonePlanToVoiceAccount   activation NOW ou NEXT_BILLING_PERIOD\n  getVoiceAccountPhonePlans       forfaits actifs + programmés"
+    },
+    {
+      "title": "Postes et touches de fonction",
+      "content": "assignDevicesToVoiceAccount      brancher un ou plusieurs postes\ngetVoiceAccountAssignedDevices\nunassignVoiceAccountDevices\n\nTouches de fonction (boutons programmables) :\n  getVoiceAccountFunctionKeys / updateVoiceAccountFunctionKeys\n  types : SPACE (vide), SHORTCUT (raccourci), SUPERVISION (voir si un collègue est en ligne)\n\nDiagnostic :\n  getVoiceAccountStatusMessages   ERROR / WARNING / SUCCESS (ex : provisioning du poste)\n  getVoipStatus                   le poste est-il bien enregistré ?"
+    },
+    {
+      "title": "Réglages et sécurité",
+      "content": "getAdvancedSettings / getMultipleAdvancedSettings / updateAdvancedSettings\n  appels simultanés, numéro présenté, musiques\ngetSecuritySettings / updateSecuritySettings\n  profil de restriction + limiteur d'appels sortants\ngetCallPolicies / updateCallPolicies   affichage de l'identité de l'appelant\nupdateNomadOption                      utiliser sa ligne depuis n'importe où\ngetPinCode / updatePinCode\nupdateSipPassword                      régénère le mot de passe SIP"
+    },
+    {
+      "title": "Renvois, messagerie, enregistrement",
+      "content": "getCallSettings → tous les renvois d'un coup\n  updateDirectCallForwarding        immédiat\n  updateLineBusyCallForwarding      si occupé\n  updateNoAnswerCallForwarding      si pas de réponse\n  updateNoConnectionCallForwarding  si poste déconnecté\n  updateScheduledCallForwarding     selon horaires\n  updateSimultaneousRing            sonnerie simultanée\n  cible : target: null = messagerie ; target: \"+33…\" = numéro (E.164)\n\nMessagerie : getVoicemailSettings / updateVoicemailSettings,\n  annonces create/update/delete, délais de suppression (en jours)\n\nEnregistrement : getRecordingStatuses, updateRecordingStatuses,\n  updateRecordingOptions (mode ON_DEMAND/ALWAYS, INBOUND/OUTBOUND/BOTH, annonce)"
+    },
+    {
+      "title": "Groupes d'interception et intégrations",
+      "content": "GROUPE D'INTERCEPTION (call pickup) : décrocher pour un collègue\n  createCallPickupGroup   getCallPickupGroup(s)   updateCallPickupGroup\n  updateCallPickupGroupMembers (ajouter / retirer des comptes)\n  deleteCallPickupGroups (en masse)\n\nINTÉGRATIONS\n  Webex   : get/updateVoiceAccountWebex   licence DISABLED BASIC STANDARD PREMIUM\n  Mondago : get/updateVoiceAccountMondago (relier téléphone ↔ CRM)\n  Doko    : getDokoConfig (identifiants + QR code) / updateVoiceAccountDoko"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "title": "Sophia : Contrats",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Contrats.",
+  "failure_message": "Relis le cours Contrats et réessaie.",
+  "questions": [
+    {
+      "question": "Entre qui est signé un contrat ?",
+      "choices": [
+        "organizationId (toi) et clientId (le client)",
+        "Deux revendeurs",
+        "Sewan et Microsoft",
+        "Deux sites"
+      ],
+      "correct_answer": "organizationId (toi) et clientId (le client)",
+      "hint": "Les deux sont obligatoires.",
+      "accept": [
+        "organizationId (toi) et clientId (le client)"
+      ]
+    },
+    {
+      "question": "Que sont les articles d'un contrat ?",
+      "choices": [
+        "Les lignes : produits/services vendus",
+        "Les pièces jointes",
+        "Les signatures",
+        "Les factures"
+      ],
+      "correct_answer": "Les lignes : produits/services vendus",
+      "hint": "ContractArticle.",
+      "accept": [
+        "Les lignes : produits/services vendus"
+      ]
+    },
+    {
+      "question": "Champ obligatoire d'un article ?",
+      "choices": [
+        "serviceId",
+        "price",
+        "siteId",
+        "catalogRef"
+      ],
+      "correct_answer": "serviceId",
+      "hint": "Chaque article référence un service.",
+      "accept": [
+        "serviceId"
+      ]
+    },
+    {
+      "question": "Qui fournit l'id d'un nouveau contrat ?",
+      "choices": [
+        "L'appelant (toi), un UUID",
+        "Le serveur",
+        "Personne",
+        "Le client"
+      ],
+      "correct_answer": "L'appelant (toi), un UUID",
+      "hint": "Transmis tel quel.",
+      "accept": [
+        "L'appelant (toi), un UUID"
+      ]
+    },
+    {
+      "question": "deleteArticles accepte…",
+      "choices": [
+        "Une liste d'IDs non vide (masse uniquement)",
+        "Un seul ID",
+        "Un contractId",
+        "Une URL"
+      ],
+      "correct_answer": "Une liste d'IDs non vide (masse uniquement)",
+      "hint": "Batch only.",
+      "accept": [
+        "Une liste d'IDs non vide (masse uniquement)"
+      ]
+    },
+    {
+      "question": "Comment supprime-t-on une pièce jointe ?",
+      "choices": [
+        "deleteAttachments avec son URL",
+        "Avec son UUID",
+        "updateContract",
+        "Impossible"
+      ],
+      "correct_answer": "deleteAttachments avec son URL",
+      "hint": "Par URL.",
+      "accept": [
+        "deleteAttachments avec son URL"
+      ]
+    },
+    {
+      "question": "Une URL présignée S3 est…",
+      "choices": [
+        "Temporaire (expiresIn) et à usage unique",
+        "Permanente",
+        "Publique pour tous",
+        "Réutilisable pour lister"
+      ],
+      "correct_answer": "Temporaire (expiresIn) et à usage unique",
+      "hint": "Sécurité.",
+      "accept": [
+        "Temporaire (expiresIn) et à usage unique"
+      ]
+    },
+    {
+      "question": "Terme INARREARS signifie…",
+      "choices": [
+        "Facturé à terme échu",
+        "Facturé d'avance",
+        "Annulé",
+        "Impayé"
+      ],
+      "correct_answer": "Facturé à terme échu",
+      "hint": "FALLDUE = à échoir.",
+      "accept": [
+        "Facturé à terme échu"
+      ]
+    },
+    {
+      "question": "Filtre status avec plusieurs valeurs :",
+      "choices": [
+        "OU logique",
+        "ET logique",
+        "Erreur",
+        "Seule la 1re compte"
+      ],
+      "correct_answer": "OU logique",
+      "hint": "Any of.",
+      "accept": [
+        "OU logique"
+      ]
+    },
+    {
+      "question": "Que renvoie updateArticle ?",
+      "choices": [
+        "Un Boolean",
+        "L'article modifié",
+        "Le contrat",
+        "Rien"
+      ],
+      "correct_answer": "Un Boolean",
+      "hint": "Relire avec getArticle.",
+      "accept": [
+        "Un Boolean"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "icon": "📱",
+  "title": "Sophia : Lignes mobiles",
+  "sections": [
+    {
+      "title": "Créer une ligne : les prérequis",
+      "content": "createMobileLine a besoin de :\n  owner.id          le SITE qui possède la ligne\n  operatorId        l'opérateur  → getOperators\n  simCardId         une SIM DISPONIBLE de cet opérateur → getSimCards\n  type              classic | dataonly | unpackaged\n  phonePlanIds      → getPhonePlans\n     classic / dataonly : en général 1 forfait\n     unpackaged : 1 forfait par catégorie (data, sms, voice)\n                  sans forfait data → data payée à l'usage\n\n4 cas :\n  pour un utilisateur existant\n  pour un nouvel utilisateur (créé pendant l'opération)\n  avec portabilité pour un utilisateur existant\n  avec portabilité pour un nouvel utilisateur\n\nOrange : internationalOption toujours true (SDTR appliqué automatiquement)."
+    },
+    {
+      "title": "Portabilité (garder son numéro)",
+      "content": "FRANCE\n  portingCode   le RIO (ex : 43ECD6CC7UBT)\n  portingDate   date d'effet\n  phoneNumber   le numéro à transférer\n\nBELGIQUE\n  donorOperator          opérateur d'origine (codes prédéfinis)\n  donorSubscriptionType  prepaid | postpaidSimple | postpaidComplex\n  donorSIMNumber         pour prepaid / postpaidSimple\n  donorAccountNumber     pour postpaidComplex\n\nESPAGNE\n  isPrepaid   booléen\n  originICC   19 ou 20 caractères, seulement si isPrepaid = true\n\nÉtapes suivies : demande envoyée → acceptée / refusée / annulée."
+    },
+    {
+      "title": "Lister et modifier",
+      "content": "getMobileLines(ownerId, recursive)\n   ownerId = un site → lignes du site\n   ownerId = une organisation + recursive: true → toutes les lignes de tous ses sites\ngetMobileLine                     une ligne\ngetIdentitiesMobileLineCounts     utilisateurs + nb de lignes (trouver qui n'en a pas)\ngetSimCards                       SIM d'un site\ngetPhonePlans                     forfaits (+ options, + international voix/SMS)\n\nupgradePhonePlans / schedulePhonePlans   changer de forfait (maintenant / plus tard)\nupdateInternationalZones                 option internationale (lignes SDTR)\nDébloquer le roaming data (Orange) quand la limite est dépassée\nTableau de bord d'alertes mobiles"
+    },
+    {
+      "title": "Advanced Mobile Lines (AML)",
+      "content": "La ligne mobile reliée au standard → mêmes fonctions qu'un poste fixe.\nElle a un compte voix de type AML (≠ CENTREX pour le fixe).\n\ngetVoiceAccount(id OU mobileLineId)  ← exactement UN des deux\n\nParamètres avancés : getAdvancedSettings / updateAdvancedSettings\n  numéro présenté : NONE, FROM_IDENTITY, ANY_NUMBER, MASKED\n  musiques : attente, occupé, sonnerie (médias : getMedias / getMediasByIds)\n  getAssignablePhoneNumbers (format E.164 : +33605050503)\n\nEnregistrement : retrieveRecordingStatuses / setRecordingStatuses\n  mode ON_DEMAND (l'utilisateur lance) ou ALWAYS (automatique)\n  type INBOUND, OUTBOUND, BOTH ; annonce légale playRecordingAnnounce\n  DISABLED arrête les nouveaux enregistrements, ne supprime pas les anciens"
+    },
+    {
+      "title": "AML : renvois, journal, messagerie",
+      "content": "Renvois (ForwardType) :\n  unconditional (tout), onbusy (occupé), noanswer (pas de réponse),\n  noconnection (injoignable), fork (sonnerie simultanée), scheduled, rejection\n  scheduled : INTERVAL (dates début/fin) ou FREQUENCY (jours 1=lundi…7=dimanche + horaires)\ncreateForward  updateForward  deleteForward (définitif)  searchForward\ngetDefaultValues  retrieveAmlForwardRule  updateAmlForwardRule\ntoggleAmlForward → active/désactive TOUS les renvois d'un type\n⚠ le compte voix doit avoir exactement UNE règle de numéro, sinon erreur\n\nJournal d'appels : getCallLogs (par défaut MOBILE, filtre numéro, redirections imbriquées)\n  statuts : RECEIVED EMITTED MISSED REJECTED BUSY TRANSFERRED…\n\nMessagerie : getVoicemailSettings / updateVoicemailSettings\n  annonces : create / update / delete / getUploadedVoicemailAnnoucement\n  délai de suppression des messages"
+    }
+  ]
+}

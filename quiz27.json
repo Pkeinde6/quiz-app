@@ -1,0 +1,204 @@
+{
+  "title": "Sophia : Lignes mobiles",
+  "minimum_score": 10,
+  "success_message": "Bravo ! Tu maîtrises le module Lignes mobiles.",
+  "failure_message": "Relis le cours Lignes mobiles et réessaie.",
+  "questions": [
+    {
+      "question": "Qui « possède » une ligne mobile (owner.id) ?",
+      "choices": [
+        "Un site",
+        "Une organisation",
+        "Le reseller",
+        "L'opérateur"
+      ],
+      "correct_answer": "Un site",
+      "hint": "Ressource rattachée au lieu, attribuée à une personne.",
+      "accept": [
+        "Un site"
+      ]
+    },
+    {
+      "question": "Quels sont les 3 types de ligne ?",
+      "choices": [
+        "classic, dataonly, unpackaged",
+        "pro, perso, data",
+        "4G, 5G, wifi",
+        "prepaid, postpaid, mixed"
+      ],
+      "correct_answer": "classic, dataonly, unpackaged",
+      "hint": "type de createMobileLine.",
+      "accept": [
+        "classic, dataonly, unpackaged"
+      ]
+    },
+    {
+      "question": "Ligne unpackaged sans forfait data :",
+      "choices": [
+        "La data est payée à l'usage",
+        "Pas de data du tout",
+        "Erreur",
+        "Data illimitée"
+      ],
+      "correct_answer": "La data est payée à l'usage",
+      "hint": "Pay as you go.",
+      "accept": [
+        "La data est payée à l'usage"
+      ]
+    },
+    {
+      "question": "En France, le code de portabilité s'appelle…",
+      "choices": [
+        "RIO",
+        "ICC",
+        "IBAN",
+        "PUK"
+      ],
+      "correct_answer": "RIO",
+      "hint": "portingCode.",
+      "accept": [
+        "RIO"
+      ]
+    },
+    {
+      "question": "En Espagne, originICC est requis quand…",
+      "choices": [
+        "isPrepaid = true",
+        "Toujours",
+        "Jamais",
+        "Le client est belge"
+      ],
+      "correct_answer": "isPrepaid = true",
+      "hint": "19 ou 20 caractères.",
+      "accept": [
+        "isPrepaid = true"
+      ]
+    },
+    {
+      "question": "Comment lister toutes les lignes d'un client multi-sites ?",
+      "choices": [
+        "getMobileLines avec l'ID de l'organisation et recursive: true",
+        "getMobileLine",
+        "getSimCards",
+        "getOperators"
+      ],
+      "correct_answer": "getMobileLines avec l'ID de l'organisation et recursive: true",
+      "hint": "Récursif.",
+      "accept": [
+        "getMobileLines avec l'ID de l'organisation et recursive: true"
+      ]
+    },
+    {
+      "question": "Que fait AML (Advanced Mobile Lines) ?",
+      "choices": [
+        "Relie la ligne mobile au standard (renvois, musique, enregistrement…)",
+        "Ajoute de la data",
+        "Change d'opérateur",
+        "Bloque le roaming"
+      ],
+      "correct_answer": "Relie la ligne mobile au standard (renvois, musique, enregistrement…)",
+      "hint": "Compte voix de type AML.",
+      "accept": [
+        "Relie la ligne mobile au standard (renvois, musique, enregistrement…)"
+      ]
+    },
+    {
+      "question": "getVoiceAccount accepte…",
+      "choices": [
+        "Exactement un de : id ou mobileLineId",
+        "Les deux obligatoirement",
+        "Aucun argument",
+        "Le numéro"
+      ],
+      "correct_answer": "Exactement un de : id ou mobileLineId",
+      "hint": "Sinon erreur.",
+      "accept": [
+        "Exactement un de : id ou mobileLineId"
+      ]
+    },
+    {
+      "question": "Mode d'enregistrement automatique ?",
+      "choices": [
+        "ALWAYS",
+        "ON_DEMAND",
+        "AUTO",
+        "ENABLED"
+      ],
+      "correct_answer": "ALWAYS",
+      "hint": "ON_DEMAND = l'utilisateur lance.",
+      "accept": [
+        "ALWAYS"
+      ]
+    },
+    {
+      "question": "Mettre l'enregistrement à DISABLED…",
+      "choices": [
+        "Arrête les nouveaux enregistrements sans supprimer les anciens",
+        "Supprime tout",
+        "Supprime la ligne",
+        "Rien"
+      ],
+      "correct_answer": "Arrête les nouveaux enregistrements sans supprimer les anciens",
+      "hint": "Historique conservé.",
+      "accept": [
+        "Arrête les nouveaux enregistrements sans supprimer les anciens"
+      ]
+    },
+    {
+      "question": "Type de renvoi « sonnerie simultanée » ?",
+      "choices": [
+        "fork",
+        "unconditional",
+        "scheduled",
+        "onbusy"
+      ],
+      "correct_answer": "fork",
+      "hint": "fork.",
+      "accept": [
+        "fork"
+      ]
+    },
+    {
+      "question": "scheduledFrequencyDays : que vaut 1 ?",
+      "choices": [
+        "Lundi",
+        "Dimanche",
+        "Janvier",
+        "1 heure"
+      ],
+      "correct_answer": "Lundi",
+      "hint": "1=lundi … 7=dimanche.",
+      "accept": [
+        "Lundi"
+      ]
+    },
+    {
+      "question": "Que fait toggleAmlForward ?",
+      "choices": [
+        "Active/désactive tous les renvois d'un type",
+        "Supprime un renvoi",
+        "Crée une ligne",
+        "Change de forfait"
+      ],
+      "correct_answer": "Active/désactive tous les renvois d'un type",
+      "hint": "Toggle.",
+      "accept": [
+        "Active/désactive tous les renvois d'un type"
+      ]
+    },
+    {
+      "question": "Pour une ligne Orange, internationalOption vaut…",
+      "choices": [
+        "Toujours true",
+        "Toujours false",
+        "Au choix",
+        "null"
+      ],
+      "correct_answer": "Toujours true",
+      "hint": "SDTR automatique.",
+      "accept": [
+        "Toujours true"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "title": "Sophia : Numéros, journaux & outils",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Numéros, journaux & outils.",
+  "failure_message": "Relis le cours Numéros, journaux & outils et réessaie.",
+  "questions": [
+    {
+      "question": "Que veut dire DID ?",
+      "choices": [
+        "Direct Inward Dialing : un numéro SDA",
+        "Data ID",
+        "Device ID",
+        "Digital Identity"
+      ],
+      "correct_answer": "Direct Inward Dialing : un numéro SDA",
+      "hint": "Numéro direct.",
+      "accept": [
+        "Direct Inward Dialing : un numéro SDA"
+      ]
+    },
+    {
+      "question": "À quoi sert getGeographicalAreas ?",
+      "choices": [
+        "Trouver la zone géographique d'un code postal pour un numéro local",
+        "Lister les pays",
+        "Localiser un téléphone",
+        "Facturer"
+      ],
+      "correct_answer": "Trouver la zone géographique d'un code postal pour un numéro local",
+      "hint": "Avant orderPhoneNumbers.",
+      "accept": [
+        "Trouver la zone géographique d'un code postal pour un numéro local"
+      ]
+    },
+    {
+      "question": "Quelle requête de journal pour les trunks SIP ?",
+      "choices": [
+        "callLogs.trunkList",
+        "callLogs.list",
+        "getCallLogs",
+        "callLogs.mobile"
+      ],
+      "correct_answer": "callLogs.trunkList",
+      "hint": "trunkList.",
+      "accept": [
+        "callLogs.trunkList"
+      ]
+    },
+    {
+      "question": "Que mesure le MOS ?",
+      "choices": [
+        "La qualité audio d'un appel",
+        "La durée",
+        "Le prix",
+        "Le nombre d'appels"
+      ],
+      "correct_answer": "La qualité audio d'un appel",
+      "hint": "Mean Opinion Score.",
+      "accept": [
+        "La qualité audio d'un appel"
+      ]
+    },
+    {
+      "question": "Que contient un Smart Record en plus de l'audio ?",
+      "choices": [
+        "Transcription, résumé IA et sentiment",
+        "Rien",
+        "La facture",
+        "Le contrat"
+      ],
+      "correct_answer": "Transcription, résumé IA et sentiment",
+      "hint": "IA.",
+      "accept": [
+        "Transcription, résumé IA et sentiment"
+      ]
+    },
+    {
+      "question": "listUserRecords renvoie…",
+      "choices": [
+        "Seulement les enregistrements de l'utilisateur appelant",
+        "Tous ceux de l'organisation",
+        "Les factures",
+        "Les trunks"
+      ],
+      "correct_answer": "Seulement les enregistrements de l'utilisateur appelant",
+      "hint": "Vue utilisateur.",
+      "accept": [
+        "Seulement les enregistrements de l'utilisateur appelant"
+      ]
+    },
+    {
+      "question": "Champs obligatoires d'un contact externe ?",
+      "choices": [
+        "name et phoneNumbers",
+        "email",
+        "company",
+        "siteId"
+      ],
+      "correct_answer": "name et phoneNumbers",
+      "hint": "Le reste est optionnel.",
+      "accept": [
+        "name et phoneNumbers"
+      ]
+    },
+    {
+      "question": "Les audit logs répondent à…",
+      "choices": [
+        "Qui, quoi, sur quoi, quand",
+        "Combien ça coûte",
+        "Où est le matériel",
+        "Quel forfait"
+      ],
+      "correct_answer": "Qui, quoi, sur quoi, quand",
+      "hint": "Traçabilité.",
+      "accept": [
+        "Qui, quoi, sur quoi, quand"
+      ]
+    },
+    {
+      "question": "Quelle info financière donne la consommation ?",
+      "choices": [
+        "Prix d'achat, de vente et marge",
+        "Le salaire",
+        "Le capital",
+        "Rien"
+      ],
+      "correct_answer": "Prix d'achat, de vente et marge",
+      "hint": "Pré-calculés.",
+      "accept": [
+        "Prix d'achat, de vente et marge"
+      ]
+    },
+    {
+      "question": "Trier la consommation par prix de vente décroissant :",
+      "choices": [
+        "-sellPrice ou sellPrice:desc",
+        "+sellPrice",
+        "sellPrice:up",
+        "desc(sellPrice)"
+      ],
+      "correct_answer": "-sellPrice ou sellPrice:desc",
+      "hint": "Préfixe ou deux-points.",
+      "accept": [
+        "-sellPrice ou sellPrice:desc"
+      ]
+    }
+  ]
+}

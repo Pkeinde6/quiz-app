@@ -1,0 +1,148 @@
+{
+  "title": "Sophia : Stock & commandes",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Stock & commandes.",
+  "failure_message": "Relis le cours Stock & commandes et réessaie.",
+  "questions": [
+    {
+      "question": "Qui peut passer une commande de matériel ?",
+      "choices": [
+        "Les rôles reseller et au-dessus",
+        "Tout utilisateur",
+        "Seulement le logisticien",
+        "Seulement le client"
+      ],
+      "correct_answer": "Les rôles reseller et au-dessus",
+      "hint": "organizationRoles.",
+      "accept": [
+        "Les rôles reseller et au-dessus"
+      ]
+    },
+    {
+      "question": "Rôle du logisticien ?",
+      "choices": [
+        "Préparer, configurer et expédier le matériel",
+        "Payer",
+        "Créer le client",
+        "Signer le contrat"
+      ],
+      "correct_answer": "Préparer, configurer et expédier le matériel",
+      "hint": "LOGISTICIAN.",
+      "accept": [
+        "Préparer, configurer et expédier le matériel"
+      ]
+    },
+    {
+      "question": "Le matériel arrive dans le stock du destinataire au statut…",
+      "choices": [
+        "READY_TO_SHIP",
+        "CREATED",
+        "DELIVERED",
+        "PAID"
+      ],
+      "correct_answer": "READY_TO_SHIP",
+      "hint": "Statut de commande.",
+      "accept": [
+        "READY_TO_SHIP"
+      ]
+    },
+    {
+      "question": "Condition pour commander des SIM pour un client ?",
+      "choices": [
+        "Le service mobile doit être actif chez lui",
+        "Aucune",
+        "Avoir un trunk",
+        "Avoir un VDC"
+      ],
+      "correct_answer": "Le service mobile doit être actif chez lui",
+      "hint": "Services Sophia.",
+      "accept": [
+        "Le service mobile doit être actif chez lui"
+      ]
+    },
+    {
+      "question": "Comment déplacer des ressources du reseller vers un client ?",
+      "choices": [
+        "moveResources",
+        "createOrder",
+        "listStockResources",
+        "transferStock"
+      ],
+      "correct_answer": "moveResources",
+      "hint": "Cross-hierarchy.",
+      "accept": [
+        "moveResources"
+      ]
+    },
+    {
+      "question": "À quoi sert checkResourcePurgeRequirement ?",
+      "choices": [
+        "Savoir s'il faut réinitialiser les ressources avant de les déplacer",
+        "Supprimer le stock",
+        "Commander",
+        "Lister"
+      ],
+      "correct_answer": "Savoir s'il faut réinitialiser les ressources avant de les déplacer",
+      "hint": "Avant move.",
+      "accept": [
+        "Savoir s'il faut réinitialiser les ressources avant de les déplacer"
+      ]
+    },
+    {
+      "question": "Quand un téléphone lit-il sa configuration ?",
+      "choices": [
+        "Au redémarrage",
+        "En continu",
+        "Jamais",
+        "Chaque heure"
+      ],
+      "correct_answer": "Au redémarrage",
+      "hint": "Contrairement au routeur.",
+      "accept": [
+        "Au redémarrage"
+      ]
+    },
+    {
+      "question": "Comment un routeur reçoit-il sa config ?",
+      "choices": [
+        "Via l'ACS en CWMP, sans redémarrer",
+        "Par clé USB",
+        "Au redémarrage seulement",
+        "Par SMS"
+      ],
+      "correct_answer": "Via l'ACS en CWMP, sans redémarrer",
+      "hint": "TR-069 / CWMP.",
+      "accept": [
+        "Via l'ACS en CWMP, sans redémarrer"
+      ]
+    },
+    {
+      "question": "exposeConfigs renvoie…",
+      "choices": [
+        "Un jobId à suivre avec la requête job",
+        "La config",
+        "true",
+        "Une erreur"
+      ],
+      "correct_answer": "Un jobId à suivre avec la requête job",
+      "hint": "Tâche de fond.",
+      "accept": [
+        "Un jobId à suivre avec la requête job"
+      ]
+    },
+    {
+      "question": "Une passerelle SIP est attribuée à…",
+      "choices": [
+        "Un trunk",
+        "Un compte voix",
+        "Une SIM",
+        "Un VDC"
+      ],
+      "correct_answer": "Un trunk",
+      "hint": "sipGateway → trunk.",
+      "accept": [
+        "Un trunk"
+      ]
+    }
+  ]
+}

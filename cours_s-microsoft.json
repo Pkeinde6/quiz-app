@@ -1,0 +1,22 @@
+{
+  "icon": "🪟",
+  "title": "Sophia : Microsoft 365",
+  "sections": [
+    {
+      "title": "Les 4 niveaux",
+      "content": "Prérequis : le service Microsoft activé sur l'organisation.\n\nPartner       ton compte revendeur chez Microsoft\nTenant        l'espace Microsoft d'UN client (ex : pmedakar.onmicrosoft.com)\nSubscription  un abonnement (ex : 20 licences Business Standard)\nUser          un compte Microsoft, à qui on donne des licences"
+    },
+    {
+      "title": "Partner et Tenant",
+      "content": "PARTNER\n  getMicrosoftPartner  getMicrosoftPartnerStatus\n  createOrUpdatePartner\n  getAggregatedGdapData   (GDAP = droits d'admin délégués par le client)\n\nTENANT\n  getTenantByOrgId\n  checkTenantDomainNameAvailability   le nom .onmicrosoft.com est-il libre ?\n  createTenant      créer un tenant pour le client\n  linkTenant        rattacher un tenant EXISTANT\n  updateTenant      resetTenant\n  getTenantGdap"
+    },
+    {
+      "title": "Abonnements",
+      "content": "Catalogue :\n  getSubscriptionCatalogItems / Offers / Skus / Pricing\n  getSubscriptionEligibility    le client peut-il acheter ce produit ?\nGestion :\n  createSubscriptionOrder   commander\n  updateSubscription        changer la quantité…\n  upgradeSubscription       passer à un produit supérieur\n  cancelOrder               annuler une commande\n  getSubscriptionList / ById / History / Stats\n\nRègles d'upgrade :\n  la source doit être ACTIVE, sans action en attente\n  la source ne doit PAS être en période de grâce (7 jours après création/renouvellement)\n  si la cible existe : active, hors période de grâce,\n    et sa fin d'engagement ≥ celle de la source"
+    },
+    {
+      "title": "Utilisateurs Microsoft",
+      "content": "getMicrosoftAccounts / Details / History / Licenses / SyncStatus\ngetMicrosoftEmailDomains\ncreateMicrosoftAccount   updateMicrosoftAccount   deleteMicrosoftAccounts\nupdateMicrosoftAccountLicenses   attribuer / retirer des licences\nresetTemporaryPassword\n\nLien avec Sophia :\n  linkInternalUserToMicrosoftAccount(msAccountId, userInternalId)\n    userInternalId rempli → lie le compte Microsoft à l'utilisateur Sophia\n    userInternalId null   → délie\n  getLinkedInternalUser"
+    }
+  ]
+}
