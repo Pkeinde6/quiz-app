@@ -196,16 +196,6 @@
       "type": "tutorial",
       "tutorialFile": "tutoriel_windows.json",
       "quizzes": []
-    },
-    {
-      "id": "admission",
-      "name": "Admission Sherbrooke",
-      "icon": "🎓",
-      "color": "#fce4ec",
-      "borderColor": "#e91e63",
-      "type": "tutorial",
-      "tutorialFile": "admission_sherbrooke.json",
-      "quizzes": []
     }
   ]
 }
