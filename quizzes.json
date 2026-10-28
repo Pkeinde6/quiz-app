@@ -39,7 +39,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/clients.svg"
+      "iconUrl": "icons/clients.svg",
+      "videoFile": "videos/s-clients.mp4"
     },
     {
       "id": "s-hosted",
@@ -56,7 +57,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/hosted.svg"
+      "iconUrl": "icons/hosted.svg",
+      "videoFile": "videos/s-hosted.mp4"
     },
     {
       "id": "s-mobile",
