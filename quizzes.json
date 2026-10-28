@@ -94,7 +94,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/trunks.svg"
+      "iconUrl": "icons/trunks.svg",
+      "videoFile": "videos/trunks.mp4"
     },
     {
       "id": "s-voicesec",
@@ -147,7 +148,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/cloud.svg"
+      "iconUrl": "icons/cloud.svg",
+      "videoFile": "videos/s-cloud.mp4"
     },
     {
       "id": "s-microsoft",
