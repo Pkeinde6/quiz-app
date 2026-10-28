@@ -184,7 +184,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/stock.svg"
+      "iconUrl": "icons/stock.svg",
+      "videoFile": "videos/s-stock.mp4"
     },
     {
       "id": "s-contracts",
@@ -219,7 +220,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/tools.svg"
+      "iconUrl": "icons/tools.svg",
+      "videoFile": "videos/s-transverse.mp4"
     },
     {
       "id": "n-bases",
