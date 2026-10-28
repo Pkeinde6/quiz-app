@@ -124,7 +124,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/subnets.svg"
+      "iconUrl": "icons/subnets.svg",
+      "videoFile": "videos/s-subnets.mp4"
     },
     {
       "id": "s-cloud",
