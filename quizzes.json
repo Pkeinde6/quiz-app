@@ -22,7 +22,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/sophia.svg"
+      "iconUrl": "icons/sophia.svg",
+      "videoFile": "videos/sophia.mp4"
     },
     {
       "id": "s-clients",
@@ -109,7 +110,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/voicesec.svg"
+      "iconUrl": "icons/voicesec.svg",
+      "videoFile": "videos/s-voicesec.mp4"
     },
     {
       "id": "s-subnets",
@@ -161,7 +163,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/microsoft.svg"
+      "iconUrl": "icons/microsoft.svg",
+      "videoFile": "videos/s-microsoft.mp4"
     },
     {
       "id": "s-stock",
@@ -195,7 +198,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/contracts.svg"
+      "iconUrl": "icons/contracts.svg",
+      "videoFile": "videos/s-contracts.mp4"
     },
     {
       "id": "s-transverse",
