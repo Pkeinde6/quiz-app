@@ -1,0 +1,289 @@
+{
+  "title": "Entretien Développeur Full Stack Junior",
+  "minimum_score": 14,
+  "success_message": "Excellent ! Tu es prêt pour un entretien de développeur junior.",
+  "failure_message": "Continue tes révisions sur Laravel, SQL, API REST, Git et les bonnes pratiques.",
+  "questions": [
+    {
+      "question": "Présentez-vous en quelques phrases.",
+      "choices": [
+        "Parler de sa formation, ses compétences, ses projets et son objectif",
+        "Parler uniquement de sa vie personnelle",
+        "Lire son CV",
+        "Dire seulement son nom"
+      ],
+      "correct_answer": "Parler de sa formation, ses compétences, ses projets et son objectif",
+      "hint": "Une présentation dure 1 à 2 minutes.",
+      "accept": [
+        "Parler de sa formation, ses compétences, ses projets et son objectif"
+      ]
+    },
+    {
+      "question": "Pourquoi souhaitez-vous rejoindre notre entreprise ?",
+      "choices": [
+        "Pour apprendre, évoluer et contribuer aux projets",
+        "Seulement pour le salaire",
+        "Parce que c'est proche de chez moi",
+        "Je ne sais pas"
+      ],
+      "correct_answer": "Pour apprendre, évoluer et contribuer aux projets",
+      "hint": "Montre ton intérêt pour l'entreprise.",
+      "accept": [
+        "Pour apprendre, évoluer et contribuer aux projets"
+      ]
+    },
+    {
+      "question": "Que signifie MVC ?",
+      "choices": [
+        "Model View Controller",
+        "Main Virtual Code",
+        "Module Version Control",
+        "Multiple View Component"
+      ],
+      "correct_answer": "Model View Controller",
+      "hint": "Architecture utilisée par Laravel.",
+      "accept": [
+        "Model View Controller",
+        "MVC"
+      ]
+    },
+    {
+      "question": "À quoi sert une API REST ?",
+      "choices": [
+        "Permettre à plusieurs applications de communiquer",
+        "Créer une base de données",
+        "Compiler un programme",
+        "Créer un serveur web"
+      ],
+      "correct_answer": "Permettre à plusieurs applications de communiquer",
+      "hint": "Communication via HTTP.",
+      "accept": [
+        "Permettre à plusieurs applications de communiquer"
+      ]
+    },
+    {
+      "question": "Quelle méthode HTTP sert à récupérer des données ?",
+      "choices": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "correct_answer": "GET",
+      "hint": "Lecture des ressources.",
+      "accept": [
+        "GET"
+      ]
+    },
+    {
+      "question": "Quelle méthode HTTP permet de créer une ressource ?",
+      "choices": [
+        "POST",
+        "GET",
+        "DELETE",
+        "PATCH"
+      ],
+      "correct_answer": "POST",
+      "hint": "Création.",
+      "accept": [
+        "POST"
+      ]
+    },
+    {
+      "question": "Quel code HTTP signifie 'Ressource non trouvée' ?",
+      "choices": [
+        "404",
+        "500",
+        "201",
+        "401"
+      ],
+      "correct_answer": "404",
+      "hint": "Très connu.",
+      "accept": [
+        "404"
+      ]
+    },
+    {
+      "question": "Quel outil est souvent utilisé pour tester une API ?",
+      "choices": [
+        "Postman",
+        "Photoshop",
+        "Excel",
+        "Figma"
+      ],
+      "correct_answer": "Postman",
+      "hint": "Très utilisé en développement backend.",
+      "accept": [
+        "Postman"
+      ]
+    },
+    {
+      "question": "Que permet une migration Laravel ?",
+      "choices": [
+        "Créer ou modifier la structure de la base de données",
+        "Compiler Laravel",
+        "Créer une vue",
+        "Créer un contrôleur"
+      ],
+      "correct_answer": "Créer ou modifier la structure de la base de données",
+      "hint": "php artisan migrate",
+      "accept": [
+        "Créer ou modifier la structure de la base de données"
+      ]
+    },
+    {
+      "question": "À quoi sert Eloquent dans Laravel ?",
+      "choices": [
+        "ORM permettant de manipuler la base de données",
+        "Créer des animations",
+        "Créer des fichiers CSS",
+        "Gérer Git"
+      ],
+      "correct_answer": "ORM permettant de manipuler la base de données",
+      "hint": "Relation entre objets et base de données.",
+      "accept": [
+        "ORM permettant de manipuler la base de données"
+      ]
+    },
+    {
+      "question": "Quelle commande lance les migrations Laravel ?",
+      "choices": [
+        "php artisan migrate",
+        "php artisan serve",
+        "composer install",
+        "npm run dev"
+      ],
+      "correct_answer": "php artisan migrate",
+      "hint": "Très utilisée.",
+      "accept": [
+        "php artisan migrate"
+      ]
+    },
+    {
+      "question": "Quel système permet de gérer les versions d'un projet ?",
+      "choices": [
+        "Git",
+        "Docker",
+        "Linux",
+        "MySQL"
+      ],
+      "correct_answer": "Git",
+      "hint": "Versioning.",
+      "accept": [
+        "Git"
+      ]
+    },
+    {
+      "question": "À quoi sert Docker ?",
+      "choices": [
+        "Exécuter une application dans un conteneur",
+        "Créer une base SQL",
+        "Programmer en Java",
+        "Créer des interfaces"
+      ],
+      "correct_answer": "Exécuter une application dans un conteneur",
+      "hint": "Conteneurisation.",
+      "accept": [
+        "Exécuter une application dans un conteneur"
+      ]
+    },
+    {
+      "question": "Quelle est la différence entre SQL et NoSQL ?",
+      "choices": [
+        "SQL est relationnel, NoSQL est plus flexible",
+        "Aucune différence",
+        "NoSQL utilise uniquement PHP",
+        "SQL est un langage de programmation"
+      ],
+      "correct_answer": "SQL est relationnel, NoSQL est plus flexible",
+      "hint": "Bases de données.",
+      "accept": [
+        "SQL est relationnel, NoSQL est plus flexible"
+      ]
+    },
+    {
+      "question": "Pourquoi utilisez-vous Laravel ?",
+      "choices": [
+        "Parce qu'il facilite le développement d'applications web sécurisées et organisées",
+        "Parce qu'il remplace Java",
+        "Parce qu'il est obligatoire",
+        "Je ne sais pas"
+      ],
+      "correct_answer": "Parce qu'il facilite le développement d'applications web sécurisées et organisées",
+      "hint": "Parle de MVC, Eloquent, sécurité.",
+      "accept": [
+        "Parce qu'il facilite le développement d'applications web sécurisées et organisées"
+      ]
+    },
+    {
+      "question": "Que répondriez-vous si on vous demande si vous connaissez Docker alors que vous débutez ?",
+      "choices": [
+        "Je connais les bases et je suis en train de me former",
+        "Oui, je suis expert",
+        "Non et je ne veux pas apprendre",
+        "Je change de sujet"
+      ],
+      "correct_answer": "Je connais les bases et je suis en train de me former",
+      "hint": "Toujours rester honnête.",
+      "accept": [
+        "Je connais les bases et je suis en train de me former"
+      ]
+    },
+    {
+      "question": "Quelle qualité est la plus importante pour un développeur junior ?",
+      "choices": [
+        "La capacité d'apprendre rapidement",
+        "Tout savoir",
+        "Travailler seul",
+        "Éviter les questions"
+      ],
+      "correct_answer": "La capacité d'apprendre rapidement",
+      "hint": "Les recruteurs recherchent le potentiel.",
+      "accept": [
+        "La capacité d'apprendre rapidement"
+      ]
+    },
+    {
+      "question": "Que faites-vous lorsque vous rencontrez un bug ?",
+      "choices": [
+        "Analyser le problème, lire les logs, tester puis corriger",
+        "Supprimer le projet",
+        "Attendre que quelqu'un le corrige",
+        "Redémarrer l'ordinateur"
+      ],
+      "correct_answer": "Analyser le problème, lire les logs, tester puis corriger",
+      "hint": "Montre ta méthode.",
+      "accept": [
+        "Analyser le problème, lire les logs, tester puis corriger"
+      ]
+    },
+    {
+      "question": "Pourquoi devrions-nous vous recruter ?",
+      "choices": [
+        "Je suis motivé, j'apprends vite et j'ai réalisé plusieurs projets concrets",
+        "Parce que j'ai besoin d'un travail",
+        "Parce que je suis disponible",
+        "Aucune réponse"
+      ],
+      "correct_answer": "Je suis motivé, j'apprends vite et j'ai réalisé plusieurs projets concrets",
+      "hint": "Valorise tes projets.",
+      "accept": [
+        "Je suis motivé, j'apprends vite et j'ai réalisé plusieurs projets concrets"
+      ]
+    },
+    {
+      "question": "À la fin de l'entretien, que pouvez-vous demander ?",
+      "choices": [
+        "Les missions, l'équipe, les technologies utilisées et les possibilités d'embauche",
+        "Quand sont les vacances",
+        "Le mot de passe du Wi-Fi",
+        "Rien"
+      ],
+      "correct_answer": "Les missions, l'équipe, les technologies utilisées et les possibilités d'embauche",
+      "hint": "Montre ton intérêt.",
+      "accept": [
+        "Les missions, l'équipe, les technologies utilisées et les possibilités d'embauche"
+      ]
+    }
+  ]
+}

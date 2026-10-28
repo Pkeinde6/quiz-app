@@ -1,4 +1,4 @@
-﻿{
+{
   "categories": [
     {
       "id": "linux",
@@ -8,12 +8,48 @@
       "borderColor": "#4caf50",
       "courseFile": "cours_linux.json",
       "quizzes": [
-        {"id":"quiz1","file":"quiz1.json","title":"Navigation","icon":"🧭","questions":10},
-        {"id":"quiz2","file":"quiz2.json","title":"Fichiers & Dossiers","icon":"📁","questions":10},
-        {"id":"quiz3","file":"quiz3.json","title":"Lecture de Fichiers","icon":"📖","questions":10},
-        {"id":"quiz4","file":"quiz4.json","title":"Permissions","icon":"🔒","questions":10},
-        {"id":"quiz5","file":"quiz5.json","title":"Utilisateurs & Groupes","icon":"👥","questions":10},
-        {"id":"quiz6","file":"quiz6.json","title":"Revision Generale","icon":"🎯","questions":10}
+        {
+          "id": "quiz1",
+          "file": "quiz1.json",
+          "title": "Navigation",
+          "icon": "🧭",
+          "questions": 10
+        },
+        {
+          "id": "quiz2",
+          "file": "quiz2.json",
+          "title": "Fichiers & Dossiers",
+          "icon": "📁",
+          "questions": 10
+        },
+        {
+          "id": "quiz3",
+          "file": "quiz3.json",
+          "title": "Lecture de Fichiers",
+          "icon": "📖",
+          "questions": 10
+        },
+        {
+          "id": "quiz4",
+          "file": "quiz4.json",
+          "title": "Permissions",
+          "icon": "🔒",
+          "questions": 10
+        },
+        {
+          "id": "quiz5",
+          "file": "quiz5.json",
+          "title": "Utilisateurs & Groupes",
+          "icon": "👥",
+          "questions": 10
+        },
+        {
+          "id": "quiz6",
+          "file": "quiz6.json",
+          "title": "Revision Generale",
+          "icon": "🎯",
+          "questions": 10
+        }
       ]
     },
     {
@@ -24,12 +60,48 @@
       "borderColor": "#ff9800",
       "courseFile": "cours_oracle.json",
       "quizzes": [
-        {"id":"quiz7","file":"quiz7.json","title":"Architecture & PDB","icon":"🏗️","questions":10},
-        {"id":"quiz8","file":"quiz8.json","title":"Tablespaces & Datafiles","icon":"💾","questions":10},
-        {"id":"quiz9","file":"quiz9.json","title":"Utilisateurs & Profils","icon":"👤","questions":10},
-        {"id":"quiz10","file":"quiz10.json","title":"Roles & Privileges","icon":"🔑","questions":10},
-        {"id":"quiz11","file":"quiz11.json","title":"Tables & SQL","icon":"📊","questions":10},
-        {"id":"quiz12","file":"quiz12.json","title":"Revision Generale","icon":"🏆","questions":10}
+        {
+          "id": "quiz7",
+          "file": "quiz7.json",
+          "title": "Architecture & PDB",
+          "icon": "🏗️",
+          "questions": 10
+        },
+        {
+          "id": "quiz8",
+          "file": "quiz8.json",
+          "title": "Tablespaces & Datafiles",
+          "icon": "💾",
+          "questions": 10
+        },
+        {
+          "id": "quiz9",
+          "file": "quiz9.json",
+          "title": "Utilisateurs & Profils",
+          "icon": "👤",
+          "questions": 10
+        },
+        {
+          "id": "quiz10",
+          "file": "quiz10.json",
+          "title": "Roles & Privileges",
+          "icon": "🔑",
+          "questions": 10
+        },
+        {
+          "id": "quiz11",
+          "file": "quiz11.json",
+          "title": "Tables & SQL",
+          "icon": "📊",
+          "questions": 10
+        },
+        {
+          "id": "quiz12",
+          "file": "quiz12.json",
+          "title": "Revision Generale",
+          "icon": "🏆",
+          "questions": 10
+        }
       ]
     },
     {
@@ -40,12 +112,79 @@
       "borderColor": "#2196f3",
       "courseFile": "cours_python.json",
       "quizzes": [
-        {"id":"quiz13","file":"quiz13.json","title":"Introduction & Variables","icon":"📝","questions":10},
-        {"id":"quiz14","file":"quiz14.json","title":"Types & Opérateurs","icon":"🔢","questions":10},
-        {"id":"quiz15","file":"quiz15.json","title":"Print, Input & Casting","icon":"⌨️","questions":10},
-        {"id":"quiz16","file":"quiz16.json","title":"Conditions if/elif/else","icon":"🔀","questions":10},
-        {"id":"quiz17","file":"quiz17.json","title":"Boucles for & while","icon":"🔁","questions":10},
-        {"id":"quiz18","file":"quiz18.json","title":"Fonctions & Modules","icon":"⚙️","questions":10}
+        {
+          "id": "quiz13",
+          "file": "quiz13.json",
+          "title": "Introduction & Variables",
+          "icon": "📝",
+          "questions": 10
+        },
+        {
+          "id": "quiz14",
+          "file": "quiz14.json",
+          "title": "Types & Opérateurs",
+          "icon": "🔢",
+          "questions": 10
+        },
+        {
+          "id": "quiz15",
+          "file": "quiz15.json",
+          "title": "Print, Input & Casting",
+          "icon": "⌨️",
+          "questions": 10
+        },
+        {
+          "id": "quiz16",
+          "file": "quiz16.json",
+          "title": "Conditions if/elif/else",
+          "icon": "🔀",
+          "questions": 10
+        },
+        {
+          "id": "quiz17",
+          "file": "quiz17.json",
+          "title": "Boucles for & while",
+          "icon": "🔁",
+          "questions": 10
+        },
+        {
+          "id": "quiz18",
+          "file": "quiz18.json",
+          "title": "Fonctions & Modules",
+          "icon": "⚙️",
+          "questions": 10
+        },
+        {
+          "id": "quiz19",
+          "file": "quiz19.json",
+          "title": "Entretien Dev Full Stack Junior",
+          "icon": "💼",
+          "questions": 20
+        }
+      ]
+    },
+    {
+      "id": "sophia",
+      "name": "API Sophia",
+      "icon": "📡",
+      "color": "#f3e5f5",
+      "borderColor": "#9c27b0",
+      "courseFile": "cours_sophia.json",
+      "quizzes": [
+        {
+          "id": "quiz20",
+          "file": "quiz20.json",
+          "title": "Concepts & Auth",
+          "icon": "🔐",
+          "questions": 20
+        },
+        {
+          "id": "quiz21",
+          "file": "quiz21.json",
+          "title": "Logique des requêtes",
+          "icon": "🧩",
+          "questions": 20
+        }
       ]
     },
     {
