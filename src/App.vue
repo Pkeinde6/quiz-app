@@ -29,21 +29,32 @@
       </header>
 
       <!-- Groupes -->
-      <section v-for="g in groups" :key="g.name" class="mb-10">
-        <div class="flex items-end justify-between mb-4 px-1">
-          <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">
-            <span class="inline-block w-2 h-2 rounded-full bg-brand mr-2 align-middle"></span>{{ g.name }}
-          </h2>
-          <span class="text-xs text-muted font-medium">{{ g.items.length }} modules</span>
-        </div>
-        <div class="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+      <section v-for="g in groups" :key="g.name" class="mb-4 bg-white border border-line rounded-3xl overflow-hidden">
+        <!-- En-tete du groupe : clic pour deplier / replier -->
+        <button @click="toggleGroup(g.name)" :aria-expanded="isOpen(g.name)"
+          class="w-full flex items-center gap-3 sm:gap-4 text-left p-4 sm:p-5 cursor-pointer hover:bg-paper/60 transition">
+          <span class="flex -space-x-3 shrink-0">
+            <span v-for="c in g.items.slice(0, 3)" :key="c.id" class="w-10 h-10 rounded-xl bg-paper border-2 border-white grid place-items-center">
+              <img v-if="c.iconUrl" :src="c.iconUrl" alt="" class="w-5 h-5" /><template v-else>{{ c.icon }}</template>
+            </span>
+          </span>
+          <span class="flex-1 min-w-0">
+            <span class="block text-lg sm:text-xl font-extrabold tracking-tight leading-tight">{{ g.name }}</span>
+            <span class="block text-xs text-muted mt-0.5">{{ g.items.length }} modules · {{ groupPct(g) }} % fait</span>
+            <span class="block h-1 bg-paper rounded-full overflow-hidden mt-2 max-w-48">
+              <span class="block h-full bg-brand rounded-full transition-all duration-500" :style="{ width: groupPct(g) + '%' }"></span>
+            </span>
+          </span>
+          <svg class="w-6 h-6 text-muted shrink-0 transition-transform duration-300" :class="isOpen(g.name) ? 'rotate-180 text-brand' : ''" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+        <div v-if="isOpen(g.name)" class="rise grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 px-4 sm:px-5 pb-4 sm:pb-5">
           <button
             v-for="cat in g.items" :key="cat.id"
             @click="selectCategory(cat)"
-            class="group text-left bg-white border border-line rounded-2xl p-4 sm:p-5 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_12px_30px_-12px_rgba(0,133,63,.45)]"
+            class="group text-left bg-paper/50 border border-line rounded-2xl p-3 sm:p-4 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_12px_30px_-12px_rgba(0,133,63,.45)]"
           >
             <div class="flex items-start gap-3">
-              <span class="shrink-0 w-12 h-12 rounded-xl bg-paper group-hover:bg-brand/10 grid place-items-center text-2xl transition"><img v-if="cat.iconUrl" :src="cat.iconUrl" alt="" class="w-7 h-7" /><template v-else>{{ cat.icon }}</template></span>
+              <span class="shrink-0 w-11 h-11 rounded-xl bg-white group-hover:bg-brand/10 grid place-items-center text-2xl transition"><img v-if="cat.iconUrl" :src="cat.iconUrl" alt="" class="w-7 h-7" /><template v-else>{{ cat.icon }}</template></span>
               <div class="min-w-0 flex-1">
                 <div class="font-bold text-ink leading-tight">{{ cat.name }}</div>
                 <div class="text-xs text-muted mt-1">
@@ -52,7 +63,7 @@
               </div>
               <svg class="w-5 h-5 text-line group-hover:text-brand group-hover:translate-x-0.5 transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
             </div>
-            <div v-if="cat.quizzes && cat.quizzes.length" class="mt-4">
+            <div v-if="cat.quizzes && cat.quizzes.length" class="mt-3">
               <div class="h-1.5 bg-paper rounded-full overflow-hidden">
                 <div class="h-full rounded-full bg-brand transition-all duration-500" :style="{ width: catPct(cat) + '%' }"></div>
               </div>
@@ -281,6 +292,24 @@ const groups = computed(() => {
   }
   return [...map].map(([name, items]) => ({ name, items }));
 });
+
+// Groupes depliables sur l'accueil (etat memorise dans le navigateur)
+const OPEN_KEY = 'quiz-app-open-groups';
+const openGroups = ref((() => {
+  try { return JSON.parse(localStorage.getItem(OPEN_KEY)) || []; } catch { return []; }
+})());
+const isOpen = (name) => openGroups.value.includes(name);
+const toggleGroup = (name) => {
+  openGroups.value = isOpen(name) ? openGroups.value.filter(n => n !== name) : [...openGroups.value, name];
+  try { localStorage.setItem(OPEN_KEY, JSON.stringify(openGroups.value)); } catch {}
+};
+const groupPct = (g) => {
+  progressVersion.value;
+  const qs = g.items.flatMap(c => c.quizzes || []);
+  if (!qs.length) return 0;
+  const p = loadProgress();
+  return Math.round(qs.filter(q => p[q.id] !== undefined).length / qs.length * 100);
+};
 
 const catPct = (cat) => {
   progressVersion.value;
