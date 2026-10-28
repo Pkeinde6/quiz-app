@@ -238,7 +238,8 @@
           "icon": "🎓",
           "questions": 11
         }
-      ]
+      ],
+      "videoFile": "videos/n-bases.mp4"
     },
     {
       "id": "n-eligibility",
@@ -255,7 +256,8 @@
           "icon": "📍",
           "questions": 10
         }
-      ]
+      ],
+      "videoFile": "videos/n-eligibility.mp4"
     },
     {
       "id": "n-orders",
@@ -272,7 +274,8 @@
           "icon": "🛒",
           "questions": 11
         }
-      ]
+      ],
+      "videoFile": "videos/n-orders.mp4"
     },
     {
       "id": "n-portability",
@@ -289,7 +292,8 @@
           "icon": "🔁",
           "questions": 12
         }
-      ]
+      ],
+      "videoFile": "videos/n-portability.mp4"
     },
     {
       "id": "n-services",
@@ -306,7 +310,8 @@
           "icon": "🛠️",
           "questions": 10
         }
-      ]
+      ],
+      "videoFile": "videos/n-services.mp4"
     },
     {
       "id": "n-mobile",
@@ -323,7 +328,8 @@
           "icon": "📶",
           "questions": 10
         }
-      ]
+      ],
+      "videoFile": "videos/n-mobile.mp4"
     },
     {
       "id": "n-webhooks",
@@ -340,7 +346,8 @@
           "icon": "🔔",
           "questions": 10
         }
-      ]
+      ],
+      "videoFile": "videos/n-webhooks.mp4"
     },
     {
       "id": "linux",
