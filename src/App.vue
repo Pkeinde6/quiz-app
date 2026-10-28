@@ -1,91 +1,145 @@
 <template>
-  <div :class="(screen === 'tutorial' || screen === 'tutoAnimation') ? 'font-[Inter]' : 'max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8 font-[Inter]'">
+  <div :class="(screen === 'tutorial' || screen === 'tutoAnimation') ? '' : 'max-w-5xl mx-auto px-4 py-4 sm:py-8'">
 
-    <!-- ============ ECRAN 1 : Choix de la categorie ============ -->
-    <div v-if="screen === 'home'" class="mt-4">
-      <h1 class="text-center text-2xl sm:text-4xl font-extrabold text-gray-900 mb-1">Quiz App</h1>
-      <p class="text-center text-gray-500 text-sm sm:text-base mb-6 sm:mb-8">Choisis ta matiere</p>
+    <!-- ============ ECRAN 1 : Accueil ============ -->
+    <div v-if="screen === 'home'" class="rise">
+      <!-- En-tete -->
+      <header class="relative overflow-hidden rounded-3xl bg-ink text-paper px-5 sm:px-10 py-8 sm:py-12 mb-8">
+        <div class="absolute -top-24 -right-16 w-80 h-80 rounded-full bg-brand/40 blur-3xl"></div>
+        <div class="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-brand via-brand to-sun"></div>
+        <div class="relative">
+          <span class="inline-block text-[11px] font-bold tracking-[.2em] uppercase bg-sun text-ink px-3 py-1 rounded-full mb-4">Révise · Pratique · Progresse</span>
+          <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[.95]">Quiz <span class="text-sun">App</span></h1>
+          <p class="text-paper/70 mt-3 text-sm sm:text-base max-w-md">Cours et quiz pour apprendre l'API Sophia GO, Linux, Oracle et Python.</p>
+          <div class="grid grid-cols-3 gap-2 sm:gap-4 mt-6 max-w-lg">
+            <div class="bg-white/5 border border-white/10 rounded-2xl px-4 py-3">
+              <div class="text-2xl sm:text-3xl font-extrabold">{{ totals.modules }}</div>
+              <div class="text-[11px] uppercase tracking-wider text-paper/60">modules</div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl px-4 py-3">
+              <div class="text-2xl sm:text-3xl font-extrabold">{{ totals.done }}<span class="text-paper/40 text-lg">/{{ totals.quizzes }}</span></div>
+              <div class="text-[11px] uppercase tracking-wider text-paper/60">quiz faits</div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl px-4 py-3">
+              <div class="text-2xl sm:text-3xl font-extrabold text-sun">{{ totals.pct }}%</div>
+              <div class="text-[11px] uppercase tracking-wider text-paper/60">progression</div>
+            </div>
+          </div>
+        </div>
+      </header>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <button
-          v-for="cat in categories"
-          :key="cat.id"
-          class="group flex flex-col items-center justify-center py-6 sm:py-10 px-4 sm:px-6 rounded-2xl border-3 cursor-pointer transition-all duration-300 shadow-md hover:-translate-y-1.5 hover:shadow-xl"
-          :style="{ background: cat.color, borderColor: cat.borderColor }"
-          @click="selectCategory(cat)"
-        >
-          <span class="text-3xl sm:text-5xl mb-2">{{ cat.icon }}</span>
-          <span class="text-lg sm:text-xl font-extrabold text-gray-800">{{ cat.name }}</span>
-          <span class="text-sm text-gray-600 mt-1">{{ cat.type === 'tutorial' ? '📖 Tutoriel' : cat.quizzes.length + ' quiz' }}</span>
-        </button>
-      </div>
+      <!-- Groupes -->
+      <section v-for="g in groups" :key="g.name" class="mb-10">
+        <div class="flex items-end justify-between mb-4 px-1">
+          <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">
+            <span class="inline-block w-2 h-2 rounded-full bg-brand mr-2 align-middle"></span>{{ g.name }}
+          </h2>
+          <span class="text-xs text-muted font-medium">{{ g.items.length }} modules</span>
+        </div>
+        <div class="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <button
+            v-for="cat in g.items" :key="cat.id"
+            @click="selectCategory(cat)"
+            class="group text-left bg-white border border-line rounded-2xl p-4 sm:p-5 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_12px_30px_-12px_rgba(0,133,63,.45)]"
+          >
+            <div class="flex items-start gap-3">
+              <span class="shrink-0 w-12 h-12 rounded-xl bg-paper group-hover:bg-brand/10 grid place-items-center text-2xl transition"><img v-if="cat.iconUrl" :src="cat.iconUrl" alt="" class="w-7 h-7" /><template v-else>{{ cat.icon }}</template></span>
+              <div class="min-w-0 flex-1">
+                <div class="font-bold text-ink leading-tight">{{ cat.name }}</div>
+                <div class="text-xs text-muted mt-1">
+                  {{ cat.type === 'tutorial' ? 'Tutoriel pas à pas' : (cat.courseFile ? 'Cours + ' : '') + cat.quizzes.length + ' quiz' }}
+                </div>
+              </div>
+              <svg class="w-5 h-5 text-line group-hover:text-brand group-hover:translate-x-0.5 transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+            </div>
+            <div v-if="cat.quizzes && cat.quizzes.length" class="mt-4">
+              <div class="h-1.5 bg-paper rounded-full overflow-hidden">
+                <div class="h-full rounded-full bg-brand transition-all duration-500" :style="{ width: catPct(cat) + '%' }"></div>
+              </div>
+              <div class="text-[11px] text-muted mt-1.5">{{ catPct(cat) === 100 ? '✓ Terminé' : catPct(cat) + ' % fait' }}</div>
+            </div>
+          </button>
+        </div>
+      </section>
 
-      <!-- Bouton Tuto Animations GSAP -->
-      <div class="mt-8">
-        <button
-          @click="screen = 'tutoAnimation'"
-          class="w-full flex flex-col items-center justify-center py-6 sm:py-10 px-4 sm:px-6 rounded-2xl border-3 cursor-pointer transition-all duration-300 shadow-md hover:-translate-y-1.5 hover:shadow-xl"
-          style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-color: #5a67d8;"
-        >
-          <span class="text-3xl sm:text-5xl mb-2">🎬</span>
-          <span class="text-lg sm:text-xl font-extrabold text-white">Animations GSAP</span>
-          <span class="text-sm text-white/70 mt-1">📖 Documentation Portfolio</span>
-        </button>
-      </div>
+      <!-- Tuto GSAP -->
+      <button
+        @click="screen = 'tutoAnimation'"
+        class="w-full flex items-center gap-4 text-left rounded-2xl bg-night text-paper p-5 sm:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      >
+        <span class="w-12 h-12 rounded-xl bg-sun grid place-items-center shrink-0"><img :src="'icons/gsap.svg'" alt="GSAP" class="w-7 h-7" /></span>
+        <span class="flex-1">
+          <span class="block font-bold text-lg">Animations GSAP</span>
+          <span class="block text-xs text-paper/60">Documentation portfolio</span>
+        </span>
+        <svg class="w-5 h-5 text-sun" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+      </button>
 
       <!-- Compteur en ligne temps reel -->
       <div class="mt-8 text-center">
-        <button @click="showAdmin" class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-green-600 transition cursor-pointer">
+        <button @click="showAdmin" class="inline-flex items-center gap-2 text-xs text-muted hover:text-brand transition cursor-pointer">
           <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-60"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
           </span>
           {{ deviceCount }} en ligne
         </button>
       </div>
     </div>
 
-    <!-- ============ ECRAN 2 : Liste des quiz d'une categorie ============ -->
-    <div v-if="screen === 'category'" class="mt-4">
-      <!-- Bouton retour -->
-      <button @click="screen = 'home'" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-4 py-2 rounded-lg transition mb-6 cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
-        Retour
+    <!-- ============ ECRAN 2 : Une categorie ============ -->
+    <div v-if="screen === 'category'" class="rise">
+      <button @click="screen = 'home'" :class="backBtn">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
+        Accueil
       </button>
 
-      <h1 class="text-center text-xl sm:text-3xl font-extrabold text-gray-900 mb-2">{{ selectedCat.icon }} {{ selectedCat.name }}</h1>
-
-      <!-- Bouton mini-cours -->
-      <div class="text-center my-5">
-        <button @click="loadCourse" class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer text-sm sm:text-base">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
-          Mini-cours {{ selectedCat.name }}
-        </button>
-      </div>
-
-      <!-- Progression globale -->
-      <div v-if="catProgress.total > 0" class="mb-4 text-center">
-        <div class="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden mb-1.5">
-          <div class="h-full bg-gradient-to-r from-green-500 to-lime-400 rounded-full transition-all duration-500" :style="{ width: catProgress.pct + '%' }"></div>
+      <div class="relative overflow-hidden rounded-3xl bg-ink text-paper p-6 sm:p-8 mb-6">
+        <div class="absolute -bottom-24 -right-10 w-72 h-72 rounded-full bg-brand/40 blur-3xl"></div>
+        <div class="relative flex items-center gap-4">
+          <span class="w-16 h-16 rounded-2xl bg-white/10 grid place-items-center text-4xl shrink-0"><img v-if="selectedCat.iconUrl" :src="selectedCat.iconUrl" alt="" class="w-9 h-9 brightness-0 invert" /><template v-else>{{ selectedCat.icon }}</template></span>
+          <div>
+            <div class="text-[11px] font-bold tracking-[.2em] uppercase text-sun">{{ selectedCat.group }}</div>
+            <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">{{ selectedCat.name }}</h1>
+          </div>
         </div>
-        <span class="text-sm text-gray-500 font-semibold">{{ catProgress.done }} / {{ catProgress.total }} quiz termines</span>
+        <div v-if="catProgress.total > 0" class="relative mt-6">
+          <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+            <div class="h-full bg-sun rounded-full transition-all duration-500" :style="{ width: catProgress.pct + '%' }"></div>
+          </div>
+          <div class="text-xs text-paper/60 mt-2">{{ catProgress.done }} / {{ catProgress.total }} quiz faits</div>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 min-[400px]:grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mt-4">
+      <!-- Etape 1 : cours -->
+      <button v-if="selectedCat.courseFile" @click="loadCourse"
+        class="w-full flex items-center gap-4 text-left bg-white border-2 border-brand rounded-2xl p-4 sm:p-5 mb-4 cursor-pointer transition hover:bg-brand/5 hover:-translate-y-0.5">
+        <span class="w-12 h-12 rounded-xl bg-brand text-white grid place-items-center shrink-0">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+        </span>
+        <span class="flex-1">
+          <span class="block text-[11px] font-bold uppercase tracking-wider text-brand">Étape 1</span>
+          <span class="block font-bold text-lg">Lire le cours</span>
+        </span>
+        <svg class="w-5 h-5 text-brand" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+      </button>
+
+      <!-- Etape 2 : quiz -->
+      <div class="text-[11px] font-bold uppercase tracking-wider text-muted mb-2 px-1">{{ selectedCat.courseFile ? 'Étape 2 · ' : '' }}S'entraîner</div>
+      <div class="grid grid-cols-1 min-[480px]:grid-cols-2 sm:grid-cols-3 gap-3">
         <button
-          v-for="q in selectedCat.quizzes"
-          :key="q.id"
-          class="flex flex-col items-center justify-center py-4 sm:py-5 px-2 sm:px-3 rounded-xl border-2 bg-white cursor-pointer transition-all duration-200 shadow-sm hover:-translate-y-1 hover:border-indigo-400 hover:shadow-lg"
-          :class="getScore(q.id) !== null ? 'border-green-400 bg-green-50' : 'border-gray-200'"
+          v-for="q in selectedCat.quizzes" :key="q.id"
           @click="loadQuiz(q)"
+          class="flex flex-col items-start text-left p-4 rounded-2xl border bg-white cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:border-brand hover:shadow-lg"
+          :class="getScore(q.id) !== null ? 'border-brand/50' : 'border-line'"
         >
-          <span class="text-2xl sm:text-3xl mb-1.5">{{ q.icon }}</span>
-          <span class="text-xs sm:text-sm font-bold text-gray-800 text-center mb-0.5">{{ q.title }}</span>
-          <span class="text-xs text-gray-400">{{ q.questions }} questions</span>
-          <span v-if="getScore(q.id) !== null" class="flex items-center gap-1 text-xs font-bold text-green-600 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-            {{ getScore(q.id) }} / {{ q.questions }}
+          <span class="w-10 h-10 rounded-xl bg-paper grid place-items-center text-xl mb-2"><img v-if="selectedCat.iconUrl && selectedCat.group !== 'Informatique'" :src="selectedCat.iconUrl" alt="" class="w-6 h-6" /><template v-else>{{ q.icon }}</template></span>
+          <span class="text-sm font-bold leading-snug">{{ q.title }}</span>
+          <span class="text-xs text-muted mt-0.5">{{ q.questions }} questions</span>
+          <span v-if="getScore(q.id) !== null" class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-brand bg-brand/10 px-2 py-1 rounded-full">
+            ★ Meilleur : {{ getScore(q.id) }} / {{ q.questions }}
           </span>
+          <span v-else class="mt-3 text-xs font-semibold text-ink bg-sun px-2 py-1 rounded-full">Commencer</span>
         </button>
       </div>
     </div>
@@ -107,9 +161,9 @@
 
     <!-- ============ ECRAN 4 : Quiz en cours ============ -->
     <div v-if="screen === 'quiz' && quizData">
-      <button @click="screen = 'category'" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-4 py-2 rounded-lg transition mb-4 cursor-pointer">
+      <button @click="screen = 'category'" :class="backBtn">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
-        Retour aux quiz
+        {{ selectedCat ? selectedCat.name : 'Retour' }}
       </button>
       <Quiz :quiz="quizData" :key="quizKey" @finished="onQuizFinished" />
     </div>
@@ -123,7 +177,7 @@
 
     <!-- ============ ECRAN 6 : Admin - Appareils en ligne (temps reel) ============ -->
     <div v-if="screen === 'admin'" class="mt-4">
-      <button @click="screen = 'home'" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-4 py-2 rounded-lg transition mb-6 cursor-pointer">
+      <button @click="screen = 'home'" :class="backBtn">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
         Retour
       </button>
@@ -199,6 +253,35 @@ const tick = ref(0);
 let tickInterval = null;
 
 const STORAGE_KEY = 'quiz-app-progress';
+
+const backBtn = 'inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-ink bg-white border border-line hover:border-brand px-4 py-2 rounded-full transition mb-5 cursor-pointer';
+
+// Categories regroupees pour l'accueil
+const groups = computed(() => {
+  const map = new Map();
+  for (const c of categories.value) {
+    const g = c.group || 'Autres';
+    if (!map.has(g)) map.set(g, []);
+    map.get(g).push(c);
+  }
+  return [...map].map(([name, items]) => ({ name, items }));
+});
+
+const catPct = (cat) => {
+  progressVersion.value;
+  const qs = cat.quizzes || [];
+  if (!qs.length) return 0;
+  const p = loadProgress();
+  return Math.round(qs.filter(q => p[q.id] !== undefined).length / qs.length * 100);
+};
+
+const totals = computed(() => {
+  progressVersion.value;
+  const p = loadProgress();
+  const all = categories.value.flatMap(c => c.quizzes || []);
+  const done = all.filter(q => p[q.id] !== undefined).length;
+  return { modules: categories.value.length, quizzes: all.length, done, pct: all.length ? Math.round(done / all.length * 100) : 0 };
+});
 
 const loadProgress = () => {
   try {

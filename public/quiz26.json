@@ -1,0 +1,148 @@
+{
+  "title": "Sophia : Microsoft 365",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Microsoft 365.",
+  "failure_message": "Relis le cours Microsoft 365 et réessaie.",
+  "questions": [
+    {
+      "question": "Qu'est-ce qu'un tenant Microsoft ?",
+      "choices": [
+        "L'espace Microsoft d'un client",
+        "Une licence",
+        "Un utilisateur",
+        "Ton compte revendeur"
+      ],
+      "correct_answer": "L'espace Microsoft d'un client",
+      "hint": "xxx.onmicrosoft.com",
+      "accept": [
+        "L'espace Microsoft d'un client"
+      ]
+    },
+    {
+      "question": "Différence createTenant / linkTenant ?",
+      "choices": [
+        "create en crée un nouveau, link rattache un tenant existant",
+        "Aucune",
+        "link supprime",
+        "create est déprécié"
+      ],
+      "correct_answer": "create en crée un nouveau, link rattache un tenant existant",
+      "hint": "Client déjà chez Microsoft ?",
+      "accept": [
+        "create en crée un nouveau, link rattache un tenant existant"
+      ]
+    },
+    {
+      "question": "Comment vérifier qu'un nom de domaine tenant est libre ?",
+      "choices": [
+        "checkTenantDomainNameAvailability",
+        "getTenantByOrgId",
+        "validateName",
+        "getMicrosoftEmailDomains"
+      ],
+      "correct_answer": "checkTenantDomainNameAvailability",
+      "hint": "Avant createTenant.",
+      "accept": [
+        "checkTenantDomainNameAvailability"
+      ]
+    },
+    {
+      "question": "Combien dure la période de grâce d'un abonnement ?",
+      "choices": [
+        "7 jours après création ou renouvellement",
+        "30 jours",
+        "24 h",
+        "1 an"
+      ],
+      "correct_answer": "7 jours après création ou renouvellement",
+      "hint": "Bloque les upgrades.",
+      "accept": [
+        "7 jours après création ou renouvellement"
+      ]
+    },
+    {
+      "question": "Peut-on upgrader un abonnement avec une action en attente ?",
+      "choices": [
+        "Non",
+        "Oui",
+        "Seulement le week-end",
+        "Oui si payé"
+      ],
+      "correct_answer": "Non",
+      "hint": "Pas de pending actions.",
+      "accept": [
+        "Non"
+      ]
+    },
+    {
+      "question": "Comment donner une licence à un utilisateur ?",
+      "choices": [
+        "updateMicrosoftAccountLicenses",
+        "createSubscriptionOrder",
+        "linkTenant",
+        "updateTenant"
+      ],
+      "correct_answer": "updateMicrosoftAccountLicenses",
+      "hint": "Licences du compte.",
+      "accept": [
+        "updateMicrosoftAccountLicenses"
+      ]
+    },
+    {
+      "question": "linkInternalUserToMicrosoftAccount avec userInternalId null…",
+      "choices": [
+        "Délie le compte Microsoft de l'utilisateur Sophia",
+        "Supprime le compte",
+        "Crée un utilisateur",
+        "Erreur"
+      ],
+      "correct_answer": "Délie le compte Microsoft de l'utilisateur Sophia",
+      "hint": "null = unlink.",
+      "accept": [
+        "Délie le compte Microsoft de l'utilisateur Sophia"
+      ]
+    },
+    {
+      "question": "Que vérifie getSubscriptionEligibility ?",
+      "choices": [
+        "Si le client peut acheter ce produit",
+        "Le prix",
+        "Le mot de passe",
+        "Le domaine"
+      ],
+      "correct_answer": "Si le client peut acheter ce produit",
+      "hint": "Éligibilité.",
+      "accept": [
+        "Si le client peut acheter ce produit"
+      ]
+    },
+    {
+      "question": "Prérequis pour tout le module ?",
+      "choices": [
+        "Le service Microsoft activé sur l'organisation",
+        "Un trunk",
+        "Une SIM",
+        "Un VDC"
+      ],
+      "correct_answer": "Le service Microsoft activé sur l'organisation",
+      "hint": "Services Sophia.",
+      "accept": [
+        "Le service Microsoft activé sur l'organisation"
+      ]
+    },
+    {
+      "question": "GDAP sert à…",
+      "choices": [
+        "Gérer les droits d'administration délégués par le client",
+        "Payer",
+        "Créer des VM",
+        "Router des appels"
+      ],
+      "correct_answer": "Gérer les droits d'administration délégués par le client",
+      "hint": "Granular Delegated Admin Privileges.",
+      "accept": [
+        "Gérer les droits d'administration délégués par le client"
+      ]
+    }
+  ]
+}

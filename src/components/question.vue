@@ -1,33 +1,41 @@
 <template>
-  <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 sm:p-6 max-w-xl mx-auto">
-    <div class="text-base sm:text-lg font-bold text-gray-800 mb-4 sm:mb-5">
+  <div class="rise">
+    <div class="text-lg sm:text-xl font-bold text-ink leading-snug mb-5">
       {{ task.question }}
     </div>
 
-    <ul class="flex flex-col gap-2 sm:gap-2.5 mb-5 sm:mb-6 list-none p-0">
-      <li v-for="choice in shuffledChoices" :key="choice">
-        <label class="flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm cursor-pointer px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition">
-          <input
-            type="radio"
-            name="answer"
-            :value="choice"
-            v-model="selected"
-            class="accent-indigo-500 w-4 h-4"
-          />
-          <span>{{ choice }}</span>
-        </label>
+    <ul class="flex flex-col gap-2.5 mb-5 list-none p-0">
+      <li v-for="(choice, i) in shuffledChoices" :key="choice">
+        <button
+          type="button"
+          @click="!checked && (selected = choice)"
+          :class="choiceClass(choice)"
+          class="w-full flex items-center gap-3 text-left text-sm sm:text-base px-3 sm:px-4 py-3 rounded-xl border-2 transition cursor-pointer disabled:cursor-default"
+          :disabled="checked"
+        >
+          <span :class="letterClass(choice)" class="shrink-0 w-8 h-8 rounded-lg grid place-items-center text-sm font-bold transition">
+            {{ checked && choice === task.correct_answer ? '✓' : checked && choice === selected ? '✗' : letters[i] }}
+          </span>
+          <span class="flex-1">{{ choice }}</span>
+        </button>
       </li>
     </ul>
 
+    <!-- Correction immediate -->
+    <div v-if="checked" class="rise rounded-xl px-4 py-3 mb-5 text-sm"
+      :class="isCorrect ? 'bg-brand/10 text-night' : 'bg-red-50 text-red-700'">
+      <div class="font-bold mb-0.5">{{ isCorrect ? 'Bonne réponse !' : 'Pas tout à fait…' }}</div>
+      <div v-if="!isCorrect">La bonne réponse : <strong>{{ task.correct_answer }}</strong></div>
+      <div v-if="task.hint" class="mt-1 opacity-80">💡 {{ task.hint }}</div>
+    </div>
+
     <div class="flex justify-end">
-    <button
-      @click="validate"
-      :disabled="!selected"
-      class="inline-flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold px-5 py-2.5 rounded-lg transition cursor-pointer shadow-sm"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
-      Valider
-    </button>
+      <button v-if="!checked" @click="checked = true" :disabled="!selected" :class="primaryBtn">
+        Valider
+      </button>
+      <button v-else @click="emit('answer', selected)" :class="primaryBtn">
+        {{ last ? 'Voir le résultat' : 'Suivant' }} →
+      </button>
     </div>
   </div>
 </template>
@@ -35,9 +43,13 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-const props = defineProps({ task: Object });
+const props = defineProps({ task: Object, last: Boolean });
 const emit = defineEmits(['answer']);
 const selected = ref('');
+const checked = ref(false);
+const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+const primaryBtn = 'inline-flex items-center gap-2 bg-brand hover:bg-brand-dark disabled:bg-line disabled:text-muted disabled:cursor-not-allowed text-white font-semibold px-6 py-3 rounded-full transition cursor-pointer';
 
 // Melange Fisher-Yates (une seule fois par question grace au computed)
 const shuffledChoices = computed(() => {
@@ -49,7 +61,25 @@ const shuffledChoices = computed(() => {
   return arr;
 });
 
-const validate = () => {
-  emit('answer', selected.value);
+const isCorrect = computed(() => selected.value === props.task.correct_answer);
+
+const choiceClass = (choice) => {
+  if (checked.value) {
+    if (choice === props.task.correct_answer) return 'border-brand bg-brand/10';
+    if (choice === selected.value) return 'border-red-400 bg-red-50';
+    return 'border-line bg-white opacity-60';
+  }
+  return choice === selected.value
+    ? 'border-brand bg-brand/5'
+    : 'border-line bg-white hover:border-brand/60';
+};
+
+const letterClass = (choice) => {
+  if (checked.value) {
+    if (choice === props.task.correct_answer) return 'bg-brand text-white';
+    if (choice === selected.value) return 'bg-red-500 text-white';
+    return 'bg-paper text-muted';
+  }
+  return choice === selected.value ? 'bg-brand text-white' : 'bg-paper text-muted';
 };
 </script>

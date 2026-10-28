@@ -1,0 +1,176 @@
+{
+  "title": "Sophia : Clients & identités",
+  "minimum_score": 9,
+  "success_message": "Bravo ! Tu maîtrises le module Clients & identités.",
+  "failure_message": "Relis le cours Clients & identités et réessaie.",
+  "questions": [
+    {
+      "question": "Quel est l'ordre de création correct ?",
+      "choices": [
+        "Organisation → services → site → identité",
+        "Identité → site → organisation",
+        "Site → organisation → identité",
+        "N'importe quel ordre"
+      ],
+      "correct_answer": "Organisation → services → site → identité",
+      "hint": "Hiérarchie de haut en bas.",
+      "accept": [
+        "Organisation → services → site → identité"
+      ]
+    },
+    {
+      "question": "Sous quoi crée-t-on une identité ?",
+      "choices": [
+        "Un site",
+        "Une organisation directement",
+        "Un reseller",
+        "Une autre identité"
+      ],
+      "correct_answer": "Un site",
+      "hint": "Dernier niveau de l'arbre.",
+      "accept": [
+        "Un site"
+      ]
+    },
+    {
+      "question": "Quand peut-on supprimer une identité ?",
+      "choices": [
+        "Quand elle n'a plus de ressource ni de profil de droits liés",
+        "Toujours",
+        "Jamais",
+        "Seulement le lundi"
+      ],
+      "correct_answer": "Quand elle n'a plus de ressource ni de profil de droits liés",
+      "hint": "Ligne mobile, licence… à libérer d'abord.",
+      "accept": [
+        "Quand elle n'a plus de ressource ni de profil de droits liés"
+      ]
+    },
+    {
+      "question": "Quelle requête retrouve une organisation depuis l'ancienne API ?",
+      "choices": [
+        "getOrganizationFromLive(perId)",
+        "getOrganization(id)",
+        "getHierarchy",
+        "getStats"
+      ],
+      "correct_answer": "getOrganizationFromLive(perId)",
+      "hint": "LIVE utilise des entiers.",
+      "accept": [
+        "getOrganizationFromLive(perId)"
+      ]
+    },
+    {
+      "question": "Que renvoie getStats ?",
+      "choices": [
+        "Les nombres de clients, internes et revendeurs",
+        "Les appels du jour",
+        "Les factures",
+        "Les rôles"
+      ],
+      "correct_answer": "Les nombres de clients, internes et revendeurs",
+      "hint": "customer, internal, reseller, total.",
+      "accept": [
+        "Les nombres de clients, internes et revendeurs"
+      ]
+    },
+    {
+      "question": "Un client créé via l'API a combien de services actifs ?",
+      "choices": [
+        "Aucun",
+        "Tous",
+        "Ceux de son parent",
+        "Un seul"
+      ],
+      "correct_answer": "Aucun",
+      "hint": "Activation en 2e opération.",
+      "accept": [
+        "Aucun"
+      ]
+    },
+    {
+      "question": "Les InvoiceCustomization servent à…",
+      "choices": [
+        "Donner des valeurs de facturation par défaut aux enfants",
+        "Payer une facture",
+        "Créer un site",
+        "Supprimer un client"
+      ],
+      "correct_answer": "Donner des valeurs de facturation par défaut aux enfants",
+      "hint": "Héritage parent → enfants.",
+      "accept": [
+        "Donner des valeurs de facturation par défaut aux enfants"
+      ]
+    },
+    {
+      "question": "deprecatePrevious: true sur un mandat SEPA signifie…",
+      "choices": [
+        "Rendre obsolète l'ancien mandat",
+        "Supprimer le client",
+        "Annuler la facture",
+        "Rien"
+      ],
+      "correct_answer": "Rendre obsolète l'ancien mandat",
+      "hint": "On remplace le mandat.",
+      "accept": [
+        "Rendre obsolète l'ancien mandat"
+      ]
+    },
+    {
+      "question": "Quel type d'identité pour une salle de réunion ?",
+      "choices": [
+        "RESOURCE",
+        "USER",
+        "SSO",
+        "SITE"
+      ],
+      "correct_answer": "RESOURCE",
+      "hint": "Pas un humain.",
+      "accept": [
+        "RESOURCE"
+      ]
+    },
+    {
+      "question": "Comment attribuer des droits à un utilisateur ?",
+      "choices": [
+        "assignIdentityRoleToIdentity",
+        "updateSite",
+        "createRole",
+        "grantAccess"
+      ],
+      "correct_answer": "assignIdentityRoleToIdentity",
+      "hint": "Rôles d'identité.",
+      "accept": [
+        "assignIdentityRoleToIdentity"
+      ]
+    },
+    {
+      "question": "Code pays invalide pour une organisation donne l'erreur…",
+      "choices": [
+        "613-121",
+        "014",
+        "404",
+        "613-110"
+      ],
+      "correct_answer": "613-121",
+      "hint": "Le pays doit faire 2 lettres.",
+      "accept": [
+        "613-121"
+      ]
+    },
+    {
+      "question": "Que faut-il activer pour gérer les subnets d'un client ?",
+      "choices": [
+        "Le service AccessLink",
+        "Le service Microsoft",
+        "Rien",
+        "Un trunk"
+      ],
+      "correct_answer": "Le service AccessLink",
+      "hint": "Voir la page Access links.",
+      "accept": [
+        "Le service AccessLink"
+      ]
+    }
+  ]
+}

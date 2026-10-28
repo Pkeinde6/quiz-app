@@ -1,0 +1,22 @@
+{
+  "icon": "🧰",
+  "title": "Sophia : Numéros, journaux & outils",
+  "sections": [
+    {
+      "title": "Numéros de téléphone",
+      "content": "Commander des numéros :\n  1) pays commandables\n  2) getOrderOptions(pays)            options de commande\n  3) getGeographicalAreas(codePostal) zone géographique (numéros locaux)\n  4) orderPhoneNumbers\ngetPhoneNumberDetails   détail d'un numéro\ngetDIDNumbers           numéros SDA (DID = Direct Inward Dialing)\ngetManagedPhoneNumbers  createManagedPhoneNumber  deleteManagedPhoneNumber\nupdatePhoneNumberSpeedDial  numéro abrégé\n\nTypes (PhoneNumberTypes) : PHONE_PACK, CONTACT_EXPERIENCE, TRUNK_SIP,\n  MICROSOFT_TEAM_SIP, CENTREX_MOBILE_LINE, LANDLINE, MOBILE"
+    },
+    {
+      "title": "Journal d'appels",
+      "content": "callLogs.search     historique de trunks, lignes HT, mobiles, utilisateurs\n                    par organisation, site ou ressource\ncallLogs.list       lignes utilisateurs (HT + mobile)\ncallLogs.trunkList  trunks SIP\n\nChaque appel :\n  direction OUTGOING / RECEIVED / MISSED\n  statut RECEIVED, MISSED, BUSY, TRANSFERRED, REJECTED…\n  ressource (TRUNK, HOSTED_TELEPHONY, MOBILE, IDENTITY), compte SIP\n  qualité : MOS (Mean Opinion Score)\n  identifiants de corrélation (encryptedCallId…)"
+    },
+    {
+      "title": "Smart Records (enregistrements IA)",
+      "content": "Chaque enregistrement contient :\n  audio          le fichier\n  transcription  le texte de la conversation (speech-to-text)\n  summary        résumé généré par IA\n  sentiment      positive, negative, frustrated, angry, thankful, neutral…\n  contexte       appelant, appelé, date, durée, direction\n\nlistRecords(ownerId)  vue ADMIN : tous les enregistrements du périmètre\nlistUserRecords       vue UTILISATEUR : seulement SES appels\ngetRecord  getRecordByCdrId  checkRecordsByCdrIds  getRecordsFiles  deleteRecord\ngetRetention / updateRetention   durée de conservation\ngetFTPConfiguration              export vers un FTP"
+    },
+    {
+      "title": "Annuaire, recherche, conso, audit, produits",
+      "content": "ANNUAIRE (phonebook)\n  addExternalContact (name + phoneNumbers obligatoires)  addPersonalContact\n  updateContact  deletePhoneBookContacts  getContactsByPhoneNumbers\n  updateDefaultVisibility / updateSpecificVisibility (masquer un contact)\n\nRECHERCHE GLOBALE   search → trouver un client, une ligne, un numéro…\n\nCONSOMMATION        getConsumptionInformationList\n  quantité + unité (min, Mo, SMS), nb d'événements facturables,\n  prix d'achat / vente / MARGE, type de vente, services\n  tri : -sellPrice ou sellPrice:desc\n\nAUDIT LOGS          getAuditLogs / getAuditLogsEventsList / ...FilterValues\n  Qui ? actor   Quoi ? eventName, updatedFields, oldValues/newValues\n  Sur quoi ? entity, entityOwner   Quand ? eventDate\n\nPRODUITS            gérer le catalogue et sa visibilité par défaut pour les enfants"
+    }
+  ]
+}

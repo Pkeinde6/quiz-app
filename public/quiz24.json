@@ -1,0 +1,148 @@
+{
+  "title": "Sophia : Accès Internet & subnets",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Accès Internet & subnets.",
+  "failure_message": "Relis le cours Accès Internet & subnets et réessaie.",
+  "questions": [
+    {
+      "question": "Qu'est-ce qu'un subnet ?",
+      "choices": [
+        "Un bloc d'adresses IP attribué à un client",
+        "Un forfait mobile",
+        "Un serveur",
+        "Un téléphone"
+      ],
+      "correct_answer": "Un bloc d'adresses IP attribué à un client",
+      "hint": "Adresses IP.",
+      "accept": [
+        "Un bloc d'adresses IP attribué à un client"
+      ]
+    },
+    {
+      "question": "Quel service doit être actif pour gérer les subnets ?",
+      "choices": [
+        "AccessLink",
+        "Microsoft",
+        "HostedTelephony",
+        "Contracts"
+      ],
+      "correct_answer": "AccessLink",
+      "hint": "Liens d'accès.",
+      "accept": [
+        "AccessLink"
+      ]
+    },
+    {
+      "question": "Un /29 contient combien d'adresses ?",
+      "choices": [
+        "8",
+        "29",
+        "32",
+        "1"
+      ],
+      "correct_answer": "8",
+      "hint": "2^(32-29).",
+      "accept": [
+        "8"
+      ]
+    },
+    {
+      "question": "Quelle mutation commande un subnet ?",
+      "choices": [
+        "orderSubnet",
+        "createSubnet",
+        "buySubnet",
+        "addSubnet"
+      ],
+      "correct_answer": "orderSubnet",
+      "hint": "On « commande ».",
+      "accept": [
+        "orderSubnet"
+      ]
+    },
+    {
+      "question": "Statut d'un subnet juste après résiliation ?",
+      "choices": [
+        "QUARANTINE avant d'être libéré",
+        "AVAILABLE immédiatement",
+        "IN_USE",
+        "DELETED"
+      ],
+      "correct_answer": "QUARANTINE avant d'être libéré",
+      "hint": "Pas réattribué tout de suite.",
+      "accept": [
+        "QUARANTINE avant d'être libéré"
+      ]
+    },
+    {
+      "question": "Comment lier un subnet à un firewall ?",
+      "choices": [
+        "assignService",
+        "linkFirewall",
+        "updateSubnetDescription",
+        "orderSubnet"
+      ],
+      "correct_answer": "assignService",
+      "hint": "LinkedServiceType FIREWALL.",
+      "accept": [
+        "assignService"
+      ]
+    },
+    {
+      "question": "Type de subnet pour un réseau privé d'entreprise ?",
+      "choices": [
+        "MPLS",
+        "PUBLIC",
+        "CGN",
+        "SINGLE_USE"
+      ],
+      "correct_answer": "MPLS",
+      "hint": "Réseau privé opérateur.",
+      "accept": [
+        "MPLS"
+      ]
+    },
+    {
+      "question": "Où voir tout ce qui est arrivé à un subnet ?",
+      "choices": [
+        "getHistory / getEventsLog",
+        "getStats",
+        "getAuditLogs seulement",
+        "Nulle part"
+      ],
+      "correct_answer": "getHistory / getEventsLog",
+      "hint": "Événements.",
+      "accept": [
+        "getHistory / getEventsLog"
+      ]
+    },
+    {
+      "question": "Quels pays sont gérés pour les subnets ?",
+      "choices": [
+        "FR, ES, BE, DE",
+        "Tous",
+        "Seulement FR",
+        "SN et FR"
+      ],
+      "correct_answer": "FR, ES, BE, DE",
+      "hint": "Enum Country.",
+      "accept": [
+        "FR, ES, BE, DE"
+      ]
+    },
+    {
+      "question": "/32 correspond à…",
+      "choices": [
+        "Une seule adresse",
+        "32 adresses",
+        "Un réseau entier",
+        "IPv6"
+      ],
+      "correct_answer": "Une seule adresse",
+      "hint": "Le plus petit bloc IPv4.",
+      "accept": [
+        "Une seule adresse"
+      ]
+    }
+  ]
+}

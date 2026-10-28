@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+/* Charte Rangu */
+@theme {
+  --color-brand: #00853F;
+  --color-brand-dark: #006B32;
+  --color-night: #003D24;
+  --color-ink: #0E1A14;
+  --color-paper: #F3F6F1;
+  --color-sun: #FDEF42;
+  --color-line: #DCE5DE;
+  --color-muted: #5C6E63;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+body {
+  font-family: var(--font-display);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Apparition douce des ecrans (power3.out) */
+@keyframes rise {
+  from { opacity: .001; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+.rise { animation: rise .5s cubic-bezier(.22, 1, .36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+}

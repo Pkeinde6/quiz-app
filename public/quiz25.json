@@ -1,0 +1,176 @@
+{
+  "title": "Sophia : Cloud",
+  "minimum_score": 9,
+  "success_message": "Bravo ! Tu maîtrises le module Cloud.",
+  "failure_message": "Relis le cours Cloud et réessaie.",
+  "questions": [
+    {
+      "question": "Différence principale VPS / Datacenter ?",
+      "choices": [
+        "VPS = VM seule (1 disque, 1 réseau) ; Datacenter = infra dédiée en VDC multi-disques",
+        "Aucune",
+        "Le VPS est plus cher",
+        "Le Datacenter n'a pas de VM"
+      ],
+      "correct_answer": "VPS = VM seule (1 disque, 1 réseau) ; Datacenter = infra dédiée en VDC multi-disques",
+      "hint": "VDC.",
+      "accept": [
+        "VPS = VM seule (1 disque, 1 réseau) ; Datacenter = infra dédiée en VDC multi-disques"
+      ]
+    },
+    {
+      "question": "Que signifie HDS ?",
+      "choices": [
+        "Hébergeur de Données de Santé",
+        "High Disk Speed",
+        "Hosted Data Server",
+        "Hybrid Datacenter"
+      ],
+      "correct_answer": "Hébergeur de Données de Santé",
+      "hint": "Santé, certification française.",
+      "accept": [
+        "Hébergeur de Données de Santé"
+      ]
+    },
+    {
+      "question": "Qu'est-ce qu'un VDC ?",
+      "choices": [
+        "Un conteneur logique de VM dans un datacenter",
+        "Une carte réseau",
+        "Un disque",
+        "Un forfait"
+      ],
+      "correct_answer": "Un conteneur logique de VM dans un datacenter",
+      "hint": "Virtual Datacenter.",
+      "accept": [
+        "Un conteneur logique de VM dans un datacenter"
+      ]
+    },
+    {
+      "question": "Pourquoi les actions VM s'appellent asyncXxx ?",
+      "choices": [
+        "Elles sont asynchrones : la tâche continue après la réponse",
+        "Elles sont lentes à écrire",
+        "Elles sont dépréciées",
+        "Elles sont gratuites"
+      ],
+      "correct_answer": "Elles sont asynchrones : la tâche continue après la réponse",
+      "hint": "Voir getVmPendingTasks.",
+      "accept": [
+        "Elles sont asynchrones : la tâche continue après la réponse"
+      ]
+    },
+    {
+      "question": "Comment éteindre de force une VM bloquée ?",
+      "choices": [
+        "asyncHardStopVM",
+        "asyncStopVM",
+        "deleteVm",
+        "asyncRebootVM"
+      ],
+      "correct_answer": "asyncHardStopVM",
+      "hint": "Hard = brutal.",
+      "accept": [
+        "asyncHardStopVM"
+      ]
+    },
+    {
+      "question": "Comment revenir à un instantané ?",
+      "choices": [
+        "asyncRevertVMToSnapshot",
+        "asyncRestoreBackup",
+        "asyncCreateVMSnapshot",
+        "moveVm"
+      ],
+      "correct_answer": "asyncRevertVMToSnapshot",
+      "hint": "Revert.",
+      "accept": [
+        "asyncRevertVMToSnapshot"
+      ]
+    },
+    {
+      "question": "À quoi sert mountIso ?",
+      "choices": [
+        "Monter une image d'installation sur le lecteur virtuel de la VM",
+        "Créer un disque",
+        "Sauvegarder",
+        "Supprimer la VM"
+      ],
+      "correct_answer": "Monter une image d'installation sur le lecteur virtuel de la VM",
+      "hint": "CD virtuel.",
+      "accept": [
+        "Monter une image d'installation sur le lecteur virtuel de la VM"
+      ]
+    },
+    {
+      "question": "Comment ajouter l'antivirus CrowdStrike ?",
+      "choices": [
+        "addCrowdstrikeToVm",
+        "installAntivirus",
+        "updateVm",
+        "createDisk"
+      ],
+      "correct_answer": "addCrowdstrikeToVm",
+      "hint": "CrowdStrike.",
+      "accept": [
+        "addCrowdstrikeToVm"
+      ]
+    },
+    {
+      "question": "Un réseau Datacenter avec accès extérieur passe par…",
+      "choices": [
+        "Un firewall FortiGate",
+        "Un trunk SIP",
+        "Une SIM",
+        "Rien"
+      ],
+      "correct_answer": "Un firewall FortiGate",
+      "hint": "Réseau firewall-protected.",
+      "accept": [
+        "Un firewall FortiGate"
+      ]
+    },
+    {
+      "question": "Le Cloud Trunk relie…",
+      "choices": [
+        "Un trunk téléphonique 3CX à une VM cloud",
+        "Deux VDC",
+        "Un subnet à un firewall",
+        "Deux clients"
+      ],
+      "correct_answer": "Un trunk téléphonique 3CX à une VM cloud",
+      "hint": "VoIP dans le cloud.",
+      "accept": [
+        "Un trunk téléphonique 3CX à une VM cloud"
+      ]
+    },
+    {
+      "question": "Comment changer une VM de VDC ?",
+      "choices": [
+        "moveVm",
+        "asyncUpdateVM",
+        "createVdc",
+        "linkVm"
+      ],
+      "correct_answer": "moveVm",
+      "hint": "Déplacer.",
+      "accept": [
+        "moveVm"
+      ]
+    },
+    {
+      "question": "Les clés SSH servent à…",
+      "choices": [
+        "Se connecter aux VM sans mot de passe",
+        "Chiffrer les factures",
+        "Activer Microsoft",
+        "Payer"
+      ],
+      "correct_answer": "Se connecter aux VM sans mot de passe",
+      "hint": "Authentification sécurisée.",
+      "accept": [
+        "Se connecter aux VM sans mot de passe"
+      ]
+    }
+  ]
+}

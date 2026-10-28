@@ -1,0 +1,148 @@
+{
+  "title": "Sophia : Sécurité voix",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Sécurité voix.",
+  "failure_message": "Relis le cours Sécurité voix et réessaie.",
+  "questions": [
+    {
+      "question": "Contre quoi protège la sécurité voix ?",
+      "choices": [
+        "La fraude téléphonique vers des numéros surtaxés",
+        "Les virus informatiques",
+        "Les impayés",
+        "Le spam mail"
+      ],
+      "correct_answer": "La fraude téléphonique vers des numéros surtaxés",
+      "hint": "Pirates la nuit.",
+      "accept": [
+        "La fraude téléphonique vers des numéros surtaxés"
+      ]
+    },
+    {
+      "question": "Un profil WHITELIST…",
+      "choices": [
+        "N'autorise que les destinations listées",
+        "Interdit les destinations listées",
+        "Autorise tout",
+        "Bloque tout"
+      ],
+      "correct_answer": "N'autorise que les destinations listées",
+      "hint": "Liste blanche.",
+      "accept": [
+        "N'autorise que les destinations listées"
+      ]
+    },
+    {
+      "question": "Format des countryCodes ?",
+      "choices": [
+        "ISO 3166-1 alpha-2 (FR, SN…)",
+        "Indicatif (+33)",
+        "Nom complet",
+        "Code ISO à 3 lettres"
+      ],
+      "correct_answer": "ISO 3166-1 alpha-2 (FR, SN…)",
+      "hint": "2 lettres.",
+      "accept": [
+        "ISO 3166-1 alpha-2 (FR, SN…)"
+      ]
+    },
+    {
+      "question": "Que signifie UIFN ?",
+      "choices": [
+        "Numéros verts internationaux",
+        "Un pays",
+        "Un opérateur",
+        "Une erreur"
+      ],
+      "correct_answer": "Numéros verts internationaux",
+      "hint": "Universal International Freephone Numbers.",
+      "accept": [
+        "Numéros verts internationaux"
+      ]
+    },
+    {
+      "question": "Le limiteur OCL contrôle…",
+      "choices": [
+        "Le nombre d'appels sortants sur une période",
+        "Les destinations",
+        "Les appels entrants",
+        "Le prix"
+      ],
+      "correct_answer": "Le nombre d'appels sortants sur une période",
+      "hint": "Outgoing Call Limiter.",
+      "accept": [
+        "Le nombre d'appels sortants sur une période"
+      ]
+    },
+    {
+      "question": "Ordre d'évaluation du filtrage entrant ?",
+      "choices": [
+        "Règles spécifiques d'abord, puis règle par défaut",
+        "Règle par défaut d'abord",
+        "Au hasard",
+        "Seulement la règle par défaut"
+      ],
+      "correct_answer": "Règles spécifiques d'abord, puis règle par défaut",
+      "hint": "specificRules en premier.",
+      "accept": [
+        "Règles spécifiques d'abord, puis règle par défaut"
+      ]
+    },
+    {
+      "question": "defaultRule: null signifie…",
+      "choices": [
+        "Rien n'est filtré si aucune règle spécifique ne correspond",
+        "Tout est bloqué",
+        "Erreur",
+        "Tout est autorisé sauf l'international"
+      ],
+      "correct_answer": "Rien n'est filtré si aucune règle spécifique ne correspond",
+      "hint": "Effacer la règle par défaut.",
+      "accept": [
+        "Rien n'est filtré si aucune règle spécifique ne correspond"
+      ]
+    },
+    {
+      "question": "Comment supprimer toutes les règles spécifiques ?",
+      "choices": [
+        "Envoyer specificRules: []",
+        "Omettre le champ",
+        "deleteFilteringList",
+        "defaultRule: null"
+      ],
+      "correct_answer": "Envoyer specificRules: []",
+      "hint": "Omettre = inchangé.",
+      "accept": [
+        "Envoyer specificRules: []"
+      ]
+    },
+    {
+      "question": "Actions possibles d'une règle entrante ?",
+      "choices": [
+        "ALLOW et BLOCK",
+        "ON et OFF",
+        "YES et NO",
+        "ACCEPT, REJECT, FORWARD"
+      ],
+      "correct_answer": "ALLOW et BLOCK",
+      "hint": "InboundFilteringAction.",
+      "accept": [
+        "ALLOW et BLOCK"
+      ]
+    },
+    {
+      "question": "À quoi sert une liste de filtrage ?",
+      "choices": [
+        "Regrouper des numéros/préfixes réutilisables dans plusieurs règles",
+        "Facturer",
+        "Lister les trunks",
+        "Enregistrer"
+      ],
+      "correct_answer": "Regrouper des numéros/préfixes réutilisables dans plusieurs règles",
+      "hint": "FilteringList.",
+      "accept": [
+        "Regrouper des numéros/préfixes réutilisables dans plusieurs règles"
+      ]
+    }
+  ]
+}

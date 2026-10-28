@@ -1,14 +1,12 @@
 <template>
-  <div class="mb-5">
-    <div class="flex items-center justify-between mb-1.5">
-      <span class="text-xs font-semibold text-gray-500">Question {{ current }} / {{ max }}</span>
-      <span class="text-xs font-semibold text-indigo-500">{{ Math.round((current / max) * 100) }}%</span>
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-xs font-bold uppercase tracking-wider text-muted">Question {{ current }} / {{ max }}</span>
+      <span class="text-xs font-bold text-brand">{{ Math.round((current / max) * 100) }}%</span>
     </div>
-    <div class="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden">
-      <div
-        class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-300"
-        :style="{ width: (current / max * 100) + '%' }"
-      ></div>
+    <div class="flex gap-1">
+      <div v-for="i in max" :key="i" class="h-1.5 flex-1 rounded-full transition-colors duration-300"
+        :class="i < current ? 'bg-brand' : i === current ? 'bg-sun' : 'bg-line'"></div>
     </div>
   </div>
 </template>

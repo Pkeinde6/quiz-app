@@ -1,0 +1,26 @@
+{
+  "icon": "☁️",
+  "title": "Sophia : Cloud",
+  "sections": [
+    {
+      "title": "Les 4 offres cloud",
+      "content": "Cloud VPS         VM seule sur infra partagée. 1 disque, 1 carte réseau.\n                  Rapide à créer. Idéal : site web, petite appli.\nCloud Datacenter  Infra virtuelle DÉDIÉE, organisée en VDC (Virtual Datacenter).\n                  Plusieurs disques, plusieurs cartes réseau, réseaux, firewall.\nCloud HDS         = Datacenter certifié Hébergeur de Données de Santé (France).\n                  Pour cliniques, labos, logiciels médicaux.\nCloud Trunk       Trunk téléphonique 3CX relié à une VM cloud.\n\n+ Clés SSH pour se connecter aux VM sans mot de passe."
+    },
+    {
+      "title": "Cloud VPS : opérations",
+      "content": "LECTURE\n  getVmList / getVm                 liste / détail des VM\n  getVmNameValidation               nom disponible ?\n  getVmPendingTasks                 tâches en cours\n  getConsoleLink                    console web de la VM\n  getVmStatisticsUrl                statistiques\n  getNetworkInterface(List)         carte réseau\n  getSnapshotList                   instantanés\n  getBackupRestorePointList         points de sauvegarde\n  getCrowdStrikeProducts            antivirus disponibles\n\nACTIONS (asynchrones → asyncXxx)\n  asyncCreateVM  asyncUpdateVM  asyncResizeVM  asyncDeleteVM\n  asyncStartVM  asyncStopVM  asyncHardStopVM  asyncRebootVM\n  asyncCreateVMSnapshot  asyncRevertVMToSnapshot  asyncDeleteVMSnapshot\n  asyncRestoreBackup\n  addCrowdstrikeToVm / removeCrowdstrikeFromVm   ← protection antivirus"
+    },
+    {
+      "title": "Datacenter / HDS : VDC et réseaux",
+      "content": "VDC = conteneur logique qui regroupe des VM, lié à un datacenter et un provider.\n  getVdcList  getVdc  getVdcValidation  getDcSummary\n  createVdc  updateVdc  deleteVdc\n\nRéseaux (connectent les VM d'un VDC) :\n  interne        VM ↔ VM uniquement\n  avec firewall  accès extérieur via un firewall FortiGate\n  infrastructure\n  getNetworkList  getNetworkById  getNetworkSummary  getNetworkValidation\n  getFirewallsByOrganizationId / BySiteId"
+    },
+    {
+      "title": "Datacenter / HDS : VM, disques, ISO",
+      "content": "Une VM Datacenter appartient TOUJOURS à un VDC.\nCréation : depuis un template, depuis une ISO, ou import OVA.\n  asyncCreateDcVM / asyncCreateDcVmFromIso / validationOva + finishOvaUpload\n  moveVm (changer de VDC)\n\nDisques : createDisk  updateDisk  deleteDisk\nCartes réseau : createNetworkInterface  updateNetworkInterface  deleteNetworkInterface\n\nISO (CD virtuel pour installer un OS) :\n  getIsoList  mountIso  unmountIso\n  getUploadUrl → createCustomIso / updateCustomIso / deleteCustomIso / cancelCustomIsoUpload\nTemplates (modèles de VM) :\n  getDefaultTemplatesList  getCustomTemplatesList  getAllTemplatesList\n  createCustomTemplate  updateCustomTemplate  deleteCustomTemplate"
+    },
+    {
+      "title": "Cloud Trunk et clés SSH",
+      "content": "CLOUD TRUNK (3CX dans le cloud)\n  getCloudTrunkList  getCloudTrunkById  getCloudTrunkSummary\n  validateCloudTrunkName  getAvailableTrunksForCloudTrunk\n  createCloudTrunk  updateCloudTrunk  deleteCloudTrunk\n  linkTrunkToCloudTrunk / unlinkCloudTrunk   ← relier un trunk SIP\n\nCLÉS SSH\n  getSshKeyList  getSshKeyById  getSshKeyUsedByUsers\n  createSshKey  deleteSshKey"
+    }
+  ]
+}
