@@ -37,6 +37,30 @@
     {
       "title": "9. Hiérarchie (le modèle de données)",
       "content": "Reseller (toi)\n  └── Client (tes clients ; flag Internal = ta propre filiale)\n        └── Site (adresse physique RÉELLE : urgences téléphoniques)\n              ├── services non personnels (lien Internet...)\n              └── Identity : User (humain) | Other account (salle de réunion)\n                    └── services personnels (ligne mobile, licence Microsoft...)\n\nNouveau client = au moins Client + Site.\nService personnel = Client + Site + Identity.\nServices Sophia = catalogues à activer par organisation (aucun par défaut via l'API)."
+    },
+    {
+      "title": "10. Fonctionnalités : base clients",
+      "content": "Organisations & sites\n  - lister, lire (queries), créer, modifier (mutations)\n\nParamètres de facturation (billing settings)\n  - lire / modifier\n\nServices Sophia\n  - activer / désactiver les catalogues d'une organisation\n\nIdentités\n  - gérer les utilisateurs\n  - services attachés aux utilisateurs"
+    },
+    {
+      "title": "11. Fonctionnalités : réseau, cloud, Microsoft",
+      "content": "Subnets (liens d'accès)\n  - commander, résilier, modifier la description\n  - historique, infos, assigner / désassigner un service\n\nCloud\n  - Cloud VPS : lire les VM + actions\n  - Cloud Datacenter / Healthcare : réseaux, VDC, VM, ISO & templates (Get + Actions)\n  - Cloud Trunk, clés SSH (Get + Actions)\n\nMicrosoft\n  - Partner, Tenant, Abonnements, Utilisateurs\n\nGroupes d'appel (call groups)"
+    },
+    {
+      "title": "12. Fonctionnalités : lignes mobiles",
+      "content": "Référentiels : opérateurs, options de forfait par opérateur\n\nCréer une ligne\n  - pour un utilisateur existant / un nouvel utilisateur\n  - avec portabilité : France, Belgique, Espagne\n\nLister\n  - lignes d'un site\n  - lignes d'une organisation (ownerId + recursive)\n  - utilisateurs + nombre de lignes, cartes SIM, forfaits (options, international)\n\nUne ligne : lire, option internationale (SDTR), changer de forfait\n\nAdvanced Mobile Lines\n  - paramètres avancés, sécurité, enregistrement des appels\n  - renvois d'appel (créer, chercher, modifier, supprimer, règles AML)\n  - journal d'appels, messagerie vocale\n\nDébloquer le roaming data (Orange), tableau de bord des alertes"
+    },
+    {
+      "title": "13. Fonctionnalités : trunks SIP & sécurité voix",
+      "content": "Trunks\n  - créer, lire, modifier, résilier, supprimer, lister (récursif)\n  - suspendre / réactiver, annuler un changement de plan programmé\n  - plans disponibles, canaux pay-as-you-go, validation du nom\n  - renvois, paramètres généraux, sécurité (auth, ACL)\n  - numéros, passerelles SIP, statistiques, Smart Record\n  - sites du trunk : attacher / retirer, lire, lister, modifier\n\nSécurité voix\n  - profils de restriction\n  - limiteur d'appels sortants\n  - filtrage des appels entrants (listes, exceptions horaires)"
+    },
+    {
+      "title": "14. Fonctionnalités : téléphonie hébergée",
+      "content": "Groupes d'interception (call pickup) : CRUD + membres\n\nComptes voix\n  - cycle de vie : créer (en masse), lire, lister, modifier, supprimer\n  - postes : assigner, lister, désassigner\n  - touches de fonction\n  - diagnostic : messages de statut, statut VoIP\n  - intégrations : Mondago, Webex, Doko (config + QR code)\n  - réglages : avancés, sécurité, politiques d'appel, nomade, PIN, mot de passe SIP\n  - messagerie vocale, forfaits, enregistrement\n  - renvois : direct, occupé, non-réponse, non-connexion, programmé, sonnerie simultanée\n\nLookups : forfaits dispo, numéros abrégés, résumé (comptes, softphones, téléphones)"
+    },
+    {
+      "title": "15. Fonctionnalités : stock, contrats, équipements, transverse",
+      "content": "Stock : lister, vérifier la purge, déplacer des ressources dans la hiérarchie\nResource Order : commander des ressources\n\nContrats\n  - lire, modifier, articles (CRUD), sites / organisations concernés\n  - pièces jointes via URL S3 présignées, contact externe\n\nConfiguration des équipements\n  - téléphones, DECT (combinés, satellites), routeurs (ACS / CWMP)\n  - formulaire de config (lire / soumettre), inventaire, changer de modèle\n  - publier, redémarrer, suspendre, actions en masse + suivi des jobs\n\nAutres : journal d'appels, Smart Records, annuaire, numéros de téléphone\n\nTransverse : recherche globale, consommation, audit logs (qui / quoi / quand / où), produits"
     }
   ]
 }
