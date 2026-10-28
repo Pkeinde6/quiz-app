@@ -1,0 +1,176 @@
+{
+  "title": "Netwo : Portabilité",
+  "minimum_score": 9,
+  "success_message": "Bravo ! Tu maîtrises le module Netwo Portabilité.",
+  "failure_message": "Relis le cours Netwo Portabilité et réessaie.",
+  "questions": [
+    {
+      "question": "Que signifie RIO ?",
+      "choices": [
+        "Relevé d'Identité Opérateur",
+        "Réseau IP Opérateur",
+        "Routage International Ouvert",
+        "Référence d'Installation Optique"
+      ],
+      "correct_answer": "Relevé d'Identité Opérateur",
+      "hint": "Particuliers / petites entreprises.",
+      "accept": [
+        "Relevé d'Identité Opérateur"
+      ]
+    },
+    {
+      "question": "Portabilité « Total » :",
+      "choices": [
+        "Le NDI et toutes ses SDA",
+        "Une partie des SDA sans la tête",
+        "Un seul numéro mobile",
+        "Seulement le NDI"
+      ],
+      "correct_answer": "Le NDI et toutes ses SDA",
+      "hint": "Liste exacte obligatoire.",
+      "accept": [
+        "Le NDI et toutes ses SDA"
+      ]
+    },
+    {
+      "question": "Portabilité partielle SANS la tête de ligne :",
+      "choices": [
+        "Partial",
+        "PartialComplex",
+        "Total",
+        "Simple"
+      ],
+      "correct_answer": "Partial",
+      "hint": "Une SDA sert de NDI.",
+      "accept": [
+        "Partial"
+      ]
+    },
+    {
+      "question": "Délai minimum d'une portabilité ?",
+      "choices": [
+        "6 jours ouvrés",
+        "24 heures",
+        "30 jours",
+        "90 jours"
+      ],
+      "correct_answer": "6 jours ouvrés",
+      "hint": "En général ~7.",
+      "accept": [
+        "6 jours ouvrés"
+      ]
+    },
+    {
+      "question": "Au-delà de combien de jours la commande est annulée ?",
+      "choices": [
+        "90 jours",
+        "30 jours",
+        "6 jours",
+        "1 an"
+      ],
+      "correct_answer": "90 jours",
+      "hint": "Par l'APNF.",
+      "accept": [
+        "90 jours"
+      ]
+    },
+    {
+      "question": "Quand faire une fiabilisation ?",
+      "choices": [
+        "Si la liste des SDA est inconnue, incertaine, ou après un rejet",
+        "Toujours",
+        "Jamais",
+        "Seulement pour les mobiles"
+      ],
+      "correct_answer": "Si la liste des SDA est inconnue, incertaine, ou après un rejet",
+      "hint": "reliability-check.",
+      "accept": [
+        "Si la liste des SDA est inconnue, incertaine, ou après un rejet"
+      ]
+    },
+    {
+      "question": "Champs obligatoires d'une fiabilisation ?",
+      "choices": [
+        "idn et customer",
+        "cart_id et lines",
+        "wanted_date",
+        "rio"
+      ],
+      "correct_answer": "idn et customer",
+      "hint": "POST /portability/reliability-check.",
+      "accept": [
+        "idn et customer"
+      ]
+    },
+    {
+      "question": "Décaler une portabilité entrante :",
+      "choices": [
+        "POST /portability/order/{id}/delay",
+        "DELETE /portability/order/{id}",
+        "PATCH /orders/{id}",
+        "POST /cart"
+      ],
+      "correct_answer": "POST /portability/order/{id}/delay",
+      "hint": "wanted_date*.",
+      "accept": [
+        "POST /portability/order/{id}/delay"
+      ]
+    },
+    {
+      "question": "Quelles sortantes sont gérées automatiquement ?",
+      "choices": [
+        "Les PSG (Demport, Deporsub, Restit)",
+        "Toutes",
+        "Aucune",
+        "Seulement les mobiles"
+      ],
+      "correct_answer": "Les PSG (Demport, Deporsub, Restit)",
+      "hint": "Les autres : F126.",
+      "accept": [
+        "Les PSG (Demport, Deporsub, Restit)"
+      ]
+    },
+    {
+      "question": "Comment répondre à l'étude d'une sortante ?",
+      "choices": [
+        "POST /portability/outgoing/{id}/cri",
+        "POST /portability/outgoing/{id}/cr",
+        "DELETE /portability/order/{id}",
+        "PATCH /service/{id}"
+      ],
+      "correct_answer": "POST /portability/outgoing/{id}/cri",
+      "hint": "CRI = compte rendu d'étude.",
+      "accept": [
+        "POST /portability/outgoing/{id}/cri"
+      ]
+    },
+    {
+      "question": "Que faire à la réception d'une RESTIT ?",
+      "choices": [
+        "Envoyer un CR pour confirmer",
+        "Rien",
+        "Annuler la commande",
+        "Créer un panier"
+      ],
+      "correct_answer": "Envoyer un CR pour confirmer",
+      "hint": "Restitution.",
+      "accept": [
+        "Envoyer un CR pour confirmer"
+      ]
+    },
+    {
+      "question": "Le préfixe de portabilité se trouve avec…",
+      "choices": [
+        "GET /service?product_category[]=prefix_hosting",
+        "GET /imb/list",
+        "GET /orders",
+        "GET /cart"
+      ],
+      "correct_answer": "GET /service?product_category[]=prefix_hosting",
+      "hint": "service_id.",
+      "accept": [
+        "GET /service?product_category[]=prefix_hosting"
+      ]
+    }
+  ]
+}

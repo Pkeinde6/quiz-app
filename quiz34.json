@@ -1,0 +1,148 @@
+{
+  "title": "Netwo : Éligibilité & IMB",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Netwo Éligibilité & IMB.",
+  "failure_message": "Relis le cours Netwo Éligibilité & IMB et réessaie.",
+  "questions": [
+    {
+      "question": "Que renvoie POST /eligibility ?",
+      "choices": [
+        "Un eligibility_id pour lire les résultats ensuite",
+        "Directement toutes les offres",
+        "Un panier",
+        "Une commande"
+      ],
+      "correct_answer": "Un eligibility_id pour lire les résultats ensuite",
+      "hint": "Traitement asynchrone.",
+      "accept": [
+        "Un eligibility_id pour lire les résultats ensuite"
+      ]
+    },
+    {
+      "question": "À quoi sert POST /eligibility/geocode-input ?",
+      "choices": [
+        "Valider la saisie et la signer (value + signature)",
+        "Commander",
+        "Lister les IMB",
+        "Créer un webhook"
+      ],
+      "correct_answer": "Valider la saisie et la signer (value + signature)",
+      "hint": "La signature est requise ensuite.",
+      "accept": [
+        "Valider la saisie et la signer (value + signature)"
+      ]
+    },
+    {
+      "question": "Champs obligatoires de POST /eligibility ?",
+      "choices": [
+        "market, value, signature",
+        "cart_id, lines",
+        "lat, lng",
+        "idn, customer"
+      ],
+      "correct_answer": "market, value, signature",
+      "hint": "Avec * dans la référence.",
+      "accept": [
+        "market, value, signature"
+      ]
+    },
+    {
+      "question": "Comment savoir si l'éligibilité est terminée ?",
+      "choices": [
+        "GET /eligibility/{id}/status",
+        "GET /orders",
+        "POST /eligibility",
+        "GET /imb/closest"
+      ],
+      "correct_answer": "GET /eligibility/{id}/status",
+      "hint": "Statut.",
+      "accept": [
+        "GET /eligibility/{id}/status"
+      ]
+    },
+    {
+      "question": "Trier les offres par prix mensuel croissant :",
+      "choices": [
+        "sort_by=recurring_price.asc",
+        "sort=price",
+        "order_by=recurring_price",
+        "price=asc"
+      ],
+      "correct_answer": "sort_by=recurring_price.asc",
+      "hint": "Convention de tri.",
+      "accept": [
+        "sort_by=recurring_price.asc"
+      ]
+    },
+    {
+      "question": "Que renvoie POST /eligibility/list-ndi ?",
+      "choices": [
+        "Les NDI (numéros de ligne) liés à l'adresse validée",
+        "Les commandes",
+        "Les factures",
+        "Les webhooks"
+      ],
+      "correct_answer": "Les NDI (numéros de ligne) liés à l'adresse validée",
+      "hint": "query_type requis.",
+      "accept": [
+        "Les NDI (numéros de ligne) liés à l'adresse validée"
+      ]
+    },
+    {
+      "question": "Qu'est-ce qu'un IMB ?",
+      "choices": [
+        "L'identifiant d'un immeuble dans les bases fibre",
+        "Un type de commande",
+        "Une clé d'API",
+        "Un ticket"
+      ],
+      "correct_answer": "L'identifiant d'un immeuble dans les bases fibre",
+      "hint": "Référence immeuble.",
+      "accept": [
+        "L'identifiant d'un immeuble dans les bases fibre"
+      ]
+    },
+    {
+      "question": "Trouver l'immeuble le plus proche d'un point :",
+      "choices": [
+        "GET /imb/closest?lat=…&lng=…",
+        "GET /imb/list",
+        "POST /eligibility",
+        "GET /imb/{ref}"
+      ],
+      "correct_answer": "GET /imb/closest?lat=…&lng=…",
+      "hint": "Coordonnées.",
+      "accept": [
+        "GET /imb/closest?lat=…&lng=…"
+      ]
+    },
+    {
+      "question": "Statut d'un immeuble raccordable ?",
+      "choices": [
+        "Connectable",
+        "Target",
+        "Abandoned",
+        "Signed"
+      ],
+      "correct_answer": "Connectable",
+      "hint": "IMBStatus.",
+      "accept": [
+        "Connectable"
+      ]
+    },
+    {
+      "question": "Valeurs possibles de offer_type ?",
+      "choices": [
+        "enterprise, professional",
+        "fiber, copper",
+        "owned, provider",
+        "test, prod"
+      ],
+      "correct_answer": "enterprise, professional",
+      "hint": "OfferType.",
+      "accept": [
+        "enterprise, professional"
+      ]
+    }
+  ]
+}

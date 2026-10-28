@@ -1,0 +1,162 @@
+{
+  "title": "Netwo : Les bases de l'API",
+  "minimum_score": 8,
+  "success_message": "Bravo ! Tu maîtrises le module Netwo Les bases de l'API.",
+  "failure_message": "Relis le cours Netwo Les bases de l'API et réessaie.",
+  "questions": [
+    {
+      "question": "Quel type d'API est Netwo ?",
+      "choices": [
+        "REST (une URL par ressource, JSON)",
+        "GraphQL",
+        "SOAP",
+        "gRPC"
+      ],
+      "correct_answer": "REST (une URL par ressource, JSON)",
+      "hint": "Contrairement à Sophia.",
+      "accept": [
+        "REST (une URL par ressource, JSON)"
+      ]
+    },
+    {
+      "question": "URL de base de l'API Netwo ?",
+      "choices": [
+        "https://api.netwo.io/api/v1/",
+        "https://netwo.io/graphql",
+        "http://api.netwo.io/",
+        "https://developer.netwo.io/api"
+      ],
+      "correct_answer": "https://api.netwo.io/api/v1/",
+      "hint": "HTTPS obligatoire.",
+      "accept": [
+        "https://api.netwo.io/api/v1/"
+      ]
+    },
+    {
+      "question": "Quel en-tête porte la clé d'API ?",
+      "choices": [
+        "x-api-key",
+        "Authorization: Bearer",
+        "api-token",
+        "x-netwo-key"
+      ],
+      "correct_answer": "x-api-key",
+      "hint": "Pas de JWT ici.",
+      "accept": [
+        "x-api-key"
+      ]
+    },
+    {
+      "question": "À quoi sert x-actor-slug ?",
+      "choices": [
+        "Indiquer l'acteur (tenant) au nom duquel on agit",
+        "Choisir la langue",
+        "Activer le mode test",
+        "Paginer"
+      ],
+      "correct_answer": "Indiquer l'acteur (tenant) au nom duquel on agit",
+      "hint": "Une clé peut couvrir plusieurs acteurs.",
+      "accept": [
+        "Indiquer l'acteur (tenant) au nom duquel on agit"
+      ]
+    },
+    {
+      "question": "Comment utiliser le mode test ?",
+      "choices": [
+        "Clé de test + en-tête x-realm: test",
+        "Ajouter ?test=true",
+        "Utiliser HTTP",
+        "Rien, tout est test"
+      ],
+      "correct_answer": "Clé de test + en-tête x-realm: test",
+      "hint": "Ne touche pas la production.",
+      "accept": [
+        "Clé de test + en-tête x-realm: test"
+      ]
+    },
+    {
+      "question": "Filtrer amount >= 10 :",
+      "choices": [
+        "?amount=10.gte",
+        "?amount>=10",
+        "?amount_min=10",
+        "?filter=amount:10"
+      ],
+      "correct_answer": "?amount=10.gte",
+      "hint": "Suffixe gte.",
+      "accept": [
+        "?amount=10.gte"
+      ]
+    },
+    {
+      "question": "Trier par débit décroissant :",
+      "choices": [
+        "?sort_by=debit.desc",
+        "?order=-debit",
+        "?sort=debit&dir=down",
+        "?debit=desc"
+      ],
+      "correct_answer": "?sort_by=debit.desc",
+      "hint": "attribut.asc|desc.",
+      "accept": [
+        "?sort_by=debit.desc"
+      ]
+    },
+    {
+      "question": "Passer deux valeurs pour infrastructure_type :",
+      "choices": [
+        "?infrastructure_type[]=ftto&infrastructure_type[]=sdsl",
+        "?infrastructure_type=ftto,sdsl",
+        "?infrastructure_type=[ftto,sdsl]",
+        "Impossible"
+      ],
+      "correct_answer": "?infrastructure_type[]=ftto&infrastructure_type[]=sdsl",
+      "hint": "Crochets répétés.",
+      "accept": [
+        "?infrastructure_type[]=ftto&infrastructure_type[]=sdsl"
+      ]
+    },
+    {
+      "question": "Limite courante du nombre d'appels ?",
+      "choices": [
+        "200 par minute et 5000 par jour",
+        "10 par seconde",
+        "Illimité",
+        "1000 par heure"
+      ],
+      "correct_answer": "200 par minute et 5000 par jour",
+      "hint": "x-ratelimit-*.",
+      "accept": [
+        "200 par minute et 5000 par jour"
+      ]
+    },
+    {
+      "question": "Code renvoyé par un POST réussi ?",
+      "choices": [
+        "201",
+        "200",
+        "204",
+        "202"
+      ],
+      "correct_answer": "201",
+      "hint": "Entité créée.",
+      "accept": [
+        "201"
+      ]
+    },
+    {
+      "question": "Code si tu n'as pas le droit de faire l'action ?",
+      "choices": [
+        "403",
+        "401",
+        "404",
+        "500"
+      ],
+      "correct_answer": "403",
+      "hint": "401 = non connecté.",
+      "accept": [
+        "403"
+      ]
+    }
+  ]
+}

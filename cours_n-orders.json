@@ -1,0 +1,26 @@
+{
+  "icon": "🛒",
+  "title": "Netwo : Panier & commandes",
+  "sections": [
+    {
+      "title": "Le parcours d'achat",
+      "content": "Comme sur un site marchand :\n  1) trouver le produit dans le catalogue (marketplace)\n  2) créer un PANIER (cart) avec des lignes\n  3) lire les lignes du panier (cart lines)\n  4) créer la COMMANDE (order) à partir du panier\n  5) suivre les lignes de commande (order lines) et leurs statuts\n\nLe product_id reste STABLE dans le temps, même si la version\ndu catalogue (contrat) change."
+    },
+    {
+      "title": "Catalogue (marketplace)",
+      "content": "GET /contract/marketplace/products?categories[]=mobile_data&seller_type=providers\n  → produits que TU peux commander (seller_type obligatoire)\nGET /contract/marketplace          contrats (catalogues) disponibles\n  filtres : target_market (service_operator | general_availability), search…\nGET /contract/marketplace/connections   connexions disponibles\nGET /contract/product/{contract_version_product_id}   un produit dans une version de catalogue"
+    },
+    {
+      "title": "Le panier (cart)",
+      "content": "POST /cart\nbody : lines*, context*, name, description\n→ renvoie un cart_id\n\nGET    /cart                       mes paniers (status, cart_type, search, limit, offset)\nGET    /cart/{cart_id}             contenu\nPATCH  /cart/{cart_id}             modifier\nDELETE /cart/{cart_id}             supprimer (et tout ce qui y est lié)\n\nLignes :\nGET    /cart/{cart_id}/lines       lister les lignes\nPOST   /cart/{cart_id}/lines       ajouter une ligne (entity*, discount)\nPUT    /cart/{cart_id}/lines       REMPLACER toutes les lignes\nPUT    /cart/lines/{line_id}       modifier une ligne\nDELETE /cart/lines/{line_id}       supprimer une ligne\nGET    /cart/lines/{line_id}/vertical   bâtiment, escalier, étage, OTP (fibre)\n\nStatut d'un panier : draft → validated"
+    },
+    {
+      "title": "La commande (order)",
+      "content": "POST /orders\nbody : { \"cart_id\": \"...\", \"lines\": [ ... ] }   (les deux obligatoires)\n→ 201 + order_id\n\nGET /orders                        mes commandes (status, order_type, order_ids…)\nGET /orders/{order_id}             détail\nGET /orders/{order_id}/lines       lignes d'une commande\nGET /orders/lines                  toutes les lignes (filtres nombreux)\nGET /orders/lines/{order_line_id}  détail d'une ligne\n\nStatuts d'une commande :\ncreated → transmitted → confirmed → deploying → terminated   (ou cancelled)\nStatuts d'une ligne, en plus :\nreviewing scheduled completed cancel_requested delay_requested rejected"
+    },
+    {
+      "title": "Agir sur une ligne de commande",
+      "content": "POST /orders/lines/{order_line_id}/transitions\nbody : { \"transition\": ... }      appliquer une transition (ex : annuler, décaler)\n\nPOST /orders/lines/{order_line_id}/reference\nbody : { \"reference\": \"CMD-2026-042\" }\n→ ta propre référence (unique), pour retrouver la ligne dans ton outil\n\nMessagerie avec le fournisseur :\nPOST /orders/lines/{order_line_id}/messaging\nbody : message*, file_ids, propagate\nGET  /orders/lines/{order_line_id}/messaging    (since, kind)\n\nPièces jointes : POST /file → file_id (temporaire tant qu'il n'est pas rattaché)"
+    }
+  ]
+}

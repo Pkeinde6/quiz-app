@@ -1,0 +1,22 @@
+{
+  "icon": "🔔",
+  "title": "Netwo : Notifications & webhooks",
+  "sections": [
+    {
+      "title": "Le principe",
+      "content": "Au lieu d'interroger l'API en boucle (\"polling\"), Netwo t'APPELLE\nquand quelque chose change : c'est un WEBHOOK.\n\nTu donnes une URL de ton serveur ; Netwo y envoie un POST JSON\nà chaque événement du type choisi.\n\nTon serveur ← POST https://mon-serveur.fr/netwo/hook ← Netwo\n               { \"type\": \"order_line_updated\", \"object_id\": \"...\", ... }"
+    },
+    {
+      "title": "Gérer ses webhooks",
+      "content": "POST   /notification/webhook          créer : notification_type*, url*, description\nGET    /notification/webhook          lister\nPATCH  /notification/webhook/{id}     modifier : url*, description\nDELETE /notification/webhook/{id}     supprimer\n\nEn-têtes envoyés avec chaque appel (ex : un secret pour authentifier Netwo) :\nPOST   /notification/webhook/{id}               ajouter : key*, value*\nGET    /notification/webhook/{id}               lister les en-têtes\nPATCH  /notification/webhook/{id}/{header_id}   modifier : value*\nDELETE /notification/webhook/{id}/{header_id}   retirer"
+    },
+    {
+      "title": "Les types d'événements",
+      "content": "Commandes :\n  order_line_created  order_line_updated\n  order_line_message_created  order_line_message_pending\nRendez-vous technicien :\n  appointment_created  appointment_selected  appointment_rescheduled\nTickets :\n  signalization_created  signalization_updated\n  signalization_messaging_created  signalization_message_pending\nChangements de service :\n  ServiceChangeCreated / Approved / Refused / Processing / Completed / Cancelled…\nClients : customer_record_created  customer_record_updated\nMobile : MobileSubscriptionStatusChanged, ligne entrée dans un autre pays\nFixe : connexion down / connexion up (object_id = id du service)\nPortabilité sortante : OutgoingPortabilityApnfCommandReceived,\n                       OutgoingPortabilityFeedbackCriRequested\nConso : consumption"
+    },
+    {
+      "title": "Bonnes pratiques",
+      "content": "Réponds VITE avec un code 2xx, puis traite en arrière-plan.\nAjoute un en-tête secret (POST /notification/webhook/{id}) et vérifie-le à la réception.\nUn webhook ne contient souvent que des identifiants (object_id, sub_object_id) :\n  rappelle l'API pour obtenir le détail, ex :\nGET /orders/lines/{order_line_id}\nExemple d'usage : OutgoingPortabilityFeedbackCriRequested → tu dois envoyer un CRI."
+    }
+  ]
+}
