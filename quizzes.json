@@ -188,6 +188,23 @@
       ]
     },
     {
+      "id": "trunks",
+      "name": "Sophia : Trunks SIP",
+      "icon": "☎️",
+      "color": "#e8f5e9",
+      "borderColor": "#00853F",
+      "courseFile": "cours_trunks.json",
+      "quizzes": [
+        {
+          "id": "quiz22",
+          "file": "quiz22.json",
+          "title": "createTrunk & gestion",
+          "icon": "☎️",
+          "questions": 20
+        }
+      ]
+    },
+    {
       "id": "windows",
       "name": "Windows Server",
       "icon": "🖥️",

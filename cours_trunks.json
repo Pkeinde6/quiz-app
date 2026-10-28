@@ -1,0 +1,66 @@
+{
+  "icon": "☎️",
+  "title": "Sophia : Trunks SIP",
+  "sections": [
+    {
+      "title": "C'est quoi un trunk SIP ?",
+      "content": "Une entreprise a DÉJÀ son propre standard (IPBX : 3CX, Asterisk…) ou Microsoft Teams.\nLe trunk SIP = le \"tuyau\" Internet qui relie ce standard au réseau téléphonique.\n\n  [Standard du client] ══ trunk SIP ══ [Sewan] ── réseau téléphonique mondial\n\nVocabulaire :\n  canal (channel)  = 1 appel simultané possible. 30 canaux = 30 appels en même temps\n  PAI              = P-Asserted-Identity : le numéro présenté par défaut quand on appelle\n  trunk site       = un site du client branché sur le trunk (un trunk peut en avoir plusieurs)\n  passerelle SIP   = boîtier qui convertit l'analogique (vieux téléphones, fax) en IP\n  Teams PBX        = trunk pour Microsoft Teams au lieu d'un standard classique\n\nDomaine GraphQL : trunk { ... }"
+    },
+    {
+      "title": "Avant createTrunk : les prérequis",
+      "content": "L'organisation doit avoir :\n  ✔ au moins un Site\n  ✔ au moins un numéro national disponible en stock\n\nRequêtes à faire AVANT de créer :\n\n1) Le nom est-il libre ?\n   validateName(organizationId, name)\n\n2) Quels numéros puis-je utiliser ?\n   getNumberList(organizationId, sites: [siteId])     → numéros d'un ou plusieurs sites\n   (ou listStockResources au niveau organisation, type \"did\", statut \"inactive\")\n\n3) Quel abonnement ?\n   getTrunkPlans(targetId: <orgId>, planType)         → forfaits disponibles\n   getTrunkNoPlanChannels(targetId: <orgId>)          → canaux possibles en pay-as-you-go\n   ⚠ targetId = l'ORGANISATION, pas le trunk\n\n4) Des passerelles SIP ? (optionnel)\n   getAllGatewayStockResources(organizationId)        → passerelles en stock, statut inactive"
+    },
+    {
+      "title": "createTrunk : les paramètres",
+      "content": "mutation createTrunk($trunk: TrunkCreate!) {\n  trunk { createTrunk(trunk: $trunk) { trunkId } }\n}\n\ninput TrunkCreate {\n  name: String!               nom unique dans l'organisation\n  organizationId: UUID!       le client\n  siteAddressId: UUID!        adresse du site principal\n  hostingEnvironmentId: UUID  cluster (sinon cluster par défaut)\n  planId: UUID                forfait — null = pay-as-you-go\n  channels: Int               total d'appels simultanés du trunk\n  pai: String!                numéro présenté (+33123456789)\n  gatewayIds: [UUID]          passerelles SIP (optionnel)\n  teamsPBX: Boolean!          true = Microsoft Teams, false = standard classique\n  sites: [TrunkSiteCreate]!   au moins 1 site\n}\n\ninput TrunkSiteCreate {\n  siteId: UUID!\n  channels: Int!              canaux de CE site (≥ 1)\n  numbersId: [UUID]!          au moins 1 numéro\n}\n\nRéponse : { trunkId } seulement → ensuite getTrunk(trunkId) pour les détails."
+    },
+    {
+      "title": "createTrunk : les règles métier",
+      "content": "✔ Au moins 1 site, et chaque site a au moins 1 numéro\n✔ channels ≥ 1 au niveau trunk ET au niveau site\n✔ Les numéros ne doivent pas déjà être utilisés par un autre trunk\n✔ Le PAI doit être un numéro valide\n✔ Le nom est unique dans l'organisation\n\nCanaux :\n  trunk = le MAXIMUM global d'appels simultanés\n  site  = la capacité de chaque site\n  La somme des sites PEUT dépasser le total du trunk (pour s'adapter aux besoins),\n  mais alors certains sites peuvent rater des appels aux heures de pointe.\n  Exemple : trunk 30 canaux, Paris 20 + Marseille 15 = 35 → autorisé, mais limite à 30.\n\nPays :\n  Le PREMIER site choisi fixe le pays du trunk.\n  Ensuite, impossible d'ajouter un site d'un autre pays.\n  Paris en premier → Marseille OK, Madrid refusé.\n\nPlan :\n  planId = un forfait → \"channels\" doit correspondre au forfait\n  planId = null       → pay-as-you-go (payé à l'usage)"
+    },
+    {
+      "title": "Exemples de createTrunk",
+      "content": "1) Forfait, 2 sites, 30 canaux, avec passerelles\n{ \"trunk\": {\n  \"name\": \"Paris Office Trunk\",\n  \"organizationId\": \"b2c3…\", \"siteAddressId\": \"c3d4…\",\n  \"planId\": \"f9e8…\", \"channels\": 30, \"pai\": \"+33123456789\",\n  \"gatewayIds\": [\"0b6c…\", \"37f2…\"], \"teamsPBX\": false,\n  \"sites\": [\n    { \"siteId\": \"e5f6…\", \"channels\": 15, \"numbersId\": [\"f6a7…\", \"a7b8…\"] },\n    { \"siteId\": \"c9d0…\", \"channels\": 15, \"numbersId\": [\"d0e1…\"] } ] } }\n\n2) Pay-as-you-go : \"planId\": null, \"channels\": 10\n\n3) Microsoft Teams : \"teamsPBX\": true\n   (réglages Teams spécifiques : sous-domaine + enregistrement DNS TXT)"
+    },
+    {
+      "title": "Le cycle de vie (statuts)",
+      "content": "createTrunk\n   │\n   ▼\nCREATION_IN_PROGRESS ──échec──▶ CREATION_FAILED ──deleteTrunk──▶ supprimé\n   │ ok\n   ▼\nACTIVE ◀──reactivateTrunk── SUSPENDED\n   │  ──suspendTrunk──────▶\n   │\n   ├─ updateTrunk / updateTrunkSite ─▶ MODIFICATION_IN_PROGRESS ─▶ ACTIVE\n   │\n   └─ terminateTrunk ─▶ TERMINATION_IN_PROGRESS ─▶ TERMINATED\n\nStatuts des NUMÉROS sur un site :\n  ROUTING   → en cours de branchement\n  ROUTED    → branché, fonctionne\n  UNROUTING → en cours de retrait\n  REROUTING → en cours de déplacement\n\nLe champ messages[] de getTrunk contient les alertes / erreurs du provisioning."
+    },
+    {
+      "title": "Lire : getTrunk, listTrunks, statistiques",
+      "content": "getTrunk(trunkId)\n  → trunkId name status channels pai teamsPBX country\n    planSubscription { planId planType }   (null si pay-as-you-go)\n    sites { trunkSiteId siteId channels status numbers { number status } }\n    messages { code debugMessage }\n  Si TERMINATED : country et pai = null, sites et messages = []\n\nlistTrunks(organizationId, pagination, filters, sortFields)\n  → trunks du client ET de ses sous-organisations (récursif)\n  filtres possibles : statuses: [TrunkStatus], ...\n\ngetTrunkStatisticsUrl(trunkId)\n  → une URL vers le tableau de statistiques du trunk\n\nTypes de forfait (planType) :\n  NATIONAL_UNLIMITED       illimité vers un pays\n  INTERNATIONAL_UNLIMITED  illimité international\n  CUSTOM                   sur mesure\n  NO_PLAN                  pay-as-you-go"
+    },
+    {
+      "title": "Modifier : updateTrunk et les forfaits",
+      "content": "updateTrunk(trunk: TrunkUpdate!)\ninput TrunkUpdate {\n  trunkId: UUID!\n  name: String        renommer\n  channels: Int       changer le nombre de canaux\n  planId: UUID        changer de forfait (null = passer en pay-as-you-go)\n  pai: String         changer le numéro présenté\n}\n\nUpgrade ou downgrade ? Le système décide selon le type de forfait et les canaux :\n  ✅ UPGRADE (plus de valeur)   → appliqué IMMÉDIATEMENT\n  ⏳ DOWNGRADE (moins de valeur) → programmé au 1er du MOIS SUIVANT\n\ncancelScheduledSubscriptionChange(trunkId)\n  → annule un downgrade programmé (immédiat, irréversible)"
+    },
+    {
+      "title": "Suspendre, résilier, supprimer",
+      "content": "suspendTrunk(trunkId)\n  → statut SUSPENDED : plus aucun appel entrant ni sortant (ex : impayé)\nreactivateTrunk(trunkId)\n  → SUSPENDED → ACTIVE (le trunk doit être SUSPENDED)\n\nterminateTrunk(trunkId)\n  → résiliation définitive : libère numéros et passerelles\n  → TERMINATION_IN_PROGRESS puis TERMINATED (asynchrone)\n\ndeleteTrunk(trunkId)\n  → UNIQUEMENT pour un trunk en CREATION_FAILED (nettoyage après échec)\n  → sur tout autre statut : erreur\n\nÀ retenir :\n  suspendre = pause      résilier = fin du contrat      supprimer = effacer un échec"
+    },
+    {
+      "title": "Les sites du trunk",
+      "content": "addTrunkSite(trunkSite: TrunkSiteAdd!)       brancher un site de plus (même pays !)\nupdateTrunkSite(trunkSite: TrunkSiteUpdate!) changer canaux / numéros d'un site\n   numéros retirés → UNROUTING, ajoutés → ROUTING puis ROUTED\n   site → MODIFICATION_IN_PROGRESS pendant le provisioning\ndeleteTrunkSite(trunkSiteId)                  débrancher un site\n\ngetTrunkSite(trunkSiteId)                     détail d'un site du trunk\nlistTrunkSites(siteId, pagination)            trunks branchés sur un site\n\nRéglages par site :\ngetTrunkSiteSettings(trunkSiteId)\nupdateTrunkSiteSettings(trunkSiteId, siteSettings)\n  numéro affiché : mode NUMBER (+ numéro E164) ou TRANSPARENT (numéro d'origine)"
+    },
+    {
+      "title": "Paramètres généraux",
+      "content": "getTrunkGeneralSettings(trunkId)\nupdateGeneralSettings(trunkId, generalSettings)\n\nTrunk classique (generic PBX) :\n  Format des numéros entrants : INT (+33…), FR (01…), FR9 (format national réduit)\n  Numéro dans la Request-URI SIP : oui / non\n  Codecs avancés :\n    forceG711Codec          forcer le codec G711 (qualité standard, compatible partout)\n    bypassMedia             séparer l'audio de la signalisation\n    vtrunkCompatibilityMode identification des sites : NDI ou NDS\n  Distribution des appels entrants :\n    STATIC  → liste d'équipements (IP / domaine + port + protocole)\n    DYNAMIC → load balancing + mode de login ALTERNATIVE ou FALLBACK\n\nTrunk Teams :\n  seulement le sous-domaine Teams et l'enregistrement DNS TXT"
+    },
+    {
+      "title": "Sécurité du trunk",
+      "content": "getTrunkSecuritySettings(trunkId)\nupdateSecuritySettings(trunkId, securitySettings)\n\nAuthentification (trunk classique) :\n  method = LOGIN_PASSWORD  → le standard se connecte avec login / mot de passe\n  method = IPADDRESS       → seules les IP listées dans ipAddresses sont acceptées\n  Lecture seule : domain, login, trunkSitesLogin, sipServerAccesses (FQDN, IPv4/IPv6)\n\nACL (qui a le droit de se connecter) :\n  authentication → déduite automatiquement des IP d'authentification\n  custom         → IP ajoutées à la main\n\nAnti-fraude (trunk classique ET Teams) :\n  restrictionProfileId          interdire des destinations (international, surtaxés…)\n  outgoingCallLimiterProfileId  limiter les appels sortants simultanés"
+    },
+    {
+      "title": "Renvois d'appel",
+      "content": "getTrunkCallForwarding(trunkId)\nupdateCallForwarding(trunkId, callForwarding: [TrunkCallForwardingRuleInput]!)\n\nTypes de règles :\n  DIRECT            tout renvoyer vers un numéro\n  NO_ANSWER         si pas de réponse après afterSeconds\n  NO_CONNECTION     si le standard est injoignable (panne, coupure)\n  SIMULTANEOUS_CALL faire sonner un autre téléphone en même temps\n                    (seulement sur un numéro précis)\n\nPortée (assigned) :\n  TRUNK         → règle pour tout le trunk (phoneNumber vide)\n  PHONE_NUMBER  → règle pour un numéro du trunk (phoneNumber obligatoire)\n\ntransferTo  = numéro de destination au format international\nafterSeconds obligatoire pour NO_ANSWER et SIMULTANEOUS_CALL\nUne règle peut être SUSPENDUE sans perdre sa configuration.\n\nExemple : standard en panne → NO_CONNECTION vers le mobile du gérant."
+    },
+    {
+      "title": "Smart Record (enregistrement)",
+      "content": "getSmartRecord(trunkId)             (seul endroit où on voit unitPrice)\nupdateSmartRecord(trunkId, input)   mise à jour partielle : champs omis = inchangés\ncancelScheduledSmartRecordChange(trunkId)\n\nOptions : enabled, channels, scope (tous les numéros / SELECTED_NUMBERS + numbers),\n          triggerMode, direction, notifyParticipants\n\nRègles de timing :\n  Désactiver (enabled: false) → DEACTIVATION programmée au DERNIER jour du mois\n  Baisser les canaux          → CHANNEL_DOWNGRADE au 1er du mois suivant\n  Augmenter les canaux        → immédiat"
+    },
+    {
+      "title": "Récap : toutes les opérations",
+      "content": "LECTURE (query)                       ÉCRITURE (mutation)\nvalidateName                          createTrunk\ngetTrunkPlans                         updateTrunk\ngetTrunkNoPlanChannels                cancelScheduledSubscriptionChange\ngetNumberList                         suspendTrunk / reactivateTrunk\ngetAllGatewayStockResources           terminateTrunk\ngetTrunk                              deleteTrunk (CREATION_FAILED)\nlistTrunks                            addTrunkSite / updateTrunkSite / deleteTrunkSite\ngetTrunkStatisticsUrl                 updateTrunkSiteSettings\ngetTrunkSite / listTrunkSites         updateGeneralSettings\ngetTrunkSiteSettings                  updateSecuritySettings\ngetTrunkGeneralSettings               updateCallForwarding\ngetTrunkSecuritySettings              updateSmartRecord\ngetTrunkCallForwarding                cancelScheduledSmartRecordChange\ngetSmartRecord\n\nParcours type :\nvalidateName → getNumberList → getTrunkPlans → createTrunk → getTrunk (jusqu'à ACTIVE)\n→ updateSecuritySettings → updateCallForwarding"
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "title": "Sophia : Trunks SIP",
+  "minimum_score": 14,
+  "success_message": "Bravo ! Tu sais créer et gérer un trunk SIP Sophia.",
+  "failure_message": "Relis le cours Trunks : prérequis, règles de createTrunk et cycle de vie.",
+  "questions": [
+    {
+      "question": "À quoi sert un trunk SIP ?",
+      "choices": [
+        "Relier le standard (IPBX ou Teams) d'une entreprise au réseau téléphonique via Internet",
+        "Créer une ligne mobile",
+        "Héberger une VM",
+        "Envoyer des SMS"
+      ],
+      "correct_answer": "Relier le standard (IPBX ou Teams) d'une entreprise au réseau téléphonique via Internet",
+      "hint": "Le client a déjà son standard.",
+      "accept": [
+        "Relier le standard (IPBX ou Teams) d'une entreprise au réseau téléphonique via Internet"
+      ]
+    },
+    {
+      "question": "Que représente un « canal » (channel) ?",
+      "choices": [
+        "Un appel simultané possible",
+        "Un numéro de téléphone",
+        "Un site",
+        "Une passerelle"
+      ],
+      "correct_answer": "Un appel simultané possible",
+      "hint": "30 canaux = 30 appels en même temps.",
+      "accept": [
+        "Un appel simultané possible"
+      ]
+    },
+    {
+      "question": "Que faut-il au minimum dans l'organisation avant createTrunk ?",
+      "choices": [
+        "Un site et un numéro national disponible en stock",
+        "Un compte Microsoft",
+        "Une ligne mobile",
+        "Rien"
+      ],
+      "correct_answer": "Un site et un numéro national disponible en stock",
+      "hint": "Voir la page Stock.",
+      "accept": [
+        "Un site et un numéro national disponible en stock"
+      ]
+    },
+    {
+      "question": "Quelle requête vérifie qu'un nom de trunk est libre ?",
+      "choices": [
+        "validateName",
+        "getTrunk",
+        "listTrunks",
+        "checkTrunk"
+      ],
+      "correct_answer": "validateName",
+      "hint": "Le nom est unique dans l'organisation.",
+      "accept": [
+        "validateName"
+      ]
+    },
+    {
+      "question": "Dans getTrunkPlans(targetId), que vaut targetId ?",
+      "choices": [
+        "L'UUID de l'organisation",
+        "L'UUID du trunk",
+        "L'UUID du site",
+        "Le numéro PAI"
+      ],
+      "correct_answer": "L'UUID de l'organisation",
+      "hint": "Piège classique de la doc.",
+      "accept": [
+        "L'UUID de l'organisation"
+      ]
+    },
+    {
+      "question": "Que se passe-t-il si planId = null ?",
+      "choices": [
+        "Le trunk fonctionne en pay-as-you-go",
+        "Erreur",
+        "Forfait illimité",
+        "Le trunk est suspendu"
+      ],
+      "correct_answer": "Le trunk fonctionne en pay-as-you-go",
+      "hint": "On paie à l'usage.",
+      "accept": [
+        "Le trunk fonctionne en pay-as-you-go"
+      ]
+    },
+    {
+      "question": "Que veut dire PAI ?",
+      "choices": [
+        "P-Asserted-Identity : le numéro présenté par défaut",
+        "Plan d'appel international",
+        "Passerelle analogique IP",
+        "Paiement à l'usage"
+      ],
+      "correct_answer": "P-Asserted-Identity : le numéro présenté par défaut",
+      "hint": "pai: \"+33123456789\"",
+      "accept": [
+        "P-Asserted-Identity : le numéro présenté par défaut"
+      ]
+    },
+    {
+      "question": "Que renvoie createTrunk ?",
+      "choices": [
+        "Seulement trunkId",
+        "Le trunk complet",
+        "Un booléen",
+        "La liste des sites"
+      ],
+      "correct_answer": "Seulement trunkId",
+      "hint": "Ensuite on appelle getTrunk.",
+      "accept": [
+        "Seulement trunkId"
+      ]
+    },
+    {
+      "question": "Statut d'un trunk juste après createTrunk ?",
+      "choices": [
+        "CREATION_IN_PROGRESS",
+        "ACTIVE",
+        "SUSPENDED",
+        "NO_PLAN"
+      ],
+      "correct_answer": "CREATION_IN_PROGRESS",
+      "hint": "Le provisioning est asynchrone.",
+      "accept": [
+        "CREATION_IN_PROGRESS"
+      ]
+    },
+    {
+      "question": "Trunk 30 canaux, sites à 20 + 15 canaux. C'est…",
+      "choices": [
+        "Autorisé, mais des appels peuvent être perdus aux pics",
+        "Refusé",
+        "Automatiquement passé à 35",
+        "Réparti à 15 + 15"
+      ],
+      "correct_answer": "Autorisé, mais des appels peuvent être perdus aux pics",
+      "hint": "Le trunk fixe le maximum global.",
+      "accept": [
+        "Autorisé, mais des appels peuvent être perdus aux pics"
+      ]
+    },
+    {
+      "question": "Premier site à Paris. Peut-on ajouter un site à Madrid ?",
+      "choices": [
+        "Non, le premier site fixe le pays du trunk",
+        "Oui toujours",
+        "Oui si teamsPBX",
+        "Oui avec un forfait international"
+      ],
+      "correct_answer": "Non, le premier site fixe le pays du trunk",
+      "hint": "Un seul pays par trunk.",
+      "accept": [
+        "Non, le premier site fixe le pays du trunk"
+      ]
+    },
+    {
+      "question": "Quand utiliser deleteTrunk ?",
+      "choices": [
+        "Uniquement sur un trunk en CREATION_FAILED",
+        "Pour résilier un trunk actif",
+        "Pour suspendre",
+        "Pour retirer un site"
+      ],
+      "correct_answer": "Uniquement sur un trunk en CREATION_FAILED",
+      "hint": "Sinon : terminateTrunk.",
+      "accept": [
+        "Uniquement sur un trunk en CREATION_FAILED"
+      ]
+    },
+    {
+      "question": "Différence entre suspendTrunk et terminateTrunk ?",
+      "choices": [
+        "Suspendre = pause réversible ; résilier = fin définitive qui libère numéros et passerelles",
+        "Aucune",
+        "Suspendre supprime le trunk",
+        "Résilier est réversible"
+      ],
+      "correct_answer": "Suspendre = pause réversible ; résilier = fin définitive qui libère numéros et passerelles",
+      "hint": "reactivateTrunk annule une suspension.",
+      "accept": [
+        "Suspendre = pause réversible ; résilier = fin définitive qui libère numéros et passerelles"
+      ]
+    },
+    {
+      "question": "Un downgrade de forfait via updateTrunk s'applique…",
+      "choices": [
+        "Au 1er du mois suivant",
+        "Immédiatement",
+        "Jamais",
+        "Dans 24 h"
+      ],
+      "correct_answer": "Au 1er du mois suivant",
+      "hint": "Un upgrade, lui, est immédiat.",
+      "accept": [
+        "Au 1er du mois suivant"
+      ]
+    },
+    {
+      "question": "Comment annuler un downgrade programmé ?",
+      "choices": [
+        "cancelScheduledSubscriptionChange",
+        "updateTrunk avec l'ancien plan",
+        "deleteTrunk",
+        "reactivateTrunk"
+      ],
+      "correct_answer": "cancelScheduledSubscriptionChange",
+      "hint": "Annulation immédiate et irréversible.",
+      "accept": [
+        "cancelScheduledSubscriptionChange"
+      ]
+    },
+    {
+      "question": "Statut d'un numéro qui fonctionne sur le trunk ?",
+      "choices": [
+        "ROUTED",
+        "ROUTING",
+        "UNROUTING",
+        "ACTIVE"
+      ],
+      "correct_answer": "ROUTED",
+      "hint": "ROUTING = en cours.",
+      "accept": [
+        "ROUTED"
+      ]
+    },
+    {
+      "question": "Avec method = IPADDRESS, qui peut se connecter ?",
+      "choices": [
+        "Seulement les adresses IP autorisées listées",
+        "Tout le monde",
+        "Ceux qui ont login/mot de passe",
+        "Personne"
+      ],
+      "correct_answer": "Seulement les adresses IP autorisées listées",
+      "hint": "Sinon LOGIN_PASSWORD.",
+      "accept": [
+        "Seulement les adresses IP autorisées listées"
+      ]
+    },
+    {
+      "question": "Quels réglages de sécurité existent aussi pour un trunk Teams ?",
+      "choices": [
+        "Profil de restriction et limiteur d'appels sortants",
+        "Login/mot de passe",
+        "ACL personnalisées",
+        "Aucun"
+      ],
+      "correct_answer": "Profil de restriction et limiteur d'appels sortants",
+      "hint": "Auth et ACL ne s'appliquent pas à Teams.",
+      "accept": [
+        "Profil de restriction et limiteur d'appels sortants"
+      ]
+    },
+    {
+      "question": "Quelle règle de renvoi pour quand le standard est en panne ?",
+      "choices": [
+        "NO_CONNECTION",
+        "NO_ANSWER",
+        "DIRECT",
+        "SIMULTANEOUS_CALL"
+      ],
+      "correct_answer": "NO_CONNECTION",
+      "hint": "Ligne injoignable.",
+      "accept": [
+        "NO_CONNECTION"
+      ]
+    },
+    {
+      "question": "Désactiver Smart Record (enabled: false) prend effet…",
+      "choices": [
+        "Le dernier jour du mois en cours",
+        "Immédiatement",
+        "Le 1er du mois suivant",
+        "Après 24 h"
+      ],
+      "correct_answer": "Le dernier jour du mois en cours",
+      "hint": "Une DEACTIVATION est programmée.",
+      "accept": [
+        "Le dernier jour du mois en cours"
+      ]
+    }
+  ]
+}
