@@ -1,0 +1,148 @@
+{
+  "title": "Netwo : Services & signalisations",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Netwo Services & signalisations.",
+  "failure_message": "Relis le cours Netwo Services & signalisations et réessaie.",
+  "questions": [
+    {
+      "question": "Une commande terminée devient…",
+      "choices": [
+        "Un service",
+        "Un panier",
+        "Une éligibilité",
+        "Un webhook"
+      ],
+      "correct_answer": "Un service",
+      "hint": "GET /service.",
+      "accept": [
+        "Un service"
+      ]
+    },
+    {
+      "question": "Qu'est-ce qu'une signalisation ?",
+      "choices": [
+        "Un ticket d'incident sur un service",
+        "Une notification mail",
+        "Une commande",
+        "Une portabilité"
+      ],
+      "correct_answer": "Un ticket d'incident sur un service",
+      "hint": "SAV.",
+      "accept": [
+        "Un ticket d'incident sur un service"
+      ]
+    },
+    {
+      "question": "Champs obligatoires pour ouvrir une signalisation ?",
+      "choices": [
+        "service_id, description, contact, state",
+        "cart_id",
+        "order_id, lines",
+        "Aucun"
+      ],
+      "correct_answer": "service_id, description, contact, state",
+      "hint": "POST /service/signalization.",
+      "accept": [
+        "service_id, description, contact, state"
+      ]
+    },
+    {
+      "question": "Valeurs de state d'un incident ?",
+      "choices": [
+        "degraded, interrupted, other, never_worked",
+        "open, close",
+        "active, suspended",
+        "low, high"
+      ],
+      "correct_answer": "degraded, interrupted, other, never_worked",
+      "hint": "ServiceState.",
+      "accept": [
+        "degraded, interrupted, other, never_worked"
+      ]
+    },
+    {
+      "question": "Que fait freeze sur un ticket ?",
+      "choices": [
+        "Met en pause le compteur de dépassement de GTR",
+        "Supprime le ticket",
+        "Ferme le ticket",
+        "Relance le fournisseur"
+      ],
+      "correct_answer": "Met en pause le compteur de dépassement de GTR",
+      "hint": "unfreeze pour reprendre.",
+      "accept": [
+        "Met en pause le compteur de dépassement de GTR"
+      ]
+    },
+    {
+      "question": "Que signifie GTR ?",
+      "choices": [
+        "Garantie de Temps de Rétablissement",
+        "Gestion Technique Réseau",
+        "Groupe de Tickets Résolus",
+        "Garantie Totale de Routage"
+      ],
+      "correct_answer": "Garantie de Temps de Rétablissement",
+      "hint": "Délai max de réparation.",
+      "accept": [
+        "Garantie de Temps de Rétablissement"
+      ]
+    },
+    {
+      "question": "Clore un ticket nécessite…",
+      "choices": [
+        "Un message de clôture",
+        "Rien",
+        "Un fichier",
+        "L'accord de Netwo"
+      ],
+      "correct_answer": "Un message de clôture",
+      "hint": "Obligatoire.",
+      "accept": [
+        "Un message de clôture"
+      ]
+    },
+    {
+      "question": "Statuts possibles d'un ticket ?",
+      "choices": [
+        "open, frozen, pending_closure, close",
+        "draft, validated",
+        "created, completed",
+        "Valid, Incomplete"
+      ],
+      "correct_answer": "open, frozen, pending_closure, close",
+      "hint": "TicketStatus.",
+      "accept": [
+        "open, frozen, pending_closure, close"
+      ]
+    },
+    {
+      "question": "Mettre des VLAN sur liste noire :",
+      "choices": [
+        "PATCH /service/{id}/vlan",
+        "GET /service/{id}/vlan",
+        "POST /service/available-backbone",
+        "DELETE /service/{id}"
+      ],
+      "correct_answer": "PATCH /service/{id}/vlan",
+      "hint": "vlan_blacklist*.",
+      "accept": [
+        "PATCH /service/{id}/vlan"
+      ]
+    },
+    {
+      "question": "Statut d'un service suspendu ?",
+      "choices": [
+        "suspended",
+        "frozen",
+        "close",
+        "cancelled"
+      ],
+      "correct_answer": "suspended",
+      "hint": "ServiceStatus.",
+      "accept": [
+        "suspended"
+      ]
+    }
+  ]
+}

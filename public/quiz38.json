@@ -1,0 +1,148 @@
+{
+  "title": "Netwo : Mobile & consommation",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Netwo Mobile & consommation.",
+  "failure_message": "Relis le cours Netwo Mobile & consommation et réessaie.",
+  "questions": [
+    {
+      "question": "Activer une ligne data mobile, c'est…",
+      "choices": [
+        "Passer une commande (produit → panier → commande)",
+        "Un PATCH sur la SIM",
+        "Un webhook",
+        "Une éligibilité"
+      ],
+      "correct_answer": "Passer une commande (produit → panier → commande)",
+      "hint": "3 étapes.",
+      "accept": [
+        "Passer une commande (produit → panier → commande)"
+      ]
+    },
+    {
+      "question": "Catégorie produit des lignes data mobiles ?",
+      "choices": [
+        "mobile_data",
+        "sim",
+        "4g",
+        "data"
+      ],
+      "correct_answer": "mobile_data",
+      "hint": "categories[]=mobile_data.",
+      "accept": [
+        "mobile_data"
+      ]
+    },
+    {
+      "question": "Délai d'activation après la commande ?",
+      "choices": [
+        "Quelques minutes",
+        "6 jours ouvrés",
+        "90 jours",
+        "24 heures"
+      ],
+      "correct_answer": "Quelques minutes",
+      "hint": "Ligne active rapidement.",
+      "accept": [
+        "Quelques minutes"
+      ]
+    },
+    {
+      "question": "Route recommandée pour modifier une SIM ?",
+      "choices": [
+        "PUT /service/simcard/{service_id}",
+        "PUT /service/{service_id}/command",
+        "POST /orders",
+        "PATCH /cart"
+      ],
+      "correct_answer": "PUT /service/simcard/{service_id}",
+      "hint": "/command est déprécié.",
+      "accept": [
+        "PUT /service/simcard/{service_id}"
+      ]
+    },
+    {
+      "question": "Conso de toutes les lignes, une par une :",
+      "choices": [
+        "GET /service/simcard/consumptions",
+        "GET /service/simcard/consumption",
+        "GET /orders",
+        "GET /service"
+      ],
+      "correct_answer": "GET /service/simcard/consumptions",
+      "hint": "Paginé, max 200.",
+      "accept": [
+        "GET /service/simcard/consumptions"
+      ]
+    },
+    {
+      "question": "Valeurs de step pour l'historique d'une ligne ?",
+      "choices": [
+        "Daily, Monthly",
+        "Hour, Week",
+        "1, 7, 30",
+        "asc, desc"
+      ],
+      "correct_answer": "Daily, Monthly",
+      "hint": "ConsumptionStep.",
+      "accept": [
+        "Daily, Monthly"
+      ]
+    },
+    {
+      "question": "Qu'est-ce qu'un CDR ?",
+      "choices": [
+        "Un enregistrement détaillé d'appel ou de session",
+        "Un contrat",
+        "Un ticket",
+        "Une carte SIM"
+      ],
+      "correct_answer": "Un enregistrement détaillé d'appel ou de session",
+      "hint": "Call Detail Record.",
+      "accept": [
+        "Un enregistrement détaillé d'appel ou de session"
+      ]
+    },
+    {
+      "question": "Paramètre obligatoire de GET /consumption ?",
+      "choices": [
+        "limit",
+        "service_ids",
+        "iccids",
+        "after_date"
+      ],
+      "correct_answer": "limit",
+      "hint": "limit*.",
+      "accept": [
+        "limit"
+      ]
+    },
+    {
+      "question": "Comment reprendre la lecture des CDR là où on s'était arrêté ?",
+      "choices": [
+        "after_id (ou after_date)",
+        "page=2",
+        "offset uniquement",
+        "Impossible"
+      ],
+      "correct_answer": "after_id (ou after_date)",
+      "hint": "Pagination par curseur.",
+      "accept": [
+        "after_id (ou after_date)"
+      ]
+    },
+    {
+      "question": "Format du numéro pour GET /vas ?",
+      "choices": [
+        "Sans préfixe pays (+33 / 0033)",
+        "Avec +33",
+        "En E.164",
+        "Avec espaces"
+      ],
+      "correct_answer": "Sans préfixe pays (+33 / 0033)",
+      "hint": "Numéros surtaxés.",
+      "accept": [
+        "Sans préfixe pays (+33 / 0033)"
+      ]
+    }
+  ]
+}

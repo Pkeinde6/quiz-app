@@ -44,7 +44,22 @@
       <section class="flex-1 min-w-0">
         <div class="bg-white border border-line rounded-2xl p-4 sm:p-6">
           <h3 class="text-sm sm:text-base font-extrabold text-ink mb-3 pb-3 border-b-4 border-sun inline-block">{{ current + 1 }}. {{ cleanTitle(section.title) }}</h3>
-          <pre class="font-mono text-xs sm:text-sm leading-6 sm:leading-7 text-ink bg-paper p-3 sm:p-4 rounded-xl whitespace-pre-wrap break-words m-0 overflow-x-auto">{{ section.content }}</pre>
+          <div class="flex flex-col gap-3">
+            <template v-for="(b, i) in blocks" :key="i">
+              <div v-if="b.type === 'code'" class="rounded-xl overflow-hidden bg-ink ring-1 ring-ink/10 shadow-sm">
+                <div class="flex items-center justify-between px-3 sm:px-4 py-1.5 bg-night">
+                  <span class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-sun">
+                    <span class="font-mono">&lt;/&gt;</span> Code
+                  </span>
+                  <button @click="copy(b.text, i)" class="text-[11px] font-semibold text-paper/70 hover:text-sun transition cursor-pointer">
+                    {{ copied === i ? '✓ Copié' : 'Copier' }}
+                  </button>
+                </div>
+                <pre class="code-block font-mono text-[12px] sm:text-sm leading-6 text-paper p-3 sm:p-4 m-0 overflow-x-auto whitespace-pre" v-html="highlight(b.text)"></pre>
+              </div>
+              <p v-else class="text-[15px] sm:text-base leading-relaxed text-ink whitespace-pre-line m-0">{{ b.text }}</p>
+            </template>
+          </div>
         </div>
 
         <div class="flex justify-between gap-2 mt-4">
@@ -62,6 +77,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { toBlocks, highlight } from '../courseFormat.js';
 
 const props = defineProps({ course: Object });
 defineEmits(['back']);
@@ -69,6 +85,14 @@ defineEmits(['back']);
 const current = ref(0);
 const sidebarOpen = ref(false);
 const section = computed(() => props.course.sections[current.value]);
+const blocks = computed(() => toBlocks(section.value.content));
+
+const copied = ref(-1);
+const copy = async (text, i) => {
+  try { await navigator.clipboard.writeText(text); } catch { return; }
+  copied.value = i;
+  setTimeout(() => { if (copied.value === i) copied.value = -1; }, 1500);
+};
 
 // Retire la numerotation deja presente dans certains titres ("3. ", "9b. ")
 const cleanTitle = (t) => t.replace(/^\d+[a-z]?\.\s*/, '');

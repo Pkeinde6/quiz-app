@@ -1,0 +1,148 @@
+{
+  "title": "Netwo : Notifications & webhooks",
+  "minimum_score": 7,
+  "success_message": "Bravo ! Tu maîtrises le module Netwo Notifications & webhooks.",
+  "failure_message": "Relis le cours Netwo Notifications & webhooks et réessaie.",
+  "questions": [
+    {
+      "question": "Qu'est-ce qu'un webhook ?",
+      "choices": [
+        "Netwo appelle ton URL quand un événement se produit",
+        "Une requête que tu fais en boucle",
+        "Un type de commande",
+        "Une clé d'API"
+      ],
+      "correct_answer": "Netwo appelle ton URL quand un événement se produit",
+      "hint": "Évite le polling.",
+      "accept": [
+        "Netwo appelle ton URL quand un événement se produit"
+      ]
+    },
+    {
+      "question": "Champs obligatoires pour créer un webhook ?",
+      "choices": [
+        "notification_type et url",
+        "key et value",
+        "cart_id",
+        "service_id"
+      ],
+      "correct_answer": "notification_type et url",
+      "hint": "POST /notification/webhook.",
+      "accept": [
+        "notification_type et url"
+      ]
+    },
+    {
+      "question": "Comment ajouter un secret envoyé avec chaque notification ?",
+      "choices": [
+        "POST /notification/webhook/{id} avec key et value",
+        "Dans l'URL",
+        "x-api-key",
+        "Impossible"
+      ],
+      "correct_answer": "POST /notification/webhook/{id} avec key et value",
+      "hint": "En-têtes du webhook.",
+      "accept": [
+        "POST /notification/webhook/{id} avec key et value"
+      ]
+    },
+    {
+      "question": "Événement quand une ligne de commande change ?",
+      "choices": [
+        "order_line_updated",
+        "order_updated",
+        "cart_updated",
+        "service_change"
+      ],
+      "correct_answer": "order_line_updated",
+      "hint": "NotificationType.",
+      "accept": [
+        "order_line_updated"
+      ]
+    },
+    {
+      "question": "Événement quand une connexion fixe tombe ?",
+      "choices": [
+        "Landline connection is down",
+        "signalization_created",
+        "consumption",
+        "order_line_created"
+      ],
+      "correct_answer": "Landline connection is down",
+      "hint": "object_id = service.",
+      "accept": [
+        "Landline connection is down"
+      ]
+    },
+    {
+      "question": "Que faire en recevant un webhook ?",
+      "choices": [
+        "Répondre vite en 2xx puis traiter en arrière-plan",
+        "Attendre 1 minute",
+        "Renvoyer une erreur",
+        "Supprimer le webhook"
+      ],
+      "correct_answer": "Répondre vite en 2xx puis traiter en arrière-plan",
+      "hint": "Bonne pratique.",
+      "accept": [
+        "Répondre vite en 2xx puis traiter en arrière-plan"
+      ]
+    },
+    {
+      "question": "Un webhook contient souvent…",
+      "choices": [
+        "Des identifiants : il faut rappeler l'API pour le détail",
+        "Toutes les données",
+        "Rien",
+        "Un fichier CSV"
+      ],
+      "correct_answer": "Des identifiants : il faut rappeler l'API pour le détail",
+      "hint": "object_id.",
+      "accept": [
+        "Des identifiants : il faut rappeler l'API pour le détail"
+      ]
+    },
+    {
+      "question": "Événement indiquant qu'un CRI est attendu ?",
+      "choices": [
+        "OutgoingPortabilityFeedbackCriRequested",
+        "order_line_message_pending",
+        "appointment_selected",
+        "consumption"
+      ],
+      "correct_answer": "OutgoingPortabilityFeedbackCriRequested",
+      "hint": "Portabilité sortante.",
+      "accept": [
+        "OutgoingPortabilityFeedbackCriRequested"
+      ]
+    },
+    {
+      "question": "Événement de prise de rendez-vous technicien ?",
+      "choices": [
+        "appointment_created",
+        "signalization_updated",
+        "customer_record_created",
+        "consumption"
+      ],
+      "correct_answer": "appointment_created",
+      "hint": "Appointment.",
+      "accept": [
+        "appointment_created"
+      ]
+    },
+    {
+      "question": "Supprimer un webhook :",
+      "choices": [
+        "DELETE /notification/webhook/{id}",
+        "PATCH /notification/webhook/{id}",
+        "POST /notification/webhook",
+        "GET /notification/webhook"
+      ],
+      "correct_answer": "DELETE /notification/webhook/{id}",
+      "hint": "DELETE.",
+      "accept": [
+        "DELETE /notification/webhook/{id}"
+      ]
+    }
+  ]
+}

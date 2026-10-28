@@ -22,7 +22,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/sophia.svg"
+      "iconUrl": "icons/sophia.svg",
+      "videoFile": "videos/sophia.mp4"
     },
     {
       "id": "s-clients",
@@ -39,7 +40,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/clients.svg"
+      "iconUrl": "icons/clients.svg",
+      "videoFile": "videos/s-clients.mp4"
     },
     {
       "id": "s-hosted",
@@ -56,7 +58,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/hosted.svg"
+      "iconUrl": "icons/hosted.svg",
+      "videoFile": "videos/s-hosted.mp4"
     },
     {
       "id": "s-mobile",
@@ -73,7 +76,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/mobile.svg"
+      "iconUrl": "icons/mobile.svg",
+      "videoFile": "videos/s-mobile.mp4"
     },
     {
       "id": "trunks",
@@ -90,7 +94,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/trunks.svg"
+      "iconUrl": "icons/trunks.svg",
+      "videoFile": "videos/trunks.mp4"
     },
     {
       "id": "s-voicesec",
@@ -107,7 +112,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/voicesec.svg"
+      "iconUrl": "icons/voicesec.svg",
+      "videoFile": "videos/s-voicesec.mp4"
     },
     {
       "id": "s-subnets",
@@ -124,7 +130,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/subnets.svg"
+      "iconUrl": "icons/subnets.svg",
+      "videoFile": "videos/s-subnets.mp4"
     },
     {
       "id": "s-cloud",
@@ -141,7 +148,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/cloud.svg"
+      "iconUrl": "icons/cloud.svg",
+      "videoFile": "videos/s-cloud.mp4"
     },
     {
       "id": "s-microsoft",
@@ -158,7 +166,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/microsoft.svg"
+      "iconUrl": "icons/microsoft.svg",
+      "videoFile": "videos/s-microsoft.mp4"
     },
     {
       "id": "s-stock",
@@ -175,7 +184,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/stock.svg"
+      "iconUrl": "icons/stock.svg",
+      "videoFile": "videos/s-stock.mp4"
     },
     {
       "id": "s-contracts",
@@ -192,7 +202,8 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/contracts.svg"
+      "iconUrl": "icons/contracts.svg",
+      "videoFile": "videos/s-contracts.mp4"
     },
     {
       "id": "s-transverse",
@@ -209,7 +220,127 @@
         }
       ],
       "group": "API Sophia GO",
-      "iconUrl": "icons/tools.svg"
+      "iconUrl": "icons/tools.svg",
+      "videoFile": "videos/s-transverse.mp4"
+    },
+    {
+      "id": "n-bases",
+      "name": "Les bases de l'API",
+      "icon": "🎓",
+      "iconUrl": "icons/n-bases.svg",
+      "group": "API Netwo",
+      "courseFile": "cours_n-bases.json",
+      "quizzes": [
+        {
+          "id": "quiz33",
+          "file": "quiz33.json",
+          "title": "Les bases de l'API",
+          "icon": "🎓",
+          "questions": 11
+        }
+      ]
+    },
+    {
+      "id": "n-eligibility",
+      "name": "Éligibilité & IMB",
+      "icon": "📍",
+      "iconUrl": "icons/n-eligibility.svg",
+      "group": "API Netwo",
+      "courseFile": "cours_n-eligibility.json",
+      "quizzes": [
+        {
+          "id": "quiz34",
+          "file": "quiz34.json",
+          "title": "Éligibilité & IMB",
+          "icon": "📍",
+          "questions": 10
+        }
+      ]
+    },
+    {
+      "id": "n-orders",
+      "name": "Panier & commandes",
+      "icon": "🛒",
+      "iconUrl": "icons/n-orders.svg",
+      "group": "API Netwo",
+      "courseFile": "cours_n-orders.json",
+      "quizzes": [
+        {
+          "id": "quiz35",
+          "file": "quiz35.json",
+          "title": "Panier & commandes",
+          "icon": "🛒",
+          "questions": 11
+        }
+      ]
+    },
+    {
+      "id": "n-portability",
+      "name": "Portabilité",
+      "icon": "🔁",
+      "iconUrl": "icons/n-portability.svg",
+      "group": "API Netwo",
+      "courseFile": "cours_n-portability.json",
+      "quizzes": [
+        {
+          "id": "quiz36",
+          "file": "quiz36.json",
+          "title": "Portabilité",
+          "icon": "🔁",
+          "questions": 12
+        }
+      ]
+    },
+    {
+      "id": "n-services",
+      "name": "Services & signalisations",
+      "icon": "🛠️",
+      "iconUrl": "icons/n-services.svg",
+      "group": "API Netwo",
+      "courseFile": "cours_n-services.json",
+      "quizzes": [
+        {
+          "id": "quiz37",
+          "file": "quiz37.json",
+          "title": "Services & signalisations",
+          "icon": "🛠️",
+          "questions": 10
+        }
+      ]
+    },
+    {
+      "id": "n-mobile",
+      "name": "Mobile & consommation",
+      "icon": "📶",
+      "iconUrl": "icons/n-mobile.svg",
+      "group": "API Netwo",
+      "courseFile": "cours_n-mobile.json",
+      "quizzes": [
+        {
+          "id": "quiz38",
+          "file": "quiz38.json",
+          "title": "Mobile & consommation",
+          "icon": "📶",
+          "questions": 10
+        }
+      ]
+    },
+    {
+      "id": "n-webhooks",
+      "name": "Notifications & webhooks",
+      "icon": "🔔",
+      "iconUrl": "icons/n-webhooks.svg",
+      "group": "API Netwo",
+      "courseFile": "cours_n-webhooks.json",
+      "quizzes": [
+        {
+          "id": "quiz39",
+          "file": "quiz39.json",
+          "title": "Notifications & webhooks",
+          "icon": "🔔",
+          "questions": 10
+        }
+      ]
     },
     {
       "id": "linux",

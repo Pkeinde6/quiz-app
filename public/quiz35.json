@@ -1,0 +1,162 @@
+{
+  "title": "Netwo : Panier & commandes",
+  "minimum_score": 8,
+  "success_message": "Bravo ! Tu maîtrises le module Netwo Panier & commandes.",
+  "failure_message": "Relis le cours Netwo Panier & commandes et réessaie.",
+  "questions": [
+    {
+      "question": "Ordre du parcours d'achat ?",
+      "choices": [
+        "Catalogue → panier → lignes du panier → commande",
+        "Commande → panier",
+        "Panier → catalogue → commande",
+        "Commande directe"
+      ],
+      "correct_answer": "Catalogue → panier → lignes du panier → commande",
+      "hint": "Comme un site marchand.",
+      "accept": [
+        "Catalogue → panier → lignes du panier → commande"
+      ]
+    },
+    {
+      "question": "Paramètre obligatoire de GET /contract/marketplace/products ?",
+      "choices": [
+        "seller_type",
+        "categories",
+        "search",
+        "limit"
+      ],
+      "correct_answer": "seller_type",
+      "hint": "Avec *.",
+      "accept": [
+        "seller_type"
+      ]
+    },
+    {
+      "question": "Quel identifiant reste stable quand le catalogue change ?",
+      "choices": [
+        "product_id",
+        "contract_version_id",
+        "cart_id",
+        "order_id"
+      ],
+      "correct_answer": "product_id",
+      "hint": "La version de contrat peut varier.",
+      "accept": [
+        "product_id"
+      ]
+    },
+    {
+      "question": "Champs obligatoires de POST /cart ?",
+      "choices": [
+        "lines et context",
+        "name et description",
+        "cart_id",
+        "order_id"
+      ],
+      "correct_answer": "lines et context",
+      "hint": "Avec *.",
+      "accept": [
+        "lines et context"
+      ]
+    },
+    {
+      "question": "Remplacer toutes les lignes d'un panier :",
+      "choices": [
+        "PUT /cart/{cart_id}/lines",
+        "POST /cart/{cart_id}/lines",
+        "PATCH /cart/{cart_id}",
+        "DELETE /cart/{cart_id}"
+      ],
+      "correct_answer": "PUT /cart/{cart_id}/lines",
+      "hint": "PUT = remplacer.",
+      "accept": [
+        "PUT /cart/{cart_id}/lines"
+      ]
+    },
+    {
+      "question": "Champs obligatoires de POST /orders ?",
+      "choices": [
+        "cart_id et lines",
+        "product_id",
+        "eligibility_id",
+        "Aucun"
+      ],
+      "correct_answer": "cart_id et lines",
+      "hint": "On commande à partir du panier.",
+      "accept": [
+        "cart_id et lines"
+      ]
+    },
+    {
+      "question": "Statut d'une commande en cours de déploiement ?",
+      "choices": [
+        "deploying",
+        "draft",
+        "validated",
+        "open"
+      ],
+      "correct_answer": "deploying",
+      "hint": "OrderStatus.",
+      "accept": [
+        "deploying"
+      ]
+    },
+    {
+      "question": "Statuts d'un panier ?",
+      "choices": [
+        "draft, validated",
+        "open, close",
+        "created, transmitted",
+        "active, cancelled"
+      ],
+      "correct_answer": "draft, validated",
+      "hint": "CartStatus.",
+      "accept": [
+        "draft, validated"
+      ]
+    },
+    {
+      "question": "Mettre ta propre référence sur une ligne :",
+      "choices": [
+        "POST /orders/lines/{id}/reference",
+        "PATCH /orders/{id}",
+        "POST /cart",
+        "PUT /orders/lines/{id}"
+      ],
+      "correct_answer": "POST /orders/lines/{id}/reference",
+      "hint": "Référence externe unique.",
+      "accept": [
+        "POST /orders/lines/{id}/reference"
+      ]
+    },
+    {
+      "question": "Envoyer un message au fournisseur sur une ligne :",
+      "choices": [
+        "POST /orders/lines/{id}/messaging",
+        "POST /notification/webhook",
+        "POST /service/signalization",
+        "POST /file"
+      ],
+      "correct_answer": "POST /orders/lines/{id}/messaging",
+      "hint": "Messagerie de commande.",
+      "accept": [
+        "POST /orders/lines/{id}/messaging"
+      ]
+    },
+    {
+      "question": "Un fichier envoyé par POST /file est…",
+      "choices": [
+        "Temporaire tant qu'il n'est pas rattaché à une ressource",
+        "Public",
+        "Définitif",
+        "Supprimé après 1 minute"
+      ],
+      "correct_answer": "Temporaire tant qu'il n'est pas rattaché à une ressource",
+      "hint": "On récupère un file_id.",
+      "accept": [
+        "Temporaire tant qu'il n'est pas rattaché à une ressource"
+      ]
+    }
+  ]
+}

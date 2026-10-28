@@ -111,6 +111,20 @@
         </div>
       </div>
 
+      <!-- Video du module -->
+      <div v-if="selectedCat.videoFile" class="mb-4 rounded-2xl overflow-hidden bg-ink border border-line">
+        <video v-if="showVideo" :src="selectedCat.videoFile" controls autoplay playsinline class="w-full aspect-video bg-ink"></video>
+        <button v-else @click="showVideo = true" class="w-full flex items-center gap-4 text-left p-4 sm:p-5 text-paper cursor-pointer hover:bg-night transition">
+          <span class="w-12 h-12 rounded-full bg-sun text-ink grid place-items-center shrink-0">
+            <svg class="w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14Z"/></svg>
+          </span>
+          <span class="flex-1">
+            <span class="block text-[11px] font-bold uppercase tracking-wider text-sun">Vidéo</span>
+            <span class="block font-bold text-lg">Regarder l'explication en vidéo</span>
+          </span>
+        </button>
+      </div>
+
       <!-- Etape 1 : cours -->
       <button v-if="selectedCat.courseFile" @click="loadCourse"
         class="w-full flex items-center gap-4 text-left bg-white border-2 border-brand rounded-2xl p-4 sm:p-5 mb-4 cursor-pointer transition hover:bg-brand/5 hover:-translate-y-0.5">
@@ -253,6 +267,7 @@ const tick = ref(0);
 let tickInterval = null;
 
 const STORAGE_KEY = 'quiz-app-progress';
+const showVideo = ref(false);
 
 const backBtn = 'inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-ink bg-white border border-line hover:border-brand px-4 py-2 rounded-full transition mb-5 cursor-pointer';
 
@@ -372,6 +387,7 @@ const selectCategory = (cat) => {
     return;
   }
   selectedCat.value = cat;
+  showVideo.value = false;
   screen.value = 'category';
 };
 

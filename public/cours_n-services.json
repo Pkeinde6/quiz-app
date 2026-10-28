@@ -1,0 +1,22 @@
+{
+  "icon": "🛠️",
+  "title": "Netwo : Services & signalisations",
+  "sections": [
+    {
+      "title": "Les services livrés",
+      "content": "Une commande terminée devient un SERVICE (un accès, une ligne, un préfixe…).\n\nGET   /service                    mes services\n  filtres : status, product_category[], delivery_protocol, context, service_ids…\nGET   /service/{service_id}       détail\nPATCH /service/{service_id}       modifier : dates de mise en service / résiliation,\n                                  références externes, nom client, VLAN…\nGET   /provisioning/technical-info/{service_id}   infos techniques de provisioning\n\nStatuts : initialized  active  cancellation_in_progress  cancelled  suspended\nConfiguration : pending_configuration  configured  configuration_error  deactivated…"
+    },
+    {
+      "title": "Réseau : backbones, routage, VLAN",
+      "content": "POST /service/available-backbone\n  body : contract_version_product_id*, variation_id, buyer_id\n  → backbones (cœurs de réseau) disponibles pour un produit\n\nGET /service/routing-profile      profils de routage\n\nService POI L2 (point de raccordement niveau 2) :\nGET   /service/{service_id}/vlan  VLAN disponibles\nPATCH /service/{service_id}/vlan  body : vlan_blacklist*   → mettre des VLAN sur liste noire"
+    },
+    {
+      "title": "Ouvrir une signalisation (ticket SAV)",
+      "content": "Une SIGNALISATION = un ticket d'incident sur un service (panne, lenteur…).\n\nPOST /service/signalization\n{\n  \"service_id\": \"...\",          le service en panne\n  \"description\": \"Plus de synchro depuis 8h\",\n  \"contact\": { ... },           qui contacter\n  \"state\": \"interrupted\",       degraded | interrupted | other | never_worked\n  \"file_ids\": [\"...\"]           pièces jointes (POST /file)\n}\n\nGET /service/signalization          tous les tickets (status, service_id, before, after…)\nGET /service/signalization/{id}     un ticket\nPATCH /service/signalization/{id}   références externes, contact"
+    },
+    {
+      "title": "Le cycle d'un ticket",
+      "content": "Statuts : open  frozen  pending_closure  close\n\nPATCH /service/signalization/{id}/freeze     geler (message*)\n  → met en pause le compteur de dépassement de GTR\nPATCH /service/signalization/{id}/unfreeze   reprendre le compteur\nPATCH /service/signalization/{id}/close      clore (un message de clôture est OBLIGATOIRE)\nPATCH /service/signalization/{id}/reopen     rouvrir (message*)\n\nMessagerie :\nPOST /service/signalization/{id}/messaging   message*, file_ids, propagate\nGET  /service/signalization/{id}/messaging\nGET  /file/{file_id}                          télécharger une pièce jointe\n\nGTR = Garantie de Temps de Rétablissement : le délai max de réparation promis."
+    }
+  ]
+}

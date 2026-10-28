@@ -1,0 +1,22 @@
+{
+  "icon": "📶",
+  "title": "Netwo : Mobile & consommation",
+  "sections": [
+    {
+      "title": "Activer une ligne data mobile",
+      "content": "C'est une COMMANDE, en 3 étapes :\n\n1) Trouver le produit :\nGET /contract/marketplace/products?categories[]=mobile_data&seller_type=providers\n\n2) Créer le panier (avec options éventuelles, ex : IP fixe) :\nPOST /cart\n\n3) Lire les lignes puis commander :\nGET  /cart/{cart_id}/lines\nPOST /orders\n   ex : SIM ICCID 89461722011826004342, plafond 20 Go / mois,\n        connectivité fournie par Netwo (protocol.type = l3_over_l2x)\n\nLa ligne est active en quelques minutes."
+    },
+    {
+      "title": "Piloter les SIM",
+      "content": "PUT /service/simcard/{service_id}\n  → modifier une SIM (suspension, plafond…) ; 201 = demande enregistrée, en cours\n\n⚠ PUT /service/{service_id}/command est DÉPRÉCIÉ : utiliser /service/simcard/{service_id}\n\nWebhooks utiles :\n  MobileSubscriptionStatusChanged   statut d'abonnement modifié\n  Mobile line crossed a border      une ligne entre dans un autre pays (roaming)"
+    },
+    {
+      "title": "Consommation mobile",
+      "content": "Toute la flotte :\nGET /service/simcard/consumption                  conso agrégée actuelle (with_price)\nGET /service/simcard/consumption-history          historique agrégé (start_date*, end_date*)\nGET /service/simcard/consumptions                 data + quotas de chaque ligne (max 200 / page)\nGET /service/simcard/fleet-consumptions-history   historique par ligne (month*, year*)\n\nUne ligne :\nGET /service/simcard/{service_id}/consumption           conso + quotas\nGET /service/simcard/{service_id}/consumption-history   step* = Daily | Monthly, start_date*, end_date*"
+    },
+    {
+      "title": "CDR et exports",
+      "content": "CDR = Call Detail Record : une ligne par appel / session data.\n\nGET /consumption?limit=500&infra_type=mobile        en JSON\nGET /consumption/csv?limit=500                      en CSV\n  filtres : infra_type (mobile | phone_line), event_type, pricing_side,\n            after_id, after_date, service_ids, iccids…\n  limit est OBLIGATOIRE ; after_id permet de reprendre où on s'était arrêté\n\nExports mensuels :\nGET /consumption/export?service_id=...    exports CSV disponibles\nGET /consumption/export/{export_id}       télécharger\n\nNuméros spéciaux (VAS) :\nGET /vas/{country}/{vas_number}   tarif d'un numéro surtaxé (sans préfixe +33 / 0033)"
+    }
+  ]
+}

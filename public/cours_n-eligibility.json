@@ -1,0 +1,22 @@
+{
+  "icon": "📍",
+  "title": "Netwo : Éligibilité & IMB",
+  "sections": [
+    {
+      "title": "Le principe",
+      "content": "Avant de vendre un accès Internet, on vérifie qu'il est possible à l'adresse du client :\nquelle technologie (fibre FTTH / FTTO / FTTE, SDSL, ADSL, VDSL, mobile…), quels opérateurs,\nquels débits, quels prix.\n\nLe parcours :\n  1) présélectionner le bon lieu (adresse, ligne existante…)\n  2) valider et SIGNER la saisie\n  3) lancer l'éligibilité → on reçoit un eligibility_id\n  4) suivre le statut, puis lire les résultats (offres)"
+    },
+    {
+      "title": "Préparer la demande",
+      "content": "POST /eligibility/preselect\n  → liste les emplacements possibles pour une saisie, pour choisir le bon\n\nPOST /eligibility/geocode-input\n  → valide la saisie et la SIGNE : renvoie { value, signature }\n     statut Valid ou Incomplete\n\nPOST /eligibility/list-ndi\n  body : value*, signature*, query_type*\n  → liste les NDI (numéros de ligne) rattachés à cette adresse\n\nGET /eligibility/resolvers\n  → les \"resolvers\" actifs (sources d'éligibilité interrogées)"
+    },
+    {
+      "title": "Lancer et lire l'éligibilité",
+      "content": "POST /eligibility\nbody :\n{\n  \"market\": \"...\",          marché ciblé\n  \"offer_type\": \"enterprise\",   enterprise | professional\n  \"catalog\": \"provider\",        owned | provider\n  \"value\": \"...\",           la saisie validée\n  \"signature\": \"...\"        sa signature (geocode-input)\n}\n→ 201 + { eligibility_id }\n\nGET /eligibility/{eligibility_id}/status    en cours / terminé ?\nGET /eligibility/{eligibility_id}           les résultats (offres)\n    filtres : offer_type, infrastructure_type[], debit, recurring_price,\n              access_fee, commitment_duration, sort_by=recurring_price.asc…\nGET /eligibility/{eligibility_id}/info                   la demande d'origine\nGET /eligibility/{eligibility_id}/details/{product_id}   détail d'une offre\nGET /eligibility/{eligibility_id}/options/{entity_id}    options d'une offre\nGET /eligibility/history                                 historique"
+    },
+    {
+      "title": "IMB (immeubles fibre)",
+      "content": "IMB = identifiant d'immeuble dans les bases fibre (ARCEP).\n\nGET /imb/closest?lat=48.85&lng=2.35   l'immeuble le plus proche de coordonnées\nGET /imb/list                         immeubles autour d'un point / d'une zone / d'une adresse\nGET /imb/{imb_ref}                    un immeuble par sa référence\n\nStatuts d'un immeuble (IMBStatus) :\nDeployed  Signed  Connectable  DeployInProgress  Target  Abandoned\n\nTypes d'infrastructure (InfraType) :\nftto  ftte  ftth  sdsl  adsl  vdsl  data_mobile  mobile_link"
+    }
+  ]
+}

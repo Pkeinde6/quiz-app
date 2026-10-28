@@ -1,5 +1,5 @@
 <template>
-  <div :class="['font-[Inter] min-h-screen transition-colors duration-300', t.bg]">
+  <div :class="['font-display min-h-screen transition-colors duration-300', t.bg]">
     <!-- Header sticky -->
     <div :class="['sticky top-0 z-30 backdrop-blur-md border-b px-4 py-3 flex items-center gap-3 transition-colors duration-300', t.header]">
       <button @click="$emit('back')" :class="['inline-flex items-center gap-1.5 text-sm border px-3 py-1.5 rounded-lg transition cursor-pointer shrink-0', t.backBtn]">
@@ -94,7 +94,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
               Explication
             </h3>
-            <p :class="['text-sm leading-relaxed whitespace-pre-line', t.text]">{{ section.explanation }}</p>
+            <p :class="['text-[15px] leading-7 whitespace-pre-line', t.text]">{{ section.explanation }}</p>
           </div>
 
           <!-- Demo interactive -->
@@ -118,7 +118,7 @@
                 <span :class="copied === section.code ? 'text-[#0ae448]' : ''">{{ copied === section.code ? '✓ Copie !' : 'Copier' }}</span>
               </button>
             </div>
-            <pre :class="['p-4 sm:p-5 overflow-x-auto text-xs sm:text-sm leading-relaxed', t.codeBg]"><code>{{ section.code }}</code></pre>
+            <pre :class="['code-block font-mono p-4 sm:p-5 overflow-x-auto text-[12px] sm:text-[13.5px] leading-[1.7]', t.codeBg]"><code v-html="highlightJs(section.code)"></code></pre>
           </div>
 
           <!-- Analyse du code -->
@@ -127,9 +127,9 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.06 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
               Analyse du code
             </h3>
-            <ul :class="['space-y-2.5 text-sm', t.text]">
+            <ul :class="['gsap-rich space-y-3 text-[15px] leading-7', t.text]">
               <li v-for="(point, j) in section.analysis" :key="j" class="flex gap-2.5 items-start">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#0ae448] shrink-0 mt-1.5"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#0ae448] shrink-0 mt-3"></span>
                 <span v-html="point"></span>
               </li>
             </ul>
@@ -143,6 +143,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, reactive } from 'vue'
 import gsap from 'gsap'
+import { highlightJs } from '../courseFormat.js'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)

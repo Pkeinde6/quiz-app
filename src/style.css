@@ -29,3 +29,24 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .rise { animation: none; }
 }
+
+/* Coloration du code dans les cours */
+.code-block .tok-kw   { color: #FDEF42; font-weight: 600; }
+.code-block .tok-fn   { color: #5fd39a; }
+.code-block .tok-type { color: #9fd3ff; }
+.code-block .tok-str  { color: #ffb38a; }
+.code-block .tok-var  { color: #f0a8ff; }
+.code-block .tok-cmt  { color: #8aa596; font-style: italic; }
+.code-block .tok-num  { color: #f0a8ff; }
+
+/* Page GSAP : code inline dans les analyses */
+.gsap-rich code {
+  font-family: var(--font-mono);
+  font-size: .85em;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: rgba(10, 228, 72, .12);
+  color: #0ae448;
+  white-space: nowrap;
+}
+.gsap-rich strong { color: inherit; font-weight: 700; }

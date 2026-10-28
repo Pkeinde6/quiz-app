@@ -1,0 +1,26 @@
+{
+  "icon": "🔁",
+  "title": "Netwo : Portabilité",
+  "sections": [
+    {
+      "title": "Les notions clés",
+      "content": "Portabilité = garder son numéro en changeant d'opérateur.\n\nDeux façons de l'identifier :\n  RIO  Relevé d'Identité Opérateur (particuliers, petites entreprises)\n  SDA  Sélection Directe à l'Arrivée : numéros rattachés à un NDI\n       (NDI = numéro de tête de l'installation téléphonique)\n\nTrois types (portability_type) :\n  Total           le NDI + TOUTES les SDA (liste exacte obligatoire)\n  Partial         une partie des SDA, SANS la tête de ligne (une SDA sert de NDI)\n  PartialComplex  une partie des SDA, AVEC la tête de ligne\n\nTrois contextes : simple, subséquente (déjà portée), multi-attributaire.\nToujours UNE seule commande : Netwo la découpe si besoin."
+    },
+    {
+      "title": "Délais et fiabilisation",
+      "content": "Délai minimum : 6 jours ouvrés (en général ~7).\nDélai maximum : 90 jours, sinon annulation automatique par l'APNF.\nwanted_date : entre +6 jours ouvrés et +89 jours, format RFC3339 en UTC.\n\nFiabilisation (jusqu'à 5 jours ouvrés) : récupérer la vraie liste des SDA\nauprès de l'opérateur. Recommandée si le client ne connaît pas ses SDA,\nsi la liste est incertaine, ou après un premier rejet.\n\nPOST /portability/reliability-check      body : idn*, customer*\nGET  /portability/reliability-check       mes fiabilisations (state)\nGET  /portability/reliability-check/{id}  résultat\nétats : created  completed  rejected\n\nGET /portability/operator-code/by-phone-number?numbers=...\n  → codes opérateur (OPA / OPE) des numéros : savoir ce qui est portable"
+    },
+    {
+      "title": "Créer une portabilité (marketplace)",
+      "content": "1) Trouver ton préfixe de portabilité hébergé :\nGET /service?product_category[]=prefix_hosting     → service_id\n\n2) Créer le panier :\nPOST /cart\n  idn                   NDI (ou numéro à porter)\n  wanted_date           date souhaitée\n  rio_or_did            liste des SDA, ou le RIO\n  portability_type      total | partial | partial_complex\n  option_call_validation  validation par appel\n  option_delegated      déléguer la réalisation à Netwo\n\n3) Lire les lignes : GET /cart/{cart_id}/lines\n4) Commander :      POST /orders"
+    },
+    {
+      "title": "Suivre une portabilité entrante",
+      "content": "GET    /portability/order/{order_id}          détail + statut\nGET    /portability/order-line/{order_line_id}   détails techniques\nPOST   /portability/order/{order_id}/delay    décaler (wanted_date*, comment)\nDELETE /portability/order/{order_id}          annuler (asynchrone)\n\nÉtats de la commande :\ncreated  transmitted  reviewing  date_accepted  completed\ncancellation_in_progress  delay_in_progress  cancelled  rejected\n\nÉtats côté APNF (organisme interopérateurs) :\nSent ArOk Planned DelayRequested DelayAccepted WaitingArOk\nCancelRequested Cancelled Rejected Completed"
+    },
+    {
+      "title": "Portabilités sortantes",
+      "content": "Un client te QUITTE : un autre opérateur demande ses numéros.\nSeules les sortantes PSG (Demport / Deporsub / Restit) sont gérées ;\nles autres sont rejetées avec le code F126.\n\n0) Renseigne un destinataire de notifications \"Portabilité Sortante\"\n1) GET /portability/outgoing                 les demandes reçues\n   GET /portability/outgoing/{id}            le détail\n2) AR (accusé de réception) : contrôle technique AUTOMATIQUE → AR OK / AR KO\n3) Étude → envoyer le CRI (compte rendu d'étude) :\n   POST /portability/outgoing/{id}/cri\n   body : status*, contact_name*, contact_email*, contact_phone_number*, comment\n4) À la date prévue, la portabilité est réalisée automatiquement\n5) RESTIT (restitution) : confirmer par un CR\n   POST /portability/outgoing/{id}/cr\n\nÉtats : Received ArOk CriEtudeOk Completed Cancelled Rejected\n        ManualInbox ManualProcessing ManualScheduled"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "icon": "🎓",
+  "title": "Netwo : Les bases de l'API",
+  "sections": [
+    {
+      "title": "Netwo, c'est quoi ?",
+      "content": "Netwo est une MARKETPLACE télécom B2B : des opérateurs d'infrastructure (fibre, cuivre,\nmobile…) y vendent leurs offres, et des revendeurs / intégrateurs les achètent.\n\nAvec l'API, tu peux :\n  tester l'éligibilité d'une adresse (fibre, SDSL, ADSL…)\n  remplir un panier et passer commande\n  suivre les commandes et échanger des messages\n  faire des portabilités de numéros (entrantes et sortantes)\n  gérer les services livrés et ouvrir des tickets (signalisations)\n  suivre la consommation voix / data mobile\n  recevoir des notifications par webhook\n\nDifférence avec Sophia : Netwo est une API REST (une URL par ressource),\nSophia est une API GraphQL (une seule URL)."
+    },
+    {
+      "title": "Accès et authentification",
+      "content": "URL de base (HTTPS obligatoire, HTTP refusé) :\nhttps://api.netwo.io/api/v1/{ressource}\n\nRequêtes et réponses en JSON. 3 en-têtes à CHAQUE appel :\ncontent-type: application/json\nx-actor-slug: [ACTOR_SLUG]\nx-api-key: [API_KEY]\n\nx-api-key     la clé d'API (demande par mail à acces-api@support.netwo.io)\nx-actor-slug  l'acteur (le \"tenant\") au nom duquel tu agis :\n              une clé peut avoir des rôles sur plusieurs acteurs\n\nMode TEST (sans toucher la production) : clé de test dédiée + en-tête\nx-realm: test"
+    },
+    {
+      "title": "Exemple d'appel",
+      "content": "Lister tes commandes :\n\ncurl https://api.netwo.io/api/v1/orders?limit=10 \\\n  -H \"content-type: application/json\" \\\n  -H \"x-actor-slug: mon-entreprise\" \\\n  -H \"x-api-key: xxxxxxxx\"\n\nLes verbes HTTP :\nGET     lire           POST    créer\nPATCH   modifier       PUT     remplacer\nDELETE  supprimer"
+    },
+    {
+      "title": "Conventions : filtres, tri, listes",
+      "content": "Filtres numériques : suffixe .gte .lte .gt .lt sur la valeur\nGET /endpoint?amount=10.gte        → amount >= 10\nGET /endpoint?amount=10.lt         → amount < 10\n\nTri : sort_by=attribut.asc|desc\nGET /endpoint?sort_by=debit.desc\n\nTableau en paramètre : nom[]=valeur répété\nGET /endpoint?infrastructure_type[]=ftto&infrastructure_type[]=sdsl\n\nPagination : limit et offset\nGET /orders?limit=20&offset=40     → 3e page de 20"
+    },
+    {
+      "title": "Limites et codes d'erreur",
+      "content": "Rate limiting : la plupart des routes = 200 appels / minute et 5000 / jour.\nLes en-têtes de réponse indiquent où tu en es :\nx-ratelimit-limit: 200, 200;w=60      200 appels sur 60 secondes\nx-ratelimit-remaining: 95             appels restants\nx-ratelimit-reset: 18                 secondes avant remise à zéro\n\nCodes HTTP :\n200  succès (GET)          201  créé / modifié (POST, PATCH, DELETE)\n401  non authentifié       403  action non autorisée\n404  ressource inconnue    5xx  erreur interne\n\nDifférence avec Sophia : ici le code HTTP reflète vraiment l'erreur\n(Sophia renvoie presque toujours 200 avec un tableau errors)."
+    }
+  ]
+}
