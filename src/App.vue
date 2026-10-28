@@ -235,7 +235,7 @@ const catProgress = computed(() => {
 });
 
 onMounted(() => {
-  fetch('quizzes.json')
+  fetch('quizzes.json', { cache: 'no-cache' })
     .then(r => r.json())
     .then(data => { categories.value = data.categories; })
     .catch(() => { screen.value = 'error'; });
@@ -282,7 +282,7 @@ const pageLabel = (page) => {
 const selectCategory = (cat) => {
   if (cat.type === 'tutorial') {
     // Ouvrir directement le tutoriel
-    fetch(cat.tutorialFile)
+    fetch(cat.tutorialFile, { cache: 'no-cache' })
       .then(r => { if (r.ok) return r.json(); throw new Error(); })
       .then(data => { courseData.value = data; screen.value = 'tutorial'; })
       .catch(() => { screen.value = 'error'; });
@@ -294,14 +294,14 @@ const selectCategory = (cat) => {
 
 const loadQuiz = (quizMeta) => {
   currentQuizMeta.value = quizMeta;
-  fetch(quizMeta.file)
+  fetch(quizMeta.file, { cache: 'no-cache' })
     .then(r => { if (r.ok) return r.json(); throw new Error(); })
     .then(data => { quizData.value = data; quizKey.value++; screen.value = 'quiz'; })
     .catch(() => { screen.value = 'error'; });
 };
 
 const loadCourse = () => {
-  fetch(selectedCat.value.courseFile)
+  fetch(selectedCat.value.courseFile, { cache: 'no-cache' })
     .then(r => { if (r.ok) return r.json(); throw new Error(); })
     .then(data => { courseData.value = data; screen.value = 'course'; })
     .catch(() => { screen.value = 'error'; });
