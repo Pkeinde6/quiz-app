@@ -1,0 +1,288 @@
+{
+  "title": "API Sophia GO : Concepts",
+  "minimum_score": 14,
+  "success_message": "Bravo ! Tu maîtrises les concepts de l API Sophia GO.",
+  "failure_message": "Relis le cours : authentification, erreurs et hiérarchie.",
+  "questions": [
+    {
+      "question": "Quel type d'API la plateforme Sophia GO utilise-t-elle comme passerelle ?",
+      "choices": [
+        "GraphQL",
+        "REST",
+        "SOAP",
+        "gRPC"
+      ],
+      "correct_answer": "GraphQL",
+      "hint": "Un langage de requête où le client choisit les champs.",
+      "accept": [
+        "GraphQL"
+      ]
+    },
+    {
+      "question": "Quelle est la différence entre Sophia LIVE et Sophia GO ?",
+      "choices": [
+        "LIVE est l'ancienne API, GO la nouvelle où sortent les nouveaux produits",
+        "GO est l'ancienne, LIVE la nouvelle",
+        "C'est la même API",
+        "LIVE est réservé au mobile"
+      ],
+      "correct_answer": "LIVE est l'ancienne API, GO la nouvelle où sortent les nouveaux produits",
+      "hint": "Tout nouveau service sort sur la nouvelle plateforme.",
+      "accept": [
+        "LIVE est l'ancienne API, GO la nouvelle où sortent les nouveaux produits"
+      ]
+    },
+    {
+      "question": "Quel standard protège l'accès à l'API ?",
+      "choices": [
+        "OAuth 2.0 + OpenID Connect",
+        "Basic Auth",
+        "Clé API dans l'URL",
+        "Aucun"
+      ],
+      "correct_answer": "OAuth 2.0 + OpenID Connect",
+      "hint": "Flux standard avec un serveur SSO.",
+      "accept": [
+        "OAuth 2.0 + OpenID Connect"
+      ]
+    },
+    {
+      "question": "Sous quelle forme est le token reçu ?",
+      "choices": [
+        "Un JWT (JSON Web Token)",
+        "Un cookie de session",
+        "Un fichier XML",
+        "Un code PIN"
+      ],
+      "correct_answer": "Un JWT (JSON Web Token)",
+      "hint": "eyJhxxx.xxx.xxx",
+      "accept": [
+        "Un JWT (JSON Web Token)"
+      ]
+    },
+    {
+      "question": "Quel grant_type pour un compte de service (client_id + client_secret) ?",
+      "choices": [
+        "client_credentials",
+        "password",
+        "refresh_token",
+        "authorization_code"
+      ],
+      "correct_answer": "client_credentials",
+      "hint": "Pas d'humain dans ce flux.",
+      "accept": [
+        "client_credentials"
+      ]
+    },
+    {
+      "question": "Quel grant_type avec son compte SSO personnel (username/password) ?",
+      "choices": [
+        "password",
+        "client_credentials",
+        "implicit",
+        "device_code"
+      ],
+      "correct_answer": "password",
+      "hint": "On envoie username et password.",
+      "accept": [
+        "password"
+      ]
+    },
+    {
+      "question": "Comment obtenir un nouveau token sans renvoyer le mot de passe ?",
+      "choices": [
+        "Utiliser le refresh token (grant_type=refresh_token)",
+        "Recréer un compte",
+        "Modifier expires_in",
+        "Réutiliser l'ancien token"
+      ],
+      "correct_answer": "Utiliser le refresh token (grant_type=refresh_token)",
+      "hint": "Un second token, plus durable, est fourni.",
+      "accept": [
+        "Utiliser le refresh token (grant_type=refresh_token)"
+      ]
+    },
+    {
+      "question": "Pour un script qui ne fait que lire, quel rôle recommande la doc ?",
+      "choices": [
+        "Read Only",
+        "Super Administrateur",
+        "Aucun rôle",
+        "Selfcare"
+      ],
+      "correct_answer": "Read Only",
+      "hint": "Une mutation lancée par erreur sera rejetée.",
+      "accept": [
+        "Read Only"
+      ]
+    },
+    {
+      "question": "À quoi sert le Playground ?",
+      "choices": [
+        "Explorer le schéma et exécuter des requêtes",
+        "Créer des comptes OnePass",
+        "Payer ses factures",
+        "Héberger son app"
+      ],
+      "correct_answer": "Explorer le schéma et exécuter des requêtes",
+      "hint": "Onglet Docs + bouton play.",
+      "accept": [
+        "Explorer le schéma et exécuter des requêtes"
+      ]
+    },
+    {
+      "question": "Quel code HTTP renvoie le plus souvent la passerelle, même si un sous-système a échoué ?",
+      "choices": [
+        "200 OK",
+        "500",
+        "404",
+        "401"
+      ],
+      "correct_answer": "200 OK",
+      "hint": "Les erreurs métier sont dans le corps de la réponse.",
+      "accept": [
+        "200 OK"
+      ]
+    },
+    {
+      "question": "Valeurs possibles de extensions.code ?",
+      "choices": [
+        "API_ERROR, INTERNAL_SERVER_ERROR, UNAUTHENTICATED",
+        "OK, KO",
+        "200, 400, 500",
+        "WARN, INFO, DEBUG"
+      ],
+      "correct_answer": "API_ERROR, INTERNAL_SERVER_ERROR, UNAUTHENTICATED",
+      "hint": "Trois codes.",
+      "accept": [
+        "API_ERROR, INTERNAL_SERVER_ERROR, UNAUTHENTICATED"
+      ]
+    },
+    {
+      "question": "À quoi sert error_code dans extensions.errors[] ?",
+      "choices": [
+        "Clé de traduction du message",
+        "Code HTTP",
+        "ID de l'utilisateur",
+        "Numéro de page"
+      ],
+      "correct_answer": "Clé de traduction du message",
+      "hint": "Associé aux placeholders.",
+      "accept": [
+        "Clé de traduction du message"
+      ]
+    },
+    {
+      "question": "Que signifie le préfixe 613 (ex : 613-024) ?",
+      "choices": [
+        "Service Hierarchy (SOL)",
+        "Service Money (Cresus)",
+        "Erreur réseau",
+        "Service Microsoft"
+      ],
+      "correct_answer": "Service Hierarchy (SOL)",
+      "hint": "Organisations, sites, identités...",
+      "accept": [
+        "Service Hierarchy (SOL)"
+      ]
+    },
+    {
+      "question": "Erreur générique 024 ?",
+      "choices": [
+        "Value is not valid",
+        "Not Found",
+        "Forbidden",
+        "Entity not found"
+      ],
+      "correct_answer": "Value is not valid",
+      "hint": "Ex : UUID mal formé.",
+      "accept": [
+        "Value is not valid"
+      ]
+    },
+    {
+      "question": "Erreur générique 014 ?",
+      "choices": [
+        "Not enough permissions",
+        "Bad Request",
+        "Conflict",
+        "Service unavailable"
+      ],
+      "correct_answer": "Not enough permissions",
+      "hint": "Problème de rôles.",
+      "accept": [
+        "Not enough permissions"
+      ]
+    },
+    {
+      "question": "Structure de la hiérarchie Sophia ?",
+      "choices": [
+        "Un arbre : chaque entité a un parent",
+        "Une liste plate",
+        "Un graphe sans parent",
+        "Une seule organisation"
+      ],
+      "correct_answer": "Un arbre : chaque entité a un parent",
+      "hint": "Reseller > Client > Site > Identity.",
+      "accept": [
+        "Un arbre : chaque entité a un parent"
+      ]
+    },
+    {
+      "question": "Que représente un Site ?",
+      "choices": [
+        "Le lieu physique des utilisateurs/ressources d'un client",
+        "Un site web",
+        "Un serveur DNS",
+        "Un rôle"
+      ],
+      "correct_answer": "Le lieu physique des utilisateurs/ressources d'un client",
+      "hint": "L'adresse réelle compte (appels d'urgence).",
+      "accept": [
+        "Le lieu physique des utilisateurs/ressources d'un client"
+      ]
+    },
+    {
+      "question": "Deux types d'Identity ?",
+      "choices": [
+        "User et Other account",
+        "Admin et Guest",
+        "Client et Site",
+        "Personal et Business"
+      ],
+      "correct_answer": "User et Other account",
+      "hint": "Other account = ex. salle de réunion.",
+      "accept": [
+        "User et Other account"
+      ]
+    },
+    {
+      "question": "Minimum à créer pour un service personnel (ligne mobile) ?",
+      "choices": [
+        "La chaîne client → site → identity",
+        "Un client seul",
+        "Une identity seule",
+        "Un reseller"
+      ],
+      "correct_answer": "La chaîne client → site → identity",
+      "hint": "Le service est attaché à une personne.",
+      "accept": [
+        "La chaîne client → site → identity"
+      ]
+    },
+    {
+      "question": "Organisation créée via l'API : quels services sont activés ?",
+      "choices": [
+        "Aucun, il faut les activer ensuite",
+        "Tous",
+        "La téléphonie seulement",
+        "Ceux du parent"
+      ],
+      "correct_answer": "Aucun, il faut les activer ensuite",
+      "hint": "Différent de l'assistant web.",
+      "accept": [
+        "Aucun, il faut les activer ensuite"
+      ]
+    }
+  ]
+}

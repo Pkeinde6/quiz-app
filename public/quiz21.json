@@ -1,0 +1,288 @@
+{
+  "title": "API Sophia GO : Logique des requêtes",
+  "minimum_score": 14,
+  "success_message": "Excellent ! Tu sais lire et écrire des requêtes GraphQL Sophia.",
+  "failure_message": "Relis les sections 3 à 8 du cours.",
+  "questions": [
+    {
+      "question": "Toutes les requêtes passent par combien d'URL (endpoint) ?",
+      "choices": [
+        "Une seule : /go/api/graphql/partners",
+        "Une par ressource (/organizations, /sites...)",
+        "Une par méthode HTTP",
+        "Une par client"
+      ],
+      "correct_answer": "Une seule : /go/api/graphql/partners",
+      "hint": "En GraphQL, c'est le corps de la requête qui dit ce qu'on veut.",
+      "accept": [
+        "Une seule : /go/api/graphql/partners"
+      ]
+    },
+    {
+      "question": "Avec quelle méthode HTTP envoie-t-on une requête GraphQL ?",
+      "choices": [
+        "POST avec un JSON { query, variables }",
+        "GET /identity",
+        "DELETE",
+        "PUT"
+      ],
+      "correct_answer": "POST avec un JSON { query, variables }",
+      "hint": "Même pour une lecture.",
+      "accept": [
+        "POST avec un JSON { query, variables }"
+      ]
+    },
+    {
+      "question": "Dans  query { identity { getIdentity { id } } }, que représente « identity » ?",
+      "choices": [
+        "Le domaine (namespace) qui regroupe les opérations",
+        "Le nom de la variable",
+        "Le champ retourné",
+        "Le token"
+      ],
+      "correct_answer": "Le domaine (namespace) qui regroupe les opérations",
+      "hint": "Les opérations sont rangées par domaine : identity, organization, permission...",
+      "accept": [
+        "Le domaine (namespace) qui regroupe les opérations"
+      ]
+    },
+    {
+      "question": "Dans la même requête, que représente « getIdentity » ?",
+      "choices": [
+        "L'opération (la fonction) appelée dans le domaine",
+        "Un type",
+        "Un alias",
+        "Une mutation"
+      ],
+      "correct_answer": "L'opération (la fonction) appelée dans le domaine",
+      "hint": "Domaine → opération → champs.",
+      "accept": [
+        "L'opération (la fonction) appelée dans le domaine"
+      ]
+    },
+    {
+      "question": "Que représente { id firstName lastName email } ?",
+      "choices": [
+        "La sélection : les seuls champs qu'on veut recevoir",
+        "Les paramètres d'entrée",
+        "Les headers",
+        "Les erreurs"
+      ],
+      "correct_answer": "La sélection : les seuls champs qu'on veut recevoir",
+      "hint": "Pas de champ demandé = pas de champ reçu.",
+      "accept": [
+        "La sélection : les seuls champs qu'on veut recevoir"
+      ]
+    },
+    {
+      "question": "La forme de la réponse JSON...",
+      "choices": [
+        "Reprend exactement la forme de la requête (data.identity.getIdentity...)",
+        "Est toujours une liste plate",
+        "Est en XML",
+        "Est aléatoire"
+      ],
+      "correct_answer": "Reprend exactement la forme de la requête (data.identity.getIdentity...)",
+      "hint": "C'est le principe miroir de GraphQL.",
+      "accept": [
+        "Reprend exactement la forme de la requête (data.identity.getIdentity...)"
+      ]
+    },
+    {
+      "question": "Où se placent les arguments d'une opération ?",
+      "choices": [
+        "Entre parenthèses : getOrganizations(parentOrganizationId: \"...\")",
+        "Dans l'URL",
+        "Dans un header",
+        "Après les accolades"
+      ],
+      "correct_answer": "Entre parenthèses : getOrganizations(parentOrganizationId: \"...\")",
+      "hint": "Comme l'appel d'une fonction.",
+      "accept": [
+        "Entre parenthèses : getOrganizations(parentOrganizationId: \"...\")"
+      ]
+    },
+    {
+      "question": "Dans une réponse de liste, où se trouvent les éléments ?",
+      "choices": [
+        "Dans edges",
+        "Dans items",
+        "Dans data.list",
+        "Dans rows"
+      ],
+      "correct_answer": "Dans edges",
+      "hint": "getOrganizations { edges { id name } }",
+      "accept": [
+        "Dans edges"
+      ]
+    },
+    {
+      "question": "Comment demander la page 2 de 3 éléments ?",
+      "choices": [
+        "pagination: { page: 2, limit: 3 }",
+        "page=2&limit=3 dans l'URL",
+        "offset: 3",
+        "next: true"
+      ],
+      "correct_answer": "pagination: { page: 2, limit: 3 }",
+      "hint": "Argument de l'opération.",
+      "accept": [
+        "pagination: { page: 2, limit: 3 }"
+      ]
+    },
+    {
+      "question": "Que demander pour savoir combien de pages existent ?",
+      "choices": [
+        "pageInfo { nbPage page nextPage previousPage }",
+        "count",
+        "total()",
+        "length"
+      ],
+      "correct_answer": "pageInfo { nbPage page nextPage previousPage }",
+      "hint": "À côté de edges.",
+      "accept": [
+        "pageInfo { nbPage page nextPage previousPage }"
+      ]
+    },
+    {
+      "question": "Que fait  ... on Organization { name }  ?",
+      "choices": [
+        "Un fragment inline : sélectionne des champs seulement si l'objet est une Organization",
+        "Une boucle",
+        "Un commentaire",
+        "Une mutation"
+      ],
+      "correct_answer": "Un fragment inline : sélectionne des champs seulement si l'objet est une Organization",
+      "hint": "owner peut être Organization OU Site.",
+      "accept": [
+        "Un fragment inline : sélectionne des champs seulement si l'objet est une Organization"
+      ]
+    },
+    {
+      "question": "Pourquoi la requête assignedRoles utilise-t-elle ... on Organization et ... on Site ?",
+      "choices": [
+        "Parce que owner peut être de plusieurs types différents",
+        "Pour aller plus vite",
+        "Parce que c'est obligatoire partout",
+        "Pour paginer"
+      ],
+      "correct_answer": "Parce que owner peut être de plusieurs types différents",
+      "hint": "Type union/interface.",
+      "accept": [
+        "Parce que owner peut être de plusieurs types différents"
+      ]
+    },
+    {
+      "question": "Que fait  orgName:name  ?",
+      "choices": [
+        "Un alias : le champ name est renvoyé sous la clé orgName",
+        "Une division",
+        "Un filtre",
+        "Une concaténation"
+      ],
+      "correct_answer": "Un alias : le champ name est renvoyé sous la clé orgName",
+      "hint": "Utile quand deux champs ont le même nom.",
+      "accept": [
+        "Un alias : le champ name est renvoyé sous la clé orgName"
+      ]
+    },
+    {
+      "question": "Quel mot-clé utilise-t-on pour créer/modifier (ex : commander un subnet) ?",
+      "choices": [
+        "mutation",
+        "query",
+        "update",
+        "post"
+      ],
+      "correct_answer": "mutation",
+      "hint": "Les lectures sont des query.",
+      "accept": [
+        "mutation"
+      ]
+    },
+    {
+      "question": "Dans  query myListOrganizations { ... }, que représente myListOrganizations ?",
+      "choices": [
+        "Un nom d'opération libre, utile pour le debug",
+        "Une opération obligatoire de l'API",
+        "Un type",
+        "Une variable"
+      ],
+      "correct_answer": "Un nom d'opération libre, utile pour le debug",
+      "hint": "Tu peux l'appeler comme tu veux.",
+      "accept": [
+        "Un nom d'opération libre, utile pour le debug"
+      ]
+    },
+    {
+      "question": "Comment passer des valeurs dynamiques proprement (sans les coller dans la chaîne) ?",
+      "choices": [
+        "Avec des variables : query($id: ID!) { ...(id: $id) } + JSON variables",
+        "Concaténation de chaînes",
+        "Dans le header Authorization",
+        "Impossible"
+      ],
+      "correct_answer": "Avec des variables : query($id: ID!) { ...(id: $id) } + JSON variables",
+      "hint": "Le ! signifie obligatoire.",
+      "accept": [
+        "Avec des variables : query($id: ID!) { ...(id: $id) } + JSON variables"
+      ]
+    },
+    {
+      "question": "Une requête renvoie  \"data\": null  et un tableau errors. Où regarder la cause ?",
+      "choices": [
+        "errors[].extensions.errors[].debug_message",
+        "Le code HTTP seulement",
+        "Les headers",
+        "data.message"
+      ],
+      "correct_answer": "errors[].extensions.errors[].debug_message",
+      "hint": "Le debug_message explique.",
+      "accept": [
+        "errors[].extensions.errors[].debug_message"
+      ]
+    },
+    {
+      "question": "Une réponse peut-elle contenir à la fois data et errors ?",
+      "choices": [
+        "Oui, une partie peut réussir et une autre échouer",
+        "Non, jamais",
+        "Seulement en mutation",
+        "Seulement en 500"
+      ],
+      "correct_answer": "Oui, une partie peut réussir et une autre échouer",
+      "hint": "Plusieurs sous-systèmes derrière la passerelle.",
+      "accept": [
+        "Oui, une partie peut réussir et une autre échouer"
+      ]
+    },
+    {
+      "question": "Pour récupérer à la fois ton identité et tes rôles, il faut...",
+      "choices": [
+        "Une seule requête en ajoutant assignedRoles dans la sélection",
+        "Deux appels HTTP",
+        "Trois appels",
+        "Un appel REST"
+      ],
+      "correct_answer": "Une seule requête en ajoutant assignedRoles dans la sélection",
+      "hint": "On ajoute des champs imbriqués.",
+      "accept": [
+        "Une seule requête en ajoutant assignedRoles dans la sélection"
+      ]
+    },
+    {
+      "question": "Ordre logique pour faire un appel ?",
+      "choices": [
+        "1) Obtenir un token 2) Header Bearer 3) POST la query 4) Lire data / errors",
+        "1) POST la query 2) Obtenir le token",
+        "1) Lire errors 2) Envoyer",
+        "Pas besoin de token"
+      ],
+      "correct_answer": "1) Obtenir un token 2) Header Bearer 3) POST la query 4) Lire data / errors",
+      "hint": "Authentification d'abord.",
+      "accept": [
+        "1) Obtenir un token 2) Header Bearer 3) POST la query 4) Lire data / errors"
+      ]
+    }
+  ]
+}

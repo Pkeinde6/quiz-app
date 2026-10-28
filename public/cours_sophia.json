@@ -1,0 +1,42 @@
+{
+  "icon": "📡",
+  "title": "Cours : API Sophia GO",
+  "sections": [
+    {
+      "title": "1. L'idée de GraphQL",
+      "content": "REST : une URL par ressource\n  GET /organizations   GET /sites/42   ...\n\nGraphQL : UNE seule URL\n  POST https://sophia3.sewan.fr/go/api/graphql/partners\n\nC'est le CORPS de la requête qui décrit ce que tu veux.\nTu choisis les champs → tu reçois exactement ces champs, rien de plus.\n\n  query     = lecture\n  mutation  = écriture (créer, modifier, supprimer)"
+    },
+    {
+      "title": "2. S'authentifier (avant tout)",
+      "content": "POST https://authcloudservice.com/auth/realms/foundation-eu-west-1-production/protocol/openid-connect/token\nContent-Type: application/x-www-form-urlencoded\n\nCompte perso :     grant_type=password  client_id=api  username=...  password=...\nCompte de service : grant_type=client_credentials  client_id=...  client_secret=...\nRenouveler :        grant_type=refresh_token  refresh_token=...\n\nRéponse : { \"access_token\": \"eyJ...\", \"token_type\": \"Bearer\", ... }\n\nEnsuite, à CHAQUE appel :\n  Authorization: Bearer eyJ...\n\n⚠ Le token est privé. Pour un script de lecture → rôle Read Only."
+    },
+    {
+      "title": "3. Anatomie d'une requête",
+      "content": "query {                    ← type d'opération (lecture)\n  identity {               ← DOMAINE (namespace)\n    getIdentity {          ← OPÉRATION dans ce domaine\n      id                   ← champs voulus (sélection)\n      firstName\n      email\n    }\n  }\n}\n\nRéponse = même forme, en miroir :\n{ \"data\": { \"identity\": { \"getIdentity\": {\n    \"id\": \"9c28...\", \"firstName\": \"François\", \"email\": \"...\" } } } }\n\nRègle : domaine → opération → champs."
+    },
+    {
+      "title": "4. Arguments et listes",
+      "content": "Les arguments se mettent entre parenthèses, comme une fonction :\n\nquery {\n  organization {\n    getOrganizations(\n      parentOrganizationId: \"d9ae...\"\n      pagination: { page: 1, limit: 3 }\n    ) {\n      edges { id name }          ← les éléments de la liste\n      pageInfo { page nbPage nextPage previousPage }\n    }\n  }\n}\n\n• get...s (ex : getOrganizations) = liste paginée\n• Sans pagination → seulement un sous-ensemble (≈20)\n• Pour la page suivante : page: 2"
+    },
+    {
+      "title": "5. Imbrication, fragments, alias",
+      "content": "On peut descendre dans les objets liés en UNE requête :\n\ngetIdentity {\n  firstName\n  assignedRoles {\n    name\n    owner {\n      ... on Organization { orgName: name }\n      ... on Site         { siteName: name }\n    }\n  }\n}\n\n• assignedRoles { ... }  → objets liés (imbrication)\n• ... on Organization    → FRAGMENT : 'si owner est une Organization, donne-moi...'\n                           (owner peut être de plusieurs types)\n• orgName: name          → ALIAS : renomme la clé dans la réponse"
+    },
+    {
+      "title": "6. Variables (bonne pratique)",
+      "content": "Au lieu de coller les valeurs dans le texte :\n\nquery ListOrgs($parent: ID!, $page: Int) {\n  organization {\n    getOrganizations(parentOrganizationId: $parent,\n                     pagination: { page: $page, limit: 10 }) {\n      edges { id name }\n    }\n  }\n}\n\nBody JSON envoyé :\n{ \"query\": \"...\", \"variables\": { \"parent\": \"d9ae...\", \"page\": 1 } }\n\n$ = variable, ! = obligatoire. ListOrgs = nom libre de l'opération."
+    },
+    {
+      "title": "7. Mutations",
+      "content": "Même logique, mot-clé mutation :\n\nmutation {\n  domaine {\n    actionQuelconque(input: { ... }) {\n      id            ← ce que tu veux récupérer après l'action\n    }\n  }\n}\n\nEx. dans la doc : commander / résilier un subnet, assigner un service,\ncréer une organisation (puis activer ses services dans une 2e opération !)."
+    },
+    {
+      "title": "8. Lire les erreurs",
+      "content": "Le HTTP est presque toujours 200 OK. Les erreurs sont DANS la réponse :\n\n{ \"errors\": [ {\n    \"message\": \"Value is not valid\",\n    \"path\": [\"permission\", \"getPermissions\"],   ← où ça a cassé\n    \"extensions\": {\n      \"code\": \"API_ERROR\",        (ou INTERNAL_SERVER_ERROR, UNAUTHENTICATED)\n      \"status\": 400,\n      \"errors\": [ { \"debug_message\": \"...UUID mal formé\",\n                    \"error_code\": \"613-024\",   ← service-erreur\n                    \"placeholders\": { \"name\": \"target\" } } ] } } ],\n  \"data\": null }\n\ndata ET errors peuvent coexister (succès partiel).\nCodes utiles : 02 Unauthorized, 03 Forbidden, 09 Entity not found,\n014 Not enough permissions, 024 Value is not valid. 613 = Hierarchy."
+    },
+    {
+      "title": "9. Hiérarchie (le modèle de données)",
+      "content": "Reseller (toi)\n  └── Client (tes clients ; flag Internal = ta propre filiale)\n        └── Site (adresse physique RÉELLE : urgences téléphoniques)\n              ├── services non personnels (lien Internet...)\n              └── Identity : User (humain) | Other account (salle de réunion)\n                    └── services personnels (ligne mobile, licence Microsoft...)\n\nNouveau client = au moins Client + Site.\nService personnel = Client + Site + Identity.\nServices Sophia = catalogues à activer par organisation (aucun par défaut via l'API)."
+    }
+  ]
+}
