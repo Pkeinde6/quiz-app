@@ -73,6 +73,18 @@
         </div>
       </section>
 
+      <!-- Carte de l'API Netwo (page statique de reference) -->
+      <a href="netwo-carte.html"
+        class="w-full flex items-center gap-4 text-left rounded-2xl bg-white border-2 border-brand p-5 sm:p-6 mt-6 mb-4 no-underline text-ink transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+        <span class="w-12 h-12 rounded-xl bg-brand/10 grid place-items-center shrink-0"><img :src="'icons/n-bases.svg'" alt="" class="w-7 h-7" /></span>
+        <span class="flex-1">
+          <span class="block text-[11px] font-bold uppercase tracking-wider text-brand">Référence de développement</span>
+          <span class="block font-bold text-lg">Carte de l'API Netwo</span>
+          <span class="block text-xs text-muted">Acteurs, 93 routes par partie, parcours types</span>
+        </span>
+        <svg class="w-5 h-5 text-brand" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+      </a>
+
       <!-- Tuto GSAP -->
       <button
         @click="screen = 'tutoAnimation'"

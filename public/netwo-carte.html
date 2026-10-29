@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Carte de l'API Netwo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout : en-tete court, navigation collante par partie, puis 3 sections (acteurs, routes, parcours) */
+:root{
+  --bg:#F3F6F1; --surface:#FFFFFF; --ink:#0E1A14; --muted:#5C6E63; --line:#DCE5DE;
+  --brand:#00853F; --brand-soft:#E3F1E8; --sun:#FDEF42; --night:#003D24;
+  --get:#1F6FB2; --post:#00853F; --patch:#A76200; --put:#7A4DB3; --delete:#C2362F;
+  --code-bg:#0E1A14; --code-fg:#E6EFE9;
+  --display:"Outfit",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1510; --surface:#12201A; --ink:#E6EFE9; --muted:#93A89B; --line:#24382D;
+  --brand:#3CC27A; --brand-soft:#173A27; --sun:#FDEF42; --night:#0A2A1A;
+  --get:#6AB4F0; --post:#3CC27A; --patch:#F0B34F; --put:#B996F0; --delete:#F07A70;
+  --code-bg:#07100B; --code-fg:#E6EFE9; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1510; --surface:#12201A; --ink:#E6EFE9; --muted:#93A89B; --line:#24382D;
+  --brand:#3CC27A; --brand-soft:#173A27; --sun:#FDEF42; --night:#0A2A1A;
+  --get:#6AB4F0; --post:#3CC27A; --patch:#F0B34F; --put:#B996F0; --delete:#F07A70;
+  --code-bg:#07100B; --code-fg:#E6EFE9; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;line-height:1.15;margin:0}
+code,.mono{font-family:var(--mono);font-size:.88em}
+p{margin:0}
+a{color:var(--brand)}
+
+header.top{padding-block:40px 28px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+header.top h1{font-size:clamp(32px,6vw,52px);font-weight:800;letter-spacing:-.02em;margin-top:8px}
+header.top p.lead{color:var(--muted);max-width:62ch;margin-top:12px;font-size:17px}
+.base{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.base .chip{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-family:var(--mono);font-size:13px;min-width:0;overflow-wrap:anywhere}
+.base .chip b{color:var(--brand);font-weight:600}
+
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.toc a{flex:none;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:6px 12px;border-radius:999px}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);background:var(--surface);outline:none}
+
+section.part{padding-block:44px 8px}
+section.part > .wrap > h2{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.01em}
+section.part > .wrap > p.intro{color:var(--muted);max-width:68ch;margin-top:8px}
+
+/* ── Acteurs : chaine de distribution */
+.chain{margin-top:24px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:stretch}
+.node{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0;position:relative}
+.node .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.node h3{font-size:18px;font-weight:700;margin-top:4px}
+.node p{color:var(--muted);font-size:14px;margin-top:6px}
+.node.me{border:2px solid var(--brand);background:var(--brand-soft)}
+.node.me .you{position:absolute;top:-11px;left:14px;background:var(--sun);color:#0E1A14;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:6px}
+.flowline{grid-column:1/-1;display:flex;justify-content:space-between;color:var(--muted);font-size:13px;padding:0 4px}
+@media (max-width:760px){.chain{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.chain{grid-template-columns:1fr}}
+
+.callout{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--sun);border-radius:12px;padding:16px 18px}
+.callout h3{font-size:16px;font-weight:700}
+.callout p{color:var(--muted);margin-top:6px;font-size:15px;max-width:75ch}
+
+.actors{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.actor{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.actor header{display:flex;align-items:center;gap:10px}
+.actor .dot{width:12px;height:12px;border-radius:50%;flex:none}
+.actor h3{font-size:18px;font-weight:700}
+.actor .who{color:var(--muted);font-size:14px}
+.actor ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14.5px}
+.actor .src{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+
+.roles{margin-top:22px;overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.roles table{border-collapse:collapse;width:100%;min-width:620px;font-size:14.5px}
+.roles th,.roles td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.roles th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.roles tr:last-child td{border-bottom:0}
+.roles td:first-child{font-weight:600}
+
+/* ── Routes */
+.toolbar{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toolbar input{flex:1 1 240px;min-width:0;font:inherit;font-size:15px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.toolbar input:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filters button{font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.filters button .dot{width:8px;height:8px;border-radius:50%}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.group{margin-top:26px}
+.group > header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.group > header h3{font-size:20px;font-weight:800}
+.group > header .why{color:var(--muted);font-size:14px}
+.route{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:4px 14px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.verb{font-family:var(--mono);font-size:12px;font-weight:600;text-align:center;padding:3px 0;border-radius:6px;color:#fff;margin-top:2px}
+.v-GET{background:var(--get)}.v-POST{background:var(--post)}.v-PATCH{background:var(--patch)}.v-PUT{background:var(--put)}.v-DELETE{background:var(--delete)}
+:root:not([data-theme="light"]) .verb{color:#0B1510}
+:root[data-theme="light"] .verb{color:#fff}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .verb{color:#fff}}
+.path{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;min-width:0}
+.path .p{color:var(--brand)}
+.desc{grid-column:2/3;color:var(--muted);font-size:14.5px}
+.params{grid-column:2/3;font-family:var(--mono);font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.params b{color:var(--ink);font-weight:600}
+.who-tags{grid-column:3;grid-row:1/span 3;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:150px}
+.wt{font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap;border:1px solid currentColor}
+.copy{font:inherit;font-size:12px;border:0;background:none;color:var(--muted);cursor:pointer;padding:0;margin-left:8px}
+.copy:hover,.copy:focus-visible{color:var(--brand);outline:none}
+.empty{color:var(--muted);padding:24px 0}
+@media (max-width:600px){.route{grid-template-columns:60px minmax(0,1fr)}.who-tags{grid-column:1/-1;grid-row:auto;justify-content:flex-start;max-width:none}}
+
+/* ── Parcours */
+.flows{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.flow{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.flow h3{font-size:18px;font-weight:700}
+.flow .who{color:var(--muted);font-size:14px;margin-top:4px}
+.flow ol{margin:14px 0 0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px}
+.flow li{counter-increment:s;display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;font-size:14px}
+.flow li::before{content:counter(s);width:24px;height:24px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:12px;display:grid;place-items:center}
+.flow li code{display:block;color:var(--ink);overflow-wrap:anywhere}
+.flow li span{color:var(--muted)}
+
+footer{padding-block:48px 56px;color:var(--muted);font-size:14px}
+footer p{max-width:75ch}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+section.part{scroll-margin-top:60px}
+</style>
+</head>
+<body>
+<p class="wrap" style="padding-block:16px 0;margin:0"><a href="./" style="font-weight:600;text-decoration:none">← Retour à Quiz App</a></p>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Référence de développement</div>
+    <h1>Carte de l'API Netwo</h1>
+    <p class="lead">Qui fait quoi sur la marketplace, toutes les routes regroupées par partie, et les parcours que vous allez coder. Basé sur la doc developer.netwo.io (93 routes, relevé du 29/10/2026).</p>
+    <div class="base">
+      <span class="chip"><b>URL</b> https://api.netwo.io/api/v1/…</span>
+      <span class="chip"><b>x-api-key</b> ta clé</span>
+      <span class="chip"><b>x-actor-slug</b> l'acteur au nom duquel tu agis</span>
+      <span class="chip"><b>x-realm</b> test (bac à sable)</span>
+      <span class="chip"><b>Limite</b> 200 / min · 5000 / jour</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <div class="wrap">
+    <a href="#acteurs">Les acteurs</a>
+    <a href="#roles">Acheteur ou vendeur ?</a>
+    <a href="#routes">Les routes</a>
+    <a href="#parcours">Parcours types</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ ACTEURS ═══════════════ -->
+<section class="part" id="acteurs">
+  <div class="wrap">
+    <h2>Les acteurs</h2>
+    <p class="intro">Netwo est une place de marché : des fournisseurs d'infrastructure vendent, des opérateurs de services achètent et revendent à leurs clients. Dans l'API, chaque entreprise est un <b>acteur</b>, identifié par son slug (<code>x-actor-slug</code>). Ton entreprise sera un acteur.</p>
+
+    <div class="chain" aria-label="Chaîne de distribution">
+      <div class="node">
+        <div class="tag">EndProvider</div>
+        <h3>Fournisseur d'infrastructure</h3>
+        <p>Possède le réseau : fibre, cuivre, mobile. Orange Wholesale, SFR, Kosc, Bouygues…</p>
+      </div>
+      <div class="node">
+        <div class="tag">plateforme</div>
+        <h3>Netwo</h3>
+        <p>La marketplace : catalogue, éligibilité, commandes, SAV, portabilité (via l'APNF).</p>
+      </div>
+      <div class="node me">
+        <span class="you">Toi</span>
+        <div class="tag">Direct · Intermediate</div>
+        <h3>Opérateur de services</h3>
+        <p>Intégrateur ou revendeur : achète sur Netwo, peut revendre à d'autres.</p>
+      </div>
+      <div class="node">
+        <div class="tag">EndCustomer</div>
+        <h3>Client final</h3>
+        <p>L'entreprise qui utilise l'accès : la PME, la clinique, l'agence…</p>
+      </div>
+      <div class="flowline"><span>vend →</span><span>met en relation →</span><span>revend →</span><span>utilise</span></div>
+    </div>
+
+    <div class="callout">
+      <h3>Comment lire les étiquettes EndProvider, Intermediate, EndCustomer ?</h3>
+      <p>Ce sont les valeurs de <code>ServiceActorChannel</code> dans l'API : la place d'un acteur dans la chaîne d'un service. <b>Direct</b> : tu achètes directement au fournisseur. <b>Intermediate</b> : tu es un maillon entre deux autres acteurs, par exemple quand tu revends un produit « réexposable » (<code>reexposable_only</code>) à un autre revendeur.</p>
+    </div>
+
+    <div class="actors">
+      <article class="actor">
+        <header><span class="dot" style="background:var(--brand)"></span><h3>Toi, l'opérateur de services</h3></header>
+        <p class="who">Le rôle principal de ton application.</p>
+        <ul>
+          <li>Tester l'éligibilité d'une adresse</li>
+          <li>Parcourir le catalogue et remplir un panier</li>
+          <li>Passer et suivre des commandes, échanger avec le fournisseur</li>
+          <li>Demander des portabilités entrantes</li>
+          <li>Gérer tes services, ouvrir des tickets SAV</li>
+          <li>Suivre la consommation mobile et les CDR</li>
+          <li>Recevoir des webhooks</li>
+        </ul>
+        <p class="src">Côté acheteur : commandes <code>sent</code>, panier <code>purchase</code>, contexte service <code>customer</code>, prix <code>as_consumer</code>.</p>
+      </article>
+      <article class="actor">
+        <header><span class="dot" style="background:var(--patch)"></span><h3>Le fournisseur</h3></header>
+        <p class="who">Celui qui livre le service. Tu peux l'être aussi si tu revends.</p>
+        <ul>
+          <li>Reçoit les commandes et les fait avancer (transitions)</li>
+          <li>Répond aux messages sur les lignes de commande</li>
+          <li>Fixe les rendez-vous techniciens</li>
+          <li>Traite les tickets, peut les geler si le blocage vient du client</li>
+          <li>Facture la consommation</li>
+        </ul>
+        <p class="src">Côté vendeur : commandes <code>received</code>, panier <code>sales</code>, contexte service <code>provider</code>, prix <code>as_provider</code>.</p>
+      </article>
+      <article class="actor">
+        <header><span class="dot" style="background:var(--get)"></span><h3>Netwo</h3></header>
+        <p class="who">La plateforme et l'intermédiaire technique.</p>
+        <ul>
+          <li>Calcule l'éligibilité en interrogeant les fournisseurs</li>
+          <li>Transmet les commandes au fournisseur</li>
+          <li>Héberge ton préfixe de portabilité</li>
+          <li>Dialogue avec l'APNF pour les portabilités</li>
+          <li>Envoie les notifications (webhooks)</li>
+        </ul>
+        <p class="src">Vendeur <code>internal</code> quand c'est Netwo qui vend (<code>seller_type</code>).</p>
+      </article>
+      <article class="actor">
+        <header><span class="dot" style="background:var(--put)"></span><h3>Les acteurs de la portabilité</h3></header>
+        <p class="who">Hors de Netwo, mais présents dans les flux.</p>
+        <ul>
+          <li><b>Opérateur donneur</b> : celui que le client quitte</li>
+          <li><b>Opérateur receveur</b> : celui qui récupère le numéro</li>
+          <li><b>APNF</b> : fait circuler les demandes entre opérateurs</li>
+          <li>Toi : receveur en entrante, donneur en sortante (CRI, CR)</li>
+        </ul>
+        <p class="src">États côté APNF : <code>ApnfRequestStateResponse</code>.</p>
+      </article>
+      <article class="actor">
+        <header><span class="dot" style="background:var(--delete)"></span><h3>Le client final</h3></header>
+        <p class="who">N'appelle pas l'API, mais on le décrit dans les requêtes.</p>
+        <ul>
+          <li>Sa fiche client (<code>/actor/customer</code>)</li>
+          <li>Son adresse pour l'éligibilité</li>
+          <li>Le contact sur les tickets SAV</li>
+          <li>Ses numéros pour la portabilité</li>
+        </ul>
+        <p class="src">Événements : <code>customer_record_created</code>, <code>customer_record_updated</code>.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ROLES ═══════════════ -->
+<section class="part" id="roles">
+  <div class="wrap">
+    <h2>Acheteur ou vendeur ?</h2>
+    <p class="intro">Un même acteur peut acheter <b>et</b> vendre. L'API te fait toujours préciser de quel côté tu regardes. Voici les paramètres qui portent ce choix.</p>
+    <div class="roles">
+      <table>
+        <thead><tr><th>Où</th><th>Paramètre</th><th>Côté acheteur</th><th>Côté vendeur</th></tr></thead>
+        <tbody>
+          <tr><td>Commandes</td><td><code>order_type</code></td><td><code>sent</code> : celles que tu as passées</td><td><code>received</code> : celles que tu dois livrer</td></tr>
+          <tr><td>Panier</td><td><code>cart_type</code></td><td><code>purchase</code> : tu achètes</td><td><code>sales</code> : tu prépares une vente</td></tr>
+          <tr><td>Services</td><td><code>context</code></td><td><code>customer</code> : services que tu consommes</td><td><code>provider</code> : services que tu fournis</td></tr>
+          <tr><td>Consommation</td><td><code>pricing_side</code></td><td><code>as_consumer</code> : ce que tu paies</td><td><code>as_provider</code> : ce que tu factures</td></tr>
+          <tr><td>Tickets SAV</td><td><code>consumer_slug</code> / <code>provider_slug</code></td><td>tu es le consommateur</td><td>tu es le fournisseur</td></tr>
+          <tr><td>Catalogue</td><td><code>seller_type</code></td><td colspan="2"><code>providers</code> : fournisseurs tiers · <code>internal</code> : vendu par Netwo</td></tr>
+          <tr><td>Contrats</td><td><code>target_market</code></td><td colspan="2"><code>service_operator</code> : offres pour opérateurs de services · <code>general_availability</code> : offres ouvertes à tous</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <h3>Ce que la doc ne dit pas</h3>
+      <p>La doc publique ne donne pas de matrice officielle « tel rôle a droit à telle route ». Les droits dépendent des rôles attachés à ta clé d'API (une erreur <code>403</code> signale une route interdite). Les colonnes « qui l'utilise » ci-dessous sont déduites des paramètres ci-dessus et des guides : à confirmer avec Netwo en demandant ta clé (acces-api@support.netwo.io).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ROUTES ═══════════════ -->
+<section class="part" id="routes">
+  <div class="wrap">
+    <h2>Les routes, par partie</h2>
+    <p class="intro">Les 93 routes REST regroupées dans l'ordre où tu les utiliseras. <b>*</b> = champ obligatoire. Filtre par acteur pour ne voir que ce qui te concerne.</p>
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Chercher une route : cart, portability, simcard…" aria-label="Chercher une route">
+      <div class="filters" role="group" aria-label="Filtrer par acteur">
+        <button type="button" data-f="all" aria-pressed="true">Toutes</button>
+        <button type="button" data-f="A" aria-pressed="false"><span class="dot" style="background:var(--brand)"></span>Acheteur (toi)</button>
+        <button type="button" data-f="F" aria-pressed="false"><span class="dot" style="background:var(--patch)"></span>Fournisseur</button>
+      </div>
+      <span class="count" id="count"></span>
+    </div>
+    <div id="groups"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ PARCOURS ═══════════════ -->
+<section class="part" id="parcours">
+  <div class="wrap">
+    <h2>Parcours types</h2>
+    <p class="intro">Les enchaînements de routes que votre application va implémenter, dans l'ordre.</p>
+    <div class="flows">
+      <article class="flow">
+        <h3>Vendre un accès fibre</h3>
+        <p class="who">Acheteur · de l'adresse à la mise en service</p>
+        <ol>
+          <li><div><code>POST /eligibility/preselect</code><span>proposer les adresses, choisir la bonne</span></div></li>
+          <li><div><code>POST /eligibility/geocode-input</code><span>valider : value + signature</span></div></li>
+          <li><div><code>POST /eligibility</code><span>lancer, recevoir eligibility_id</span></div></li>
+          <li><div><code>GET /eligibility/{id}/status</code><span>attendre la fin</span></div></li>
+          <li><div><code>GET /eligibility/{id}?sort_by=recurring_price.asc</code><span>choisir l'offre</span></div></li>
+          <li><div><code>POST /cart</code> → <code>GET /cart/{id}/lines</code><span>panier</span></div></li>
+          <li><div><code>POST /orders</code><span>commander</span></div></li>
+          <li><div><code>webhook order_line_updated</code> + <code>appointment_*</code><span>suivre, rendez-vous technicien</span></div></li>
+          <li><div><code>GET /service?status=active</code><span>le service est livré</span></div></li>
+        </ol>
+      </article>
+      <article class="flow">
+        <h3>Activer une ligne data mobile</h3>
+        <p class="who">Acheteur · quelques minutes</p>
+        <ol>
+          <li><div><code>GET /contract/marketplace/products?categories[]=mobile_data&amp;seller_type=providers</code><span>trouver le forfait</span></div></li>
+          <li><div><code>POST /cart</code><span>forfait + options (IP fixe…)</span></div></li>
+          <li><div><code>GET /cart/{id}/lines</code><span>lignes du panier</span></div></li>
+          <li><div><code>POST /orders</code><span>avec l'ICCID et le plafond data</span></div></li>
+          <li><div><code>PUT /service/simcard/{service_id}</code><span>ensuite : suspendre, changer le plafond</span></div></li>
+        </ol>
+      </article>
+      <article class="flow">
+        <h3>Portabilité entrante</h3>
+        <p class="who">Acheteur, opérateur receveur · 6 jours ouvrés minimum</p>
+        <ol>
+          <li><div><code>GET /portability/operator-code/by-phone-number</code><span>savoir quels numéros sont portables ensemble</span></div></li>
+          <li><div><code>POST /portability/reliability-check</code><span>si la liste des SDA est incertaine</span></div></li>
+          <li><div><code>GET /service?product_category[]=prefix_hosting</code><span>ton préfixe de portabilité</span></div></li>
+          <li><div><code>POST /cart</code><span>NDI, SDA ou RIO, type, wanted_date</span></div></li>
+          <li><div><code>GET /cart/{id}/lines</code> → <code>POST /orders</code><span>commander</span></div></li>
+          <li><div><code>GET /portability/order/{order_id}</code><span>suivre ; décaler avec <b>/delay</b>, annuler avec DELETE</span></div></li>
+        </ol>
+      </article>
+      <article class="flow">
+        <h3>Portabilité sortante</h3>
+        <p class="who">Toi en opérateur donneur · un client te quitte</p>
+        <ol>
+          <li><div><code>webhook OutgoingPortabilityApnfCommandReceived</code><span>demande reçue</span></div></li>
+          <li><div><code>GET /portability/outgoing/{id}</code><span>lire la demande (AR fait automatiquement)</span></div></li>
+          <li><div><code>webhook OutgoingPortabilityFeedbackCriRequested</code><span>étude demandée</span></div></li>
+          <li><div><code>POST /portability/outgoing/{id}/cri</code><span>répondre OK ou KO</span></div></li>
+          <li><div><code>POST /portability/outgoing/{id}/cr</code><span>seulement pour une RESTIT</span></div></li>
+        </ol>
+      </article>
+      <article class="flow">
+        <h3>Panne et ticket SAV</h3>
+        <p class="who">Acheteur ouvre, fournisseur traite</p>
+        <ol>
+          <li><div><code>webhook connexion down</code><span>coupure détectée</span></div></li>
+          <li><div><code>POST /file</code><span>photos, captures (optionnel)</span></div></li>
+          <li><div><code>POST /service/signalization</code><span>service_id, description, contact, state</span></div></li>
+          <li><div><code>POST …/{id}/messaging</code><span>échanger avec le fournisseur</span></div></li>
+          <li><div><code>PATCH …/{id}/freeze</code> · <code>/unfreeze</code><span>si le blocage vient du client (chrono GTR)</span></div></li>
+          <li><div><code>PATCH …/{id}/close</code><span>réparé, message obligatoire</span></div></li>
+        </ol>
+      </article>
+      <article class="flow">
+        <h3>Facturer la consommation</h3>
+        <p class="who">Fin de mois</p>
+        <ol>
+          <li><div><code>GET /service/simcard/consumptions</code><span>qui approche de son quota</span></div></li>
+          <li><div><code>GET /consumption?limit=500&amp;after_id=…</code><span>lire tous les CDR par paquets</span></div></li>
+          <li><div><code>GET /consumption/export?service_id=…</code><span>exports CSV du mois</span></div></li>
+          <li><div><code>GET /consumption/export/{export_id}</code><span>télécharger</span></div></li>
+        </ol>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Source : developer.netwo.io (guides et référence OpenAPI). Les rôles par route sont déduits de la doc publique : vérifiez-les avec les rôles réels de votre clé d'API avant de figer l'architecture.</p>
+  </div>
+</footer>
+
+<script>
+// A = acheteur (operateur de services), F = fournisseur. p = parametres (* = obligatoire)
+const GROUPS = [
+ { id:"base", title:"Acteur & fichiers", why:"utilitaires transverses", routes:[
+  ["GET","/actor/customer/{actor_id}","Lire une fiche client","", "AF"],
+  ["POST","/file","Envoyer un fichier (temporaire tant qu'il n'est rattaché à rien) → file_id","", "AF"],
+  ["GET","/file/{file_id}","Télécharger un fichier joint à un ticket","", "AF"],
+ ]},
+ { id:"catalog", title:"Catalogue (marketplace)", why:"quoi vendre, à quel prix", routes:[
+  ["GET","/contract/marketplace/products","Produits que tu peux commander","seller_type*, categories[], infra_providers, search", "A"],
+  ["GET","/contract/marketplace","Contrats (catalogues) disponibles","target_market, actor_ids, reexposable_only, search, limit, offset", "AF"],
+  ["GET","/contract/marketplace/connections","Connexions disponibles (marché opérateurs)","infra_providers, search, limit, offset", "A"],
+  ["GET","/contract/product/{contract_version_product_id}","Un produit dans une version de catalogue","", "AF"],
+ ]},
+ { id:"elig", title:"Éligibilité", why:"ce qui est possible à une adresse", routes:[
+  ["POST","/eligibility/preselect","Proposer les emplacements correspondant à une saisie","", "A"],
+  ["POST","/eligibility/geocode-input","Valider et signer la saisie → value + signature","", "A"],
+  ["POST","/eligibility/list-ndi","Numéros de ligne (NDI) liés à l'adresse","value*, signature*, query_type*", "A"],
+  ["GET","/eligibility/resolvers","Sources d'éligibilité actives","", "A"],
+  ["POST","/eligibility","Lancer l'éligibilité → eligibility_id","market*, value*, signature*, offer_type, catalog", "A"],
+  ["GET","/eligibility/{eligibility_id}/status","Statut : en cours ou terminé","", "A"],
+  ["GET","/eligibility/{eligibility_id}","Les offres trouvées","infrastructure_type[], debit, recurring_price, access_fee, commitment_duration, sort_by", "A"],
+  ["GET","/eligibility/{eligibility_id}/info","La demande d'origine","", "A"],
+  ["GET","/eligibility/{eligibility_id}/details/{product_id}","Détail d'une offre","", "A"],
+  ["GET","/eligibility/{eligibility_id}/options/{entity_id}","Options d'une offre","", "A"],
+  ["GET","/eligibility/history","Historique des éligibilités","target_catalog, search, limit, offset", "A"],
+ ]},
+ { id:"imb", title:"Immeubles fibre (IMB)", why:"où en est la fibre dans un immeuble", routes:[
+  ["GET","/imb/closest","Immeuble le plus proche de coordonnées","lat*, lng*", "A"],
+  ["GET","/imb/list","Immeubles d'une zone ou d'une adresse","limit, offset", "A"],
+  ["GET","/imb/{imb_ref}","Un immeuble par sa référence","", "A"],
+ ]},
+ { id:"cart", title:"Panier", why:"préparer la commande", routes:[
+  ["POST","/cart","Créer un panier → cart_id","lines*, context*, name, description", "AF"],
+  ["GET","/cart","Mes paniers","status, cart_type, search, limit, offset", "AF"],
+  ["GET","/cart/{cart_id}","Contenu d'un panier","", "AF"],
+  ["PATCH","/cart/{cart_id}","Modifier un panier","", "AF"],
+  ["DELETE","/cart/{cart_id}","Supprimer un panier et ce qui y est lié","", "AF"],
+  ["GET","/cart/{cart_id}/lines","Lignes du panier (nécessaires pour commander)","", "AF"],
+  ["POST","/cart/{cart_id}/lines","Ajouter une ligne","entity*, discount", "AF"],
+  ["PUT","/cart/{cart_id}/lines","Remplacer toutes les lignes","lines*", "AF"],
+  ["PUT","/cart/lines/{line_id}","Modifier une ligne","", "AF"],
+  ["DELETE","/cart/lines/{line_id}","Supprimer une ligne","", "AF"],
+  ["GET","/cart/lines/{line_id}/vertical","Bâtiment, escalier, étage, OTP (fibre)","", "A"],
+ ]},
+ { id:"orders", title:"Commandes", why:"acheter et suivre", routes:[
+  ["POST","/orders","Créer une commande → order_id","cart_id*, lines*", "A"],
+  ["GET","/orders","Mes commandes (envoyées ou reçues)","order_type (sent | received), status, order_ids, filter, limit, offset", "AF"],
+  ["GET","/orders/{order_id}","Détail d'une commande","", "AF"],
+  ["GET","/orders/{order_id}/lines","Lignes d'une commande","filter, status", "AF"],
+  ["GET","/orders/lines","Toutes les lignes de commande","order_type, status, product_category, external_reference…", "AF"],
+  ["GET","/orders/lines/{order_line_id}","Détail d'une ligne","", "AF"],
+  ["POST","/orders/lines/{order_line_id}/transitions","Faire avancer une ligne (confirmer, annuler, décaler…)","transition*", "AF"],
+  ["POST","/orders/lines/{order_line_id}/reference","Poser ta propre référence (unique)","reference*", "AF"],
+  ["POST","/orders/lines/{order_line_id}/messaging","Envoyer un message sur la ligne","message*, file_ids, propagate", "AF"],
+  ["GET","/orders/lines/{order_line_id}/messaging","Lire les messages","since, kind, limit, offset", "AF"],
+ ]},
+ { id:"porta", title:"Portabilité", why:"garder ses numéros", routes:[
+  ["GET","/portability/operator-code/by-phone-number","Codes opérateur (OPA / OPE) de numéros","numbers", "A"],
+  ["POST","/portability/reliability-check","Demander une fiabilisation (vraie liste des SDA)","idn*, customer*", "A"],
+  ["GET","/portability/reliability-check","Mes fiabilisations","state, filter, limit, offset", "A"],
+  ["GET","/portability/reliability-check/{reliability_check_id}","Résultat d'une fiabilisation","", "A"],
+  ["GET","/portability/order/{order_id}","Suivre une portabilité entrante","", "A"],
+  ["GET","/portability/order-line/{order_line_id}","Détails techniques d'une ligne","", "A"],
+  ["POST","/portability/order/{order_id}/delay","Décaler la date","wanted_date*, comment", "A"],
+  ["DELETE","/portability/order/{order_id}","Annuler (asynchrone)","", "A"],
+  ["GET","/portability/outgoing","Portabilités sortantes reçues","limit, offset", "F"],
+  ["GET","/portability/outgoing/{outgoing_portability_id}","Détail d'une sortante","", "F"],
+  ["POST","/portability/outgoing/{outgoing_portability_id}/cri","Répondre à l'étude (OK / KO)","status*, contact_name*, contact_email*, contact_phone_number*, comment", "F"],
+  ["POST","/portability/outgoing/{outgoing_portability_id}/cr","Confirmer une restitution (RESTIT)","", "F"],
+ ]},
+ { id:"service", title:"Services livrés", why:"ce qui fonctionne et se facture", routes:[
+  ["GET","/service","Mes services","context (customer | provider), status, product_category[], service_ids, filter…", "AF"],
+  ["GET","/service/{service_id}","Détail d'un service","", "AF"],
+  ["PATCH","/service/{service_id}","Dates, références externes, nom client, VLAN…","", "AF"],
+  ["GET","/provisioning/technical-info/{service_id}","Infos techniques (IP, identifiants)","", "A"],
+  ["POST","/service/available-backbone","Backbones disponibles pour un produit","contract_version_product_id*, variation_id, buyer_id", "AF"],
+  ["GET","/service/routing-profile","Profils de routage","limit, offset", "AF"],
+  ["GET","/service/{service_id}/vlan","VLAN d'un POI de niveau 2","", "AF"],
+  ["PATCH","/service/{service_id}/vlan","Mettre des VLAN sur liste noire","vlan_blacklist*", "AF"],
+ ]},
+ { id:"sav", title:"Signalisations (SAV)", why:"tickets d'incident", routes:[
+  ["POST","/service/signalization","Ouvrir un ticket","service_id*, description*, contact*, state*, file_ids", "A"],
+  ["GET","/service/signalization","Tous les tickets","status, service_id, provider_slug, consumer_slug, before, after…", "AF"],
+  ["GET","/service/signalization/{service_ticket_id}","Détail d'un ticket","", "AF"],
+  ["PATCH","/service/signalization/{service_ticket_id}","Références externes, contact","", "AF"],
+  ["POST","/service/signalization/{service_ticket_id}/messaging","Envoyer un message","message*, file_ids, propagate", "AF"],
+  ["GET","/service/signalization/{service_ticket_id}/messaging","Lire les messages","since, kind", "AF"],
+  ["PATCH","/service/signalization/{service_ticket_id}/freeze","Geler (pause du chrono GTR)","message*, file_ids", "AF"],
+  ["PATCH","/service/signalization/{service_ticket_id}/unfreeze","Dégeler","message", "AF"],
+  ["PATCH","/service/signalization/{service_ticket_id}/close","Clore (message obligatoire)","", "AF"],
+  ["PATCH","/service/signalization/{service_ticket_id}/reopen","Rouvrir","message*", "A"],
+ ]},
+ { id:"mobile", title:"Mobile & consommation", why:"SIM, quotas, CDR", routes:[
+  ["PUT","/service/simcard/{service_id}","Modifier une SIM (201 = demande enregistrée)","", "A"],
+  ["PUT","/service/{service_id}/command","Déprécié : utiliser /service/simcard/{service_id}","", "A"],
+  ["GET","/service/simcard/consumption","Conso agrégée actuelle de la flotte","with_price", "A"],
+  ["GET","/service/simcard/consumption-history","Historique agrégé","start_date*, end_date*, with_price", "A"],
+  ["GET","/service/simcard/consumptions","Data + quotas de chaque ligne (200 max / page)","limit, offset", "A"],
+  ["GET","/service/simcard/fleet-consumptions-history","Historique par ligne pour un mois","month*, year*", "A"],
+  ["GET","/service/simcard/{service_id}/consumption","Conso + quotas d'une ligne","", "A"],
+  ["GET","/service/simcard/{service_id}/consumption-history","Historique d'une ligne","step* (Daily | Monthly), start_date*, end_date*", "A"],
+  ["GET","/consumption","CDR en JSON","limit*, infra_type, event_type, pricing_side, after_id, after_date, service_ids, iccids", "AF"],
+  ["GET","/consumption/csv","CDR en CSV","mêmes paramètres", "AF"],
+  ["GET","/consumption/export","Exports mensuels disponibles","service_id*", "AF"],
+  ["GET","/consumption/export/{export_id}","Télécharger un export","", "AF"],
+  ["GET","/vas/{country}/{vas_number}","Tarif d'un numéro surtaxé (sans +33)","date", "A"],
+ ]},
+ { id:"notif", title:"Notifications (webhooks)", why:"être prévenu au lieu d'interroger", routes:[
+  ["POST","/notification/webhook","Créer un webhook","notification_type*, url*, description", "AF"],
+  ["GET","/notification/webhook","Lister mes webhooks","limit, offset", "AF"],
+  ["PATCH","/notification/webhook/{webhook_id}","Modifier l'URL ou la description","url*, description", "AF"],
+  ["DELETE","/notification/webhook/{webhook_id}","Supprimer","", "AF"],
+  ["POST","/notification/webhook/{webhook_id}","Ajouter un en-tête (ex : secret)","key*, value*", "AF"],
+  ["GET","/notification/webhook/{webhook_id}","Lister les en-têtes","limit, offset", "AF"],
+  ["PATCH","/notification/webhook/{webhook_id}/{webhook_header_id}","Modifier un en-tête","value*", "AF"],
+  ["DELETE","/notification/webhook/{webhook_id}/{webhook_header_id}","Retirer un en-tête","", "AF"],
+ ]},
+];
+
+const WHO = { A:{label:"Acheteur", color:"var(--brand)"}, F:{label:"Fournisseur", color:"var(--patch)"} };
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const fmtPath = p => esc(p).replace(/\{([^}]+)\}/g,'<span class="p">{$1}</span>');
+const fmtParams = p => esc(p).replace(/([\w\[\]]+)\*/g,'<b>$1*</b>');
+
+let filter = "all", query = "";
+try { filter = localStorage.getItem("netwo-filter") || "all"; } catch {}
+
+function render(){
+  const box = document.getElementById("groups");
+  let n = 0, html = "";
+  for (const g of GROUPS){
+    const rows = g.routes.filter(([v,p,d,pa,w]) =>
+      (filter === "all" || w.includes(filter)) &&
+      (!query || (v+" "+p+" "+d+" "+pa).toLowerCase().includes(query)));
+    if (!rows.length) continue;
+    n += rows.length;
+    html += `<div class="group" id="g-${g.id}"><header><h3>${g.title}</h3><span class="why">${g.why} · ${rows.length} route${rows.length>1?"s":""}</span></header>`;
+    for (const [v,p,d,pa,w] of rows){
+      html += `<div class="route"><span class="verb v-${v}">${v}</span>
+        <div class="path">${fmtPath(p)}<button class="copy" type="button" data-copy="${esc(v+" "+p)}">copier</button></div>
+        <div class="who-tags">${[...w].map(k=>`<span class="wt" style="color:${WHO[k].color}">${WHO[k].label}</span>`).join("")}</div>
+        <div class="desc">${esc(d)}</div>${pa?`<div class="params">${fmtParams(pa)}</div>`:""}</div>`;
+    }
+    html += `</div>`;
+  }
+  box.innerHTML = html || `<p class="empty">Aucune route ne correspond. Essaie « cart », « simcard » ou « portability ».</p>`;
+  document.getElementById("count").textContent = n + " route" + (n>1?"s":"");
+  document.querySelectorAll(".filters button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === filter)));
+}
+
+document.querySelector(".filters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  filter = b.dataset.f;
+  try { localStorage.setItem("netwo-filter", filter); } catch {}
+  render();
+});
+document.getElementById("q").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); render(); });
+document.getElementById("groups").addEventListener("click", async e => {
+  const b = e.target.closest(".copy"); if (!b) return;
+  try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "copié ✓"; }
+  catch { const r = document.createRange(); r.selectNodeContents(b.parentElement); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "sélectionné"; }
+  setTimeout(() => b.textContent = "copier", 1400);
+});
+render();
+</script>
+</body>
+</html>
