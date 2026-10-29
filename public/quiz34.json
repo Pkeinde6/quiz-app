@@ -1,6 +1,6 @@
 {
   "title": "Netwo : Éligibilité & IMB",
-  "minimum_score": 7,
+  "minimum_score": 10,
   "success_message": "Bravo ! Tu maîtrises le module Netwo Éligibilité & IMB.",
   "failure_message": "Relis le cours Netwo Éligibilité & IMB et réessaie.",
   "questions": [
@@ -142,6 +142,62 @@
       "hint": "OfferType.",
       "accept": [
         "enterprise, professional"
+      ]
+    },
+    {
+      "question": "Pourquoi POST /eligibility renvoie un ticket (eligibility_id) au lieu des offres ?",
+      "choices": [
+        "Netwo interroge plusieurs opérateurs, ça prend du temps (asynchrone)",
+        "Pour économiser de la bande passante",
+        "Parce que l'adresse est fausse",
+        "Par sécurité uniquement"
+      ],
+      "correct_answer": "Netwo interroge plusieurs opérateurs, ça prend du temps (asynchrone)",
+      "hint": "On repasse chercher le résultat.",
+      "accept": [
+        "Netwo interroge plusieurs opérateurs, ça prend du temps (asynchrone)"
+      ]
+    },
+    {
+      "question": "Que représente la signature renvoyée par geocode-input ?",
+      "choices": [
+        "Un tampon qui prouve que l'adresse a été validée",
+        "Ta clé d'API",
+        "Le prix de l'offre",
+        "L'identifiant de commande"
+      ],
+      "correct_answer": "Un tampon qui prouve que l'adresse a été validée",
+      "hint": "À renvoyer avec value.",
+      "accept": [
+        "Un tampon qui prouve que l'adresse a été validée"
+      ]
+    },
+    {
+      "question": "Fibre dédiée entreprise, chère mais avec débit garanti :",
+      "choices": [
+        "FTTO",
+        "FTTH",
+        "ADSL",
+        "data_mobile"
+      ],
+      "correct_answer": "FTTO",
+      "hint": "O comme Office.",
+      "accept": [
+        "FTTO"
+      ]
+    },
+    {
+      "question": "Statut IMB qui permet de raccorder un client :",
+      "choices": [
+        "Connectable",
+        "Target",
+        "DeployInProgress",
+        "Signed"
+      ],
+      "correct_answer": "Connectable",
+      "hint": "✅",
+      "accept": [
+        "Connectable"
       ]
     }
   ]

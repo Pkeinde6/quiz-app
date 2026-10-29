@@ -254,7 +254,7 @@
           "file": "quiz34.json",
           "title": "Éligibilité & IMB",
           "icon": "📍",
-          "questions": 10
+          "questions": 14
         }
       ],
       "videoFile": "videos/n-eligibility.mp4"
@@ -290,7 +290,7 @@
           "file": "quiz36.json",
           "title": "Portabilité",
           "icon": "🔁",
-          "questions": 12
+          "questions": 16
         }
       ],
       "videoFile": "videos/n-portability.mp4"
@@ -308,7 +308,7 @@
           "file": "quiz37.json",
           "title": "Services & signalisations",
           "icon": "🛠️",
-          "questions": 10
+          "questions": 14
         }
       ],
       "videoFile": "videos/n-services.mp4"

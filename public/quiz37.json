@@ -1,6 +1,6 @@
 {
   "title": "Netwo : Services & signalisations",
-  "minimum_score": 7,
+  "minimum_score": 10,
   "success_message": "Bravo ! Tu maîtrises le module Netwo Services & signalisations.",
   "failure_message": "Relis le cours Netwo Services & signalisations et réessaie.",
   "questions": [
@@ -142,6 +142,62 @@
       "hint": "ServiceStatus.",
       "accept": [
         "suspended"
+      ]
+    },
+    {
+      "question": "Quand une commande devient-elle un service ?",
+      "choices": [
+        "Quand elle est installée et fonctionne",
+        "Dès la création du panier",
+        "Quand on ouvre un ticket",
+        "Jamais"
+      ],
+      "correct_answer": "Quand elle est installée et fonctionne",
+      "hint": "« Ça marche ».",
+      "accept": [
+        "Quand elle est installée et fonctionne"
+      ]
+    },
+    {
+      "question": "La fibre marche mais elle est très lente : quel state ?",
+      "choices": [
+        "degraded",
+        "interrupted",
+        "never_worked",
+        "other"
+      ],
+      "correct_answer": "degraded",
+      "hint": "Ça marche, mais mal.",
+      "accept": [
+        "degraded"
+      ]
+    },
+    {
+      "question": "Le technicien ne peut pas entrer car le client est fermé. Que faire ?",
+      "choices": [
+        "Geler le ticket (freeze) pour arrêter le chrono GTR",
+        "Clore le ticket",
+        "Ouvrir un 2e ticket",
+        "Supprimer le service"
+      ],
+      "correct_answer": "Geler le ticket (freeze) pour arrêter le chrono GTR",
+      "hint": "Pas la faute du fournisseur.",
+      "accept": [
+        "Geler le ticket (freeze) pour arrêter le chrono GTR"
+      ]
+    },
+    {
+      "question": "Comment être prévenu automatiquement d'un changement sur un ticket ?",
+      "choices": [
+        "Webhook signalization_updated",
+        "Rafraîchir toutes les 5 minutes",
+        "Un mail manuel",
+        "GET /service"
+      ],
+      "correct_answer": "Webhook signalization_updated",
+      "hint": "Notifications.",
+      "accept": [
+        "Webhook signalization_updated"
       ]
     }
   ]

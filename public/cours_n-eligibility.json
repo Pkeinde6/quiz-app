@@ -3,6 +3,18 @@
   "title": "Netwo : Éligibilité & IMB",
   "sections": [
     {
+      "title": "En clair : c'est quoi l'éligibilité ?",
+      "content": "Un client t'appelle : \"Je veux la fibre pour mon bureau au 12 avenue Bourguiba.\"\nAvant de lui vendre quoi que ce soit, tu dois savoir ce qui est POSSIBLE à cette adresse :\n  la fibre passe-t-elle dans l'immeuble ? sinon SDSL, ADSL, 4G… ?\n  quels opérateurs la proposent ? quels débits ? quels prix ?\n\nTester une adresse, c'est faire une ÉLIGIBILITÉ.\nC'est le \"testez votre éligibilité\" d'Orange ou de Free, en version pro et par l'API.\n\nPourquoi plusieurs étapes ? Une adresse tapée à la main est souvent imprécise\n(faute de frappe, \"bis\" oublié, plusieurs entrées…). Netwo te fait donc d'abord\nPRÉCISER et VALIDER l'adresse, avant de lancer la recherche."
+    },
+    {
+      "title": "En clair : les 5 étapes",
+      "content": "1. Proposer les adresses possibles   → tu choisis la bonne\nPOST /eligibility/preselect\n2. Valider l'adresse                  → value + signature (tampon \"adresse vérifiée\")\nPOST /eligibility/geocode-input\n3. Lancer la recherche                → un eligibility_id (ton \"ticket de retrait\")\nPOST /eligibility\n4. \"C'est prêt ?\"\nGET /eligibility/{eligibility_id}/status\n5. Lire les offres\nGET /eligibility/{eligibility_id}\n\nPourquoi un ticket au lieu de la réponse directe ?\nNetwo interroge PLUSIEURS opérateurs (Orange, SFR, Bouygues, Kosc…), ça prend\nquelques secondes. Il te donne un numéro et tu repasses chercher le résultat :\nc'est un fonctionnement ASYNCHRONE."
+    },
+    {
+      "title": "En clair : ce que tu reçois",
+      "content": "Une liste d'offres, par exemple :\n\nFTTH  Orange  1 Gb/s    49 €/mois   frais 0 €    engagement 12 mois\nFTTO  SFR     100 Mb/s  290 €/mois  frais 500 €  engagement 36 mois\nSDSL  Kosc    20 Mb/s   120 €/mois  frais 200 €  engagement 36 mois\n\nFiltrer et trier : \"seulement la FTTH, de la moins chère à la plus chère\"\nGET /eligibility/{id}?infrastructure_type[]=ftth&sort_by=recurring_price.asc\n\nLes sigles :\nFTTH   fibre jusqu'au logement : grand public, pas chère\nFTTO   fibre DÉDIÉE entreprise : chère, débit garanti, dépannage rapide\nFTTE   entre les deux : fibre \"entreprise\" sur le réseau mutualisé\nSDSL / ADSL / VDSL   Internet par la ligne téléphonique en cuivre\ndata_mobile          Internet par la 4G / 5G\n\nIMB = le code d'un immeuble dans la base nationale fibre.\nIl dit où en est la fibre : Target (prévu) → DeployInProgress → Deployed\n→ Connectable ✅ (on peut raccorder) ; ou Abandoned."
+    },
+    {
       "title": "Le principe",
       "content": "Avant de vendre un accès Internet, on vérifie qu'il est possible à l'adresse du client :\nquelle technologie (fibre FTTH / FTTO / FTTE, SDSL, ADSL, VDSL, mobile…), quels opérateurs,\nquels débits, quels prix.\n\nLe parcours :\n  1) présélectionner le bon lieu (adresse, ligne existante…)\n  2) valider et SIGNER la saisie\n  3) lancer l'éligibilité → on reçoit un eligibility_id\n  4) suivre le statut, puis lire les résultats (offres)"
     },

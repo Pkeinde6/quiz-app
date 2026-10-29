@@ -14,7 +14,7 @@ const CODE_LINE = [
   /^\s*"[^"]+"\s*:/,                                   // cle JSON
   /^\s*\$\w+/,                                         // variable
   /^\s*[a-z]\w*\s*:\s*\[?[A-Z]\w*/,                    // champ: Type
-  /^\s*[A-ZÉÈÀ][A-ZÉÈÀ0-9_]{2,}(\s{2,}|\s*$|\s*[=│▶◀─→(])/,   // VALEUR_ENUM / titre de liste
+  /^\s*[A-ZÉÈÀ][A-ZÉÈÀ0-9_]{2,}(\s{2,}|\s*$|\s*[│▶◀─→(])/,   // VALEUR_ENUM / titre de liste
 ];
 
 export function isCodeLine(line) {
