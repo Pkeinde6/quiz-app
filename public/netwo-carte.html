@@ -62,7 +62,11 @@ a{color:var(--brand)}
 /* ── Navigation */
 nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
-nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.toc .wrap{display:flex;gap:4px;align-items:center;padding-block:10px}
+nav.toc .links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+.theme{flex:none;display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.theme:hover{border-color:var(--brand)}
+.theme span{font-size:15px;line-height:1}
 nav.toc a{flex:none;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px;transition:background .2s,color .2s}
 nav.toc a:hover,nav.toc a.on{color:var(--ink);background:var(--surface);box-shadow:0 0 0 1px var(--line)}
 
@@ -193,6 +197,7 @@ footer p{max-width:78ch}
 </style>
 </head>
 <body>
+<script>try{const t=localStorage.getItem("netwo-theme");if(t)document.documentElement.dataset.theme=t}catch{}</script>
 
 <header class="hero">
   <div class="wrap">
@@ -218,10 +223,13 @@ footer p{max-width:78ch}
 
 <nav class="toc" aria-label="Sommaire">
   <div class="wrap">
-    <a href="#acteurs">Les acteurs</a>
-    <a href="#roles">Acheteur ou vendeur ?</a>
-    <a href="#routes">Les routes</a>
-    <a href="#parcours">Parcours types</a>
+    <div class="links">
+      <a href="#acteurs">Les acteurs</a>
+      <a href="#roles">Acheteur ou vendeur ?</a>
+      <a href="#routes">Les routes</a>
+      <a href="#parcours">Parcours types</a>
+    </div>
+    <button type="button" class="theme" id="theme" aria-label="Changer de thème"><span id="theme-ic">🌙</span><b id="theme-lb">Sombre</b></button>
   </div>
 </nav>
 
@@ -665,6 +673,25 @@ document.getElementById("groups").addEventListener("click", async e => {
   setTimeout(() => b.textContent = "Copier", 1400);
 });
 render();
+
+// Theme : automatique (reglage de l'appareil) tant qu'on n'a pas choisi, puis memorise.
+// Le bouton propose toujours l'autre theme que celui affiche.
+const root = document.documentElement;
+const sysDark = matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : sysDark.matches;
+function paintThemeButton(){
+  const dark = isDark();
+  document.getElementById("theme-ic").textContent = dark ? "☀️" : "🌙";
+  document.getElementById("theme-lb").textContent = dark ? "Clair" : "Sombre";
+}
+try { const saved = localStorage.getItem("netwo-theme"); if (saved) root.dataset.theme = saved; } catch {}
+paintThemeButton();
+sysDark.addEventListener("change", paintThemeButton);
+document.getElementById("theme").addEventListener("click", () => {
+  root.dataset.theme = isDark() ? "light" : "dark";
+  try { localStorage.setItem("netwo-theme", root.dataset.theme); } catch {}
+  paintThemeButton();
+});
 </script>
 </body>
 </html>
