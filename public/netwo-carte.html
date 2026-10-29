@@ -6,151 +6,212 @@
 <title>Carte de l'API Netwo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout : en-tete court, navigation collante par partie, puis 3 sections (acteurs, routes, parcours) */
+/* Layout : bandeau sombre (chiffres cles) → acteurs en chaine → table des roles →
+   routes avec sommaire lateral collant → parcours en frise. Palette Rangu, comme Quiz App. */
 :root{
-  --bg:#F3F6F1; --surface:#FFFFFF; --ink:#0E1A14; --muted:#5C6E63; --line:#DCE5DE;
-  --brand:#00853F; --brand-soft:#E3F1E8; --sun:#FDEF42; --night:#003D24;
-  --get:#1F6FB2; --post:#00853F; --patch:#A76200; --put:#7A4DB3; --delete:#C2362F;
-  --code-bg:#0E1A14; --code-fg:#E6EFE9;
+  --bg:#F3F6F1; --surface:#FFFFFF; --ink:#0E1A14; --muted:#5C6E63; --line:#DCE5DE; --soft:#EAF0EB;
+  --brand:#00853F; --brand-soft:#E1F1E7; --sun:#FDEF42; --night:#003D24; --hero:#0E1A14; --hero-fg:#F3F6F1;
+  --get:#1F6FB2; --post:#00853F; --patch:#B26A00; --put:#7A4DB3; --delete:#C2362F;
+  --buy:#00853F; --sell:#B26A00;
   --display:"Outfit",ui-sans-serif,system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0B1510; --surface:#12201A; --ink:#E6EFE9; --muted:#93A89B; --line:#24382D;
-  --brand:#3CC27A; --brand-soft:#173A27; --sun:#FDEF42; --night:#0A2A1A;
+  --bg:#0B1510; --surface:#12201A; --ink:#E6EFE9; --muted:#93A89B; --line:#22372B; --soft:#172A20;
+  --brand:#3CC27A; --brand-soft:#173A27; --night:#0A2A1A; --hero:#07100B; --hero-fg:#F3F6F1;
   --get:#6AB4F0; --post:#3CC27A; --patch:#F0B34F; --put:#B996F0; --delete:#F07A70;
-  --code-bg:#07100B; --code-fg:#E6EFE9; color-scheme:dark}}
+  --buy:#3CC27A; --sell:#F0B34F; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0B1510; --surface:#12201A; --ink:#E6EFE9; --muted:#93A89B; --line:#24382D;
-  --brand:#3CC27A; --brand-soft:#173A27; --sun:#FDEF42; --night:#0A2A1A;
+  --bg:#0B1510; --surface:#12201A; --ink:#E6EFE9; --muted:#93A89B; --line:#22372B; --soft:#172A20;
+  --brand:#3CC27A; --brand-soft:#173A27; --night:#0A2A1A; --hero:#07100B; --hero-fg:#F3F6F1;
   --get:#6AB4F0; --post:#3CC27A; --patch:#F0B34F; --put:#B996F0; --delete:#F07A70;
-  --code-bg:#07100B; --code-fg:#E6EFE9; color-scheme:dark}
+  --buy:#3CC27A; --sell:#F0B34F; color-scheme:dark}
 
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.55;margin:0}
-.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{text-wrap:balance;line-height:1.15;margin:0}
-code,.mono{font-family:var(--mono);font-size:.88em}
-p{margin:0}
-a{color:var(--brand)}
-
-header.top{padding-block:40px 28px}
-.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
-header.top h1{font-size:clamp(32px,6vw,52px);font-weight:800;letter-spacing:-.02em;margin-top:8px}
-header.top p.lead{color:var(--muted);max-width:62ch;margin-top:12px;font-size:17px}
-.base{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
-.base .chip{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-family:var(--mono);font-size:13px;min-width:0;overflow-wrap:anywhere}
-.base .chip b{color:var(--brand);font-weight:600}
-
-nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
-nav.toc a{flex:none;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:6px 12px;border-radius:999px}
-nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);background:var(--surface);outline:none}
-
-section.part{padding-block:44px 8px}
-section.part > .wrap > h2{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.01em}
-section.part > .wrap > p.intro{color:var(--muted);max-width:68ch;margin-top:8px}
-
-/* ── Acteurs : chaine de distribution */
-.chain{margin-top:24px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:stretch}
-.node{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0;position:relative}
-.node .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.node h3{font-size:18px;font-weight:700;margin-top:4px}
-.node p{color:var(--muted);font-size:14px;margin-top:6px}
-.node.me{border:2px solid var(--brand);background:var(--brand-soft)}
-.node.me .you{position:absolute;top:-11px;left:14px;background:var(--sun);color:#0E1A14;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:6px}
-.flowline{grid-column:1/-1;display:flex;justify-content:space-between;color:var(--muted);font-size:13px;padding:0 4px}
-@media (max-width:760px){.chain{grid-template-columns:1fr 1fr}}
-@media (max-width:440px){.chain{grid-template-columns:1fr}}
-
-.callout{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--sun);border-radius:12px;padding:16px 18px}
-.callout h3{font-size:16px;font-weight:700}
-.callout p{color:var(--muted);margin-top:6px;font-size:15px;max-width:75ch}
-
-.actors{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
-.actor{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.actor header{display:flex;align-items:center;gap:10px}
-.actor .dot{width:12px;height:12px;border-radius:50%;flex:none}
-.actor h3{font-size:18px;font-weight:700}
-.actor .who{color:var(--muted);font-size:14px}
-.actor ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14.5px}
-.actor .src{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
-
-.roles{margin-top:22px;overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
-.roles table{border-collapse:collapse;width:100%;min-width:620px;font-size:14.5px}
-.roles th,.roles td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-.roles th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.roles tr:last-child td{border-bottom:0}
-.roles td:first-child{font-weight:600}
-
-/* ── Routes */
-.toolbar{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.toolbar input{flex:1 1 240px;min-width:0;font:inherit;font-size:15px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
-.toolbar input:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
-.filters{display:flex;flex-wrap:wrap;gap:6px}
-.filters button{font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
-.filters button .dot{width:8px;height:8px;border-radius:50%}
-.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.filters button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
-.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-
-.group{margin-top:26px}
-.group > header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding-bottom:8px;border-bottom:2px solid var(--ink)}
-.group > header h3{font-size:20px;font-weight:800}
-.group > header .why{color:var(--muted);font-size:14px}
-.route{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:4px 14px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
-.verb{font-family:var(--mono);font-size:12px;font-weight:600;text-align:center;padding:3px 0;border-radius:6px;color:#fff;margin-top:2px}
-.v-GET{background:var(--get)}.v-POST{background:var(--post)}.v-PATCH{background:var(--patch)}.v-PUT{background:var(--put)}.v-DELETE{background:var(--delete)}
-:root:not([data-theme="light"]) .verb{color:#0B1510}
-:root[data-theme="light"] .verb{color:#fff}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .verb{color:#fff}}
-.path{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;min-width:0}
-.path .p{color:var(--brand)}
-.desc{grid-column:2/3;color:var(--muted);font-size:14.5px}
-.params{grid-column:2/3;font-family:var(--mono);font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
-.params b{color:var(--ink);font-weight:600}
-.who-tags{grid-column:3;grid-row:1/span 3;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:150px}
-.wt{font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap;border:1px solid currentColor}
-.copy{font:inherit;font-size:12px;border:0;background:none;color:var(--muted);cursor:pointer;padding:0;margin-left:8px}
-.copy:hover,.copy:focus-visible{color:var(--brand);outline:none}
-.empty{color:var(--muted);padding:24px 0}
-@media (max-width:600px){.route{grid-template-columns:60px minmax(0,1fr)}.who-tags{grid-column:1/-1;grid-row:auto;justify-content:flex-start;max-width:none}}
-
-/* ── Parcours */
-.flows{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
-.flow{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
-.flow h3{font-size:18px;font-weight:700}
-.flow .who{color:var(--muted);font-size:14px;margin-top:4px}
-.flow ol{margin:14px 0 0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px}
-.flow li{counter-increment:s;display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;font-size:14px}
-.flow li::before{content:counter(s);width:24px;height:24px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:12px;display:grid;place-items:center}
-.flow li code{display:block;color:var(--ink);overflow-wrap:anywhere}
-.flow li span{color:var(--muted)}
-
-footer{padding-block:48px 56px;color:var(--muted);font-size:14px}
-footer p{max-width:75ch}
-@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 html{scroll-behavior:smooth}
-section.part{scroll-margin-top:60px}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;line-height:1.12;margin:0}
+p{margin:0}
+code{font-family:var(--mono);font-size:.86em;background:var(--soft);padding:1px 6px;border-radius:6px}
+a{color:var(--brand)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* ── Bandeau */
+.hero{background:var(--hero);color:var(--hero-fg);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:620px;height:620px;right:-160px;top:-260px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,133,63,.55),transparent)}
+.hero::after{content:"";position:absolute;inset:0 0 auto;height:6px;background:linear-gradient(90deg,#00853F 0 72%,#FDEF42 72% 100%)}
+.hero .wrap{position:relative;padding-block:22px 34px}
+.back{display:inline-flex;gap:6px;align-items:center;color:rgba(243,246,241,.7);text-decoration:none;font-size:14px;font-weight:600}
+.back:hover{color:var(--sun)}
+.hero .tag{display:inline-block;margin-top:26px;background:var(--sun);color:#0E1A14;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.hero h1{font-size:clamp(36px,7vw,64px);font-weight:800;letter-spacing:-.025em;margin-top:14px}
+.hero h1 span{color:var(--sun)}
+.hero .lead{color:rgba(243,246,241,.72);max-width:60ch;margin-top:12px;font-size:17px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:26px;max-width:640px}
+.stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px}
+.stat b{display:block;font-size:30px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(243,246,241,.6)}
+.stat.hl b{color:var(--sun)}
+@media (max-width:520px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.headers{margin-top:22px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;font-family:var(--mono);font-size:13px;line-height:1.75;overflow-x:auto;max-width:640px}
+.headers .k{color:#5fd39a}.headers .c{color:rgba(243,246,241,.45)}
+
+/* ── Navigation */
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.toc a{flex:none;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px;transition:background .2s,color .2s}
+nav.toc a:hover,nav.toc a.on{color:var(--ink);background:var(--surface);box-shadow:0 0 0 1px var(--line)}
+
+section.part{padding-block:56px 8px;scroll-margin-top:58px}
+.sec-head{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.sec-head .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.sec-head h2{font-size:clamp(26px,4.4vw,36px);font-weight:800;letter-spacing:-.015em}
+.sec-head p{color:var(--muted);max-width:68ch}
+
+/* ── Chaine des acteurs */
+.chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;align-items:stretch}
+.link{position:relative;padding-right:28px}
+.link:last-child{padding-right:0}
+.link:not(:last-child)::after{content:"";position:absolute;right:6px;top:50%;width:16px;height:2px;background:var(--line)}
+.link:not(:last-child)::before{content:"";position:absolute;right:4px;top:calc(50% - 4px);border:5px solid transparent;border-left-color:var(--muted);transform:translateX(6px)}
+.verb-line{position:absolute;right:-12px;top:calc(50% + 10px);font-size:11px;color:var(--muted);white-space:nowrap;transform:translateX(50%)}
+.node{height:100%;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:6px;position:relative}
+.node .kind{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.node h3{font-size:19px;font-weight:700}
+.node p{color:var(--muted);font-size:14px}
+.node.me{background:var(--brand-soft);border:2px solid var(--brand)}
+.node .you{position:absolute;top:-12px;left:16px;background:var(--sun);color:#0E1A14;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:7px}
+@media (max-width:820px){
+  .chain{grid-template-columns:1fr;gap:26px}
+  .link{padding-right:0}
+  .link:not(:last-child)::after{left:28px;right:auto;top:auto;bottom:-20px;width:2px;height:14px}
+  .link:not(:last-child)::before{left:24px;right:auto;top:auto;bottom:-27px;border-left-color:transparent;border-top-color:var(--muted);transform:none}
+  .verb-line{left:42px;right:auto;top:auto;bottom:-22px;transform:none}
+}
+
+.actors{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.actor{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.actor header{display:flex;align-items:center;gap:12px}
+.badge{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:15px;flex:none;color:#fff}
+.actor h3{font-size:18px;font-weight:700}
+.actor .who{color:var(--muted);font-size:13.5px}
+.actor ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:14.5px}
+.actor li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px}
+.actor li::before{content:"→";color:var(--brand);font-weight:700}
+.actor .src{font-size:12.5px;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px;margin-top:auto}
+
+.note{margin-top:26px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+.note .ic{width:36px;height:36px;border-radius:10px;background:var(--sun);color:#0E1A14;display:grid;place-items:center;font-weight:800}
+.note h3{font-size:16px;font-weight:700}
+.note p{color:var(--muted);font-size:14.5px;margin-top:4px;max-width:78ch}
+
+/* ── Roles */
+.roles{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.roles table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+.roles th,.roles td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.roles thead th{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.roles thead th.buy{color:var(--buy)} .roles thead th.sell{color:var(--sell)}
+.roles tbody tr:last-child td{border-bottom:0}
+.roles tbody tr:hover{background:var(--soft)}
+.roles td:first-child{font-weight:700}
+.side{display:inline-flex;gap:6px;align-items:baseline}
+.side i{font-style:normal;width:8px;height:8px;border-radius:50%;flex:none;transform:translateY(-1px)}
+
+/* ── Routes : sommaire lateral + liste */
+.routes-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;align-items:start}
+aside.parts{position:sticky;top:70px;display:flex;flex-direction:column;gap:2px;max-height:calc(100vh - 90px);overflow:auto}
+aside.parts a{display:flex;justify-content:space-between;gap:8px;text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;padding:7px 10px;border-radius:10px}
+aside.parts a span{font-variant-numeric:tabular-nums;font-size:12px;background:var(--soft);border-radius:999px;padding:1px 8px;color:var(--muted)}
+aside.parts a:hover,aside.parts a.on{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+aside.parts a.on span{background:var(--brand);color:#fff}
+@media (max-width:880px){
+  .routes-layout{grid-template-columns:1fr}
+  aside.parts{position:static;flex-direction:row;overflow-x:auto;max-height:none;padding-bottom:4px}
+  aside.parts a{flex:none}
+}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:6px}
+.search{flex:1 1 260px;min-width:0;position:relative}
+.search input{width:100%;font:inherit;font-size:15px;padding:11px 14px 11px 40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted)}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:3px}
+.seg button{font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:9px;border:0;background:none;color:var(--muted);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.seg button i{width:8px;height:8px;border-radius:50%}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);margin-bottom:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+.group{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;scroll-margin-top:70px}
+.group > header{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);background:var(--soft)}
+.group > header .num{width:30px;height:30px;border-radius:9px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;font-size:13px;flex:none;font-variant-numeric:tabular-nums}
+.group > header h3{font-size:18px;font-weight:800}
+.group > header .why{color:var(--muted);font-size:13.5px}
+.route{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:2px 14px;padding:13px 18px;border-bottom:1px solid var(--line);position:relative;transition:background .15s}
+.route:last-child{border-bottom:0}
+.route:hover{background:var(--soft)}
+.route::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--vc)}
+.verb{font-family:var(--mono);font-size:11.5px;font-weight:600;text-align:center;padding:3px 0;border-radius:7px;color:var(--vc);background:color-mix(in srgb,var(--vc) 14%,transparent);align-self:start;margin-top:1px}
+.path{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;min-width:0;font-weight:500}
+.path .p{color:var(--brand)}
+.desc{grid-column:2;color:var(--ink);font-size:14.5px;opacity:.85}
+.params{grid-column:2;font-family:var(--mono);font-size:12px;color:var(--muted);overflow-wrap:anywhere;margin-top:2px}
+.params b{color:var(--ink);font-weight:600}
+.right{grid-column:3;grid-row:1/span 3;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.tags{display:flex;gap:4px}
+.wt{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 13%,transparent);white-space:nowrap}
+.copy{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;padding:3px 9px;border-radius:8px}
+.copy:hover{color:var(--brand);border-color:var(--brand)}
+.empty{color:var(--muted);padding:26px 0}
+@media (max-width:600px){
+  .route{grid-template-columns:58px minmax(0,1fr)}
+  .right{grid-column:1/-1;grid-row:auto;flex-direction:row;justify-content:space-between;align-items:center;margin-top:8px}
+}
+
+/* ── Parcours en frise */
+.flows{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px}
+.flow{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0}
+.flow header{display:flex;gap:12px;align-items:flex-start}
+.flow .ic{width:40px;height:40px;border-radius:12px;background:var(--brand-soft);display:grid;place-items:center;font-size:20px;flex:none}
+.flow h3{font-size:18px;font-weight:700}
+.flow .who{color:var(--muted);font-size:13.5px;margin-top:2px}
+.flow ol{margin:18px 0 0;padding:0;list-style:none;counter-reset:s;position:relative}
+.flow ol::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.flow li{counter-increment:s;position:relative;padding:0 0 14px 36px;font-size:14px}
+.flow li:last-child{padding-bottom:0}
+.flow li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--surface);border:2px solid var(--brand);color:var(--brand);font-weight:800;font-size:11.5px;display:grid;place-items:center}
+.flow li:last-child::before{background:var(--brand);color:#fff}
+.flow li code{display:inline-block;background:var(--soft);font-size:12.5px;overflow-wrap:anywhere;max-width:100%}
+.flow li span{display:block;color:var(--muted);margin-top:3px}
+
+footer{margin-top:56px;padding-block:28px 48px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer p{max-width:78ch}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
 <body>
-<p class="wrap" style="padding-block:16px 0;margin:0"><a href="./" style="font-weight:600;text-decoration:none">← Retour à Quiz App</a></p>
 
-<header class="top">
+<header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Référence de développement</div>
-    <h1>Carte de l'API Netwo</h1>
-    <p class="lead">Qui fait quoi sur la marketplace, toutes les routes regroupées par partie, et les parcours que vous allez coder. Basé sur la doc developer.netwo.io (93 routes, relevé du 29/10/2026).</p>
-    <div class="base">
-      <span class="chip"><b>URL</b> https://api.netwo.io/api/v1/…</span>
-      <span class="chip"><b>x-api-key</b> ta clé</span>
-      <span class="chip"><b>x-actor-slug</b> l'acteur au nom duquel tu agis</span>
-      <span class="chip"><b>x-realm</b> test (bac à sable)</span>
-      <span class="chip"><b>Limite</b> 200 / min · 5000 / jour</span>
+    <a class="back" href="./">← Retour à Quiz App</a><br>
+    <span class="tag">Référence de développement</span>
+    <h1>Carte de l'API <span>Netwo</span></h1>
+    <p class="lead">Qui fait quoi sur la marketplace, toutes les routes regroupées par partie, et les parcours que vous allez coder.</p>
+    <div class="stats">
+      <div class="stat hl"><b>93</b><span>routes</span></div>
+      <div class="stat"><b>12</b><span>parties</span></div>
+      <div class="stat"><b>5</b><span>acteurs</span></div>
+      <div class="stat"><b>6</b><span>parcours</span></div>
+    </div>
+    <div class="headers" aria-label="En-têtes obligatoires">
+<span class="c"># chaque requête → https://api.netwo.io/api/v1/…</span><br>
+<span class="k">content-type</span>: application/json<br>
+<span class="k">x-api-key</span>: &lt;ta clé&gt;            <span class="c"># acces-api@support.netwo.io</span><br>
+<span class="k">x-actor-slug</span>: &lt;ton acteur&gt;<br>
+<span class="k">x-realm</span>: test                 <span class="c"># bac à sable · 200 appels/min · 5000/jour</span>
     </div>
   </div>
 </header>
@@ -164,103 +225,104 @@ section.part{scroll-margin-top:60px}
   </div>
 </nav>
 
+<main>
 <!-- ═══════════════ ACTEURS ═══════════════ -->
 <section class="part" id="acteurs">
   <div class="wrap">
-    <h2>Les acteurs</h2>
-    <p class="intro">Netwo est une place de marché : des fournisseurs d'infrastructure vendent, des opérateurs de services achètent et revendent à leurs clients. Dans l'API, chaque entreprise est un <b>acteur</b>, identifié par son slug (<code>x-actor-slug</code>). Ton entreprise sera un acteur.</p>
-
-    <div class="chain" aria-label="Chaîne de distribution">
-      <div class="node">
-        <div class="tag">EndProvider</div>
-        <h3>Fournisseur d'infrastructure</h3>
-        <p>Possède le réseau : fibre, cuivre, mobile. Orange Wholesale, SFR, Kosc, Bouygues…</p>
-      </div>
-      <div class="node">
-        <div class="tag">plateforme</div>
-        <h3>Netwo</h3>
-        <p>La marketplace : catalogue, éligibilité, commandes, SAV, portabilité (via l'APNF).</p>
-      </div>
-      <div class="node me">
-        <span class="you">Toi</span>
-        <div class="tag">Direct · Intermediate</div>
-        <h3>Opérateur de services</h3>
-        <p>Intégrateur ou revendeur : achète sur Netwo, peut revendre à d'autres.</p>
-      </div>
-      <div class="node">
-        <div class="tag">EndCustomer</div>
-        <h3>Client final</h3>
-        <p>L'entreprise qui utilise l'accès : la PME, la clinique, l'agence…</p>
-      </div>
-      <div class="flowline"><span>vend →</span><span>met en relation →</span><span>revend →</span><span>utilise</span></div>
+    <div class="sec-head">
+      <span class="eyebrow">1 · Qui fait quoi</span>
+      <h2>Les acteurs</h2>
+      <p>Netwo est une place de marché : des fournisseurs d'infrastructure vendent, des opérateurs de services achètent et revendent à leurs clients. Dans l'API, chaque entreprise est un <b>acteur</b>, identifié par son slug. Ton entreprise sera l'un d'eux.</p>
     </div>
 
-    <div class="callout">
-      <h3>Comment lire les étiquettes EndProvider, Intermediate, EndCustomer ?</h3>
-      <p>Ce sont les valeurs de <code>ServiceActorChannel</code> dans l'API : la place d'un acteur dans la chaîne d'un service. <b>Direct</b> : tu achètes directement au fournisseur. <b>Intermediate</b> : tu es un maillon entre deux autres acteurs, par exemple quand tu revends un produit « réexposable » (<code>reexposable_only</code>) à un autre revendeur.</p>
+    <div class="chain" aria-label="Chaîne de distribution">
+      <div class="link"><div class="node">
+        <span class="kind">EndProvider</span>
+        <h3>Fournisseur d'infrastructure</h3>
+        <p>Possède le réseau : Orange Wholesale, SFR, Kosc, Bouygues…</p>
+      </div></div>
+      <div class="link"><div class="node">
+        <span class="kind">plateforme</span>
+        <h3>Netwo</h3>
+        <p>Catalogue, éligibilité, commandes, SAV, portabilité via l'APNF.</p>
+      </div></div>
+      <div class="link"><div class="node me">
+        <span class="you">Toi</span>
+        <span class="kind">Direct · Intermediate</span>
+        <h3>Opérateur de services</h3>
+        <p>Intégrateur ou revendeur : achète sur Netwo, peut revendre.</p>
+      </div></div>
+      <div class="link"><div class="node">
+        <span class="kind">EndCustomer</span>
+        <h3>Client final</h3>
+        <p>L'entreprise qui utilise l'accès : PME, clinique, agence…</p>
+      </div></div>
     </div>
 
     <div class="actors">
       <article class="actor">
-        <header><span class="dot" style="background:var(--brand)"></span><h3>Toi, l'opérateur de services</h3></header>
-        <p class="who">Le rôle principal de ton application.</p>
+        <header><span class="badge" style="background:var(--buy)">T</span><div><h3>Toi, l'opérateur de services</h3><p class="who">Le rôle principal de ton application</p></div></header>
         <ul>
           <li>Tester l'éligibilité d'une adresse</li>
-          <li>Parcourir le catalogue et remplir un panier</li>
-          <li>Passer et suivre des commandes, échanger avec le fournisseur</li>
+          <li>Parcourir le catalogue, remplir un panier</li>
+          <li>Passer et suivre des commandes</li>
           <li>Demander des portabilités entrantes</li>
           <li>Gérer tes services, ouvrir des tickets SAV</li>
-          <li>Suivre la consommation mobile et les CDR</li>
+          <li>Suivre la consommation et les CDR</li>
           <li>Recevoir des webhooks</li>
         </ul>
-        <p class="src">Côté acheteur : commandes <code>sent</code>, panier <code>purchase</code>, contexte service <code>customer</code>, prix <code>as_consumer</code>.</p>
+        <p class="src">Commandes <code>sent</code> · panier <code>purchase</code> · services <code>customer</code> · prix <code>as_consumer</code></p>
       </article>
       <article class="actor">
-        <header><span class="dot" style="background:var(--patch)"></span><h3>Le fournisseur</h3></header>
-        <p class="who">Celui qui livre le service. Tu peux l'être aussi si tu revends.</p>
+        <header><span class="badge" style="background:var(--sell)">F</span><div><h3>Le fournisseur</h3><p class="who">Livre le service. Tu l'es aussi quand tu revends.</p></div></header>
         <ul>
-          <li>Reçoit les commandes et les fait avancer (transitions)</li>
-          <li>Répond aux messages sur les lignes de commande</li>
+          <li>Reçoit les commandes et les fait avancer</li>
+          <li>Répond aux messages des lignes de commande</li>
           <li>Fixe les rendez-vous techniciens</li>
-          <li>Traite les tickets, peut les geler si le blocage vient du client</li>
+          <li>Traite les tickets, les gèle si le blocage vient du client</li>
           <li>Facture la consommation</li>
         </ul>
-        <p class="src">Côté vendeur : commandes <code>received</code>, panier <code>sales</code>, contexte service <code>provider</code>, prix <code>as_provider</code>.</p>
+        <p class="src">Commandes <code>received</code> · panier <code>sales</code> · services <code>provider</code> · prix <code>as_provider</code></p>
       </article>
       <article class="actor">
-        <header><span class="dot" style="background:var(--get)"></span><h3>Netwo</h3></header>
-        <p class="who">La plateforme et l'intermédiaire technique.</p>
+        <header><span class="badge" style="background:var(--get)">N</span><div><h3>Netwo</h3><p class="who">La plateforme et l'intermédiaire technique</p></div></header>
         <ul>
-          <li>Calcule l'éligibilité en interrogeant les fournisseurs</li>
-          <li>Transmet les commandes au fournisseur</li>
+          <li>Calcule l'éligibilité auprès des fournisseurs</li>
+          <li>Transmet les commandes</li>
           <li>Héberge ton préfixe de portabilité</li>
-          <li>Dialogue avec l'APNF pour les portabilités</li>
-          <li>Envoie les notifications (webhooks)</li>
+          <li>Dialogue avec l'APNF</li>
+          <li>Envoie les webhooks</li>
         </ul>
-        <p class="src">Vendeur <code>internal</code> quand c'est Netwo qui vend (<code>seller_type</code>).</p>
+        <p class="src">Vendeur <code>internal</code> quand Netwo vend lui-même (<code>seller_type</code>)</p>
       </article>
       <article class="actor">
-        <header><span class="dot" style="background:var(--put)"></span><h3>Les acteurs de la portabilité</h3></header>
-        <p class="who">Hors de Netwo, mais présents dans les flux.</p>
+        <header><span class="badge" style="background:var(--put)">P</span><div><h3>Les acteurs de la portabilité</h3><p class="who">Hors de Netwo, présents dans les flux</p></div></header>
         <ul>
-          <li><b>Opérateur donneur</b> : celui que le client quitte</li>
-          <li><b>Opérateur receveur</b> : celui qui récupère le numéro</li>
-          <li><b>APNF</b> : fait circuler les demandes entre opérateurs</li>
-          <li>Toi : receveur en entrante, donneur en sortante (CRI, CR)</li>
+          <li><b>Donneur</b> : l'opérateur que le client quitte</li>
+          <li><b>Receveur</b> : celui qui récupère le numéro</li>
+          <li><b>APNF</b> : fait circuler les demandes</li>
+          <li>Toi : receveur en entrante, donneur en sortante</li>
         </ul>
-        <p class="src">États côté APNF : <code>ApnfRequestStateResponse</code>.</p>
+        <p class="src">États côté APNF : <code>ApnfRequestStateResponse</code></p>
       </article>
       <article class="actor">
-        <header><span class="dot" style="background:var(--delete)"></span><h3>Le client final</h3></header>
-        <p class="who">N'appelle pas l'API, mais on le décrit dans les requêtes.</p>
+        <header><span class="badge" style="background:var(--delete)">C</span><div><h3>Le client final</h3><p class="who">N'appelle pas l'API, mais apparaît partout</p></div></header>
         <ul>
-          <li>Sa fiche client (<code>/actor/customer</code>)</li>
+          <li>Sa fiche (<code>/actor/customer</code>)</li>
           <li>Son adresse pour l'éligibilité</li>
-          <li>Le contact sur les tickets SAV</li>
+          <li>Le contact des tickets SAV</li>
           <li>Ses numéros pour la portabilité</li>
         </ul>
-        <p class="src">Événements : <code>customer_record_created</code>, <code>customer_record_updated</code>.</p>
+        <p class="src">Webhooks <code>customer_record_created</code> / <code>_updated</code></p>
       </article>
+    </div>
+
+    <div class="note">
+      <span class="ic">?</span>
+      <div>
+        <h3>EndProvider, Intermediate, EndCustomer</h3>
+        <p>Ce sont les valeurs de <code>ServiceActorChannel</code> : la place d'un acteur dans la chaîne d'un service. <b>Direct</b> : tu achètes directement au fournisseur. <b>Intermediate</b> : tu es un maillon entre deux acteurs, par exemple quand tu revends un produit réexposable (<code>reexposable_only</code>).</p>
+      </div>
     </div>
   </div>
 </section>
@@ -268,25 +330,31 @@ section.part{scroll-margin-top:60px}
 <!-- ═══════════════ ROLES ═══════════════ -->
 <section class="part" id="roles">
   <div class="wrap">
-    <h2>Acheteur ou vendeur ?</h2>
-    <p class="intro">Un même acteur peut acheter <b>et</b> vendre. L'API te fait toujours préciser de quel côté tu regardes. Voici les paramètres qui portent ce choix.</p>
+    <div class="sec-head">
+      <span class="eyebrow">2 · Le point clé de l'architecture</span>
+      <h2>Acheteur ou vendeur ?</h2>
+      <p>Un même acteur peut acheter <b>et</b> vendre. L'API te fait toujours préciser de quel côté tu regardes, avec ces paramètres.</p>
+    </div>
     <div class="roles">
       <table>
-        <thead><tr><th>Où</th><th>Paramètre</th><th>Côté acheteur</th><th>Côté vendeur</th></tr></thead>
+        <thead><tr><th>Où</th><th>Paramètre</th><th class="buy">● Côté acheteur</th><th class="sell">● Côté vendeur</th></tr></thead>
         <tbody>
-          <tr><td>Commandes</td><td><code>order_type</code></td><td><code>sent</code> : celles que tu as passées</td><td><code>received</code> : celles que tu dois livrer</td></tr>
-          <tr><td>Panier</td><td><code>cart_type</code></td><td><code>purchase</code> : tu achètes</td><td><code>sales</code> : tu prépares une vente</td></tr>
-          <tr><td>Services</td><td><code>context</code></td><td><code>customer</code> : services que tu consommes</td><td><code>provider</code> : services que tu fournis</td></tr>
-          <tr><td>Consommation</td><td><code>pricing_side</code></td><td><code>as_consumer</code> : ce que tu paies</td><td><code>as_provider</code> : ce que tu factures</td></tr>
+          <tr><td>Commandes</td><td><code>order_type</code></td><td><code>sent</code> celles que tu as passées</td><td><code>received</code> celles que tu dois livrer</td></tr>
+          <tr><td>Panier</td><td><code>cart_type</code></td><td><code>purchase</code> tu achètes</td><td><code>sales</code> tu prépares une vente</td></tr>
+          <tr><td>Services</td><td><code>context</code></td><td><code>customer</code> ce que tu consommes</td><td><code>provider</code> ce que tu fournis</td></tr>
+          <tr><td>Consommation</td><td><code>pricing_side</code></td><td><code>as_consumer</code> ce que tu paies</td><td><code>as_provider</code> ce que tu factures</td></tr>
           <tr><td>Tickets SAV</td><td><code>consumer_slug</code> / <code>provider_slug</code></td><td>tu es le consommateur</td><td>tu es le fournisseur</td></tr>
-          <tr><td>Catalogue</td><td><code>seller_type</code></td><td colspan="2"><code>providers</code> : fournisseurs tiers · <code>internal</code> : vendu par Netwo</td></tr>
-          <tr><td>Contrats</td><td><code>target_market</code></td><td colspan="2"><code>service_operator</code> : offres pour opérateurs de services · <code>general_availability</code> : offres ouvertes à tous</td></tr>
+          <tr><td>Catalogue</td><td><code>seller_type</code></td><td colspan="2"><code>providers</code> fournisseurs tiers · <code>internal</code> vendu par Netwo</td></tr>
+          <tr><td>Contrats</td><td><code>target_market</code></td><td colspan="2"><code>service_operator</code> offres pour opérateurs · <code>general_availability</code> offres ouvertes à tous</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout">
-      <h3>Ce que la doc ne dit pas</h3>
-      <p>La doc publique ne donne pas de matrice officielle « tel rôle a droit à telle route ». Les droits dépendent des rôles attachés à ta clé d'API (une erreur <code>403</code> signale une route interdite). Les colonnes « qui l'utilise » ci-dessous sont déduites des paramètres ci-dessus et des guides : à confirmer avec Netwo en demandant ta clé (acces-api@support.netwo.io).</p>
+    <div class="note">
+      <span class="ic">!</span>
+      <div>
+        <h3>À confirmer avec Netwo</h3>
+        <p>La doc publique ne donne pas de matrice officielle « tel rôle a droit à telle route ». Les droits dépendent des rôles de ta clé d'API : une erreur <code>403</code> signale une route interdite. Les étiquettes Acheteur / Fournisseur ci-dessous sont déduites des paramètres et des guides.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -294,117 +362,131 @@ section.part{scroll-margin-top:60px}
 <!-- ═══════════════ ROUTES ═══════════════ -->
 <section class="part" id="routes">
   <div class="wrap">
-    <h2>Les routes, par partie</h2>
-    <p class="intro">Les 93 routes REST regroupées dans l'ordre où tu les utiliseras. <b>*</b> = champ obligatoire. Filtre par acteur pour ne voir que ce qui te concerne.</p>
-    <div class="toolbar">
-      <input id="q" type="search" placeholder="Chercher une route : cart, portability, simcard…" aria-label="Chercher une route">
-      <div class="filters" role="group" aria-label="Filtrer par acteur">
-        <button type="button" data-f="all" aria-pressed="true">Toutes</button>
-        <button type="button" data-f="A" aria-pressed="false"><span class="dot" style="background:var(--brand)"></span>Acheteur (toi)</button>
-        <button type="button" data-f="F" aria-pressed="false"><span class="dot" style="background:var(--patch)"></span>Fournisseur</button>
-      </div>
-      <span class="count" id="count"></span>
+    <div class="sec-head">
+      <span class="eyebrow">3 · Référence</span>
+      <h2>Les 93 routes, par partie</h2>
+      <p>Dans l'ordre où tu les utiliseras. <b>*</b> = champ obligatoire.</p>
     </div>
-    <div id="groups"></div>
+    <div class="routes-layout">
+      <aside class="parts" id="parts" aria-label="Parties"></aside>
+      <div>
+        <div class="toolbar">
+          <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="Chercher : cart, portability, simcard…" aria-label="Chercher une route"></label>
+          <div class="seg" role="group" aria-label="Filtrer par acteur">
+            <button type="button" data-f="all" aria-pressed="true">Toutes</button>
+            <button type="button" data-f="A" aria-pressed="false"><i style="background:var(--buy)"></i>Acheteur</button>
+            <button type="button" data-f="F" aria-pressed="false"><i style="background:var(--sell)"></i>Fournisseur</button>
+          </div>
+          <span class="count" id="count"></span>
+        </div>
+        <div class="legend">
+          <span><i class="verb" style="--vc:var(--get)">GET</i> lire</span>
+          <span><i class="verb" style="--vc:var(--post)">POST</i> créer</span>
+          <span><i class="verb" style="--vc:var(--patch)">PATCH</i> modifier</span>
+          <span><i class="verb" style="--vc:var(--put)">PUT</i> remplacer</span>
+          <span><i class="verb" style="--vc:var(--delete)">DELETE</i> supprimer</span>
+        </div>
+        <div id="groups"></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ═══════════════ PARCOURS ═══════════════ -->
 <section class="part" id="parcours">
   <div class="wrap">
-    <h2>Parcours types</h2>
-    <p class="intro">Les enchaînements de routes que votre application va implémenter, dans l'ordre.</p>
+    <div class="sec-head">
+      <span class="eyebrow">4 · À implémenter</span>
+      <h2>Parcours types</h2>
+      <p>Les enchaînements de routes que votre application va coder, dans l'ordre.</p>
+    </div>
     <div class="flows">
       <article class="flow">
-        <h3>Vendre un accès fibre</h3>
-        <p class="who">Acheteur · de l'adresse à la mise en service</p>
+        <header><span class="ic">🌐</span><div><h3>Vendre un accès fibre</h3><p class="who">Acheteur · de l'adresse à la mise en service</p></div></header>
         <ol>
-          <li><div><code>POST /eligibility/preselect</code><span>proposer les adresses, choisir la bonne</span></div></li>
-          <li><div><code>POST /eligibility/geocode-input</code><span>valider : value + signature</span></div></li>
-          <li><div><code>POST /eligibility</code><span>lancer, recevoir eligibility_id</span></div></li>
-          <li><div><code>GET /eligibility/{id}/status</code><span>attendre la fin</span></div></li>
-          <li><div><code>GET /eligibility/{id}?sort_by=recurring_price.asc</code><span>choisir l'offre</span></div></li>
-          <li><div><code>POST /cart</code> → <code>GET /cart/{id}/lines</code><span>panier</span></div></li>
-          <li><div><code>POST /orders</code><span>commander</span></div></li>
-          <li><div><code>webhook order_line_updated</code> + <code>appointment_*</code><span>suivre, rendez-vous technicien</span></div></li>
-          <li><div><code>GET /service?status=active</code><span>le service est livré</span></div></li>
+          <li><code>POST /eligibility/preselect</code><span>proposer les adresses, choisir la bonne</span></li>
+          <li><code>POST /eligibility/geocode-input</code><span>valider : value + signature</span></li>
+          <li><code>POST /eligibility</code><span>lancer, recevoir eligibility_id</span></li>
+          <li><code>GET /eligibility/{id}/status</code><span>attendre la fin</span></li>
+          <li><code>GET /eligibility/{id}?sort_by=recurring_price.asc</code><span>choisir l'offre</span></li>
+          <li><code>POST /cart</code> → <code>GET /cart/{id}/lines</code><span>le panier</span></li>
+          <li><code>POST /orders</code><span>commander</span></li>
+          <li><code>webhook order_line_updated · appointment_*</code><span>suivi, rendez-vous technicien</span></li>
+          <li><code>GET /service?status=active</code><span>le service est livré</span></li>
         </ol>
       </article>
       <article class="flow">
-        <h3>Activer une ligne data mobile</h3>
-        <p class="who">Acheteur · quelques minutes</p>
+        <header><span class="ic">📶</span><div><h3>Activer une ligne data mobile</h3><p class="who">Acheteur · quelques minutes</p></div></header>
         <ol>
-          <li><div><code>GET /contract/marketplace/products?categories[]=mobile_data&amp;seller_type=providers</code><span>trouver le forfait</span></div></li>
-          <li><div><code>POST /cart</code><span>forfait + options (IP fixe…)</span></div></li>
-          <li><div><code>GET /cart/{id}/lines</code><span>lignes du panier</span></div></li>
-          <li><div><code>POST /orders</code><span>avec l'ICCID et le plafond data</span></div></li>
-          <li><div><code>PUT /service/simcard/{service_id}</code><span>ensuite : suspendre, changer le plafond</span></div></li>
+          <li><code>GET /contract/marketplace/products?categories[]=mobile_data&amp;seller_type=providers</code><span>trouver le forfait</span></li>
+          <li><code>POST /cart</code><span>forfait + options (IP fixe…)</span></li>
+          <li><code>GET /cart/{id}/lines</code><span>lignes du panier</span></li>
+          <li><code>POST /orders</code><span>avec l'ICCID et le plafond data</span></li>
+          <li><code>PUT /service/simcard/{service_id}</code><span>ensuite : suspendre, changer le plafond</span></li>
         </ol>
       </article>
       <article class="flow">
-        <h3>Portabilité entrante</h3>
-        <p class="who">Acheteur, opérateur receveur · 6 jours ouvrés minimum</p>
+        <header><span class="ic">📥</span><div><h3>Portabilité entrante</h3><p class="who">Toi en receveur · 6 jours ouvrés minimum</p></div></header>
         <ol>
-          <li><div><code>GET /portability/operator-code/by-phone-number</code><span>savoir quels numéros sont portables ensemble</span></div></li>
-          <li><div><code>POST /portability/reliability-check</code><span>si la liste des SDA est incertaine</span></div></li>
-          <li><div><code>GET /service?product_category[]=prefix_hosting</code><span>ton préfixe de portabilité</span></div></li>
-          <li><div><code>POST /cart</code><span>NDI, SDA ou RIO, type, wanted_date</span></div></li>
-          <li><div><code>GET /cart/{id}/lines</code> → <code>POST /orders</code><span>commander</span></div></li>
-          <li><div><code>GET /portability/order/{order_id}</code><span>suivre ; décaler avec <b>/delay</b>, annuler avec DELETE</span></div></li>
+          <li><code>GET /portability/operator-code/by-phone-number</code><span>quels numéros se portent ensemble</span></li>
+          <li><code>POST /portability/reliability-check</code><span>si la liste des SDA est incertaine</span></li>
+          <li><code>GET /service?product_category[]=prefix_hosting</code><span>ton préfixe de portabilité</span></li>
+          <li><code>POST /cart</code><span>NDI, SDA ou RIO, type, wanted_date</span></li>
+          <li><code>GET /cart/{id}/lines</code> → <code>POST /orders</code><span>commander</span></li>
+          <li><code>GET /portability/order/{order_id}</code><span>suivre ; décaler (/delay) ou annuler (DELETE)</span></li>
         </ol>
       </article>
       <article class="flow">
-        <h3>Portabilité sortante</h3>
-        <p class="who">Toi en opérateur donneur · un client te quitte</p>
+        <header><span class="ic">📤</span><div><h3>Portabilité sortante</h3><p class="who">Toi en donneur · un client te quitte</p></div></header>
         <ol>
-          <li><div><code>webhook OutgoingPortabilityApnfCommandReceived</code><span>demande reçue</span></div></li>
-          <li><div><code>GET /portability/outgoing/{id}</code><span>lire la demande (AR fait automatiquement)</span></div></li>
-          <li><div><code>webhook OutgoingPortabilityFeedbackCriRequested</code><span>étude demandée</span></div></li>
-          <li><div><code>POST /portability/outgoing/{id}/cri</code><span>répondre OK ou KO</span></div></li>
-          <li><div><code>POST /portability/outgoing/{id}/cr</code><span>seulement pour une RESTIT</span></div></li>
+          <li><code>webhook OutgoingPortabilityApnfCommandReceived</code><span>demande reçue</span></li>
+          <li><code>GET /portability/outgoing/{id}</code><span>lire la demande (AR automatique)</span></li>
+          <li><code>webhook OutgoingPortabilityFeedbackCriRequested</code><span>étude demandée</span></li>
+          <li><code>POST /portability/outgoing/{id}/cri</code><span>répondre OK ou KO</span></li>
+          <li><code>POST /portability/outgoing/{id}/cr</code><span>seulement pour une RESTIT</span></li>
         </ol>
       </article>
       <article class="flow">
-        <h3>Panne et ticket SAV</h3>
-        <p class="who">Acheteur ouvre, fournisseur traite</p>
+        <header><span class="ic">🛠️</span><div><h3>Panne et ticket SAV</h3><p class="who">Acheteur ouvre, fournisseur traite</p></div></header>
         <ol>
-          <li><div><code>webhook connexion down</code><span>coupure détectée</span></div></li>
-          <li><div><code>POST /file</code><span>photos, captures (optionnel)</span></div></li>
-          <li><div><code>POST /service/signalization</code><span>service_id, description, contact, state</span></div></li>
-          <li><div><code>POST …/{id}/messaging</code><span>échanger avec le fournisseur</span></div></li>
-          <li><div><code>PATCH …/{id}/freeze</code> · <code>/unfreeze</code><span>si le blocage vient du client (chrono GTR)</span></div></li>
-          <li><div><code>PATCH …/{id}/close</code><span>réparé, message obligatoire</span></div></li>
+          <li><code>webhook connexion down</code><span>coupure détectée</span></li>
+          <li><code>POST /file</code><span>photos, captures (optionnel)</span></li>
+          <li><code>POST /service/signalization</code><span>service_id, description, contact, state</span></li>
+          <li><code>POST …/{id}/messaging</code><span>échanger avec le fournisseur</span></li>
+          <li><code>PATCH …/{id}/freeze</code> · <code>/unfreeze</code><span>si le blocage vient du client (chrono GTR)</span></li>
+          <li><code>PATCH …/{id}/close</code><span>réparé, message obligatoire</span></li>
         </ol>
       </article>
       <article class="flow">
-        <h3>Facturer la consommation</h3>
-        <p class="who">Fin de mois</p>
+        <header><span class="ic">📊</span><div><h3>Facturer la consommation</h3><p class="who">Fin de mois</p></div></header>
         <ol>
-          <li><div><code>GET /service/simcard/consumptions</code><span>qui approche de son quota</span></div></li>
-          <li><div><code>GET /consumption?limit=500&amp;after_id=…</code><span>lire tous les CDR par paquets</span></div></li>
-          <li><div><code>GET /consumption/export?service_id=…</code><span>exports CSV du mois</span></div></li>
-          <li><div><code>GET /consumption/export/{export_id}</code><span>télécharger</span></div></li>
+          <li><code>GET /service/simcard/consumptions</code><span>qui approche de son quota</span></li>
+          <li><code>GET /consumption?limit=500&amp;after_id=…</code><span>lire tous les CDR par paquets</span></li>
+          <li><code>GET /consumption/export?service_id=…</code><span>exports CSV du mois</span></li>
+          <li><code>GET /consumption/export/{export_id}</code><span>télécharger</span></li>
         </ol>
       </article>
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap">
-    <p>Source : developer.netwo.io (guides et référence OpenAPI). Les rôles par route sont déduits de la doc publique : vérifiez-les avec les rôles réels de votre clé d'API avant de figer l'architecture.</p>
+    <p>Source : developer.netwo.io, guides et référence OpenAPI (relevé du 29/10/2026). Les rôles par route sont déduits de la doc publique : vérifiez-les avec les rôles réels de votre clé d'API avant de figer l'architecture.</p>
   </div>
 </footer>
 
 <script>
-// A = acheteur (operateur de services), F = fournisseur. p = parametres (* = obligatoire)
+// A = acheteur (operateur de services), F = fournisseur. Colonnes : verbe, chemin, description, parametres (* = obligatoire), acteurs
 const GROUPS = [
  { id:"base", title:"Acteur & fichiers", why:"utilitaires transverses", routes:[
   ["GET","/actor/customer/{actor_id}","Lire une fiche client","", "AF"],
   ["POST","/file","Envoyer un fichier (temporaire tant qu'il n'est rattaché à rien) → file_id","", "AF"],
   ["GET","/file/{file_id}","Télécharger un fichier joint à un ticket","", "AF"],
  ]},
- { id:"catalog", title:"Catalogue (marketplace)", why:"quoi vendre, à quel prix", routes:[
+ { id:"catalog", title:"Catalogue", why:"quoi vendre, à quel prix", routes:[
   ["GET","/contract/marketplace/products","Produits que tu peux commander","seller_type*, categories[], infra_providers, search", "A"],
   ["GET","/contract/marketplace","Contrats (catalogues) disponibles","target_market, actor_ids, reexposable_only, search, limit, offset", "AF"],
   ["GET","/contract/marketplace/connections","Connexions disponibles (marché opérateurs)","infra_providers, search, limit, offset", "A"],
@@ -516,8 +598,9 @@ const GROUPS = [
  ]},
 ];
 
-const WHO = { A:{label:"Acheteur", color:"var(--brand)"}, F:{label:"Fournisseur", color:"var(--patch)"} };
-const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const VC = { GET:"var(--get)", POST:"var(--post)", PATCH:"var(--patch)", PUT:"var(--put)", DELETE:"var(--delete)" };
+const WHO = { A:{label:"Acheteur", c:"var(--buy)"}, F:{label:"Fournisseur", c:"var(--sell)"} };
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 const fmtPath = p => esc(p).replace(/\{([^}]+)\}/g,'<span class="p">{$1}</span>');
 const fmtParams = p => esc(p).replace(/([\w\[\]]+)\*/g,'<b>$1*</b>');
 
@@ -525,29 +608,50 @@ let filter = "all", query = "";
 try { filter = localStorage.getItem("netwo-filter") || "all"; } catch {}
 
 function render(){
-  const box = document.getElementById("groups");
-  let n = 0, html = "";
-  for (const g of GROUPS){
+  let n = 0, html = "", side = "";
+  GROUPS.forEach((g, gi) => {
     const rows = g.routes.filter(([v,p,d,pa,w]) =>
       (filter === "all" || w.includes(filter)) &&
       (!query || (v+" "+p+" "+d+" "+pa).toLowerCase().includes(query)));
-    if (!rows.length) continue;
+    if (!rows.length) return;
     n += rows.length;
-    html += `<div class="group" id="g-${g.id}"><header><h3>${g.title}</h3><span class="why">${g.why} · ${rows.length} route${rows.length>1?"s":""}</span></header>`;
+    side += `<a href="#g-${g.id}" data-g="${g.id}">${g.title}<span>${rows.length}</span></a>`;
+    html += `<div class="group" id="g-${g.id}"><header><span class="num">${String(gi+1).padStart(2,"0")}</span><div><h3>${g.title}</h3><p class="why">${g.why}</p></div></header>`;
     for (const [v,p,d,pa,w] of rows){
-      html += `<div class="route"><span class="verb v-${v}">${v}</span>
-        <div class="path">${fmtPath(p)}<button class="copy" type="button" data-copy="${esc(v+" "+p)}">copier</button></div>
-        <div class="who-tags">${[...w].map(k=>`<span class="wt" style="color:${WHO[k].color}">${WHO[k].label}</span>`).join("")}</div>
+      html += `<div class="route" style="--vc:${VC[v]}"><span class="verb">${v}</span>
+        <div class="path">${fmtPath(p)}</div>
+        <div class="right"><div class="tags">${[...w].map(k=>`<span class="wt" style="--c:${WHO[k].c}">${WHO[k].label}</span>`).join("")}</div>
+          <button class="copy" type="button" data-copy="${esc(v+" "+p)}">Copier</button></div>
         <div class="desc">${esc(d)}</div>${pa?`<div class="params">${fmtParams(pa)}</div>`:""}</div>`;
     }
     html += `</div>`;
-  }
-  box.innerHTML = html || `<p class="empty">Aucune route ne correspond. Essaie « cart », « simcard » ou « portability ».</p>`;
+  });
+  document.getElementById("groups").innerHTML = html || `<p class="empty">Aucune route ne correspond. Essaie « cart », « simcard » ou « portability ».</p>`;
+  document.getElementById("parts").innerHTML = side;
   document.getElementById("count").textContent = n + " route" + (n>1?"s":"");
-  document.querySelectorAll(".filters button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === filter)));
+  document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === filter)));
+  watchGroups();
 }
 
-document.querySelector(".filters").addEventListener("click", e => {
+// Surligne la partie visible dans le sommaire lateral
+let obs;
+function watchGroups(){
+  if (obs) obs.disconnect();
+  obs = new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) {
+      document.querySelectorAll("#parts a").forEach(a => a.classList.toggle("on", a.dataset.g === e.target.id.slice(2)));
+    }
+  }, { rootMargin: "-80px 0px -65% 0px" });
+  document.querySelectorAll(".group").forEach(g => obs.observe(g));
+}
+// Surligne la section courante dans la barre du haut
+const secObs = new IntersectionObserver(entries => {
+  for (const e of entries) if (e.isIntersecting)
+    document.querySelectorAll("nav.toc a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+}, { rootMargin: "-60px 0px -70% 0px" });
+document.querySelectorAll("section.part").forEach(s => secObs.observe(s));
+
+document.querySelector(".seg").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   filter = b.dataset.f;
   try { localStorage.setItem("netwo-filter", filter); } catch {}
@@ -556,9 +660,9 @@ document.querySelector(".filters").addEventListener("click", e => {
 document.getElementById("q").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); render(); });
 document.getElementById("groups").addEventListener("click", async e => {
   const b = e.target.closest(".copy"); if (!b) return;
-  try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "copié ✓"; }
-  catch { const r = document.createRange(); r.selectNodeContents(b.parentElement); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "sélectionné"; }
-  setTimeout(() => b.textContent = "copier", 1400);
+  try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "Copié ✓"; }
+  catch { const r = document.createRange(); r.selectNodeContents(b.closest(".route").querySelector(".path")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Sélectionné"; }
+  setTimeout(() => b.textContent = "Copier", 1400);
 });
 render();
 </script>
