@@ -3,6 +3,18 @@
   "title": "Netwo : Services & signalisations",
   "sections": [
     {
+      "title": "En clair : service ou signalisation ?",
+      "content": "Tu as vendu une fibre, le technicien l'a installée : ce n'est plus une COMMANDE,\nc'est un SERVICE (quelque chose qui fonctionne et que le client paie chaque mois).\nUn jour, elle tombe en panne : tu préviens le fournisseur avec une SIGNALISATION,\nc'est-à-dire un TICKET de SAV.\n\nCommande ──(installation)──► Service ──(panne)──► Signalisation\n\"j'achète\"                   \"ça marche\"          \"ça ne marche plus\"\n\nVie d'un service :\ninitialized ──► active ──► cancellation_in_progress ──► cancelled\n                  └──► suspended (ex : client qui ne paie plus)\n\nGET /service?status=active&product_category[]=ftth   mes fibres FTTH actives\nPATCH /service/{service_id}                          y mettre TA référence client\nGET /provisioning/technical-info/{service_id}        IP, identifiants (pour le technicien)"
+    },
+    {
+      "title": "En clair : ouvrir un ticket",
+      "content": "Le client : \"Plus d'Internet depuis ce matin 8h.\"\n\nPOST /service/signalization\n{\n  \"service_id\": \"abc-123\",\n  \"description\": \"Plus de synchro depuis 8h, box rouge\",\n  \"contact\": { \"name\": \"Awa Diop\", \"phone\": \"+221771234567\" },\n  \"state\": \"interrupted\"\n}\n\nLa gravité (state) :\ninterrupted    🔴 coupure totale           plus rien ne marche\ndegraded       🟠 ça marche, mais mal      très lent, coupures\nnever_worked   ⚫ n'a jamais fonctionné     installé hier, rien ne marche\nother          ⚪ autre                    question, anomalie\n\nPhotos / captures : POST /file → file_id → dans file_ids"
+    },
+    {
+      "title": "En clair : la GTR et le gel",
+      "content": "GTR = Garantie de Temps de Rétablissement : la PROMESSE du fournisseur\n(\"je répare en moins de 4 h\"). S'il dépasse, il est en faute (souvent des pénalités).\n\nPourquoi GELER un ticket ? Le technicien arrive, mais le client est FERMÉ :\nce n'est pas la faute du fournisseur → on gèle, le chrono de la GTR s'arrête.\n\nPanne 8h00 → ticket ouvert → chrono ⏱️\n10h00 client absent  → freeze ⏸️\nPATCH /service/signalization/{id}/freeze\n14h00 client revenu  → unfreeze ▶️\nPATCH /service/signalization/{id}/unfreeze\n15h00 réparé         → close ✅ (message obligatoire)\nPATCH /service/signalization/{id}/close\n\nLa panne revient ? → reopen\nÉchanger avec le technicien :\nPOST /service/signalization/{id}/messaging\nÊtre prévenu automatiquement : webhook signalization_updated"
+    },
+    {
       "title": "Les services livrés",
       "content": "Une commande terminée devient un SERVICE (un accès, une ligne, un préfixe…).\n\nGET   /service                    mes services\n  filtres : status, product_category[], delivery_protocol, context, service_ids…\nGET   /service/{service_id}       détail\nPATCH /service/{service_id}       modifier : dates de mise en service / résiliation,\n                                  références externes, nom client, VLAN…\nGET   /provisioning/technical-info/{service_id}   infos techniques de provisioning\n\nStatuts : initialized  active  cancellation_in_progress  cancelled  suspended\nConfiguration : pending_configuration  configured  configuration_error  deactivated…"
     },

@@ -1,6 +1,6 @@
 {
   "title": "Netwo : Portabilité",
-  "minimum_score": 9,
+  "minimum_score": 12,
   "success_message": "Bravo ! Tu maîtrises le module Netwo Portabilité.",
   "failure_message": "Relis le cours Netwo Portabilité et réessaie.",
   "questions": [
@@ -170,6 +170,62 @@
       "hint": "service_id.",
       "accept": [
         "GET /service?product_category[]=prefix_hosting"
+      ]
+    },
+    {
+      "question": "Le NDI, c'est…",
+      "choices": [
+        "Le numéro principal (tête de ligne) de l'installation",
+        "Un code secret",
+        "Un numéro direct de service",
+        "L'opérateur donneur"
+      ],
+      "correct_answer": "Le numéro principal (tête de ligne) de l'installation",
+      "hint": "Les SDA y sont rattachées.",
+      "accept": [
+        "Le numéro principal (tête de ligne) de l'installation"
+      ]
+    },
+    {
+      "question": "Le client garde son standard chez Orange et transfère seulement 3 numéros directs :",
+      "choices": [
+        "Partielle simple (partial)",
+        "Totale",
+        "Partielle complexe",
+        "Sortante"
+      ],
+      "correct_answer": "Partielle simple (partial)",
+      "hint": "Sans le NDI.",
+      "accept": [
+        "Partielle simple (partial)"
+      ]
+    },
+    {
+      "question": "Rôle de l'APNF ?",
+      "choices": [
+        "Faire circuler les demandes de portabilité entre opérateurs",
+        "Vendre des box",
+        "Facturer les clients",
+        "Créer les IMB"
+      ],
+      "correct_answer": "Faire circuler les demandes de portabilité entre opérateurs",
+      "hint": "L'arbitre.",
+      "accept": [
+        "Faire circuler les demandes de portabilité entre opérateurs"
+      ]
+    },
+    {
+      "question": "Que fait option_delegated: true ?",
+      "choices": [
+        "Netwo réalise la portabilité à ta place",
+        "Annule la demande",
+        "Rend la portabilité gratuite",
+        "Ignore les SDA"
+      ],
+      "correct_answer": "Netwo réalise la portabilité à ta place",
+      "hint": "Délégation.",
+      "accept": [
+        "Netwo réalise la portabilité à ta place"
       ]
     }
   ]

@@ -3,6 +3,18 @@
   "title": "Netwo : Portabilité",
   "sections": [
     {
+      "title": "En clair : c'est quoi la portabilité ?",
+      "content": "Ton client a le numéro 01 23 45 67 00 chez Orange depuis 15 ans :\nil est sur ses cartes de visite, son site, sa vitrine.\nIl veut passer chez toi SANS changer de numéro.\nRécupérer ce numéro chez l'ancien opérateur = la PORTABILITÉ.\n\nLe vocabulaire :\nNDI         le numéro PRINCIPAL (tête de ligne)        ex : 01 23 45 67 00\nSDA         les numéros DIRECTS rattachés au NDI       ex : …67 01 compta, …67 02 commercial\nRIO         un CODE qui identifie la ligne (l'\"IBAN\" du numéro)   ex : 43ECD6CC7UBT\nDonneur     l'opérateur que le client QUITTE           ex : Orange\nReceveur    celui qui RÉCUPÈRE le numéro               toi, via Netwo\nAPNF        l'association des opérateurs : l'\"arbitre\" qui fait circuler les demandes\n\nPetite entreprise / particulier → le RIO suffit.\nEntreprise avec standard → NDI + liste des SDA."
+    },
+    {
+      "title": "En clair : total ou partiel ?",
+      "content": "Une entreprise : 1 NDI (…67 00) + 10 SDA (…67 01 à …67 10).\n\nTotale (total)                     le NDI + TOUTES les SDA\n  → le client quitte entièrement Orange\nPartielle simple (partial)         quelques SDA, SANS le NDI\n  → il garde son standard chez Orange, mais transfère le service commercial\nPartielle complexe (partial_complex)   quelques SDA, AVEC le NDI\n  → il récupère son standard, mais laisse quelques numéros chez Orange\n\n⚠ En totale, il faut la liste EXACTE : une SDA oubliée ou en trop = REJET.\n\nLe client ne connaît pas ses numéros (\"une dizaine… je crois\") ?\n→ FIABILISATION : demander la vraie liste à l'opérateur (5 jours ouvrés max)\nPOST /portability/reliability-check\n\nDélais : minimum 6 jours ouvrés (souvent ~7), maximum 90 jours (sinon annulée)."
+    },
+    {
+      "title": "En clair : entrante et sortante",
+      "content": "ENTRANTE : le client VIENT chez toi → c'est une commande\n1. ton préfixe de portabilité (où arrivent les numéros)\nGET /service?product_category[]=prefix_hosting\n2. le panier avec NDI, SDA ou RIO, type, date\nPOST /cart\n3. les lignes du panier\nGET /cart/{cart_id}/lines\n4. la commande\nPOST /orders\noption_delegated: true → Netwo s'occupe de tout à ta place\n\nSuivi : created → transmitted → reviewing → date_accepted → completed ✅\n        (rejected ❌ souvent à cause d'une liste de SDA fausse)\n\nSORTANTE : un client te QUITTE → tu es le donneur\n1. demande reçue (mail / webhook)\n2. AR : contrôle technique AUTOMATIQUE (AR OK / AR KO)\n3. tu étudies la demande\n4. tu réponds par un CRI (OK ou KO + code de refus)\nPOST /portability/outgoing/{id}/cri\n5. à la date prévue, la bascule est automatique\nRESTIT (numéro rendu à son opérateur d'origine) → tu confirmes par un CR"
+    },
+    {
       "title": "Les notions clés",
       "content": "Portabilité = garder son numéro en changeant d'opérateur.\n\nDeux façons de l'identifier :\n  RIO  Relevé d'Identité Opérateur (particuliers, petites entreprises)\n  SDA  Sélection Directe à l'Arrivée : numéros rattachés à un NDI\n       (NDI = numéro de tête de l'installation téléphonique)\n\nTrois types (portability_type) :\n  Total           le NDI + TOUTES les SDA (liste exacte obligatoire)\n  Partial         une partie des SDA, SANS la tête de ligne (une SDA sert de NDI)\n  PartialComplex  une partie des SDA, AVEC la tête de ligne\n\nTrois contextes : simple, subséquente (déjà portée), multi-attributaire.\nToujours UNE seule commande : Netwo la découpe si besoin."
     },
